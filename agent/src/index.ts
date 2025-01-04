@@ -150,7 +150,6 @@ import { DirectClient } from "@elizaos/client-direct";
 //import { nftGenerationPlugin } from "@elizaos/plugin-nft-generation";
 import { createNodePlugin } from "@elizaos/plugin-node";
 //import { solanaPlugin } from "@elizaos/plugin-solana";
-//console.log("SOLANA",solanaPlugin)
 //import { suiPlugin } from "@elizaos/plugin-sui";
 //import { TEEMode, teePlugin } from "@elizaos/plugin-tee";
 //import { tonPlugin } from "@elizaos/plugin-ton";

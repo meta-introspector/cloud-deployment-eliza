@@ -14,6 +14,9 @@ importers:
       '@0glabs/0g-ts-sdk':
         specifier: 0.2.1
         version: 0.2.1(bufferutil@4.0.9)(ethers@6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
+      '@coinbase/coinbase-sdk':
+        specifier: 0.10.0
+        version: 0.10.0(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
       '@deepgram/sdk':
         specifier: ^3.9.0
         version: 3.9.0(bufferutil@4.0.9)(encoding@0.1.13)(utf-8-validate@5.0.10)
@@ -4125,6 +4128,9 @@ packages:
 
   '@coinbase-samples/advanced-sdk-ts@file:packages/plugin-coinbase/advanced-sdk-ts':
     resolution: {directory: packages/plugin-coinbase/advanced-sdk-ts, type: directory}
+
+  '@coinbase/coinbase-sdk@0.10.0':
+    resolution: {integrity: sha512-sqLH7dE/0XSn5jHddjVrC1PR77sQUEytYcQAlH2d8STqRARcvddxVAByECUIL32MpbdJY7Wca3KfSa6qo811Mg==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -10421,6 +10427,16 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
+  axios-mock-adapter@1.22.0:
+    resolution: {integrity: sha512-dmI0KbkyAhntUR05YY96qg2H6gg0XMl2+qTW0xmYg6Up+BFBAJYRLROMXRdDEL06/Wqwa0TJThAYvFtSFdRCZw==}
+    peerDependencies:
+      axios: '>= 0.17.0'
+
+  axios-retry@4.5.0:
+    resolution: {integrity: sha512-aR99oXhpEDGo0UuAlYcn2iGRds30k366Zfa05XWScR9QaQD4JYiP3/1Qt1u7YlefUOK+cn0CcwoL1oefavQUlQ==}
+    peerDependencies:
+      axios: 0.x || 1.x
+
   axios@0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
 
@@ -10563,6 +10579,10 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
+  base64url@3.0.1:
+    resolution: {integrity: sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==}
+    engines: {node: '>=6.0.0'}
+
   basic-ftp@5.0.5:
     resolution: {integrity: sha512-4Bcg1P8xhUuqcii/S0Z9wiHIrQVPMermM1any+MX5GeGD7faD3/msQUDGLol9wOcz4/jbg/WJnGqoJF6LiBdtg==}
     engines: {node: '>=10.0.0'}
@@ -10634,6 +10654,10 @@ packages:
   bip174@3.0.0-rc.1:
     resolution: {integrity: sha512-+8P3BpSairVNF2Nee6Ksdc1etIjWjBOi/MH0MwKtq9YaYp+S2Hk2uvup0e8hCT4IKlS58nXJyyQVmW92zPoD4Q==}
     engines: {node: '>=18.0.0'}
+
+  bip32@4.0.0:
+    resolution: {integrity: sha512-aOGy88DDlVUhspIXJN+dVEtclhIsfAUppD43V0j40cPTld3pv/0X/MlrZSZ6jowIaQQzFwP8M6rFU2z2mVYjDQ==}
+    engines: {node: '>=6.0.0'}
 
   bip39@3.0.2:
     resolution: {integrity: sha512-J4E1r2N0tUylTKt07ibXvhpT2c5pyAFgvuA5q1H9uDy6dEGpjV8jmymh3MTYJDLCNbIVClSB9FbND49I6N24MQ==}
@@ -14342,6 +14366,10 @@ packages:
     resolution: {integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==}
     engines: {node: '>=0.10.0'}
 
+  is-retry-allowed@2.2.0:
+    resolution: {integrity: sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==}
+    engines: {node: '>=10'}
+
   is-root@2.1.0:
     resolution: {integrity: sha512-AGOriNp96vNBd3HtU+RzFEc75FfR5ymiYv8E553I71SCeXBiMsVDUtdio1OEFvrPyLIQ9tVR5RxXIFe5PUFjMg==}
     engines: {node: '>=6'}
@@ -16100,6 +16128,9 @@ packages:
 
   node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
+
+  node-jose@2.2.0:
+    resolution: {integrity: sha512-XPCvJRr94SjLrSIm4pbYHKLEaOsDvJCpyFw/6V/KK/IXmyZ6SFBzAUDO9HQf4DB/nTEFcRGH87mNciOP23kFjw==}
 
   node-llama-cpp@3.1.1:
     resolution: {integrity: sha512-CyXwxlJiAAELhy265wndAwV+nrUvVJk7+BjiYtz8BAUXCPpzZTeZTNnmcDO21FTutQyRuWhiNA/yzOLeDvmuAQ==}
@@ -18528,6 +18559,10 @@ packages:
     resolution: {integrity: sha512-TKWX8xvoGHrxVdqbYeZM9w+izTF4b9z3NhSaDkdn81btvuh+ivbIMGT/zQvDtTFWhRlThpoz6LEYTr7n8A5GcA==}
     engines: {node: '>=14.0.0'}
 
+  secp256k1@5.0.1:
+    resolution: {integrity: sha512-lDFs9AAIaWP9UCdtWrotXWWF9t8PWgQDcxqgAnpM9rMqxb3Oaq2J0thzPVSxBwdJgyQtkU/sYtFtbM1RSt/iYA==}
+    engines: {node: '>=18.0.0'}
+
   section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
@@ -19787,6 +19822,9 @@ packages:
     peerDependencies:
       typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x
 
+  typeforce@1.18.0:
+    resolution: {integrity: sha512-7uc1O8h1M1g0rArakJdf0uLRSSgFcYexrVoKo+bzJd32gd4gDy2L/Z+8/FjPnU9ydY3pEnVPtr9FyscYY60K1g==}
+
   typescript-eslint@8.11.0:
     resolution: {integrity: sha512-cBRGnW3FSlxaYwU8KfAewxFK5uzeOAp0l2KebIlPDOT5olVi65KDG/yjBooPBG0kGW/HLkoz1c/iuBFehcS3IA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -20686,6 +20724,9 @@ packages:
   widest-line@4.0.1:
     resolution: {integrity: sha512-o0cyEG0e8GPzT4iGHphIOh0cJOV8fivsXxddQasHPHfoZf1ZexrfeA21w2NaEN1RHE+fXlfISmOE8R9N3u3Qig==}
     engines: {node: '>=12'}
+
+  wif@2.0.6:
+    resolution: {integrity: sha512-HIanZn1zmduSF+BQhkE+YXIbEiH0xPr1012QbFEGB0xsKqJii0/SqJjyn8dFv6y36kOznMgMB+LGcbZTJ1xACQ==}
 
   wildcard@2.0.1:
     resolution: {integrity: sha512-CC1bOL87PIWSBhDcTrdeLo6eGT7mCFtrg0uIJtqJUFyK+eJnzl8A1niH56uu7KMa5XFrtiV+AQuHO3n7DsHnLQ==}
@@ -22893,6 +22934,28 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
+
+  '@coinbase/coinbase-sdk@0.10.0(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)':
+    dependencies:
+      '@scure/bip32': 1.6.0
+      abitype: 1.0.8(typescript@5.6.3)(zod@3.23.8)
+      axios: 1.7.9
+      axios-mock-adapter: 1.22.0(axios@1.7.9)
+      axios-retry: 4.5.0(axios@1.7.9)
+      bip32: 4.0.0
+      bip39: 3.1.0
+      decimal.js: 10.4.3
+      dotenv: 16.4.7
+      ethers: 6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      node-jose: 2.2.0
+      secp256k1: 5.0.1
+      viem: 2.21.58(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - typescript
+      - utf-8-validate
+      - zod
 
   '@colors/colors@1.5.0':
     optional: true
@@ -32040,6 +32103,17 @@ snapshots:
 
   aws4@1.13.2: {}
 
+  axios-mock-adapter@1.22.0(axios@1.7.9):
+    dependencies:
+      axios: 1.7.9
+      fast-deep-equal: 3.1.3
+      is-buffer: 2.0.5
+
+  axios-retry@4.5.0(axios@1.7.9):
+    dependencies:
+      axios: 1.7.9
+      is-retry-allowed: 2.2.0
+
   axios@0.21.4:
     dependencies:
       follow-redirects: 1.15.9(debug@4.4.0)
@@ -32284,6 +32358,8 @@ snapshots:
 
   base64-js@1.5.1: {}
 
+  base64url@3.0.1: {}
+
   basic-ftp@5.0.5: {}
 
   batch@0.6.1: {}
@@ -32354,6 +32430,13 @@ snapshots:
       uint8array-tools: 0.0.9
       varuint-bitcoin: 2.0.0
 
+  bip32@4.0.0:
+    dependencies:
+      '@noble/hashes': 1.6.1
+      '@scure/base': 1.2.1
+      typeforce: 1.18.0
+      wif: 2.0.6
+
   bip39@3.0.2:
     dependencies:
       '@types/node': 11.11.6
@@ -32364,7 +32447,6 @@ snapshots:
   bip39@3.1.0:
     dependencies:
       '@noble/hashes': 1.3.0
-    optional: true
 
   bitcoinjs-lib@7.0.0-rc.0(typescript@5.6.3):
     dependencies:
@@ -37168,6 +37250,8 @@ snapshots:
 
   is-regexp@1.0.0: {}
 
+  is-retry-allowed@2.2.0: {}
+
   is-root@2.1.0: {}
 
   is-set@2.0.3: {}
@@ -39849,6 +39933,18 @@ snapshots:
       - supports-color
 
   node-int64@0.4.0: {}
+
+  node-jose@2.2.0:
+    dependencies:
+      base64url: 3.0.1
+      buffer: 6.0.3
+      es6-promise: 4.2.8
+      lodash: 4.17.21
+      long: 5.2.3
+      node-forge: 1.3.1
+      pako: 2.1.0
+      process: 0.11.10
+      uuid: 9.0.1
 
   node-llama-cpp@3.1.1(typescript@5.6.3):
     dependencies:
@@ -42740,6 +42836,12 @@ snapshots:
       node-addon-api: 5.1.0
       node-gyp-build: 4.8.4
 
+  secp256k1@5.0.1:
+    dependencies:
+      elliptic: 6.6.1
+      node-addon-api: 5.1.0
+      node-gyp-build: 4.8.4
+
   section-matter@1.0.0:
     dependencies:
       extend-shallow: 2.0.1
@@ -44250,6 +44352,8 @@ snapshots:
       typescript: 5.6.3
       yaml: 2.7.0
 
+  typeforce@1.18.0: {}
+
   typescript-eslint@8.11.0(eslint@9.16.0(jiti@2.4.2))(typescript@5.6.3):
     dependencies:
       '@typescript-eslint/eslint-plugin': 8.11.0(@typescript-eslint/parser@8.11.0(eslint@9.16.0(jiti@2.4.2))(typescript@5.6.3))(eslint@9.16.0(jiti@2.4.2))(typescript@5.6.3)
@@ -45497,6 +45601,10 @@ snapshots:
   widest-line@4.0.1:
     dependencies:
       string-width: 5.1.2
+
+  wif@2.0.6:
+    dependencies:
+      bs58check: 2.1.2
 
   wildcard@2.0.1: {}
 
