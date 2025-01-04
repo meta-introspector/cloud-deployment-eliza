@@ -7,6 +7,12 @@
   "dependencies": {
     "@elizaos/core": "workspace:*",
     "@multiversx/sdk-core": "13.15.0",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.55.0",
+    "@opentelemetry/exporter-zipkin": "^1.30.0",
+    "@opentelemetry/sdk-metrics": "^1.30.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "bignumber.js": "9.1.2",
     "browserify": "^17.0.1",
     "esbuild-plugin-polyfill-node": "^0.3.0",

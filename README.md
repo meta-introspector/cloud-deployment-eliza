@@ -1,4 +1,52 @@
-# Eliza 🤖
+# TINA = The introspector is not Eliza 🤖 
+
+Packaging of eliza for the cloud
+```
+git clone https://github.com/meta-introspector/cloud-deployment-eliza/
+cd cloud-deployment-eliza
+
+nvm install --lts
+nvm use --lts
+pnpm install 
+pnpm build 
+pnpm rebuild
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+```
+
+Run just this 
+`scripts/start.sh` does the first install
+`scripts/just_start.sh` then you can run this
+`agent/run.sh` afterwards you can just run this to debug the agent
+
+```
+For my client I use, not the baked in one, but this one: 
+```
+git clone https://github.com/meta-introspector/eliza-starter
+pnpm start --characters="characters/eliza.character.json"
+```
+
+the --characters="characters/eliza.character.json" is hard coded on the client and must match the server version
+
+```
+nvm install --lts
+nvm use --lts
+rm -rf node_modules/
+rm -rf dist/
+pnpm i && pnpm build && pnpm start
+pnpm rebuild
+
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+pnpm start 
+```
+
+Run just this 
+`scripts/start.sh` does the first install
+`scripts/just_start.sh` then you can run this
+`agent/run.sh` afterwards you can just run this to debug the agent
+
+
 
 <div align="center">
   <img src="./docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />

@@ -5,14 +5,20 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@avnu/avnu-sdk": "2.1.1",
     "@elizaos/core": "workspace:*",
     "@elizaos/plugin-trustdb": "workspace:*",
-    "@avnu/avnu-sdk": "2.1.1",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.55.0",
+    "@opentelemetry/exporter-zipkin": "^1.30.0",
+    "@opentelemetry/sdk-metrics": "^1.30.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "@uniswap/sdk-core": "6.0.0",
-    "unruggable-sdk": "1.4.0",
     "@unruggable_starknet/core": "0.1.0",
     "starknet": "6.18.0",
     "tsup": "8.3.5",
+    "unruggable-sdk": "1.4.0",
     "vitest": "2.1.5"
   },
   "scripts": {

@@ -237,7 +237,7 @@ export class DirectClient {
                     content,
                     createdAt: Date.now(),
                 };
-
+		console.log("Memory",memory);
                 await runtime.messageManager.addEmbeddingToMemory(memory);
                 await runtime.messageManager.createMemory(memory);
 

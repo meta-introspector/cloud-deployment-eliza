@@ -6,6 +6,12 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@elizaos/core": "workspace:*",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.55.0",
+    "@opentelemetry/exporter-zipkin": "^1.30.0",
+    "@opentelemetry/sdk-metrics": "^1.30.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "@phala/dstack-sdk": "0.1.6",
     "@solana/spl-token": "0.4.9",
     "@solana/web3.js": "1.95.8",

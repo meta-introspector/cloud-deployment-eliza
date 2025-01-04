@@ -220,10 +220,10 @@ class ElizaLogger {
     debug(...strings) {
         if (!this.verbose) {
             // for diagnosing verbose logging issues
-            // console.log(
-            //     "[ElizaLogger] Debug message suppressed (verbose=false):",
-            //     ...strings
-            // );
+            console.log(
+                 "[ElizaLogger] Debug message suppressed (verbose=false):",
+                 ...strings
+            );
             return;
         }
         this.#logWithStyle(strings, {

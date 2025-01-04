@@ -1,4 +1,6 @@
 packages:
+    - "!packages/plugin-solana"
+    - "!packages/plugin-bootstrap"		
     - "docs"
     - "packages/*"
     - "client"

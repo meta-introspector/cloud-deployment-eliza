@@ -55,7 +55,7 @@ export class MemoryManager implements IMemoryManager {
             return memory;
         }
 
-        const memoryText = memory.content.text;
+        const memoryText = memory?.content?.text;
 
         // Validate memory has text content
         if (!memoryText) {

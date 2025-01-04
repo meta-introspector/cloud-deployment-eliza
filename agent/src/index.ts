@@ -1,3 +1,99 @@
+//
+import { registerInstrumentations } from '@opentelemetry/instrumentation';
+//import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
+//import { trace } from '@opentelemetry/api';
+
+//import { NodeSDK } from '@opentelemetry/sdk-node';
+import { SpanExporter, Span } from '@opentelemetry/sdk-trace-base';
+// , ExportResult
+import { ConsoleSpanExporter } from '@opentelemetry/sdk-trace-node';
+import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
+//import {  PeriodicExportingMetricReader,  ConsoleMetricExporter,} from '@opentelemetry/sdk-metrics';
+import * as opentelemetry from '@opentelemetry/api';
+//import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
+import { ZipkinExporter } from '@opentelemetry/exporter-zipkin';
+import { Resource } from '@opentelemetry/resources';
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+} from '@opentelemetry/semantic-conventions';
+import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
+import { wrapTracer } from '@opentelemetry/api/experimental';
+
+//Specify zipkin url. default url is http://localhost:9411/api/v2/spans
+// docker run -d -p 9411:9411 openzipkin/zipkin
+const zipkinUrl = 'http://localhost';
+const zipkinPort = '9411';
+const zipkinPath = '/api/v2/spans';
+const zipkinURL = `${zipkinUrl}:${zipkinPort}${zipkinPath}`;
+
+const options = {
+    headers: {
+	'module': 'mainai16z',
+    },
+    url: zipkinURL,
+    serviceName: 'ai16z',
+
+    // optional interceptor
+    getExportRequestHeaders: () => {
+	return {
+            'module': 'mainai16z',
+	}
+    }
+}
+const traceExporter_zipkin = new ZipkinExporter(options);
+const traceExporter = new ConsoleSpanExporter();
+
+
+// export class CustomConsoleSpanExporter implements SpanExporter {
+//     export(spans: Span[], resultCallback: (result: any) => void): void {
+//       elizaLogger.log("test trace", JSON.stringify(spans, null, 2));
+//       //traceExporter.export(spans,resultCallback);
+//       //traceExporter.export(traceExporter_zipkin,resultCallback);
+//       //elizaLogger.log(JSON.stringify(spans, null, 2));
+//     }
+// }
+// const myExporter = new CustomConsoleSpanExporter()
+
+// parts from https://stackoverflow.com/questions/71654897/opentelemetry-typescript-project-zipkin-exporter
+//const { SimpleSpanProcessor } = import('@opentelemetry/sdk-trace-base');
+import { NodeTracerProvider, SimpleSpanProcessor } from "@opentelemetry/sdk-trace-node";
+const txz=new SimpleSpanProcessor(traceExporter_zipkin);
+const tx=new SimpleSpanProcessor(traceExporter);
+//const tx2=new SimpleSpanProcessor(myExporter);
+
+try {
+    const serviceName = 'eliza-agent';
+    const provider = new NodeTracerProvider({
+	resource: new Resource({
+	  [ATTR_SERVICE_NAME]: serviceName,
+	  [ATTR_SERVICE_VERSION]: '1.0',    }),
+      spanProcessors: [
+	txz,
+	tx
+	//	tx2
+      ]
+    });
+
+  // Initialize the OpenTelemetry APIs to use the NodeTracerProvider bindings
+  provider.register();
+
+  registerInstrumentations({
+    instrumentations: [
+      getNodeAutoInstrumentations(),
+      new HttpInstrumentation(),
+    ],
+  });
+
+
+  elizaLogger.log("setup!")
+} catch(error){
+  elizaLogger.log("ERROR",error)
+}
+
+// wrapper
+const tracer = wrapTracer(opentelemetry.trace.getTracer('ai16z-agent'))
+
 import { PostgresDatabaseAdapter } from "@elizaos/adapter-postgres";
 import { SqliteDatabaseAdapter } from "@elizaos/adapter-sqlite";
 import { AutoClientInterface } from "@elizaos/client-auto";
@@ -28,39 +124,39 @@ import {
     ICacheManager,
 } from "@elizaos/core";
 import { RedisClient } from "@elizaos/adapter-redis";
-import { zgPlugin } from "@elizaos/plugin-0g";
-import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
-import createGoatPlugin from "@elizaos/plugin-goat";
+//import { zgPlugin } from "@elizaos/plugin-0g";
+//import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
+//import createGoatPlugin from "@elizaos/plugin-goat";
 // import { intifacePlugin } from "@elizaos/plugin-intiface";
 import { DirectClient } from "@elizaos/client-direct";
-import { aptosPlugin } from "@elizaos/plugin-aptos";
-import {
-    advancedTradePlugin,
-    coinbaseCommercePlugin,
-    coinbaseMassPaymentsPlugin,
-    tokenContractPlugin,
-    tradePlugin,
-    webhookPlugin,
-} from "@elizaos/plugin-coinbase";
-import { confluxPlugin } from "@elizaos/plugin-conflux";
-import { evmPlugin } from "@elizaos/plugin-evm";
-import { storyPlugin } from "@elizaos/plugin-story";
-import { flowPlugin } from "@elizaos/plugin-flow";
-import { fuelPlugin } from "@elizaos/plugin-fuel";
-import { imageGenerationPlugin } from "@elizaos/plugin-image-generation";
-import { ThreeDGenerationPlugin } from "@elizaos/plugin-3d-generation";
-import { multiversxPlugin } from "@elizaos/plugin-multiversx";
-import { nearPlugin } from "@elizaos/plugin-near";
-import { nftGenerationPlugin } from "@elizaos/plugin-nft-generation";
+// import { aptosPlugin } from "@elizaos/plugin-aptos";
+// import {
+//     advancedTradePlugin,
+//     coinbaseCommercePlugin,
+//     coinbaseMassPaymentsPlugin,
+//     tokenContractPlugin,
+//     tradePlugin,
+//     webhookPlugin,
+// } from "@elizaos/plugin-coinbase";
+//import { confluxPlugin } from "@elizaos/plugin-conflux";
+//import { evmPlugin } from "@elizaos/plugin-evm";
+//import { storyPlugin } from "@elizaos/plugin-story";
+//import { flowPlugin } from "@elizaos/plugin-flow";
+//import { fuelPlugin } from "@elizaos/plugin-fuel";
+//import { imageGenerationPlugin } from "@elizaos/plugin-image-generation";
+//import { ThreeDGenerationPlugin } from "@elizaos/plugin-3d-generation";
+//import { multiversxPlugin } from "@elizaos/plugin-multiversx";
+//import { nearPlugin } from "@elizaos/plugin-near";
+//import { nftGenerationPlugin } from "@elizaos/plugin-nft-generation";
 import { createNodePlugin } from "@elizaos/plugin-node";
-import { solanaPlugin } from "@elizaos/plugin-solana";
-import { suiPlugin } from "@elizaos/plugin-sui";
-import { TEEMode, teePlugin } from "@elizaos/plugin-tee";
-import { tonPlugin } from "@elizaos/plugin-ton";
-import { zksyncEraPlugin } from "@elizaos/plugin-zksync-era";
-import { cronosZkEVMPlugin } from "@elizaos/plugin-cronoszkevm";
-import { abstractPlugin } from "@elizaos/plugin-abstract";
-import { avalanchePlugin } from "@elizaos/plugin-avalanche";
+//import { solanaPlugin } from "@elizaos/plugin-solana";
+//import { suiPlugin } from "@elizaos/plugin-sui";
+//import { TEEMode, teePlugin } from "@elizaos/plugin-tee";
+//import { tonPlugin } from "@elizaos/plugin-ton";
+//import { zksyncEraPlugin } from "@elizaos/plugin-zksync-era";
+//import { cronosZkEVMPlugin } from "@elizaos/plugin-cronoszkevm";
+//import { abstractPlugin } from "@elizaos/plugin-abstract";
+//import { avalanchePlugin } from "@elizaos/plugin-avalanche";
 import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
@@ -78,10 +174,12 @@ export const wait = (minTime: number = 1000, maxTime: number = 3000) => {
 };
 
 const logFetch = async (url: string, options: any) => {
+  return await tracer.withActiveSpan('logFetch', async () => {
     elizaLogger.debug(`Fetching ${url}`);
     // Disabled to avoid disclosure of sensitive information such as API keys
-    // elizaLogger.debug(JSON.stringify(options, null, 2));
-    return fetch(url, options);
+    elizaLogger.debug(JSON.stringify(options, null, 2));
+      return fetch(url, options);
+    });
 };
 
 export function parseArguments(): {
@@ -106,12 +204,18 @@ export function parseArguments(): {
     }
 }
 
+
 function tryLoadFile(filePath: string): string | null {
+  elizaLogger.log(`tryLoadFile filePath: ${filePath}`);
+  return tracer.withActiveSpan(`tryLoadFile filePath: ${filePath}`, () => {
     try {
-        return fs.readFileSync(filePath, "utf8");
+      const ret = fs.readFileSync(filePath, "utf8");
+      return ret;
+
     } catch (e) {
-        return null;
+      return null;
     }
+  })
 }
 
 function isAllStrings(arr: unknown[]): boolean {
@@ -121,9 +225,10 @@ function isAllStrings(arr: unknown[]): boolean {
 export async function loadCharacters(
     charactersArg: string
 ): Promise<Character[]> {
+  return await tracer.withActiveSpan('loadCharacters', async () => {
     let characterPaths = charactersArg
-        ?.split(",")
-        .map((filePath) => filePath.trim());
+      ?.split(",")
+      .map((filePath) => filePath.trim());
     const loadedCharacters = [];
 
     if (characterPaths?.length > 0) {
@@ -233,6 +338,7 @@ export async function loadCharacters(
     }
 
     return loadedCharacters;
+  })
 }
 
 export function getTokenForProvider(
@@ -354,6 +460,7 @@ export function getTokenForProvider(
 }
 
 function initializeDatabase(dataDir: string) {
+  return tracer.withActiveSpan('initializeDatabase', () => {
     if (process.env.POSTGRES_URL) {
         elizaLogger.info("Initializing PostgreSQL connection...");
         const db = new PostgresDatabaseAdapter({
@@ -380,6 +487,7 @@ function initializeDatabase(dataDir: string) {
         const db = new SqliteDatabaseAdapter(new Database(filePath));
         return db;
     }
+  })
 }
 
 // also adds plugins from character file into the runtime
@@ -387,6 +495,8 @@ export async function initializeClients(
     character: Character,
     runtime: IAgentRuntime
 ) {
+
+  return await tracer.withActiveSpan('initializeClients', async () => {
     // each client can only register once
     // and if we want two we can explicitly support it
     const clients: Record<string, any> = {};
@@ -471,11 +581,20 @@ export async function initializeClients(
         }
     }
 
+
     return clients;
+  });
 }
 
 function getSecret(character: Character, secret: string) {
-    return character.settings?.secrets?.[secret] || process.env[secret];
+  return tracer.startActiveSpan("getSecret", (span:Span) => {
+    span.setAttribute('secret', secret);
+    span.setAttribute('character', character);
+    const ret = character.settings?.secrets?.[secret] || process.env[secret];
+    
+    span.end()
+    return ret;
+    });
 }
 
 let nodePlugin: any | undefined;
@@ -486,6 +605,8 @@ export async function createAgent(
     cache: ICacheManager,
     token: string
 ): Promise<AgentRuntime> {
+  return await tracer.withActiveSpan('createAgent', async () => {
+
     elizaLogger.success(
         elizaLogger.successesTitle,
         "Creating runtime for character",
@@ -494,23 +615,23 @@ export async function createAgent(
 
     nodePlugin ??= createNodePlugin();
 
-    const teeMode = getSecret(character, "TEE_MODE") || "OFF";
-    const walletSecretSalt = getSecret(character, "WALLET_SECRET_SALT");
+    //    const teeMode = getSecret(character, "TEE_MODE") || "OFF";
+    //    const walletSecretSalt = getSecret(character, "WALLET_SECRET_SALT");
 
     // Validate TEE configuration
-    if (teeMode !== TEEMode.OFF && !walletSecretSalt) {
-        elizaLogger.error(
-            "WALLET_SECRET_SALT required when TEE_MODE is enabled"
-        );
-        throw new Error("Invalid TEE configuration");
-    }
+    // if (teeMode !== TEEMode.OFF && !walletSecretSalt) {
+    //     elizaLogger.error(
+    //         "WALLET_SECRET_SALT required when TEE_MODE is enabled"
+    //     );
+    //     throw new Error("Invalid TEE configuration");
+    // }
 
-    let goatPlugin: any | undefined;
-    if (getSecret(character, "EVM_PROVIDER_URL")) {
-        goatPlugin = await createGoatPlugin((secret) =>
-            getSecret(character, secret)
-        );
-    }
+    // let goatPlugin: any | undefined;
+    // if (getSecret(character, "EVM_PROVIDER_URL")) {
+    //     goatPlugin = await createGoatPlugin((secret) =>
+    //         getSecret(character, secret)
+    //     );
+    // }
 
     return new AgentRuntime({
         databaseAdapter: db,
@@ -520,86 +641,86 @@ export async function createAgent(
         character,
         // character.plugins are handled when clients are added
         plugins: [
-            bootstrapPlugin,
-            getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")
-                ? confluxPlugin
-                : null,
+          //bootstrapPlugin,
+            // getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")
+            //     ? confluxPlugin
+            //     : null,
             nodePlugin,
-            getSecret(character, "SOLANA_PUBLIC_KEY") ||
-            (getSecret(character, "WALLET_PUBLIC_KEY") &&
-                !getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith("0x"))
-                ? solanaPlugin
-                : null,
-            (getSecret(character, "NEAR_ADDRESS") ||
-                getSecret(character, "NEAR_WALLET_PUBLIC_KEY")) &&
-            getSecret(character, "NEAR_WALLET_SECRET_KEY")
-                ? nearPlugin
-                : null,
-            getSecret(character, "EVM_PUBLIC_KEY") ||
-            (getSecret(character, "WALLET_PUBLIC_KEY") &&
-                getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith("0x"))
-                ? evmPlugin
-                : null,
-            (getSecret(character, "SOLANA_PUBLIC_KEY") ||
-                (getSecret(character, "WALLET_PUBLIC_KEY") &&
-                    !getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith(
-                        "0x"
-                    ))) &&
-            getSecret(character, "SOLANA_ADMIN_PUBLIC_KEY") &&
-            getSecret(character, "SOLANA_PRIVATE_KEY") &&
-            getSecret(character, "SOLANA_ADMIN_PRIVATE_KEY")
-                ? nftGenerationPlugin
-                : null,
-            getSecret(character, "ZEROG_PRIVATE_KEY") ? zgPlugin : null,
-            getSecret(character, "COINBASE_COMMERCE_KEY")
-                ? coinbaseCommercePlugin
-                : null,
-            getSecret(character, "FAL_API_KEY") ||
-            getSecret(character, "OPENAI_API_KEY") ||
-            getSecret(character, "VENICE_API_KEY") ||
-            getSecret(character, "HEURIST_API_KEY") ||
-            getSecret(character, "LIVEPEER_GATEWAY_URL")
-                ? imageGenerationPlugin
-                : null,
-            getSecret(character, "FAL_API_KEY") ? ThreeDGenerationPlugin : null,
-            ...(getSecret(character, "COINBASE_API_KEY") &&
-            getSecret(character, "COINBASE_PRIVATE_KEY")
-                ? [
-                      coinbaseMassPaymentsPlugin,
-                      tradePlugin,
-                      tokenContractPlugin,
-                      advancedTradePlugin,
-                  ]
-                : []),
-            ...(teeMode !== TEEMode.OFF && walletSecretSalt
-                ? [teePlugin, solanaPlugin]
-                : []),
-            getSecret(character, "COINBASE_API_KEY") &&
-            getSecret(character, "COINBASE_PRIVATE_KEY") &&
-            getSecret(character, "COINBASE_NOTIFICATION_URI")
-                ? webhookPlugin
-                : null,
-            getSecret(character, "EVM_PROVIDER_URL") ? goatPlugin : null,
-            getSecret(character, "ABSTRACT_PRIVATE_KEY")
-                ? abstractPlugin
-                : null,
-            getSecret(character, "FLOW_ADDRESS") &&
-            getSecret(character, "FLOW_PRIVATE_KEY")
-                ? flowPlugin
-                : null,
-            getSecret(character, "APTOS_PRIVATE_KEY") ? aptosPlugin : null,
-            getSecret(character, "MVX_PRIVATE_KEY") ? multiversxPlugin : null,
-            getSecret(character, "ZKSYNC_PRIVATE_KEY") ? zksyncEraPlugin : null,
-            getSecret(character, "CRONOSZKEVM_PRIVATE_KEY")
-                ? cronosZkEVMPlugin
-                : null,
-            getSecret(character, "TON_PRIVATE_KEY") ? tonPlugin : null,
-            getSecret(character, "SUI_PRIVATE_KEY") ? suiPlugin : null,
-            getSecret(character, "STORY_PRIVATE_KEY") ? storyPlugin : null,
-            getSecret(character, "FUEL_PRIVATE_KEY") ? fuelPlugin : null,
-            getSecret(character, "AVALANCHE_PRIVATE_KEY")
-                ? avalanchePlugin
-                : null,
+            // getSecret(character, "SOLANA_PUBLIC_KEY") ||
+            // (getSecret(character, "WALLET_PUBLIC_KEY") &&
+            //     !getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith("0x"))
+            //     ? solanaPlugin
+            //     : null,
+            // (getSecret(character, "NEAR_ADDRESS") ||
+            //     getSecret(character, "NEAR_WALLET_PUBLIC_KEY")) &&
+            // getSecret(character, "NEAR_WALLET_SECRET_KEY")
+            //     ? nearPlugin
+            //     : null,
+            // getSecret(character, "EVM_PUBLIC_KEY") ||
+            // (getSecret(character, "WALLET_PUBLIC_KEY") &&
+            //     getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith("0x"))
+            //     ? evmPlugin
+            //     : null,
+            // (getSecret(character, "SOLANA_PUBLIC_KEY") ||
+            //     (getSecret(character, "WALLET_PUBLIC_KEY") &&
+            //         !getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith(
+            //             "0x"
+            //         ))) &&
+            // getSecret(character, "SOLANA_ADMIN_PUBLIC_KEY") &&
+            // getSecret(character, "SOLANA_PRIVATE_KEY") &&
+            // getSecret(character, "SOLANA_ADMIN_PRIVATE_KEY")
+            //     ? nftGenerationPlugin
+            //     : null,
+            // getSecret(character, "ZEROG_PRIVATE_KEY") ? zgPlugin : null,
+            // getSecret(character, "COINBASE_COMMERCE_KEY")
+            //     ? coinbaseCommercePlugin
+            //     : null,
+            // getSecret(character, "FAL_API_KEY") ||
+            // getSecret(character, "OPENAI_API_KEY") ||
+            // getSecret(character, "VENICE_API_KEY") ||
+            // getSecret(character, "HEURIST_API_KEY") ||
+            // getSecret(character, "LIVEPEER_GATEWAY_URL")
+            //     ? imageGenerationPlugin
+            //     : null,
+            // getSecret(character, "FAL_API_KEY") ? ThreeDGenerationPlugin : null,
+            // ...(getSecret(character, "COINBASE_API_KEY") &&
+            // getSecret(character, "COINBASE_PRIVATE_KEY")
+            //     ? [
+            //           coinbaseMassPaymentsPlugin,
+            //           tradePlugin,
+            //           tokenContractPlugin,
+            //           advancedTradePlugin,
+            //       ]
+            //     : []),
+            // ...(teeMode !== TEEMode.OFF && walletSecretSalt
+            //     ? [teePlugin, solanaPlugin]
+            //     : []),
+            // getSecret(character, "COINBASE_API_KEY") &&
+            // getSecret(character, "COINBASE_PRIVATE_KEY") &&
+            // getSecret(character, "COINBASE_NOTIFICATION_URI")
+            //     ? webhookPlugin
+            //     : null,
+            // getSecret(character, "EVM_PROVIDER_URL") ? goatPlugin : null,
+            // getSecret(character, "ABSTRACT_PRIVATE_KEY")
+            //     ? abstractPlugin
+            //     : null,
+            // getSecret(character, "FLOW_ADDRESS") &&
+            // getSecret(character, "FLOW_PRIVATE_KEY")
+            //     ? flowPlugin
+            //     : null,
+            // getSecret(character, "APTOS_PRIVATE_KEY") ? aptosPlugin : null,
+            // getSecret(character, "MVX_PRIVATE_KEY") ? multiversxPlugin : null,
+            // getSecret(character, "ZKSYNC_PRIVATE_KEY") ? zksyncEraPlugin : null,
+            // getSecret(character, "CRONOSZKEVM_PRIVATE_KEY")
+            //     ? cronosZkEVMPlugin
+            //     : null,
+            // getSecret(character, "TON_PRIVATE_KEY") ? tonPlugin : null,
+            // getSecret(character, "SUI_PRIVATE_KEY") ? suiPlugin : null,
+            // getSecret(character, "STORY_PRIVATE_KEY") ? storyPlugin : null,
+            // getSecret(character, "FUEL_PRIVATE_KEY") ? fuelPlugin : null,
+            // getSecret(character, "AVALANCHE_PRIVATE_KEY")
+            //     ? avalanchePlugin
+            //     : null,
         ].filter(Boolean),
         providers: [],
         actions: [],
@@ -608,18 +729,23 @@ export async function createAgent(
         cacheManager: cache,
         fetch: logFetch,
     });
+  });
 }
 
-function initializeFsCache(baseDir: string, character: Character) {
+  function initializeFsCache(baseDir: string, character: Character) {
+    return tracer.withActiveSpan('initializeFsCache', () => {
     const cacheDir = path.resolve(baseDir, character.id, "cache");
 
     const cache = new CacheManager(new FsCacheAdapter(cacheDir));
-    return cache;
+      return cache;
+    });
 }
 
-function initializeDbCache(character: Character, db: IDatabaseCacheAdapter) {
-    const cache = new CacheManager(new DbCacheAdapter(db, character.id));
-    return cache;
+  function initializeDbCache(character: Character, db: IDatabaseCacheAdapter) {
+    return tracer.withActiveSpan('initializeDbCache', () => {
+        const cache = new CacheManager(new DbCacheAdapter(db, character.id));
+        return cache;
+      });
 }
 
 function initializeCache(
@@ -628,6 +754,7 @@ function initializeCache(
     baseDir?: string,
     db?: IDatabaseCacheAdapter
 ) {
+  return tracer.withActiveSpan('initializeCache', () => {
     switch (cacheStore) {
         case CacheStore.REDIS:
             if (process.env.REDIS_URL) {
@@ -659,12 +786,14 @@ function initializeCache(
                 `Invalid cache store: ${cacheStore} or required configuration missing.`
             );
     }
+  });
 }
 
 async function startAgent(
     character: Character,
     directClient: DirectClient
 ): Promise<AgentRuntime> {
+
     let db: IDatabaseAdapter & IDatabaseCacheAdapter;
     try {
         character.id ??= stringToUuid(character.name);
@@ -784,7 +913,8 @@ const startAgents = async () => {
     );
 };
 
-startAgents().catch((error) => {
-    elizaLogger.error("Unhandled error in startAgents:", error);
-    process.exit(1);
-});
+startAgents();
+//.catch((error) => {
+//  elizaLogger.error("Unhandled error in startAgents:", error);
+//    process.exit(1);
+//});

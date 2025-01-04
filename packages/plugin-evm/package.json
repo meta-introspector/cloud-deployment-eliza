@@ -10,6 +10,12 @@
         "@lifi/data-types": "5.15.5",
         "@lifi/sdk": "3.4.1",
         "@lifi/types": "16.3.0",
+        "@opentelemetry/api": "^1.9.0",
+        "@opentelemetry/auto-instrumentations-node": "^0.55.0",
+        "@opentelemetry/exporter-zipkin": "^1.30.0",
+        "@opentelemetry/sdk-metrics": "^1.30.0",
+        "@opentelemetry/sdk-node": "^0.57.0",
+        "@opentelemetry/sdk-trace-node": "^1.30.0",
         "tsup": "8.3.5"
     },
     "scripts": {

@@ -7,6 +7,12 @@
   "dependencies": {
     "@0glabs/0g-ts-sdk": "0.2.1",
     "@elizaos/core": "workspace:*",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.55.0",
+    "@opentelemetry/exporter-zipkin": "^1.30.0",
+    "@opentelemetry/sdk-metrics": "^1.30.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "ethers": "6.13.4",
     "tsup": "8.3.5"
   },

@@ -1,0 +1,1 @@
+curl -d "{  id: '6028e1d5-28ec-0f16-962f-2df752493b4e',{  content: {    text: 'yes, tell me your ideas',    attachments: [],    source: 'direct',    inReplyTo: undefined  },  userId: '12dea96f-ec20-0935-a6ab-75692c994959',  roomId: '217df98d-3f87-0a35-9a24-e0cd4fb3a9f1',  agentId: 'b850bc30-45f8-0041-a00a-83df46d8555d' } }" http://192.168.1.90:3000/Eliza/message
