@@ -38,15 +38,16 @@ cd eliza
 ### 2. (Optional) Run Inside a Dev Container
 
 1. Open the project directory in **VS Code**:
-   ```bash
-   code .
-   ```
+
+    ```bash
+    code .
+    ```
 
 2. In the bottom-right corner, you'll see a popup:
    **"Reopen in Container"** – Click it.
 
-   - If you don't see the popup or miss it, press `F1`, type:
-     **"Reopen in Container"**, and select it.
+    - If you don't see the popup or miss it, press `F1`, type:
+      **"Reopen in Container"**, and select it.
 
 3. Wait for the container to initialize.
 
@@ -128,6 +129,7 @@ pnpm start:client
 ```
 
 NOTE: If you are using devcontainer, add --host argument to client:
+
 ```
 pnpm start:client --host
 ```
@@ -135,7 +137,6 @@ pnpm start:client --host
 Look for the message:
 `  ➜  Local:   http://localhost:5173/`
 Click on that link or open a browser window to that location. Once you do that you should see the chat interface connect with the system and you can start interacting with your character.
-
 
 ## Database Development
 

@@ -117,7 +117,9 @@ export default {
             })) as unknown as GetTokenSalesContent;
 
             if (!content || !content.collectionAddr) {
-                throw new Error("Invalid or missing collection address in parsed content");
+                throw new Error(
+                    "Invalid or missing collection address in parsed content"
+                );
             }
 
             debugLog.validation(content);
@@ -132,15 +134,15 @@ export default {
                 },
             };
 
-            debugLog.request('POST', config.STARGAZE_ENDPOINT, requestData);
+            debugLog.request("POST", config.STARGAZE_ENDPOINT, requestData);
 
             const response = await axios.post<TokenSalesResponse>(
                 config.STARGAZE_ENDPOINT,
                 requestData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                    }
+                        "Content-Type": "application/json",
+                    },
                 }
             );
 
@@ -154,7 +156,7 @@ export default {
             // Format numeric values
             const formatPrice = (price: number, symbol: string) =>
                 `${Number(price).toLocaleString(undefined, {
-                    maximumFractionDigits: 2
+                    maximumFractionDigits: 2,
                 })} ${symbol}`;
 
             // Format date to local string
@@ -167,20 +169,23 @@ export default {
             };
 
             if (callback) {
-                const salesText = sales.map((sale: TokenSale) =>
-                    `• ${sale.token.name} (ID: ${sale.token.tokenId})
+                const salesText = sales
+                    .map(
+                        (sale: TokenSale) =>
+                            `• ${sale.token.name} (ID: ${sale.token.tokenId})
     Price: ${formatPrice(sale.price, sale.saleDenomSymbol)} ($${sale.priceUsd.toFixed(2)})
     Date: ${formatDate(sale.date)}
     Type: ${sale.saleType}
     Seller: ${sale.seller.address}
     Buyer: ${sale.buyer.address}`
-                ).join('\n\n');
+                    )
+                    .join("\n\n");
 
                 callback({
                     text: `Recent sales for ${content.collectionAddr}:\n\n${salesText}`,
                     content: {
                         collection: content.collectionAddr,
-                        sales: sales
+                        sales: sales,
                     },
                 });
             }
@@ -190,32 +195,39 @@ export default {
             debugLog.error(error);
             if (callback) {
                 callback({
-                    text: `Error fetching sales data: ${error instanceof Error ? error.message : 'Unknown error'}`,
-                    content: { error: error instanceof Error ? error.message : 'Unknown error' },
+                    text: `Error fetching sales data: ${error instanceof Error ? error.message : "Unknown error"}`,
+                    content: {
+                        error:
+                            error instanceof Error
+                                ? error.message
+                                : "Unknown error",
+                    },
                 });
             }
             return false;
         }
     },
-    examples: [[
-        {
-            user: "{{user1}}",
-            content: {
-                text: "Show me recent sales from collection ammelia",
+    examples: [
+        [
+            {
+                user: "{{user1}}",
+                content: {
+                    text: "Show me recent sales from collection ammelia",
+                },
             },
-        },
-        {
-            user: "{{agent}}",
-            content: {
-                text: "I'll check the recent sales for the ammelia collection...",
-                action: "GET_TOKEN_SALES",
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "I'll check the recent sales for the ammelia collection...",
+                    action: "GET_TOKEN_SALES",
+                },
             },
-        },
-        {
-            user: "{{agent}}",
-            content: {
-                text: "Here are the recent sales data for ammelia collection:\n• NFT #123 - Sold for 100 STARS ($5.20)\n• NFT #124 - Sold for 95 STARS ($4.95)",
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "Here are the recent sales data for ammelia collection:\n• NFT #123 - Sold for 100 STARS ($5.20)\n• NFT #124 - Sold for 95 STARS ($4.95)",
+                },
             },
-        }
-    ]],
+        ],
+    ],
 } as Action;

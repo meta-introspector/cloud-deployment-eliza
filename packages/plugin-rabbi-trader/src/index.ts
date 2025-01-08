@@ -1,23 +1,23 @@
-import type { Plugin, IAgentRuntime, Memory, State } from "@elizaos/core";
-import { elizaLogger, settings } from "@elizaos/core";
+import type { Plugin, IAgentRuntime, Memory, State } from "@elizaOS/core";
+import { elizaLogger, settings } from "@elizaOS/core";
 import { z } from "zod";
-import { TwitterClientInterface } from "@elizaos/client-twitter";
+import { TwitterClientInterface } from "@elizaOS/client-twitter";
 import {
     solanaPlugin,
     trustScoreProvider,
     trustEvaluator,
-    getTokenBalance,
-} from "@elizaos/plugin-solana";
+} from "@elizaOS/plugin-solana";
 import { TokenProvider } from "./providers/token";
 import { Connection, PublicKey } from "@solana/web3.js";
 import type { Chain, WalletClient, Signature, Balance } from "@goat-sdk/core";
+import { getTokenBalance } from "@elizaOS/plugin-solana/src/providers/tokenUtils";
 import * as fs from "fs";
 import * as path from "path";
 import { TrustScoreProvider } from "./providers/trustScoreProvider";
 import { SimulationService } from "./services/simulationService";
 import { SAFETY_LIMITS } from "./constants";
 import NodeCache from "node-cache";
-import { TrustScoreDatabase } from "@elizaos/plugin-trustdb";
+import { TrustScoreDatabase } from "@elizaOS/packlages/plugin-trustdb";
 import { v4 as uuidv4 } from "uuid";
 import { actions } from "./actions";
 import {
@@ -462,7 +462,7 @@ async function createRabbiTraderPlugin(
 
     // Move connection initialization to the top
     const connection = new Connection(
-        runtime?.getSetting("SOLANA_RPC_URL") || "https://api.mainnet-beta.solana.com"
+        runtime?.getSetting("RPC_URL") || "https://api.mainnet-beta.solana.com"
     );
 
     const keypair = getWalletKeypair(runtime);

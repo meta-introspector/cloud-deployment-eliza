@@ -1,14 +1,27 @@
-import { IAgentRuntime, AgentRuntime, ModelClass, Memory, MemoryManager } from "@elizaos/core";
-import { elizaLogger, composeContext, generateObject, stringToUuid } from "@elizaos/core";
+import {
+    IAgentRuntime,
+    AgentRuntime,
+    ModelClass,
+    Memory,
+    MemoryManager,
+} from "@elizaos/core";
+import {
+    elizaLogger,
+    composeContext,
+    generateObject,
+    stringToUuid,
+} from "@elizaos/core";
 //import fileTypeChecker from "file-type-checker";
-import { lookup } from 'mrmime';
+import { lookup } from "mrmime";
 import { ObsidianProvider } from "./providers/obsidianClient";
 import { validateObsidianConfig } from "./enviroment";
 import { searchQuerySchema, NoteHierarchy, NoteContent } from "./types";
 
 let obsidianInstance: ObsidianProvider | undefined;
 
-export async function getObsidian(runtime: IAgentRuntime): Promise<ObsidianProvider> {
+export async function getObsidian(
+    runtime: IAgentRuntime
+): Promise<ObsidianProvider> {
     if (!obsidianInstance) {
         elizaLogger.debug("Creating new ObsidianProvider instance");
         const config = await validateObsidianConfig(runtime);
@@ -21,7 +34,6 @@ export async function getObsidian(runtime: IAgentRuntime): Promise<ObsidianProvi
     }
     return obsidianInstance;
 }
-
 
 // Extract outgoing links from the note content
 export function extractLinks(noteContent: NoteContent): string[] {
@@ -39,7 +51,11 @@ export function extractLinks(noteContent: NoteContent): string[] {
 }
 
 // Store the hierarchical link data in the AI agent's memory
-export async function storeHierarchyInMemory(runtime: IAgentRuntime, message: Memory, hierarchy: NoteHierarchy) {
+export async function storeHierarchyInMemory(
+    runtime: IAgentRuntime,
+    message: Memory,
+    hierarchy: NoteHierarchy
+) {
     const memory: Memory = {
         id: stringToUuid(hierarchy.path),
         roomId: message.roomId,
@@ -47,12 +63,12 @@ export async function storeHierarchyInMemory(runtime: IAgentRuntime, message: Me
         agentId: runtime.agentId,
         content: {
             text: JSON.stringify(hierarchy),
-            type: 'note_traversal',
+            type: "note_traversal",
             metadata: {
                 path: hierarchy.path,
-                timestamp: new Date().toISOString()
-            }
-        }
+                timestamp: new Date().toISOString(),
+            },
+        },
     };
     const memoryManager = new MemoryManager({
         runtime,
@@ -64,8 +80,11 @@ export async function storeHierarchyInMemory(runtime: IAgentRuntime, message: Me
 }
 
 // Retrieve and utilize the stored hierarchy
-export async function retrieveHierarchyFromMemory(runtime: IAgentRuntime, message: Memory, notePath: string): Promise<NoteHierarchy | null> {
-
+export async function retrieveHierarchyFromMemory(
+    runtime: IAgentRuntime,
+    message: Memory,
+    notePath: string
+): Promise<NoteHierarchy | null> {
     const memoryManager = new MemoryManager({
         runtime,
         tableName: "obsidian",
@@ -82,16 +101,19 @@ export async function retrieveHierarchyFromMemory(runtime: IAgentRuntime, messag
         if (memories && memories.length > 0) {
             const memory = memories[0];
             const hierarchy: NoteHierarchy = JSON.parse(memory.content.text);
-            elizaLogger.info(`Retrieved hierarchy for note ${notePath} from memory`);
+            elizaLogger.info(
+                `Retrieved hierarchy for note ${notePath} from memory`
+            );
             return hierarchy;
         }
         return null;
     } catch (error) {
-        elizaLogger.error(`Failed to retrieve hierarchy from memory: ${error.message}`);
+        elizaLogger.error(
+            `Failed to retrieve hierarchy from memory: ${error.message}`
+        );
         return null;
     }
 }
-
 
 /**
  * Converts markdown text to plaintext by removing common markdown syntax
@@ -110,8 +132,8 @@ export async function retrieveHierarchyFromMemory(runtime: IAgentRuntime, messag
  */
 export function markdownToPlaintext(markdown: string): string {
     // Handle empty or invalid input
-    if (!markdown || typeof markdown !== 'string') {
-        return '';
+    if (!markdown || typeof markdown !== "string") {
+        return "";
     }
 
     let text = markdown;
@@ -123,32 +145,32 @@ export function markdownToPlaintext(markdown: string): string {
     });
 
     // Remove inline code
-    text = text.replace(/`([^`]+)`/g, '$1');
+    text = text.replace(/`([^`]+)`/g, "$1");
 
     // Remove headers while preserving content
-    text = text.replace(/^#{1,6}\s+(.*)$/gm, '$1');
+    text = text.replace(/^#{1,6}\s+(.*)$/gm, "$1");
 
     // Remove bold and italic markers
-    text = text.replace(/[*_]{1,2}([^*_]+)[*_]{1,2}/g, '$1');
+    text = text.replace(/[*_]{1,2}([^*_]+)[*_]{1,2}/g, "$1");
 
     // Replace horizontal rules with newlines
-    text = text.replace(/^[\s-*_]{3,}$/gm, '\n');
+    text = text.replace(/^[\s-*_]{3,}$/gm, "\n");
 
     // Remove blockquotes markers
-    text = text.replace(/^>\s+/gm, '');
+    text = text.replace(/^>\s+/gm, "");
 
     // Handle links - keep text, remove URL
-    text = text.replace(/\[([^\]]+)\]\([)]+\)/g, '$1');
+    text = text.replace(/\[([^\]]+)\]\([)]+\)/g, "$1");
 
     // Remove image markdown completely
-    text = text.replace(/!\[([^\]]*)\]\([)]+\)/g, '');
+    text = text.replace(/!\[([^\]]*)\]\([)]+\)/g, "");
 
     // Handle lists - remove markers but preserve content
-    text = text.replace(/^[\s-]*[-+*]\s+/gm, '');  // Unordered lists
-    text = text.replace(/^\s*\d+\.\s+/gm, '');     // Ordered lists
+    text = text.replace(/^[\s-]*[-+*]\s+/gm, ""); // Unordered lists
+    text = text.replace(/^\s*\d+\.\s+/gm, ""); // Ordered lists
 
     // Clean up excessive whitespace
-    text = text.replace(/\n\s*\n\s*\n/g, '\n\n');  // Multiple blank lines to double
+    text = text.replace(/\n\s*\n\s*\n/g, "\n\n"); // Multiple blank lines to double
     text = text.trim();
 
     return text;
@@ -166,9 +188,8 @@ export function removeCodeBlockDelimiters(input: string): string {
     const codeBlockRegex = /^```[a-zA-Z]*\n([\s\S]*?)\n```$/gm;
 
     // Replace the matched code block delimiters with the captured content
-    return input.replace(codeBlockRegex, '$1');
-  }
-
+    return input.replace(codeBlockRegex, "$1");
+}
 
 // Define example prompts to guide the LLM in generating the correct structure
 const EXAMPLE_SEARCH_PROMPTS = [
@@ -177,88 +198,90 @@ const EXAMPLE_SEARCH_PROMPTS = [
         output: {
             query: "typescript",
             queryFormat: "plaintext",
-            options: { contextLength: 150 }
-        }
+            options: { contextLength: 150 },
+        },
     },
     {
         input: "Find wisdom or mastering in all files",
         output: {
             query: "wisdom OR mastering",
             queryFormat: "plaintext",
-            options: { contextLength: 150 }
-        }
+            options: { contextLength: 150 },
+        },
     },
     {
         input: "Find markdown files containing 'react' or 'typescript'",
         output: {
             query: {
                 and: [
-                    { or: [{ in: ["react", { var: "content" }] }, { in: ["typescript", { var: "content" }] }] }
-                ]
+                    {
+                        or: [
+                            { in: ["react", { var: "content" }] },
+                            { in: ["typescript", { var: "content" }] },
+                        ],
+                    },
+                ],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Search for files with regex pattern 'def.*main'",
         output: {
             query: {
-                and: [
-                    { or: [{ regexp: ["def.*main", { var: "content" }] }] }
-                ]
+                and: [{ or: [{ regexp: ["def.*main", { var: "content" }] }] }],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Search for markdown files with regex pattern '<div[^>]*>'",
         output: {
             query: {
-                and: [
-                    { or: [{ regexp: ["<div[^>]*>", { var: "content" }] }] }
-                ]
+                and: [{ or: [{ regexp: ["<div[^>]*>", { var: "content" }] }] }],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Find markdown files with filenames containing 'project'",
         output: {
             query: {
-                and: [
-                    { in: ["project", { var: "path" }] }
-                ]
+                and: [{ in: ["project", { var: "path" }] }],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Search for markdown files with filenames matching regex pattern '^notes_.*\\.md$'",
         output: {
             query: {
-                and: [
-                    { regexp: ["^notes_.*\\.md$", { var: "path" }] }
-                ]
+                and: [{ regexp: ["^notes_.*\\.md$", { var: "path" }] }],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Find markdown files with filenames containing 'summary' or 'report'",
         output: {
             query: {
                 and: [
-                    { or: [{ in: ["summary", { var: "path" }] }, { in: ["report", { var: "path" }] }] }
-                ]
+                    {
+                        or: [
+                            { in: ["summary", { var: "path" }] },
+                            { in: ["report", { var: "path" }] },
+                        ],
+                    },
+                ],
             },
             queryFormat: "jsonlogic",
-            options: { contextLength: 200 }
-        }
+            options: { contextLength: 200 },
+        },
     },
     {
         input: "Select TABLE file.mtime FROM #Projects IN Projects/ AND Archive/Projects",
@@ -266,10 +289,10 @@ const EXAMPLE_SEARCH_PROMPTS = [
             query: "TABLE file.mtime FROM #Projects",
             queryFormat: "dataview",
             options: {
-                searchIn: ["Projects/", "Archive/Projects/"]
-            }
-        }
-    }
+                searchIn: ["Projects/", "Archive/Projects/"],
+            },
+        },
+    },
 ];
 
 /**
@@ -278,9 +301,10 @@ const EXAMPLE_SEARCH_PROMPTS = [
  * @returns A formatted prompt string with examples and instructions
  */
 function constructSearchPrompt(userInput: string): string {
-    const examplePrompts = EXAMPLE_SEARCH_PROMPTS.map(example =>
-        `Input: "${example.input}"\nOutput: ${JSON.stringify(example.output, null, 2)}`
-    ).join('\n\n');
+    const examplePrompts = EXAMPLE_SEARCH_PROMPTS.map(
+        (example) =>
+            `Input: "${example.input}"\nOutput: ${JSON.stringify(example.output, null, 2)}`
+    ).join("\n\n");
 
     return `Respond with a JSON block containing only the extracted values. Use null for any values that cannot be determined.
 
@@ -311,22 +335,25 @@ Respond ONLY with a JSON block containing only the extracted values.`;
  * @param prompt - The formatted prompt string
  * @returns A Promise resolving to the JSON string response
  */
-async function genereteSearchParameters(prompt: string, state: any, runtime: IAgentRuntime): Promise<string> {
+async function genereteSearchParameters(
+    prompt: string,
+    state: any,
+    runtime: IAgentRuntime
+): Promise<string> {
     try {
-
         const context = composeContext({
             state,
             template: prompt,
         });
 
         //TODO: temperature: 0.2 - Make this dynamic
-        const searchContext = await generateObject({
+        const searchContext = (await generateObject({
             runtime,
             context,
             modelClass: ModelClass.MEDIUM,
             schema: searchQuerySchema,
-            stop: ["\n\n"]
-        }) as any;
+            stop: ["\n\n"],
+        })) as any;
 
         /*if (!isSearchQuery(searchContext.object)) {
             elizaLogger.error(
@@ -338,18 +365,24 @@ async function genereteSearchParameters(prompt: string, state: any, runtime: IAg
 
         // Attempt to parse the completion as JSON to verify structure
         const parsedCompletion = searchContext.object; //JSON.parse(JSON.stringify(searchContext.object, null, 2));
-        elizaLogger.info("Parsed completion:", JSON.stringify(parsedCompletion , null, 2));
+        elizaLogger.info(
+            "Parsed completion:",
+            JSON.stringify(parsedCompletion, null, 2)
+        );
         return JSON.stringify(parsedCompletion);
-
     } catch (error) {
-        console.error('Error calling LLM API:', error);
+        console.error("Error calling LLM API:", error);
         // Return a basic fallback response that matches the schema
         return "**No matching notes found**";
     }
 }
 
 // Function to process user input
-export async function processUserInput(userInput: string, state: any, runtime: IAgentRuntime): Promise<any> {
+export async function processUserInput(
+    userInput: string,
+    state: any,
+    runtime: IAgentRuntime
+): Promise<any> {
     // Construct the prompt for the LLM
     const prompt = constructSearchPrompt(userInput);
 
@@ -358,14 +391,14 @@ export async function processUserInput(userInput: string, state: any, runtime: I
 
     // Attempt to parse the LLM's response as JSON
     try {
-      const parsedResponse = JSON.parse(llmResponse);
+        const parsedResponse = JSON.parse(llmResponse);
 
-      // Validate the parsed response against the schema
-      const validatedResponse = searchQuerySchema.parse(parsedResponse);
+        // Validate the parsed response against the schema
+        const validatedResponse = searchQuerySchema.parse(parsedResponse);
 
-      return validatedResponse;
+        return validatedResponse;
     } catch (error) {
-      console.error('Failed to parse or validate LLM response:', error);
-      return null;
+        console.error("Failed to parse or validate LLM response:", error);
+        return null;
     }
-  }
+}

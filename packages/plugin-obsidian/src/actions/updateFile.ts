@@ -7,7 +7,7 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
 import { fileSchema, isValidFile } from "../types";
 import { getObsidian } from "../helper";
@@ -21,7 +21,7 @@ export const updateFileAction: Action = {
         "UPDATE",
         "PATCH",
         "EDIT_FILE",
-        "CHANGE_FILE"
+        "CHANGE_FILE",
     ],
     description:
         "Update an existing file in the Obsidian vault. Use format: 'Update FOLDER/SUBFOLDER/filename with content: your_content'",
@@ -60,13 +60,13 @@ export const updateFileAction: Action = {
                 template: fileTemplate(message.content.text),
             });
 
-            const fileContext = await generateObject({
+            const fileContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: fileSchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidFile(fileContext.object)) {
                 elizaLogger.error(
@@ -107,7 +107,7 @@ export const updateFileAction: Action = {
                     metadata: {
                         path: path,
                         operation: "UPDATE",
-                        success: true
+                        success: true,
                     },
                 });
             }
@@ -143,7 +143,7 @@ export const updateFileAction: Action = {
             {
                 user: "{{user1}}",
                 content: {
-                    text: "Patch PROJECTS/src/config.json with content: { \"version\": \"2.0.0\" }",
+                    text: 'Patch PROJECTS/src/config.json with content: { "version": "2.0.0" }',
                 },
             },
             {

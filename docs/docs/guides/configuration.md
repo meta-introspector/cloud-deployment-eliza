@@ -71,6 +71,7 @@ HEURIST_API_KEY=
 # Livepeer Settings
 LIVEPEER_GATEWAY_URL=
 ```
+
 ### Image Generation
 
 Configure image generation in your character file:

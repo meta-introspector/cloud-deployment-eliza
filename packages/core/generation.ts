@@ -803,15 +803,18 @@ export async function generateText({
                     apiKey,
                     baseURL: endpoint,
                     headers: {
-                        'api_key': apiKey,
-                        'Content-Type': 'application/json'
-                    }
+                        api_key: apiKey,
+                        "Content-Type": "application/json",
+                    },
                 });
 
                 const { text: inferaResponse } = await aiGenerateText({
                     model: infera.languageModel(model),
                     prompt: context,
-                    system: runtime.character.system ?? settings.SYSTEM_PROMPT ?? undefined,
+                    system:
+                        runtime.character.system ??
+                        settings.SYSTEM_PROMPT ??
+                        undefined,
                     temperature: temperature,
                     maxTokens: max_response_length,
                     frequencyPenalty: frequency_penalty,

@@ -13,7 +13,7 @@ import {
     type Relationship,
     type UUID,
     RAGKnowledgeItem,
-    elizaLogger
+    elizaLogger,
 } from "@elizaos/core";
 import { v4 } from "uuid";
 import { sqliteTables } from "./sqliteTables.ts";
@@ -834,8 +834,10 @@ export class SqlJsDatabaseAdapter
                 id: row.id,
                 agentId: row.agentId,
                 content: JSON.parse(row.content),
-                embedding: row.embedding ? new Float32Array(row.embedding) : undefined, // Convert Uint8Array back to Float32Array
-                createdAt: row.createdAt
+                embedding: row.embedding
+                    ? new Float32Array(row.embedding)
+                    : undefined, // Convert Uint8Array back to Float32Array
+                createdAt: row.createdAt,
             });
         }
         stmt.free();
@@ -852,7 +854,7 @@ export class SqlJsDatabaseAdapter
         const cacheKey = `embedding_${params.agentId}_${params.searchText}`;
         const cachedResult = await this.getCache({
             key: cacheKey,
-            agentId: params.agentId
+            agentId: params.agentId,
         });
 
         if (cachedResult) {
@@ -901,11 +903,11 @@ export class SqlJsDatabaseAdapter
         stmt.bind([
             new Uint8Array(params.embedding.buffer),
             params.agentId,
-            `%${params.searchText || ''}%`,
+            `%${params.searchText || ""}%`,
             params.agentId,
             params.agentId,
             params.match_threshold,
-            params.match_count
+            params.match_count,
         ]);
 
         const results: RAGKnowledgeItem[] = [];
@@ -915,9 +917,11 @@ export class SqlJsDatabaseAdapter
                 id: row.id,
                 agentId: row.agentId,
                 content: JSON.parse(row.content),
-                embedding: row.embedding ? new Float32Array(row.embedding) : undefined,
+                embedding: row.embedding
+                    ? new Float32Array(row.embedding)
+                    : undefined,
                 createdAt: row.createdAt,
-                similarity: row.keyword_score
+                similarity: row.keyword_score,
             });
         }
         stmt.free();
@@ -925,7 +929,7 @@ export class SqlJsDatabaseAdapter
         await this.setCache({
             key: cacheKey,
             agentId: params.agentId,
-            value: JSON.stringify(results)
+            value: JSON.stringify(results),
         });
 
         return results;
@@ -947,31 +951,41 @@ export class SqlJsDatabaseAdapter
                 knowledge.id,
                 metadata.isShared ? null : knowledge.agentId,
                 JSON.stringify(knowledge.content),
-                knowledge.embedding ? new Uint8Array(knowledge.embedding.buffer) : null,
+                knowledge.embedding
+                    ? new Uint8Array(knowledge.embedding.buffer)
+                    : null,
                 knowledge.createdAt || Date.now(),
                 metadata.isMain ? 1 : 0,
                 metadata.originalId || null,
                 metadata.chunkIndex || null,
-                metadata.isShared ? 1 : 0
+                metadata.isShared ? 1 : 0,
             ]);
             stmt.free();
         } catch (error: any) {
             const isShared = knowledge.content.metadata?.isShared;
-            const isPrimaryKeyError = error?.code === 'SQLITE_CONSTRAINT_PRIMARYKEY';
+            const isPrimaryKeyError =
+                error?.code === "SQLITE_CONSTRAINT_PRIMARYKEY";
 
             if (isShared && isPrimaryKeyError) {
-                elizaLogger.info(`Shared knowledge ${knowledge.id} already exists, skipping`);
+                elizaLogger.info(
+                    `Shared knowledge ${knowledge.id} already exists, skipping`
+                );
                 return;
-            } else if (!isShared && !error.message?.includes('SQLITE_CONSTRAINT_PRIMARYKEY')) {
+            } else if (
+                !isShared &&
+                !error.message?.includes("SQLITE_CONSTRAINT_PRIMARYKEY")
+            ) {
                 elizaLogger.error(`Error creating knowledge ${knowledge.id}:`, {
                     error,
                     embeddingLength: knowledge.embedding?.length,
-                    content: knowledge.content
+                    content: knowledge.content,
                 });
                 throw error;
             }
 
-            elizaLogger.debug(`Knowledge ${knowledge.id} already exists, skipping`);
+            elizaLogger.debug(
+                `Knowledge ${knowledge.id} already exists, skipping`
+            );
         }
     }
 
@@ -983,9 +997,9 @@ export class SqlJsDatabaseAdapter
     }
 
     async clearKnowledge(agentId: UUID, shared?: boolean): Promise<void> {
-        const sql = shared ?
-            `DELETE FROM knowledge WHERE ("agentId" = ? OR "isShared" = 1)` :
-            `DELETE FROM knowledge WHERE "agentId" = ?`;
+        const sql = shared
+            ? `DELETE FROM knowledge WHERE ("agentId" = ? OR "isShared" = 1)`
+            : `DELETE FROM knowledge WHERE "agentId" = ?`;
 
         const stmt = this.db.prepare(sql);
         stmt.run([agentId]);

@@ -26,7 +26,6 @@ export interface Token {
     };
 }
 
-
 export interface StargazeConfig {
     endpoint: string;
 }

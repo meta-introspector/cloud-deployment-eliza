@@ -73,7 +73,10 @@ export class CosmosTransferActionService implements ICosmosActionService {
             senderAddress,
             params.toAddress,
             [coin],
-            { gas: gasFee.toString(), amount: [{ ...coin, amount: gasFee.toString() }] }
+            {
+                gas: gasFee.toString(),
+                amount: [{ ...coin, amount: gasFee.toString() }],
+            }
         );
 
         const gasPaid = getPaidFeeFromReceipt(txDeliveryResponse);

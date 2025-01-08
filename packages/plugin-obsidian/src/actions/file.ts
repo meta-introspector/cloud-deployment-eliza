@@ -7,10 +7,10 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
 import { fileSchema, isValidFile } from "../types";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 import { fileTemplate } from "../templates/file";
 
 export const readFileAction: Action = {
@@ -85,13 +85,13 @@ export const readFileAction: Action = {
                 template: fileTemplate(message.content.text),
             });
 
-            const fileContext = await generateObject({
+            const fileContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: fileSchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidFile(fileContext.object)) {
                 elizaLogger.error(

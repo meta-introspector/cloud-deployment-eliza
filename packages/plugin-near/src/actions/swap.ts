@@ -55,7 +55,8 @@ async function swapToken(
         const tokenOut = await ftGetTokenMetadata(outputTokenId);
         const networkId = runtime.getSetting("NEAR_NETWORK") || "testnet";
         const nodeUrl =
-            runtime.getSetting("NEAR_RPC_URL") || "https://rpc.testnet.near.org";
+            runtime.getSetting("NEAR_RPC_URL") ||
+            "https://rpc.testnet.near.org";
 
         // Get all pools for estimation
         // ratedPools, unRatedPools,

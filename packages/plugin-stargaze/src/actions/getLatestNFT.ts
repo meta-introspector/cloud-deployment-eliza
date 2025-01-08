@@ -47,7 +47,6 @@ For "Show me the latest NFT from Badkids":
 
 Extract the collection information from the above messages and respond with the appropriate JSON.`;
 
-
 const GRAPHQL_QUERY = `
 query MarketplaceTokens($collectionAddr: String!, $limit: Int) {
     tokens(
@@ -122,7 +121,9 @@ export default {
             })) as unknown as GetLatestNFTContent;
 
             if (!content || !content.collectionAddr) {
-                throw new Error("Invalid or missing collection address in parsed content");
+                throw new Error(
+                    "Invalid or missing collection address in parsed content"
+                );
             }
 
             debugLog.validation(content);
@@ -137,15 +138,15 @@ export default {
                 },
             };
 
-            debugLog.request('POST', config.STARGAZE_ENDPOINT, requestData);
+            debugLog.request("POST", config.STARGAZE_ENDPOINT, requestData);
 
             const response = await axios.post(
                 config.STARGAZE_ENDPOINT,
                 requestData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                    }
+                        "Content-Type": "application/json",
+                    },
                 }
             );
 
@@ -157,7 +158,9 @@ export default {
 
             const latestNFT = response.data.data.tokens.tokens[0];
             if (!latestNFT) {
-                throw new Error(`No NFTs found in collection: ${content.collectionAddr}`);
+                throw new Error(
+                    `No NFTs found in collection: ${content.collectionAddr}`
+                );
             }
 
             if (callback) {

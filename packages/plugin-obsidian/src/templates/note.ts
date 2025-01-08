@@ -27,4 +27,3 @@ Here are the recent user message for context:
 ${userRequest}
 
 Respond ONLY with a JSON block containing ONLY the extracted values.`;
-

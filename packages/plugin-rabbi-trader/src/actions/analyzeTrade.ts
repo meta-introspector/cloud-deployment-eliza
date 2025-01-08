@@ -5,7 +5,7 @@ import {
     generateText,
     ModelClass,
     parseJSONObjectFromText,
-} from "@elizaos/core";
+} from "@elizaOS/core";
 
 export const analyzeTradeAction: Action = {
     name: "ANALYZE_TRADE",

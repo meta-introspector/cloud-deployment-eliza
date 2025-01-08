@@ -229,8 +229,8 @@ import { PGLiteDatabaseAdapter } from "@elizaos/adapter-pglite";
 
 const db = new PGLiteDatabaseAdapter(
     new PGLite({
-        dataDir: "./db"
-    })
+        dataDir: "./db",
+    }),
 );
 ```
 

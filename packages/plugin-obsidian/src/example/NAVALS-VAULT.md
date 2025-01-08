@@ -36,4 +36,4 @@ https://drive.google.com/drive/folders/1EZiUhASpNQBYka3Z8NNkBzYnrb7TCfmG
 
 Have fun talking to Naval's digital brain!
 
-*source: https://www.reddit.com/r/NavalRavikant/comments/oza0bl/i_made_a_digital_version_of_navals_brain_free/?rdt=41536*
+_source: https://www.reddit.com/r/NavalRavikant/comments/oza0bl/i_made_a_digital_version_of_navals_brain_free/?rdt=41536_

@@ -13,13 +13,13 @@ Leverage **`@elizaos/plugin-depin`** to seamlessly integrate AI agents with the 
 ## Key Features
 
 1. **Seamless IoTeX Integration:**
-   - Leverages IoTeX Modular Infra to connect to a growing ecosystem of DePIN networks.
+    - Leverages IoTeX Modular Infra to connect to a growing ecosystem of DePIN networks.
 2. **Unified Data Access:**
-   - Standardized interfaces allow access to diverse DePIN data sources, regardless of protocols or formats.
+    - Standardized interfaces allow access to diverse DePIN data sources, regardless of protocols or formats.
 3. **Time-Series Data Handling:**
-   - Equipped to analyze temporal patterns for predictive capabilities.
+    - Equipped to analyze temporal patterns for predictive capabilities.
 4. **Future-Proof Design:**
-   - Designed to scale with the evolving DePIN and AI landscape.
+    - Designed to scale with the evolving DePIN and AI landscape.
 
 ---
 
@@ -55,11 +55,11 @@ The **DePINScan provider** bridges the gap between your Eliza agents and decentr
 
 - **Daily Metrics:** Get the latest statistics on DePIN activity, including device operations and network performance.
 - **Project Data:** Detailed information about individual DePIN projects:
-  - **Project Identifiers:** Names and slugs for easy referencing.
-  - **Token Information:** Market metrics such as token prices, market caps, and fully diluted valuations (FDV).
-  - **Device Statistics:** Total devices deployed, operational costs, and earnings.
-  - **Blockchain Integration:** Layer 1 chains associated with projects and their respective categories.
-  - **Market Insights:** Comprehensive data on market trends and project capitalization.
+    - **Project Identifiers:** Names and slugs for easy referencing.
+    - **Token Information:** Market metrics such as token prices, market caps, and fully diluted valuations (FDV).
+    - **Device Statistics:** Total devices deployed, operational costs, and earnings.
+    - **Blockchain Integration:** Layer 1 chains associated with projects and their respective categories.
+    - **Market Insights:** Comprehensive data on market trends and project capitalization.
 
 ---
 

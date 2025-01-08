@@ -199,7 +199,9 @@ export class WalletProvider {
         output += `Wallet Address: ${this.address}\n`;
 
         const totalUsdFormatted = new BigNumber(portfolio.totalUsd).toFixed(2);
-        const totalMoveFormatted = new BigNumber(portfolio.totalMove).toFixed(4);
+        const totalMoveFormatted = new BigNumber(portfolio.totalMove).toFixed(
+            4
+        );
 
         output += `Total Value: $${totalUsdFormatted} (${totalMoveFormatted} Move)\n`;
 
@@ -238,7 +240,7 @@ const walletProvider: Provider = {
             const aptosClient = new Aptos(
                 new AptosConfig({
                     network: Network.CUSTOM,
-                    fullnode: MOVEMENT_NETWORK_CONFIG[network].fullnode
+                    fullnode: MOVEMENT_NETWORK_CONFIG[network].fullnode,
                 })
             );
             const provider = new WalletProvider(

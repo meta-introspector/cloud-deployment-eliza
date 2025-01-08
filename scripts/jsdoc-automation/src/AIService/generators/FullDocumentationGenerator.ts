@@ -1,4 +1,10 @@
-import { ASTQueueItem, EnvUsage, PluginDocumentation, TodoItem, TodoSection } from "../../types";
+import {
+    ASTQueueItem,
+    EnvUsage,
+    PluginDocumentation,
+    TodoItem,
+    TodoSection,
+} from "../../types";
 import { Configuration } from "../../Configuration.js";
 import { TypeScriptParser } from "../../TypeScriptParser.js";
 import { CodeFormatter } from "../utils/CodeFormatter.js";
@@ -55,9 +61,16 @@ export class FullDocumentationGenerator {
         todoItems: TodoItem[];
         envUsages: EnvUsage[];
     }): Promise<PluginDocumentation> {
-        const organizedDocs = this.documentOrganizer.organizeDocumentation(existingDocs);
-        const organizedDocsPath = path.join(this.configuration.absolutePath, "organizedDocs.json");
-        await fs.writeFile(organizedDocsPath, JSON.stringify(organizedDocs, null, 2));
+        const organizedDocs =
+            this.documentOrganizer.organizeDocumentation(existingDocs);
+        const organizedDocsPath = path.join(
+            this.configuration.absolutePath,
+            "organizedDocs.json"
+        );
+        await fs.writeFile(
+            organizedDocsPath,
+            JSON.stringify(organizedDocs, null, 2)
+        );
 
         const indexPath = path.join(
             this.configuration.absolutePath,
@@ -69,30 +82,32 @@ export class FullDocumentationGenerator {
         const actionsDocumentation = await this.generateActionsDocumentation(
             exports.actions
         );
-        const providersDocumentation = await this.generateProvidersDocumentation(exports.providers);
-        const evaluatorsDocumentation = await this.generateEvaluatorsDocumentation(exports.evaluators);
+        const providersDocumentation =
+            await this.generateProvidersDocumentation(exports.providers);
+        const evaluatorsDocumentation =
+            await this.generateEvaluatorsDocumentation(exports.evaluators);
 
         // Generate overview, FAQ, and troubleshooting together
-        const overviewResponse = await this.generateOverview(organizedDocs, packageJson);
+        const overviewResponse = await this.generateOverview(
+            organizedDocs,
+            packageJson
+        );
         const parsedOverview = JSON.parse(overviewResponse);
 
-        const [
-            installation,
-            configuration,
-            usage,
-            apiRef,
-            todoSection,
-        ] = await Promise.all([
-            this.generateInstallation(packageJson),
-            this.generateConfiguration(envUsages),
-            this.generateUsage(organizedDocs, packageJson),
-            this.generateApiReference(organizedDocs),
-            this.generateTodoSection(todoItems),
-        ]);
+        const [installation, configuration, usage, apiRef, todoSection] =
+            await Promise.all([
+                this.generateInstallation(packageJson),
+                this.generateConfiguration(envUsages),
+                this.generateUsage(organizedDocs, packageJson),
+                this.generateApiReference(organizedDocs),
+                this.generateTodoSection(todoItems),
+            ]);
 
         // Format the FAQ and troubleshooting sections
         const formattedFAQ = this.formatFAQSection(parsedOverview.faq);
-        const formattedTroubleshooting = this.formatTroubleshootingSection(parsedOverview.troubleshooting);
+        const formattedTroubleshooting = this.formatTroubleshootingSection(
+            parsedOverview.troubleshooting
+        );
 
         return {
             overview: this.formatOverviewSection(parsedOverview.overview),
@@ -115,31 +130,42 @@ export class FullDocumentationGenerator {
 
     private formatFAQSection(faq: FAQ[]): string {
         if (!Array.isArray(faq)) {
-            console.warn('FAQ data is not an array, returning empty string');
-            return '';
+            console.warn("FAQ data is not an array, returning empty string");
+            return "";
         }
 
         return faq
-            .filter(item => item.question && item.answer) // Filter out invalid items
-            .map(item => `### Q: ${item.question}\n${item.answer}`)
-            .join('\n\n');
+            .filter((item) => item.question && item.answer) // Filter out invalid items
+            .map((item) => `### Q: ${item.question}\n${item.answer}`)
+            .join("\n\n");
     }
 
-    private formatTroubleshootingSection(troubleshooting: Troubleshooting): string {
+    private formatTroubleshootingSection(
+        troubleshooting: Troubleshooting
+    ): string {
         if (!troubleshooting?.commonIssues || !troubleshooting?.debuggingTips) {
-            console.warn('Troubleshooting data is missing required fields, returning empty string');
-            return '';
+            console.warn(
+                "Troubleshooting data is missing required fields, returning empty string"
+            );
+            return "";
         }
         const issues = troubleshooting.commonIssues
-            .filter((issue: { issue: string; cause: string; solution: string }) => issue.issue && issue.cause && issue.solution)
-            .map((issue: { issue: string; cause: string; solution: string }) => `### ${issue.issue}\n- Cause: ${issue.cause}\n- Solution: ${issue.solution}`)
-            .join('\n\n');
+            .filter(
+                (issue: { issue: string; cause: string; solution: string }) =>
+                    issue.issue && issue.cause && issue.solution
+            )
+            .map(
+                (issue: { issue: string; cause: string; solution: string }) =>
+                    `### ${issue.issue}\n- Cause: ${issue.cause}\n- Solution: ${issue.solution}`
+            )
+            .join("\n\n");
 
-        const tips = troubleshooting.debuggingTips.length > 0
-            ? `### Debugging Tips\n${troubleshooting.debuggingTips.map(tip => `- ${tip}`).join('\n')}`
-            : '';
+        const tips =
+            troubleshooting.debuggingTips.length > 0
+                ? `### Debugging Tips\n${troubleshooting.debuggingTips.map((tip) => `- ${tip}`).join("\n")}`
+                : "";
 
-        return issues + (tips ? `\n\n${tips}` : '');
+        return issues + (tips ? `\n\n${tips}` : "");
     }
 
     private async generateOverview(
@@ -159,9 +185,9 @@ export class FullDocumentationGenerator {
     private cleanJSONResponse(response: string): string {
         // Remove markdown code block syntax if present
         return response
-            .replace(/^```json\n/, '')  // Remove opening ```json
-            .replace(/\n```$/, '')      // Remove closing ```
-            .trim();                    // Remove any extra whitespace
+            .replace(/^```json\n/, "") // Remove opening ```json
+            .replace(/\n```$/, "") // Remove closing ```
+            .trim(); // Remove any extra whitespace
     }
 
     private async generateInstallation(packageJson: any): Promise<string> {
@@ -282,7 +308,10 @@ export class FullDocumentationGenerator {
     ): Promise<string> {
         const fileGroups = this.documentOrganizer.groupDocsByFile(docs);
         // write fileGroups to a json file
-        const fileGroupsPath = path.join(this.configuration.absolutePath, "fileGroups.json");
+        const fileGroupsPath = path.join(
+            this.configuration.absolutePath,
+            "fileGroups.json"
+        );
         await fs.writeFile(fileGroupsPath, JSON.stringify(fileGroups, null, 2));
         const sections: string[] = [];
 
@@ -375,7 +404,8 @@ export class FullDocumentationGenerator {
         const relativePath = file.replace(/^\.\//, "");
 
         // Ensure the path has .ts extension
-        const pathWithExtension = this.codeFormatter.ensureTypeScriptExtension(relativePath);
+        const pathWithExtension =
+            this.codeFormatter.ensureTypeScriptExtension(relativePath);
 
         // Join with the absolute path and src directory
         return path.join(
@@ -415,7 +445,8 @@ export class FullDocumentationGenerator {
                 // Use PROMPT_TEMPLATES.actionDoc
                 const prompt = `${PROMPT_TEMPLATES.actionDoc}\n\nWith content:\n\`\`\`typescript\n${actionCode}\n\`\`\``;
 
-                const actionDocumentation = await this.aiService.generateComment(prompt);
+                const actionDocumentation =
+                    await this.aiService.generateComment(prompt);
                 if (actionDocumentation.trim()) {
                     documentation += actionDocumentation + "\n\n";
                 }

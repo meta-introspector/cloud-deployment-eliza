@@ -1,4 +1,4 @@
-import { elizaLogger, IAgentRuntime } from "@elizaos/core";
+import { elizaLogger, IAgentRuntime } from "@elizaOS/core";
 import { Connection, Keypair, VersionedTransaction } from "@solana/web3.js";
 import { decodeBase58 } from "./utils";
 import { SAFETY_LIMITS } from "./constants";
@@ -39,7 +39,7 @@ export async function getWalletBalance(
         const walletKeypair = getWalletKeypair(runtime);
         const walletPubKey = walletKeypair.publicKey;
         const connection = new Connection(
-            runtime.getSetting("SOLANA_RPC_URL") ||
+            runtime.getSetting("RPC_URL") ||
                 "https://api.mainnet-beta.solana.com"
         );
 
@@ -62,7 +62,7 @@ export async function getWalletBalance(
 // Add helper function to get connection
 async function getConnection(runtime: IAgentRuntime): Promise<Connection> {
     return new Connection(
-        runtime.getSetting("SOLANA_RPC_URL") || "https://api.mainnet-beta.solana.com"
+        runtime.getSetting("RPC_URL") || "https://api.mainnet-beta.solana.com"
     );
 }
 

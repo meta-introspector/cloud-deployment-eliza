@@ -6,7 +6,7 @@ import {
     State,
     elizaLogger,
 } from "@elizaos/core";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 
 export const listNotesAction: Action = {
     name: "LIST_NOTES",
@@ -50,9 +50,10 @@ export const listNotesAction: Action = {
             elizaLogger.info(`Successfully retrieved ${notes.length} notes`);
 
             // Format the notes list into a readable string
-            const formattedNotes = notes.length > 0
-                ? notes.map(note => `- ${note}`).join('\n')
-                : "No notes found in the vault";
+            const formattedNotes =
+                notes.length > 0
+                    ? notes.map((note) => `- ${note}`).join("\n")
+                    : "No notes found in the vault";
 
             if (callback) {
                 callback({

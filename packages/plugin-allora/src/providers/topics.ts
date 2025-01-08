@@ -6,7 +6,11 @@ import {
     State,
 } from "@elizaos/core";
 import NodeCache from "node-cache";
-import { AlloraAPIClient, AlloraTopic, ChainSlug } from "@alloralabs/allora-sdk";
+import {
+    AlloraAPIClient,
+    AlloraTopic,
+    ChainSlug,
+} from "@alloralabs/allora-sdk";
 
 export class TopicsProvider implements Provider {
     private cache: NodeCache;

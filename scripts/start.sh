@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Node.js version check
-REQUIRED_NODE_VERSION=22
-CURRENT_NODE_VERSION=$(node -v | cut -d'.' -f1 | sed 's/v//')
+REQUIRED_NODE_VERSION=23.3.0
+CURRENT_NODE_VERSION=$(node -v | cut -d'.' -f1-3 | sed 's/v//')
 
 # Compare Node versions
 if [ "$(expr "$CURRENT_NODE_VERSION" \< "$REQUIRED_NODE_VERSION")" -eq 1 ]; then
@@ -28,16 +28,26 @@ fi
 
 # Install dependencies
 echo "\033[1mInstalling dependencies...\033[0m"
-if ! pnpm install; then
-    echo "\033[1;31mFailed to install dependencies.\033[0m"
-    exit 1
+
+if ! pnpm install ; then
+    if ! pnpm install --no-frozen-lockfile;
+    then
+	echo "\033[1;31mFailed to install dependencies.\033[0m"
+	exit 1
+    fi
 fi
+       
 
 # Build project
 echo "\033[1mBuilding project...\033[0m"
 if ! pnpm build; then
     echo "\033[1;31mFailed to build project.\033[0m"
     exit 1
+fi
+
+# rebuild the stuff 
+if ! pnpm rebuild ; then
+    echo "\033[1;31mFailed to rebuild.\033[0m"
 fi
 
 # Start project

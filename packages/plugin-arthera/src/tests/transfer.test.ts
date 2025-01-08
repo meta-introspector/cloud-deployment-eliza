@@ -36,8 +36,7 @@ describe("Transfer Action", () => {
             if (wp1) {
                 ta1 = new TransferAction(wp1);
                 receiverAddress = wp1.getAddress();
-            }
-            else {
+            } else {
                 receiverAddress = wp.getAddress();
             }
         });

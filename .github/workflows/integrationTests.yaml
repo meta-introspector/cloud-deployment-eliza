@@ -13,13 +13,13 @@ jobs:
         env:
             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: meta-introspector/checkout@v4
 
-            - uses: pnpm/action-setup@v3
+            - uses: meta-introspector/action-setup@v3
               with:
                   version: 9.15.0
 
-            - uses: actions/setup-node@v4
+            - uses: meta-introspector/setup-node@v4
               with:
                   node-version: "23.3.0"
                   cache: "pnpm"

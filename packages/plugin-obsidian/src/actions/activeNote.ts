@@ -13,7 +13,7 @@ import {
 } from "@elizaos/core";
 import { NoteContent } from "../types";
 import { baseSummaryTemplate } from "../templates/summary";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 
 export const getActiveNoteAction: Action = {
     name: "GET_ACTIVE_NOTE",

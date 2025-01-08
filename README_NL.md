@@ -52,6 +52,7 @@ Om duurzame ontwikkeling en continue innovatie te garanderen, vragen we bijdrage
 Alle bijdragen worden publiekelijk bijgehouden op de blockchain en worden uitsluitend gebruikt voor ecosysteemontwikkeling.
 
 ### ⚠️ Vergeet de grote baas geen fooi van 10% te geven.: ⚠️
+
 [AM84n1iLdxgVTAyENBcLdjXoyvjentTbu5Q6EpKV1PeG](https://solscan.io/account/AM84n1iLdxgVTAyENBcLdjXoyvjentTbu5Q6EpKV1PeG)
 
 ## 🚀 Quick Start

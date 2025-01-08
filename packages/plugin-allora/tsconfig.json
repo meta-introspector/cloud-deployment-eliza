@@ -3,13 +3,9 @@
     "compilerOptions": {
         "outDir": "dist",
         "rootDir": "src",
-        "types": [
-            "node"
-        ],
+        "types": ["node"],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true
     },
-    "include": [
-        "src/**/*.ts"
-    ]
+    "include": ["src/**/*.ts"]
 }

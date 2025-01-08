@@ -23,7 +23,7 @@ import {
 } from "discord.js";
 import { elizaLogger } from "@elizaos/core";
 import { AttachmentManager } from "./attachments.ts";
-import { VoiceManager } from "./voice.ts";
+//import { VoiceManager } from "./voice.ts";
 import {
     discordShouldRespondTemplate,
     discordMessageHandlerTemplate,
@@ -64,11 +64,12 @@ export class MessageManager {
     private attachmentManager: AttachmentManager;
     private interestChannels: InterestChannels = {};
     private discordClient: any;
-    private voiceManager: VoiceManager;
+  //    private voiceManager: VoiceManager;
 
-    constructor(discordClient: any, voiceManager: VoiceManager) {
+  constructor(discordClient: any//, voiceManager: VoiceManager
+  ) {
         this.client = discordClient.client;
-        this.voiceManager = voiceManager;
+      //        this.voiceManager = voiceManager;
         this.discordClient = discordClient;
         this.runtime = discordClient.runtime;
         this.attachmentManager = new AttachmentManager(this.runtime);
@@ -480,23 +481,23 @@ export class MessageManager {
             await this.runtime.evaluate(memory, state, shouldRespond);
         } catch (error) {
             console.error("Error handling message:", error);
-            if (message.channel.type === ChannelType.GuildVoice) {
-                // For voice channels, use text-to-speech for the error message
-                const errorMessage = "Sorry, I had a glitch. What was that?";
+            // if (message.channel.type === ChannelType.GuildVoice) {
+            //     // For voice channels, use text-to-speech for the error message
+            //     const errorMessage = "Sorry, I had a glitch. What was that?";
 
-                const speechService = this.runtime.getService<ISpeechService>(
-                    ServiceType.SPEECH_GENERATION
-                );
-                if (!speechService) {
-                    throw new Error("Speech generation service not found");
-                }
+            //     const speechService = this.runtime.getService<ISpeechService>(
+            //         ServiceType.SPEECH_GENERATION
+            //     );
+            //     if (!speechService) {
+            //         throw new Error("Speech generation service not found");
+            //     }
 
-                const audioStream = await speechService.generate(
-                    this.runtime,
-                    errorMessage
-                );
-                await this.voiceManager.playAudioStream(userId, audioStream);
-            } else {
+            //     const audioStream = await speechService.generate(
+            //         this.runtime,
+            //         errorMessage
+            //     );
+	    //   //                await this.voiceManager.playAudioStream(userId, audioStream);
+            // } else {
                 // For text channels, send the error message
                 console.error("Error sending message:", error);
             }

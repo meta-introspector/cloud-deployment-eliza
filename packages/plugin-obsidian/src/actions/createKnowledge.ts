@@ -6,7 +6,7 @@ import {
     State,
     elizaLogger,
 } from "@elizaos/core";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 
 export const createKnowledgeAction: Action = {
     name: "CREATE_KNOWLEDGE",
@@ -14,7 +14,7 @@ export const createKnowledgeAction: Action = {
         "BUILD_KNOWLEDGE",
         "CREATE_KNOWLEDGE_BASE",
         "CREATE_KNOWLEDGE_BASE",
-        "BUILD_KNOWLEDGE_BASE"
+        "BUILD_KNOWLEDGE_BASE",
     ],
     description:
         "Scan all markdown notes hierarchically in the Obsidian vault and build a memoryknowledge base. Use format: 'Create knowledge' or 'Build knowledge base'",
@@ -41,8 +41,12 @@ export const createKnowledgeAction: Action = {
         const obsidian = await getObsidian(runtime);
 
         try {
-            elizaLogger.info("Fetching all notes from vault and creating knowledge base");
-            elizaLogger.log("Be patient, this might take a while, depending on the size of your vault...");
+            elizaLogger.info(
+                "Fetching all notes from vault and creating knowledge base"
+            );
+            elizaLogger.log(
+                "Be patient, this might take a while, depending on the size of your vault..."
+            );
             if (callback) {
                 callback({
                     text: "This might take a while, depending on the size of your vault...",
@@ -60,9 +64,11 @@ export const createKnowledgeAction: Action = {
                         },
                     });
                 }
-
             } catch (error) {
-                elizaLogger.error("Error creating knowledge memories from notes:", error);
+                elizaLogger.error(
+                    "Error creating knowledge memories from notes:",
+                    error
+                );
                 if (callback) {
                     callback({
                         text: `Error creating knowledge memories from notes: ${error.message}`,

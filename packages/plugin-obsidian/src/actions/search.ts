@@ -6,7 +6,7 @@ import {
     State,
     elizaLogger,
 } from "@elizaos/core";
-import { getObsidian, markdownToPlaintext, processUserInput }  from "../helper";
+import { getObsidian, markdownToPlaintext, processUserInput } from "../helper";
 import { isSearchQuery } from "../types";
 
 export const searchAction: Action = {
@@ -69,7 +69,8 @@ export const searchAction: Action = {
 
         try {
             let query = "";
-            let queryFormat: 'plaintext' | 'dataview' | 'jsonlogic' = 'plaintext';
+            let queryFormat: "plaintext" | "dataview" | "jsonlogic" =
+                "plaintext";
             let searchOptions: {
                 contextLength?: number;
                 ignoreCase?: boolean;
@@ -85,28 +86,32 @@ export const searchAction: Action = {
                 state = await runtime.updateRecentMessageState(state);
             }
 
-            const searchContext = await processUserInput(message.content.text as string, state, runtime);
+            const searchContext = await processUserInput(
+                message.content.text as string,
+                state,
+                runtime
+            );
 
-            elizaLogger.debug("Search context:", JSON.stringify(searchContext.query, null, 2));
+            elizaLogger.debug(
+                "Search context:",
+                JSON.stringify(searchContext.query, null, 2)
+            );
 
             if (!isSearchQuery(searchContext)) {
-                elizaLogger.error(
-                    "Invalid search query:",
-                    searchContext
-                );
+                elizaLogger.error("Invalid search query:", searchContext);
                 return null;
             }
 
             // Extract query and format from various text patterns
-            if (searchContext.queryFormat === 'dataview') {
+            if (searchContext.queryFormat === "dataview") {
                 query = searchContext.query;
-                queryFormat = 'dataview';
+                queryFormat = "dataview";
 
                 // Merge provided options with defaults
                 if (searchContext.options) {
                     searchOptions = {
                         ...searchOptions,
-                        ...searchContext.options as typeof searchOptions,
+                        ...(searchContext.options as typeof searchOptions),
                     };
                 } /*else {
                     // Extract folders if specified in the format "FROM folder1, folder2"
@@ -118,15 +123,14 @@ export const searchAction: Action = {
                             .map(folder => folder.trim());
                     }
                 }*/
-
-            } else if (searchContext.queryFormat === 'jsonlogic') {
-                queryFormat = 'jsonlogic';
+            } else if (searchContext.queryFormat === "jsonlogic") {
+                queryFormat = "jsonlogic";
                 query = searchContext.query;
                 // Merge provided options with defaults
                 if (searchContext.options) {
                     searchOptions = {
                         ...searchOptions,
-                        ...searchContext.options as typeof searchOptions,
+                        ...(searchContext.options as typeof searchOptions),
                     };
                 }
             } else {
@@ -135,7 +139,7 @@ export const searchAction: Action = {
                 if (searchContext.options) {
                     searchOptions = {
                         ...searchOptions,
-                        ...searchContext.options as typeof searchOptions,
+                        ...(searchContext.options as typeof searchOptions),
                     };
                 }
             }
@@ -146,84 +150,86 @@ export const searchAction: Action = {
                 );
             }
 
-            elizaLogger.info(`Searching vault with ${queryFormat} query: ${typeof query === 'string' ? query : JSON.stringify(query)}`);
-
-            if (queryFormat === 'plaintext') {
-            const results = await obsidian.search(
-                query,
-                queryFormat,
-                searchOptions
+            elizaLogger.info(
+                `Searching vault with ${queryFormat} query: ${typeof query === "string" ? query : JSON.stringify(query)}`
             );
 
-            elizaLogger.info(`Found ${results.length} matching notes`);
+            if (queryFormat === "plaintext") {
+                const results = await obsidian.search(
+                    query,
+                    queryFormat,
+                    searchOptions
+                );
 
-            // Format the results into a readable string
-            const formattedResults = results.length > 0
-                ? results.map(result => {
+                elizaLogger.info(`Found ${results.length} matching notes`);
 
-                const matches = result.matches
-                    .map(item => `${markdownToPlaintext(item.context.substring(item.match.start, searchOptions.contextLength || 150)).trim()}...`)
-                    .join('\n');
+                // Format the results into a readable string
+                const formattedResults =
+                    results.length > 0
+                        ? results
+                              .map((result) => {
+                                  const matches = result.matches
+                                      .map(
+                                          (item) =>
+                                              `${markdownToPlaintext(item.context.substring(item.match.start, searchOptions.contextLength || 150)).trim()}...`
+                                      )
+                                      .join("\n");
 
-return `
+                                  return `
 #### ✅ ${result.filename} (**Score:** ${result.score})\n${matches}`;
-
-                }).join('\n\n')
-                : "**No matching notes found**";
-
+                              })
+                              .join("\n\n")
+                        : "**No matching notes found**";
 
                 elizaLogger.info("Formatted results:", formattedResults);
 
-            if (callback) {
-                callback({
-                    text: `Found **${results.length}** matches:\n\n${formattedResults}`,
-                    metadata: {
-                        count: results.length,
-                        results: results,
-                        query: query,
-                        queryFormat: queryFormat,
-                        searchOptions: searchOptions,
-                    },
-                });
-            }
+                if (callback) {
+                    callback({
+                        text: `Found **${results.length}** matches:\n\n${formattedResults}`,
+                        metadata: {
+                            count: results.length,
+                            results: results,
+                            query: query,
+                            queryFormat: queryFormat,
+                            searchOptions: searchOptions,
+                        },
+                    });
+                }
+            } else {
+                const results = await obsidian.search(
+                    query,
+                    queryFormat,
+                    searchOptions
+                );
 
-        } else {
+                elizaLogger.info(`Found ${results.length} matching notes`);
 
-            const results = await obsidian.search(
-                query,
-                queryFormat,
-                searchOptions
-            );
-
-            elizaLogger.info(`Found ${results.length} matching notes`);
-
-            // Format the results into a readable string
-            const formattedResults = results.length > 0
-                ? results.map(result => {
-return `
+                // Format the results into a readable string
+                const formattedResults =
+                    results.length > 0
+                        ? results
+                              .map((result) => {
+                                  return `
 #### ✅ ${result.filename}`;
-
-                }).join('\n\n')
-                : "**No matching notes found**";
-
+                              })
+                              .join("\n\n")
+                        : "**No matching notes found**";
 
                 elizaLogger.info("Formatted results:", formattedResults);
 
-            if (callback) {
-                callback({
-                    text: `Found **${results.length}** matches:\n\n${formattedResults}`,
-                    metadata: {
-                        count: results.length,
-                        results: results,
-                        query: query,
-                        queryFormat: queryFormat,
-                        searchOptions: searchOptions,
-                    },
-                });
+                if (callback) {
+                    callback({
+                        text: `Found **${results.length}** matches:\n\n${formattedResults}`,
+                        metadata: {
+                            count: results.length,
+                            results: results,
+                            query: query,
+                            queryFormat: queryFormat,
+                            searchOptions: searchOptions,
+                        },
+                    });
+                }
             }
-
-
-        }
 
             return true;
         } catch (error) {
@@ -332,7 +338,7 @@ return `
             {
                 user: "{{user1}}",
                 content: {
-                    text: "TABLE file.name FROM \"Notes\"",
+                    text: 'TABLE file.name FROM "Notes"',
                 },
             },
             {
@@ -347,7 +353,7 @@ return `
             {
                 user: "{{user1}}",
                 content: {
-                    text: "DQL FROM \"Daily Notes\" WHERE date = today",
+                    text: 'DQL FROM "Daily Notes" WHERE date = today',
                 },
             },
             {

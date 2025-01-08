@@ -680,9 +680,17 @@ export class MessageManager {
             content.attachments.map(async (attachment: Media) => {
                 if (attachment.contentType === "image/gif") {
                     // Handle GIFs specifically
-                    await this.sendAnimation(ctx, attachment.url, attachment.description);
+                    await this.sendAnimation(
+                        ctx,
+                        attachment.url,
+                        attachment.description
+                    );
                 } else if (attachment.contentType.startsWith("image")) {
-                    await this.sendImage(ctx, attachment.url, attachment.description);
+                    await this.sendImage(
+                        ctx,
+                        attachment.url,
+                        attachment.description
+                    );
                 }
             });
         } else {

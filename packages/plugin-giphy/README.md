@@ -16,8 +16,8 @@ pnpm add @elizaos/plugin-giphy
 
 Set up your environment with the required Giphy API key:
 
-| Variable Name | Description |
-|--------------|-------------|
+| Variable Name   | Description                               |
+| --------------- | ----------------------------------------- |
 | `GIPHY_API_KEY` | Giphy API key for authenticating requests |
 
 You need to obtain an API key by signing up at [Giphy Developers](https://developers.giphy.com/).
@@ -32,8 +32,8 @@ const plugin = giphyPlugin;
 
 // Add the plugin to your agent's plugin list
 const plugins = [
-  giphyPlugin,
-  // ... other plugins
+    giphyPlugin,
+    // ... other plugins
 ];
 
 // Initialize your agent with the plugins

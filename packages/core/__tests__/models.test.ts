@@ -43,7 +43,8 @@ describe("Model Provider Configuration", () => {
         });
 
         test("should have correct settings configuration", () => {
-            const smallModel = models[ModelProviderName.OPENAI].model[ModelClass.SMALL];
+            const smallModel =
+                models[ModelProviderName.OPENAI].model[ModelClass.SMALL];
             expect(smallModel.maxInputTokens).toBe(128000);
             expect(smallModel.maxOutputTokens).toBe(8192);
             expect(smallModel.temperature).toBe(0.6);
@@ -74,7 +75,8 @@ describe("Model Provider Configuration", () => {
         });
 
         test("should have correct settings configuration", () => {
-            const smallModel = models[ModelProviderName.ANTHROPIC].model[ModelClass.SMALL];
+            const smallModel =
+                models[ModelProviderName.ANTHROPIC].model[ModelClass.SMALL];
             expect(smallModel.maxInputTokens).toBe(200000);
             expect(smallModel.maxOutputTokens).toBe(4096);
             expect(smallModel.temperature).toBe(0.7);
@@ -105,7 +107,8 @@ describe("Model Provider Configuration", () => {
         });
 
         test("should have correct settings configuration", () => {
-            const smallModel = models[ModelProviderName.LLAMACLOUD].model[ModelClass.SMALL];
+            const smallModel =
+                models[ModelProviderName.LLAMACLOUD].model[ModelClass.SMALL];
             expect(smallModel.maxInputTokens).toBe(128000);
             expect(smallModel.maxOutputTokens).toBe(8192);
             expect(smallModel.temperature).toBe(0.7);
@@ -116,7 +119,9 @@ describe("Model Provider Configuration", () => {
     describe("Google Provider", () => {
         test("should have correct model mappings", () => {
             const googleModels = models[ModelProviderName.GOOGLE].model;
-            expect(googleModels[ModelClass.SMALL].name).toBe("gemini-2.0-flash-exp");
+            expect(googleModels[ModelClass.SMALL].name).toBe(
+                "gemini-2.0-flash-exp"
+            );
             expect(googleModels[ModelClass.MEDIUM].name).toBe(
                 "gemini-2.0-flash-exp"
             );
@@ -130,20 +135,23 @@ describe("Model Provider Configuration", () => {
 describe("Model Retrieval Functions", () => {
     describe("getModel function", () => {
         test("should retrieve correct models for different providers and classes", () => {
-            expect(models[ModelProviderName.OPENAI].model[ModelClass.SMALL].name).toBe(
-                "gpt-4o-mini"
-            );
-            expect(models[ModelProviderName.ANTHROPIC].model[ModelClass.MEDIUM].name).toBe(
-                "claude-3-5-sonnet-20241022"
-            );
+            expect(
+                models[ModelProviderName.OPENAI].model[ModelClass.SMALL].name
+            ).toBe("gpt-4o-mini");
+            expect(
+                models[ModelProviderName.ANTHROPIC].model[ModelClass.MEDIUM]
+                    .name
+            ).toBe("claude-3-5-sonnet-20241022");
         });
 
         test("should handle environment variable overrides", () => {
             expect(
-                models[ModelProviderName.OPENROUTER].model[ModelClass.SMALL].name
+                models[ModelProviderName.OPENROUTER].model[ModelClass.SMALL]
+                    .name
             ).toBe("nousresearch/hermes-3-llama-3.1-405b");
             expect(
-                models[ModelProviderName.OPENROUTER].model[ModelClass.LARGE].name
+                models[ModelProviderName.OPENROUTER].model[ModelClass.LARGE]
+                    .name
             ).toBe("nousresearch/hermes-3-llama-3.1-405b");
         });
 
@@ -197,13 +205,19 @@ describe("Model Settings Validation", () => {
                 return; // Skip providers that are not fully configured
             }
             if (providerConfig.model[ModelClass.SMALL]) {
-                expect(providerConfig.model[ModelClass.SMALL].name).toBeDefined();
+                expect(
+                    providerConfig.model[ModelClass.SMALL].name
+                ).toBeDefined();
             }
             if (providerConfig.model[ModelClass.MEDIUM]) {
-                expect(providerConfig.model[ModelClass.MEDIUM].name).toBeDefined();
+                expect(
+                    providerConfig.model[ModelClass.MEDIUM].name
+                ).toBeDefined();
             }
             if (providerConfig.model[ModelClass.LARGE]) {
-                expect(providerConfig.model[ModelClass.LARGE].name).toBeDefined();
+                expect(
+                    providerConfig.model[ModelClass.LARGE].name
+                ).toBeDefined();
             }
         });
     });

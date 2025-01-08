@@ -35,25 +35,45 @@ export const PROMPT_TEMPLATES = {
     - Description: ${packageJson.description || "N/A"}
 
     Code Components:
-    ${docs.classes.length > 0 ? `
+    ${
+        docs.classes.length > 0
+            ? `
     Classes:
-    ${docs.classes.map((c) => `- ${c.name}: ${c.jsDoc}`).join("\n")}` : ""}
+    ${docs.classes.map((c) => `- ${c.name}: ${c.jsDoc}`).join("\n")}`
+            : ""
+    }
 
-    ${docs.interfaces.length > 0 ? `
+    ${
+        docs.interfaces.length > 0
+            ? `
     Interfaces:
-    ${docs.interfaces.map((i) => `- ${i.name}: ${i.jsDoc}`).join("\n")}` : ""}
+    ${docs.interfaces.map((i) => `- ${i.name}: ${i.jsDoc}`).join("\n")}`
+            : ""
+    }
 
-    ${docs.types.length > 0 ? `
+    ${
+        docs.types.length > 0
+            ? `
     Types:
-    ${docs.types.map((t) => `- ${t.name}: ${t.jsDoc}`).join("\n")}` : ""}
+    ${docs.types.map((t) => `- ${t.name}: ${t.jsDoc}`).join("\n")}`
+            : ""
+    }
 
-    ${docs.functions.length > 0 ? `
+    ${
+        docs.functions.length > 0
+            ? `
     Functions:
-    ${docs.functions.map((f) => `- ${f.name}: ${f.jsDoc}`).join("\n")}` : ""}
+    ${docs.functions.map((f) => `- ${f.name}: ${f.jsDoc}`).join("\n")}`
+            : ""
+    }
 
-    ${docs.variables.length > 0 ? `
+    ${
+        docs.variables.length > 0
+            ? `
     Variables:
-    ${docs.variables.map((v) => `- ${v.name}: ${v.jsDoc}`).join("\n")}` : ""}
+    ${docs.variables.map((v) => `- ${v.name}: ${v.jsDoc}`).join("\n")}`
+            : ""
+    }
 
     Based on the above components, generate:
     1. A comprehensive overview that explains the plugin's purpose and key features

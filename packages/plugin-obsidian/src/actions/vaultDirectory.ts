@@ -6,7 +6,7 @@ import {
     State,
     elizaLogger,
 } from "@elizaos/core";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 
 export const listDirectoryAction: Action = {
     name: "LIST_DIRECTORY",
@@ -54,7 +54,7 @@ export const listDirectoryAction: Action = {
                 const patterns = [
                     /^(?:List|Show|View)\s+(?:directory|folder|files in|dir)\s+(.+)$/i,
                     /^(?:List|Show|View)\s+(.+)\s+(?:directory|folder|files)$/i,
-                    /^(?:ls|dir)\s+(.+)$/i
+                    /^(?:ls|dir)\s+(.+)$/i,
                 ];
 
                 for (const pattern of patterns) {
@@ -78,13 +78,15 @@ export const listDirectoryAction: Action = {
             }
 
             elizaLogger.info(`Listing files in directory: ${directoryPath}`);
-            const files: string[] = await obsidian.listDirectoryFiles(directoryPath);
+            const files: string[] =
+                await obsidian.listDirectoryFiles(directoryPath);
             elizaLogger.info(`Successfully retrieved ${files.length} files`);
 
             // Format the files list into a readable string
-            const formattedFiles = files.length > 0
-                ? files.map(file => `- ${file}`).join('\n')
-                : "No files found in the directory";
+            const formattedFiles =
+                files.length > 0
+                    ? files.map((file) => `- ${file}`).join("\n")
+                    : "No files found in the directory";
 
             if (callback) {
                 callback({

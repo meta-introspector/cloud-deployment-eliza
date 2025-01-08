@@ -120,7 +120,8 @@ describe("Wallet provider", () => {
             expect(bal).toEqual("0");
         });
         it("should fetch balance for a specific added chain", async () => {
-            const bal = await walletProvider.getWalletBalanceForChain("arthera");
+            const bal =
+                await walletProvider.getWalletBalanceForChain("arthera");
 
             expect(bal).toEqual("0");
         });

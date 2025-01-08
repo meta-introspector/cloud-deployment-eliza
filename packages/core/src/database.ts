@@ -381,12 +381,12 @@ export abstract class DatabaseAdapter<DB = any> implements IDatabaseAdapter {
         userId: UUID;
     }): Promise<Relationship[]>;
 
-     /**
+    /**
      * Retrieves knowledge items based on specified parameters.
      * @param params Object containing search parameters
      * @returns Promise resolving to array of knowledge items
      */
-     abstract getKnowledge(params: {
+    abstract getKnowledge(params: {
         id?: UUID;
         agentId: UUID;
         limit?: number;

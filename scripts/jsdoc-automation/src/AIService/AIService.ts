@@ -33,18 +33,23 @@ export class AIService {
         this.codeFormatter = new CodeFormatter();
     }
 
-
     /**
      * Generates a comment based on the specified prompt by invoking the chat model.
      * @param {string} prompt - The prompt for which to generate a comment
      * @returns {Promise<string>} The generated comment
      */
-    public async generateComment(prompt: string, isFAQ: boolean = false): Promise<string> {
+    public async generateComment(
+        prompt: string,
+        isFAQ: boolean = false
+    ): Promise<string> {
         try {
             // First try with generous limit
             let finalPrompt = prompt;
             if (!isFAQ) {
-                finalPrompt = this.codeFormatter.truncateCodeBlock(prompt, 8000);
+                finalPrompt = this.codeFormatter.truncateCodeBlock(
+                    prompt,
+                    8000
+                );
             }
 
             console.log(
@@ -68,7 +73,10 @@ export class AIService {
                         "Token limit exceeded, attempting with further truncation..."
                     );
                     // Try with more aggressive truncation
-                    finalPrompt = this.codeFormatter.truncateCodeBlock(prompt, 4000);
+                    finalPrompt = this.codeFormatter.truncateCodeBlock(
+                        prompt,
+                        4000
+                    );
                     try {
                         const response =
                             await this.chatModel.invoke(finalPrompt);
@@ -84,7 +92,10 @@ export class AIService {
                                 "Still exceeding token limit, using minimal context..."
                             );
                             // Final attempt with minimal context
-                            finalPrompt = this.codeFormatter.truncateCodeBlock(prompt, 2000);
+                            finalPrompt = this.codeFormatter.truncateCodeBlock(
+                                prompt,
+                                2000
+                            );
                             const response =
                                 await this.chatModel.invoke(finalPrompt);
                             return response.content as string;

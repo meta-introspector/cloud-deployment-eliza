@@ -20,7 +20,9 @@ const PROVIDER_CONFIG = {
     explorerUrl: `https://${process.env.NEAR_NETWORK || "testnet"}.nearblocks.io`,
     MAX_RETRIES: 3,
     RETRY_DELAY: 2000,
-    SLIPPAGE: process.env.NEAR_SLIPPAGE ? parseInt(process.env.NEAR_SLIPPAGE) : 1,
+    SLIPPAGE: process.env.NEAR_SLIPPAGE
+        ? parseInt(process.env.NEAR_SLIPPAGE)
+        : 1,
 };
 
 export interface NearToken {

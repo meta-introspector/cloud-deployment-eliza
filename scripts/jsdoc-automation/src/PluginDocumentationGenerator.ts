@@ -21,7 +21,9 @@ export class PluginDocumentationGenerator {
         private gitManager: GitManager,
         private configuration: Configuration
     ) {
-        this.fullDocumentationGenerator = new FullDocumentationGenerator(configuration);
+        this.fullDocumentationGenerator = new FullDocumentationGenerator(
+            configuration
+        );
     }
 
     /**
@@ -49,12 +51,13 @@ export class PluginDocumentationGenerator {
             console.error("package.json not found");
         }
         // Generate documentation
-        const documentation = await this.fullDocumentationGenerator.generatePluginDocumentation({
-            existingDocs,
-            packageJson,
-            todoItems,
-            envUsages,
-        });
+        const documentation =
+            await this.fullDocumentationGenerator.generatePluginDocumentation({
+                existingDocs,
+                packageJson,
+                todoItems,
+                envUsages,
+            });
 
         // Generate markdown content
         const markdownContent = this.generateMarkdownContent(
