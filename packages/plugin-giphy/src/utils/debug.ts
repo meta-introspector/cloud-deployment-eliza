@@ -5,14 +5,14 @@ export const debugLog = {
         elizaLogger.log("🌐 API Request:", {
             method,
             url,
-            data: data || "No data"
+            data: data || "No data",
         });
     },
 
     response: (response: any) => {
         elizaLogger.log("✅ API Response:", {
             status: response?.status,
-            data: response?.data || "No data"
+            data: response?.data || "No data",
         });
     },
 
@@ -21,17 +21,17 @@ export const debugLog = {
             message: error?.message,
             response: {
                 status: error?.response?.status,
-                data: error?.response?.data
+                data: error?.response?.data,
             },
             config: {
                 url: error?.config?.url,
                 method: error?.config?.method,
-                data: error?.config?.data
-            }
+                data: error?.config?.data,
+            },
         });
     },
 
     validation: (config: any) => {
         elizaLogger.log("🔍 Config Validation:", config);
-    }
+    },
 };

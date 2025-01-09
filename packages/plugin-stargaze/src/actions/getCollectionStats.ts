@@ -113,13 +113,15 @@ export default {
             })) as unknown as GetCollectionStatsContent;
 
             if (!content || !content.collectionAddr) {
-                throw new Error("Invalid or missing collection address in parsed content");
+                throw new Error(
+                    "Invalid or missing collection address in parsed content"
+                );
             }
 
             debugLog.validation(content);
 
             const config = await validateStargazeConfig(runtime);
-            
+
             const requestData = {
                 query: COLLECTION_STATS_QUERY,
                 variables: {
@@ -127,15 +129,15 @@ export default {
                 },
             };
 
-            debugLog.request('POST', config.STARGAZE_ENDPOINT, requestData);
+            debugLog.request("POST", config.STARGAZE_ENDPOINT, requestData);
 
             const response = await axios.post(
                 config.STARGAZE_ENDPOINT,
                 requestData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                    }
+                        "Content-Type": "application/json",
+                    },
                 }
             );
 
@@ -149,14 +151,16 @@ export default {
             }
 
             // Format numerical values
-            const formatValue = (value: number) => 
-                value ? Number(value).toLocaleString(undefined, { 
-                    maximumFractionDigits: 2 
-                }) : '0';
+            const formatValue = (value: number) =>
+                value
+                    ? Number(value).toLocaleString(undefined, {
+                          maximumFractionDigits: 2,
+                      })
+                    : "0";
 
             // Format percentage values
-            const formatPercent = (value: number) => 
-                value ? `${Number(value).toFixed(2)}%` : '0%';
+            const formatPercent = (value: number) =>
+                value ? `${Number(value).toFixed(2)}%` : "0%";
 
             if (callback) {
                 const message = {
@@ -172,7 +176,10 @@ export default {
 - Market Cap: ${formatValue(stats.marketCap)} USD`,
                     content: stats,
                 };
-                elizaLogger.log("✅ Sending callback with collection stats:", message);
+                elizaLogger.log(
+                    "✅ Sending callback with collection stats:",
+                    message
+                );
                 callback(message);
             }
 
@@ -188,32 +195,34 @@ export default {
             return false;
         }
     },
-    examples: [[
-        {
-            user: "{{user1}}",
-            content: {
-                text: "Show me stats for collection ammelia",
+    examples: [
+        [
+            {
+                user: "{{user1}}",
+                content: {
+                    text: "Show me stats for collection ammelia",
+                },
             },
-        },
-        {
-            user: "{{agent}}",
-            content: {
-                text: "I'll check the stats for collection ammelia...",
-                action: "GET_COLLECTION_STATS",
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "I'll check the stats for collection ammelia...",
+                    action: "GET_COLLECTION_STATS",
+                },
             },
-        },
-        {
-            user: "{{user1}}",
-            content: {
-                text: "Show me stats for collection {collection address}",
+            {
+                user: "{{user1}}",
+                content: {
+                    text: "Show me stats for collection {collection address}",
+                },
             },
-        },
-        {
-            user: "{{agent}}",
-            content: {
-                text: "I'll check the stats for collection {collection address}...",
-                action: "GET_COLLECTION_STATS",
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "I'll check the stats for collection {collection address}...",
+                    action: "GET_COLLECTION_STATS",
+                },
             },
-        },
-    ]],
+        ],
+    ],
 } as Action;

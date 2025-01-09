@@ -7,10 +7,20 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
-import { NoteContent, NoteHierarchy, isValidNoteHierarchy, noteHierarchySchema } from "../types";
-import { getObsidian, extractLinks, storeHierarchyInMemory, retrieveHierarchyFromMemory } from "../helper";
+import {
+    NoteContent,
+    NoteHierarchy,
+    isValidNoteHierarchy,
+    noteHierarchySchema,
+} from "../types";
+import {
+    getObsidian,
+    extractLinks,
+    storeHierarchyInMemory,
+    retrieveHierarchyFromMemory,
+} from "../helper";
 import { traversalTemplate } from "../templates/traversal";
 
 export const noteTraversalAction: Action = {
@@ -74,13 +84,13 @@ export const noteTraversalAction: Action = {
                 template: traversalTemplate(message.content.text),
             });
 
-            const noteContext = await generateObject({
+            const noteContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: noteHierarchySchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidNoteHierarchy(noteContext.object)) {
                 elizaLogger.error(
@@ -113,7 +123,11 @@ export const noteTraversalAction: Action = {
             }
 
             // Try to retrieve from memory first
-            const cachedHierarchy = await retrieveHierarchyFromMemory(runtime, message, path);
+            const cachedHierarchy = await retrieveHierarchyFromMemory(
+                runtime,
+                message,
+                path
+            );
             if (cachedHierarchy) {
                 elizaLogger.info(`Using cached hierarchy for note: ${path}`);
                 if (callback) {
@@ -122,7 +136,7 @@ export const noteTraversalAction: Action = {
                         metadata: {
                             path: path,
                             hierarchy: cachedHierarchy,
-                            source: 'cache'
+                            source: "cache",
                         },
                     });
                 }
@@ -130,7 +144,11 @@ export const noteTraversalAction: Action = {
             }
 
             // Implement recursive function to build the hierarchy
-            async function buildLinkHierarchy(notePath: string, depth = 0, visited = new Set<string>()): Promise<NoteHierarchy | null> {
+            async function buildLinkHierarchy(
+                notePath: string,
+                depth = 0,
+                visited = new Set<string>()
+            ): Promise<NoteHierarchy | null> {
                 // Prevent infinite recursion by checking if we've visited this note
                 if (visited.has(notePath)) {
                     return null;
@@ -138,18 +156,23 @@ export const noteTraversalAction: Action = {
                 visited.add(notePath);
 
                 try {
-                    const noteContent: NoteContent = await obsidian.getNote(notePath);
+                    const noteContent: NoteContent =
+                        await obsidian.getNote(notePath);
                     const links = extractLinks(noteContent);
                     const hierarchy: NoteHierarchy = {
                         path: notePath,
                         content: noteContent.content,
-                        links: []
+                        links: [],
                     };
 
                     // Limit recursion depth to prevent excessive traversal
                     if (depth < 7) {
                         for (const link of links) {
-                            const childHierarchy = await buildLinkHierarchy(link, depth + 1, visited);
+                            const childHierarchy = await buildLinkHierarchy(
+                                link,
+                                depth + 1,
+                                visited
+                            );
                             if (childHierarchy) {
                                 hierarchy.links.push(childHierarchy);
                             }
@@ -158,7 +181,9 @@ export const noteTraversalAction: Action = {
 
                     return hierarchy;
                 } catch (error) {
-                    elizaLogger.error(`Failed to process note ${notePath}: ${error.message}`);
+                    elizaLogger.error(
+                        `Failed to process note ${notePath}: ${error.message}`
+                    );
                     return null;
                 }
             }
@@ -178,7 +203,9 @@ export const noteTraversalAction: Action = {
                 const indent = "  ".repeat(level);
                 let result = `${indent}- ${node.path}\n`;
 
-                elizaLogger.info(`Node hierarchy links for note: ${node.links}`);
+                elizaLogger.info(
+                    `Node hierarchy links for note: ${node.links}`
+                );
 
                 for (const link of node.links as NoteHierarchy[]) {
                     result += formatHierarchy(link, level + 1);
@@ -195,7 +222,7 @@ export const noteTraversalAction: Action = {
                     metadata: {
                         path: path,
                         hierarchy: hierarchy,
-                        source: 'obsidian'
+                        source: "obsidian",
                     },
                 });
             }

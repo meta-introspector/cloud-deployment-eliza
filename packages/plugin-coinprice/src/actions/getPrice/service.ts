@@ -5,22 +5,29 @@ const COINMARKETCAP_BASE_URL = "https://pro-api.coinmarketcap.com/v1";
 const COINCAP_BASE_URL = "https://api.coincap.io/v2";
 const COINGECKO_BASE_URL = "https://api.coingecko.com/api/v3";
 
-export const createPriceService = (coingeckoApiKey?: string, coinmarketcapApiKey?: string) => {
-    const coingeckoClient = coingeckoApiKey ? axios.create({
-        baseURL: COINGECKO_BASE_URL,
-        headers: {
-            "x-cg-demo-api-key": coingeckoApiKey,
-            Accept: "application/json",
-        },
-    }) : null;
+export const createPriceService = (
+    coingeckoApiKey?: string,
+    coinmarketcapApiKey?: string
+) => {
+    const coingeckoClient = coingeckoApiKey
+        ? axios.create({
+              baseURL: COINGECKO_BASE_URL,
+              headers: {
+                  "x-cg-demo-api-key": coingeckoApiKey,
+                  Accept: "application/json",
+              },
+          })
+        : null;
 
-    const coinmarketcapClient = coinmarketcapApiKey ? axios.create({
-        baseURL: COINMARKETCAP_BASE_URL,
-        headers: {
-            "X-CMC_PRO_API_KEY": coinmarketcapApiKey,
-            Accept: "application/json",
-        },
-    }) : null;
+    const coinmarketcapClient = coinmarketcapApiKey
+        ? axios.create({
+              baseURL: COINMARKETCAP_BASE_URL,
+              headers: {
+                  "X-CMC_PRO_API_KEY": coinmarketcapApiKey,
+                  Accept: "application/json",
+              },
+          })
+        : null;
 
     const coincapClient = axios.create({
         baseURL: COINCAP_BASE_URL,
@@ -32,7 +39,7 @@ export const createPriceService = (coingeckoApiKey?: string, coinmarketcapApiKey
     const getPrice = async (
         symbol: string,
         currency: string,
-        cryptoName: string,
+        cryptoName: string
     ): Promise<PriceData> => {
         const normalizedCrypto = cryptoName.toLowerCase().trim();
         const normalizedSymbol = symbol.toUpperCase().trim();
@@ -53,7 +60,9 @@ export const createPriceService = (coingeckoApiKey?: string, coinmarketcapApiKey
 
                 const data = response.data[normalizedCrypto];
                 if (!data) {
-                    throw new Error(`No data found for cryptocurrency: ${normalizedCrypto}`);
+                    throw new Error(
+                        `No data found for cryptocurrency: ${normalizedCrypto}`
+                    );
                 }
 
                 const currencyKey = normalizedCurrency.toLowerCase();
@@ -104,11 +113,15 @@ export const createPriceService = (coingeckoApiKey?: string, coinmarketcapApiKey
                     throw new Error("CoinCap API only supports USD currency");
                 }
 
-                const response = await coincapClient.get(`/assets/${normalizedCrypto}`);
+                const response = await coincapClient.get(
+                    `/assets/${normalizedCrypto}`
+                );
                 const data = response.data.data;
 
                 if (!data) {
-                    throw new Error(`No data found for cryptocurrency: ${normalizedCrypto}`);
+                    throw new Error(
+                        `No data found for cryptocurrency: ${normalizedCrypto}`
+                    );
                 }
 
                 return {
@@ -132,4 +145,4 @@ export const createPriceService = (coingeckoApiKey?: string, coinmarketcapApiKey
     };
 
     return { getPrice };
-}
+};

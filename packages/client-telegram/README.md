@@ -16,4 +16,3 @@ Before starting the plugin, ensure the following environment variables or settin
 TELEGRAM_BOT_TOKEN: The bot token obtained from the Telegram BotFather.
 
 ## License
-

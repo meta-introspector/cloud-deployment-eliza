@@ -31,9 +31,9 @@ https://drive.google.com/drive/folders/1EZiUhASpNQBYka3Z8NNkBzYnrb7TCfmG
 - Install the Obsidian Rest API plugin and activate it
 - Copy the API token from the plugin settings
 - Setup the agent with the API token and the Vault Rest API URL
-- Run the elizaOS agent
+- Run the elizaos agent
 - Prompt the agent to create the knowledge base (Take a couple minutes to complete): **"Create knowledge base"**
 
 Have fun talking to Naval's digital brain!
 
-*source: https://www.reddit.com/r/NavalRavikant/comments/oza0bl/i_made_a_digital_version_of_navals_brain_free/?rdt=41536*
+_source: https://www.reddit.com/r/NavalRavikant/comments/oza0bl/i_made_a_digital_version_of_navals_brain_free/?rdt=41536_

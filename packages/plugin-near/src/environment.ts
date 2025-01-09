@@ -86,8 +86,11 @@ export async function validateNearConfig(
                 process.env.NEAR_WALLET_PUBLIC_KEY,
             NEAR_ADDRESS:
                 runtime.getSetting("NEAR_ADDRESS") || process.env.NEAR_ADDRESS,
-            NEAR_SLIPPAGE: runtime.getSetting("NEAR_SLIPPAGE") || process.env.NEAR_SLIPPAGE,
-            NEAR_RPC_URL: runtime.getSetting("NEAR_RPC_URL") || process.env.NEAR_RPC_URL,
+            NEAR_SLIPPAGE:
+                runtime.getSetting("NEAR_SLIPPAGE") ||
+                process.env.NEAR_SLIPPAGE,
+            NEAR_RPC_URL:
+                runtime.getSetting("NEAR_RPC_URL") || process.env.NEAR_RPC_URL,
             ...envConfig, // Spread the environment-specific config
         };
 

@@ -7,7 +7,7 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
 import { fileSchema, isValidFile } from "../types";
 import { getObsidian } from "../helper";
@@ -22,7 +22,7 @@ export const saveFileAction: Action = {
         "STORE_FILE",
         "PUT_FILE",
         "WRITE_TO_FILE",
-        "CREATE_NEW_FILE"
+        "CREATE_NEW_FILE",
     ],
     description:
         "Create or update a file in the Obsidian vault. Use format: 'Save FOLDER/SUBFOLDER/filename with content: your_content'",
@@ -61,13 +61,13 @@ export const saveFileAction: Action = {
                 template: fileTemplate(message.content.text),
             });
 
-            const fileContext = await generateObject({
+            const fileContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: fileSchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidFile(fileContext.object)) {
                 elizaLogger.error(
@@ -108,7 +108,7 @@ export const saveFileAction: Action = {
                     metadata: {
                         path: path,
                         operation: "SAVE",
-                        success: true
+                        success: true,
                     },
                 });
             }
@@ -144,7 +144,7 @@ export const saveFileAction: Action = {
             {
                 user: "{{user1}}",
                 content: {
-                    text: "Create PROJECTS/src/config.json with content: { \"version\": \"1.0.0\" }",
+                    text: 'Create PROJECTS/src/config.json with content: { "version": "1.0.0" }',
                 },
             },
             {

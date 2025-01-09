@@ -63,9 +63,7 @@ export class DocumentationGenerator {
      * @param pullNumber - Optional. The pull request number to generate JSDoc comments for.
      * @returns A promise that resolves once the JSDoc generation process is completed.
      */
-    public async generate(
-        pullNumber?: number
-    ): Promise<{
+    public async generate(pullNumber?: number): Promise<{
         documentedItems: ASTQueueItem[];
         branchName: string | undefined;
     }> {

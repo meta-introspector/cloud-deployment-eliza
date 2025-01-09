@@ -124,4 +124,4 @@ For support, please open an issue in the repository or reach out to the maintain
 
 - [CoinMarketCap API Documentation](https://coinmarketcap.com/api/documentation/v1/)
 
-- [GitHub Repository](https://github.com/elizaOS/eliza/tree/main/packages/plugin-coinmarketcap)
+- [GitHub Repository](https://github.com/elizaos/eliza/tree/main/packages/plugin-coinmarketcap)

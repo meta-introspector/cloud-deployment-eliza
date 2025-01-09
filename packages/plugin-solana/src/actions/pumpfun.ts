@@ -408,10 +408,10 @@ export default {
             );
 
             // Setup connection and SDK
-            const connection = new Connection(settings.RPC_URL!, {
+            const connection = new Connection(settings.SOLANA_RPC_URL!, {
                 commitment: "confirmed",
                 confirmTransactionInitialTimeout: 500000, // 120 seconds
-                wsEndpoint: settings.RPC_URL!.replace("https", "wss"),
+                wsEndpoint: settings.SOLANA_RPC_URL!.replace("https", "wss"),
             });
 
             const wallet = new Wallet(deployerKeypair);

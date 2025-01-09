@@ -22,10 +22,10 @@ export default defineConfig({
         "http",
         "stream",
         "buffer",
-        "querystring"
+        "querystring",
     ],
     noExternal: [],
     esbuildOptions(options) {
-        options.platform = 'node'
-    }
+        options.platform = "node";
+    },
 });

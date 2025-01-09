@@ -22,4 +22,3 @@ Here are the recent user messages for context:
 ${userRequest}
 
 Respond ONLY with a JSON markdown block containing only the extracted values.`;
-

@@ -356,7 +356,9 @@ export class TranscriptionService
             await this.saveDebugAudio(audioBuffer, "openai_input_original");
 
             const arrayBuffer = new Uint8Array(audioBuffer).buffer;
-            const convertedBuffer = Buffer.from(await this.convertAudio(arrayBuffer)).buffer;
+            const convertedBuffer = Buffer.from(
+                await this.convertAudio(arrayBuffer)
+            ).buffer;
 
             await this.saveDebugAudio(
                 convertedBuffer,
@@ -409,7 +411,9 @@ export class TranscriptionService
             await this.saveDebugAudio(audioBuffer, "local_input_original");
 
             const arrayBuffer = new Uint8Array(audioBuffer).buffer;
-            const convertedBuffer = Buffer.from(await this.convertAudio(arrayBuffer)).buffer;
+            const convertedBuffer = Buffer.from(
+                await this.convertAudio(arrayBuffer)
+            ).buffer;
 
             await this.saveDebugAudio(convertedBuffer, "local_input_converted");
 

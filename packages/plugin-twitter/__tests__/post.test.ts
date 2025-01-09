@@ -1,22 +1,28 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { postAction } from '../src/actions/post';
-import { ModelClass, IAgentRuntime, Memory, State, generateObject } from '@elizaos/core';
-import { TweetContent, TweetSchema } from '../src/types';
-import { tweetTemplate } from '../src/templates';
-import { UUID } from '../../core/src/types';
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { postAction } from "../src/actions/post";
+import {
+    ModelClass,
+    IAgentRuntime,
+    Memory,
+    State,
+    generateObject,
+} from "@elizaos/core";
+import { TweetContent, TweetSchema } from "../src/types";
+import { tweetTemplate } from "../src/templates";
+import { UUID } from "../../core/src/types";
 
 // Mock @elizaos/core
-vi.mock('@elizaos/core', async () => {
-    const actual = await vi.importActual('@elizaos/core');
+vi.mock("@elizaos/core", async () => {
+    const actual = await vi.importActual("@elizaos/core");
     return {
         ...actual,
         generateObject: vi.fn().mockImplementation(async ({ schema }) => {
             if (schema === TweetSchema) {
                 return {
                     object: {
-                        text: 'Test tweet content'
+                        text: "Test tweet content",
                     },
-                    raw: 'Test tweet content'
+                    raw: "Test tweet content",
                 };
             }
             return null;
@@ -28,11 +34,14 @@ vi.mock('@elizaos/core', async () => {
                     ...state,
                     recentMessages: state?.recentMessages || [],
                     topics: state?.topics || [],
-                    postDirections: state?.postDirections || '',
-                    agentName: state?.agentName || 'TestAgent',
+                    postDirections: state?.postDirections || "",
+                    agentName: state?.agentName || "TestAgent",
                 },
                 template,
-                result: template.replace(/{{(\w+)}}/g, (_, key) => state?.[key] || key)
+                result: template.replace(
+                    /{{(\w+)}}/g,
+                    (_, key) => state?.[key] || key
+                ),
             };
         }),
         formatMessages: vi.fn().mockImplementation((messages) => messages),
@@ -42,7 +51,7 @@ vi.mock('@elizaos/core', async () => {
             warn: vi.fn(),
             info: vi.fn(),
         },
-        ModelClass: actual.ModelClass
+        ModelClass: actual.ModelClass,
     };
 });
 
@@ -51,24 +60,25 @@ const mockScraper = {
     login: vi.fn().mockResolvedValue(true),
     isLoggedIn: vi.fn().mockResolvedValue(true),
     sendTweet: vi.fn().mockResolvedValue({
-        json: () => Promise.resolve({
-            data: {
-                create_tweet: {
-                    tweet_results: {
-                        result: {
-                            id: '123',
-                            text: 'Test tweet content'
-                        }
-                    }
-                }
-            }
-        })
+        json: () =>
+            Promise.resolve({
+                data: {
+                    create_tweet: {
+                        tweet_results: {
+                            result: {
+                                id: "123",
+                                text: "Test tweet content",
+                            },
+                        },
+                    },
+                },
+            }),
     }),
 };
 
 // Mock the agent-twitter-client
-vi.mock('agent-twitter-client', () => ({
-    Scraper: vi.fn().mockImplementation(() => mockScraper)
+vi.mock("agent-twitter-client", () => ({
+    Scraper: vi.fn().mockImplementation(() => mockScraper),
 }));
 
 // Mock environment variables
@@ -77,28 +87,29 @@ beforeEach(() => {
     vi.resetModules();
     process.env = {
         ...originalEnv,
-        TWITTER_USERNAME: 'test_user',
-        TWITTER_PASSWORD: 'test_pass',
-        TWITTER_EMAIL: 'test@example.com',
-        TWITTER_DRY_RUN: 'true'
+        TWITTER_USERNAME: "test_user",
+        TWITTER_PASSWORD: "test_pass",
+        TWITTER_EMAIL: "test@example.com",
+        TWITTER_DRY_RUN: "true",
     };
 
     // Reset mock implementations
     mockScraper.login.mockResolvedValue(true);
     mockScraper.isLoggedIn.mockResolvedValue(true);
     mockScraper.sendTweet.mockResolvedValue({
-        json: () => Promise.resolve({
-            data: {
-                create_tweet: {
-                    tweet_results: {
-                        result: {
-                            id: '123',
-                            text: 'Test tweet content'
-                        }
-                    }
-                }
-            }
-        })
+        json: () =>
+            Promise.resolve({
+                data: {
+                    create_tweet: {
+                        tweet_results: {
+                            result: {
+                                id: "123",
+                                text: "Test tweet content",
+                            },
+                        },
+                    },
+                },
+            }),
     });
 });
 
@@ -107,15 +118,15 @@ afterEach(() => {
     vi.clearAllMocks();
 });
 
-describe('Twitter Post Action', () => {
+describe("Twitter Post Action", () => {
     const mockRuntime: IAgentRuntime = {
         generateObject: vi.fn().mockImplementation(async ({ schema }) => {
             if (schema === TweetSchema) {
                 return {
                     object: {
-                        text: 'Test tweet content'
+                        text: "Test tweet content",
                     },
-                    raw: 'Test tweet content'
+                    raw: "Test tweet content",
                 };
             }
             return null;
@@ -144,29 +155,29 @@ describe('Twitter Post Action', () => {
     };
 
     const mockMessage: Memory = {
-        id: '123' as UUID,
-        content: { text: 'Please tweet something' },
-        userId: '123' as UUID,
-        agentId: '123' as UUID,
-        roomId: '123' as UUID
+        id: "123" as UUID,
+        content: { text: "Please tweet something" },
+        userId: "123" as UUID,
+        agentId: "123" as UUID,
+        roomId: "123" as UUID,
     };
 
     const mockState: State = {
-        topics: ['test topic'],
+        topics: ["test topic"],
         recentMessages: "test",
         recentPostInteractions: [],
-        postDirections: 'Be friendly',
-        agentName: 'TestAgent',
-        bio: '',
-        lore: '',
-        messageDirections: '',
-        roomId: 'ads' as UUID,
-        actors: '',
-        recentMessagesData: []
+        postDirections: "Be friendly",
+        agentName: "TestAgent",
+        bio: "",
+        lore: "",
+        messageDirections: "",
+        roomId: "ads" as UUID,
+        actors: "",
+        recentMessagesData: [],
     };
 
-    describe('validate', () => {
-        it('should validate valid message content', async () => {
+    describe("validate", () => {
+        it("should validate valid message content", async () => {
             const result = await postAction.validate(
                 mockRuntime,
                 mockMessage,
@@ -175,7 +186,7 @@ describe('Twitter Post Action', () => {
             expect(result).toBe(true);
         });
 
-        it('should fail validation without credentials', async () => {
+        it("should fail validation without credentials", async () => {
             delete process.env.TWITTER_USERNAME;
             delete process.env.TWITTER_PASSWORD;
 
@@ -188,10 +199,10 @@ describe('Twitter Post Action', () => {
         });
     });
 
-    describe('handler', () => {
-        it('should handle API errors', async () => {
-            process.env.TWITTER_DRY_RUN = 'false';
-            mockScraper.login.mockRejectedValueOnce(new Error('API Error'));
+    describe("handler", () => {
+        it("should handle API errors", async () => {
+            process.env.TWITTER_DRY_RUN = "false";
+            mockScraper.login.mockRejectedValueOnce(new Error("API Error"));
             mockScraper.isLoggedIn.mockResolvedValueOnce(false);
 
             const result = await postAction.handler(

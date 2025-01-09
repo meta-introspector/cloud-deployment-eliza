@@ -7,10 +7,10 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
 import { NoteContent, noteSchema, isValidNote } from "../types";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 import { noteTemplate } from "../templates/note";
 
 export const getNoteAction: Action = {
@@ -25,7 +25,7 @@ export const getNoteAction: Action = {
         "OPEN_NOTE",
         "ACCESS_NOTE",
         "VIEW_NOTE",
-        "SHOW_NOTE"
+        "SHOW_NOTE",
     ],
     description:
         "Retrieve and display the content of a specific note from Obsidian vault by path. Use format: 'Get FOLDER/SUBFOLDER/Note Name.md'",
@@ -65,13 +65,13 @@ export const getNoteAction: Action = {
                 template: noteTemplate(message.content.text),
             });
 
-            const noteContext = await generateObject({
+            const noteContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: noteSchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidNote(noteContext.object)) {
                 elizaLogger.error(
@@ -90,7 +90,7 @@ export const getNoteAction: Action = {
             }
 
             // Extract path from note context
-            path = noteContext.object.path
+            path = noteContext.object.path;
 
             elizaLogger.info(`Fetching note at path: ${path}`);
             const noteContent: NoteContent = await obsidian.getNote(path);

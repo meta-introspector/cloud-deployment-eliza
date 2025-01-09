@@ -65,15 +65,17 @@ export class JsDocAnalyzer {
     /**
      * Type guard to check if a node is a VariableDeclaration
      */
-    private isVariableDeclaration(node: TSESTree.Node): node is TSESTree.VariableDeclaration {
-        return node.type === 'VariableDeclaration';
+    private isVariableDeclaration(
+        node: TSESTree.Node
+    ): node is TSESTree.VariableDeclaration {
+        return node.type === "VariableDeclaration";
     }
 
     /**
      * Checks if a node is a const declaration
      */
     private isConstDeclaration(node: TSESTree.Node): boolean {
-        return this.isVariableDeclaration(node) && node.kind === 'const';
+        return this.isVariableDeclaration(node) && node.kind === "const";
     }
 
     /**
@@ -81,14 +83,16 @@ export class JsDocAnalyzer {
      */
     private isLongEnough(node: TSESTree.Node, minLines: number = 10): boolean {
         if (!node.loc) return false;
-        return (node.loc.end.line - node.loc.start.line) > minLines;
+        return node.loc.end.line - node.loc.start.line > minLines;
     }
 
     /**
      * Checks if a node is an export declaration
      */
-    private isExportDeclaration(node: TSESTree.Node): node is TSESTree.ExportNamedDeclaration {
-        return node.type === 'ExportNamedDeclaration';
+    private isExportDeclaration(
+        node: TSESTree.Node
+    ): node is TSESTree.ExportNamedDeclaration {
+        return node.type === "ExportNamedDeclaration";
     }
 
     /**
@@ -98,7 +102,7 @@ export class JsDocAnalyzer {
      */
     private isSignificantConstant(node: TSESTree.VariableDeclaration): boolean {
         // Must be const declaration
-        if (node.kind !== 'const') return false;
+        if (node.kind !== "const") return false;
 
         // Must be exported
         const parent = node.parent;
@@ -203,7 +207,10 @@ export class JsDocAnalyzer {
         const actualNode = this.getActualNode(node);
 
         // Handle variable declarations (constants)
-        if (this.isVariableDeclaration(actualNode) && actualNode.declarations.length > 0) {
+        if (
+            this.isVariableDeclaration(actualNode) &&
+            actualNode.declarations.length > 0
+        ) {
             const declaration = actualNode.declarations[0];
             if (this.isIdentifier(declaration.id)) {
                 return declaration.id.name;
@@ -304,7 +311,11 @@ export class JsDocAnalyzer {
         }
 
         // Handle export const declarations
-        if (this.isExportDeclaration(node) && node.declaration && this.isConstDeclaration(node.declaration)) {
+        if (
+            this.isExportDeclaration(node) &&
+            node.declaration &&
+            this.isConstDeclaration(node.declaration)
+        ) {
             return this.isLongEnough(node.declaration);
         }
 

@@ -18,7 +18,7 @@ export const letzAiImageGeneration = {
         message: any,
         state: any,
         options: any,
-        callback: any,
+        callback: any
     ) => {
         // For now, just call the callback with "OK"
         callback({
@@ -76,4 +76,3 @@ export const letzAIPlugin = {
     name: "letzai",
     actions: [letzAiImageGeneration],
 };
-

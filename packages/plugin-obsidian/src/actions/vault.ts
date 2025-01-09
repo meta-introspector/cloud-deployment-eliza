@@ -6,7 +6,7 @@ import {
     State,
     elizaLogger,
 } from "@elizaos/core";
-import { getObsidian }  from "../helper";
+import { getObsidian } from "../helper";
 
 export const listAllFilesAction: Action = {
     name: "LIST_ALL",
@@ -21,7 +21,7 @@ export const listAllFilesAction: Action = {
         "DISPLAY_ALL_FILES",
         "ENUMERATE_ALL_FILES",
         "LIST_EVERYTHING",
-        "SHOW_EVERYTHING"
+        "SHOW_EVERYTHING",
     ],
     description:
         "List all files in the entire Obsidian vault. Use format: 'List all files' or 'Show all files'",
@@ -57,21 +57,23 @@ export const listAllFilesAction: Action = {
             const filesByDirectory: { [key: string]: string[] } = {};
 
             for (const file of files) {
-                const directory = file.split('/').slice(0, -1).join('/') || '/';
+                const directory = file.split("/").slice(0, -1).join("/") || "/";
                 if (!filesByDirectory[directory]) {
                     filesByDirectory[directory] = [];
                 }
-                filesByDirectory[directory].push(file.split('/').pop() || file);
+                filesByDirectory[directory].push(file.split("/").pop() || file);
             }
 
-
             // Format the files list into a readable tree structure
-            const formattedFiles = files.length > 0
-                ? Object.entries(filesByDirectory)
-                    .map(([directory, files]) =>
-                        `${directory === '/' ? 'Root' : directory}:\n${files.map(file => `  - ${file}`).join('\n')}`)
-                    .join('\n\n')
-                : "No files found in the vault";
+            const formattedFiles =
+                files.length > 0
+                    ? Object.entries(filesByDirectory)
+                          .map(
+                              ([directory, files]) =>
+                                  `${directory === "/" ? "Root" : directory}:\n${files.map((file) => `  - ${file}`).join("\n")}`
+                          )
+                          .join("\n\n")
+                    : "No files found in the vault";
 
             if (callback) {
                 callback({

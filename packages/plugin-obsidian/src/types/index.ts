@@ -11,11 +11,14 @@ export interface SearchMatchApi {
 export const noteSchema = z.object({
     tags: z.array(z.string()).optional(),
     frontmatter: z.record(z.unknown()).optional(),
-    stat: z.object({
-        ctime: z.number(),
-        mtime: z.number(),
-        size: z.number(),
-    }).nullable().optional(),
+    stat: z
+        .object({
+            ctime: z.number(),
+            mtime: z.number(),
+            size: z.number(),
+        })
+        .nullable()
+        .optional(),
     path: z.string(),
     content: z.string().nullable().optional(),
 });
@@ -29,11 +32,14 @@ export const isValidNote = (note: unknown): note is NoteContent => {
 export const fileSchema = z.object({
     path: z.string(),
     content: z.string().nullable().optional(),
-    stat: z.object({
-        ctime: z.number(),
-        mtime: z.number(),
-        size: z.number(),
-    }).nullable().optional()
+    stat: z
+        .object({
+            ctime: z.number(),
+            mtime: z.number(),
+            size: z.number(),
+        })
+        .nullable()
+        .optional(),
 });
 
 export type FileContent = z.infer<typeof fileSchema>;
@@ -84,12 +90,17 @@ export interface NoteHierarchy {
 export const noteHierarchySchema = z.object({
     path: z.string(),
     content: z.string().nullable().optional(),
-    links: z.lazy(() => z.array(noteHierarchySchema)).nullable().optional()
+    links: z
+        .lazy(() => z.array(noteHierarchySchema))
+        .nullable()
+        .optional(),
 });
 
 export type NoteHierarchy = z.infer<typeof noteHierarchySchema>;
 
-export const isValidNoteHierarchy = (hierarchy: unknown): hierarchy is NoteHierarchy => {
+export const isValidNoteHierarchy = (
+    hierarchy: unknown
+): hierarchy is NoteHierarchy => {
     return noteHierarchySchema.safeParse(hierarchy).success;
 };
 
@@ -110,7 +121,7 @@ export function isSearchKeyword(obj: any): obj is SearchKeyword {
     return searchKeywordSchema.safeParse(obj).success;
 }
 
-export type QueryFormat = 'plaintext' | 'dataview' | 'jsonlogic';
+export type QueryFormat = "plaintext" | "dataview" | "jsonlogic";
 
 export interface SearchOptions {
     contextLength?: number;
@@ -131,8 +142,12 @@ export const searchOptionsSchema = z.object({
 });
 
 export const searchQuerySchema = z.object({
-    query: z.union([z.string(), z.record(z.unknown())]).describe("The query to search for"),
-    queryFormat: z.enum(['plaintext', 'dataview', 'jsonlogic']).describe("The format of the query"),
+    query: z
+        .union([z.string(), z.record(z.unknown())])
+        .describe("The query to search for"),
+    queryFormat: z
+        .enum(["plaintext", "dataview", "jsonlogic"])
+        .describe("The format of the query"),
     options: searchOptionsSchema.optional().describe("Search options"),
 });
 

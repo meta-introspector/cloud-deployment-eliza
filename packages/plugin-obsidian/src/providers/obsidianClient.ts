@@ -1,4 +1,9 @@
-import { NoteContent, ResultNoteApi, ResultNoteSearchApi, ServerInfo } from "../types";
+import {
+    NoteContent,
+    ResultNoteApi,
+    ResultNoteSearchApi,
+    ServerInfo,
+} from "../types";
 import { createHash } from "crypto";
 import {
     elizaLogger,
@@ -114,9 +119,7 @@ export class ObsidianProvider {
 
         try {
             const response = await fetch(
-                `${this.host_url}/vault/${encodeURIComponent(
-                    path
-                )}`,
+                `${this.host_url}/vault/${encodeURIComponent(path)}`,
                 {
                     headers: {
                         Authorization: `Bearer ${this.token}`,
@@ -147,15 +150,12 @@ export class ObsidianProvider {
         }
 
         try {
-            const response = await fetch(
-                `${this.host_url}/active/`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${this.token}`,
-                        accept: "application/vnd.olrapi.note+json",
-                    },
-                }
-            );
+            const response = await fetch(`${this.host_url}/active/`, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                    accept: "application/vnd.olrapi.note+json",
+                },
+            });
 
             if (!response.ok) {
                 if (response.status === 404) {
@@ -167,7 +167,10 @@ export class ObsidianProvider {
             const noteContent: NoteContent = await response.json();
             return noteContent;
         } catch (error) {
-            elizaLogger.error("Failed to fetch active note content:", error.message);
+            elizaLogger.error(
+                "Failed to fetch active note content:",
+                error.message
+            );
             throw error;
         }
     }
@@ -269,10 +272,14 @@ export class ObsidianProvider {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const vaultDirectory: Record<string, string[]> = await response.json();
+            const vaultDirectory: Record<string, string[]> =
+                await response.json();
             return vaultDirectory.files as string[];
         } catch (error) {
-            elizaLogger.error("Failed to list directory contents:", error.message);
+            elizaLogger.error(
+                "Failed to list directory contents:",
+                error.message
+            );
             throw error;
         }
     }
@@ -311,7 +318,6 @@ export class ObsidianProvider {
         }
     }
 
-
     /**
      * Opens a file in Obsidian by its path.
      * @param filePath - The path to the file within the vault.
@@ -339,7 +345,10 @@ export class ObsidianProvider {
 
             elizaLogger.success(`Successfully opened file: ${filePath}`);
         } catch (error) {
-            elizaLogger.error(`Failed to open file '${filePath}':`, error.message);
+            elizaLogger.error(
+                `Failed to open file '${filePath}':`,
+                error.message
+            );
             throw error;
         }
     }
@@ -432,21 +441,19 @@ export class ObsidianProvider {
         }
 
         try {
-            const response = await fetch(
-                `${this.host_url}/commands/`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${this.token}`,
-                        accept: "application/json",
-                    },
-                }
-            );
+            const response = await fetch(`${this.host_url}/commands/`, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                    accept: "application/json",
+                },
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const commands: { id: string; name: string }[] = await response.json();
+            const commands: { id: string; name: string }[] =
+                await response.json();
             return commands;
         } catch (error) {
             elizaLogger.error("Failed to list commands:", error.message);
@@ -465,17 +472,14 @@ export class ObsidianProvider {
         }
 
         try {
-            const response = await fetch(
-                `${this.host_url}/commands/execute`,
-                {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${this.token}`,
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ commandId }),
-                }
-            );
+            const response = await fetch(`${this.host_url}/commands/execute`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ commandId }),
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -495,14 +499,14 @@ export class ObsidianProvider {
      */
     async search(
         query: string | object,
-        queryFormat: 'plaintext' | 'dataview' | 'jsonlogic' = 'plaintext',
+        queryFormat: "plaintext" | "dataview" | "jsonlogic" = "plaintext",
         options: {
             contextLength?: number;
             ignoreCase?: boolean;
             isRegex?: boolean;
             searchIn?: string[];
         } = {}
-    ): Promise<ResultNoteApi[]|ResultNoteSearchApi[]> {
+    ): Promise<ResultNoteApi[] | ResultNoteSearchApi[]> {
         if (!this.connected) {
             await this.connect();
         }
@@ -515,81 +519,78 @@ export class ObsidianProvider {
         let body: string;
 
         switch (queryFormat) {
-            case 'dataview':
-                contentType = 'application/vnd.olrapi.dataview.dql+txt';
-                if (typeof query !== 'string') {
-                    throw new Error('Dataview query must be a string.');
+            case "dataview":
+                contentType = "application/vnd.olrapi.dataview.dql+txt";
+                if (typeof query !== "string") {
+                    throw new Error("Dataview query must be a string.");
                 }
                 body = query;
                 break;
-            case 'jsonlogic':
-                contentType = 'application/vnd.olrapi.jsonlogic+json';
-                if (typeof query !== 'object') {
-                    throw new Error('JsonLogic query must be an object.');
+            case "jsonlogic":
+                contentType = "application/vnd.olrapi.jsonlogic+json";
+                if (typeof query !== "object") {
+                    throw new Error("JsonLogic query must be an object.");
                 }
                 body = JSON.stringify(query);
                 break;
-            case 'plaintext':
+            case "plaintext":
             default:
-                contentType = 'application/json';
-                if (typeof query !== 'string') {
-                    throw new Error('Plaintext query must be a string.');
+                contentType = "application/json";
+                if (typeof query !== "string") {
+                    throw new Error("Plaintext query must be a string.");
                 }
                 body = query;
                 break;
         }
 
         try {
-
             elizaLogger.log(
                 `Processing search query with format ${queryFormat}:`,
                 body
             );
 
-            if (queryFormat === 'dataview' || queryFormat === 'jsonlogic') {
+            if (queryFormat === "dataview" || queryFormat === "jsonlogic") {
+                const response = await fetch(`${this.host_url}/search`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${this.token}`,
+                        "Content-Type": contentType,
+                        Accept: "application/json",
+                    },
+                    body: body,
+                });
 
-            const response = await fetch(`${this.host_url}/search`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${this.token}`,
-                    'Content-Type': contentType,
-                    Accept: 'application/json',
-                },
-                body: body,
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const results: ResultNoteSearchApi[] = await response.json();
-            return results;
-
-        } else {
-
-            const response = await fetch(`${this.host_url}/search/simple?query=${encodeURIComponent(body)}&contextLength=${contextLength}`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${this.token}`,
-                    'Content-Type': contentType,
-                    Accept: 'application/json',
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const results: ResultNoteSearchApi[] = await response.json();
+                return results;
+            } else {
+                const response = await fetch(
+                    `${this.host_url}/search/simple?query=${encodeURIComponent(body)}&contextLength=${contextLength}`,
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${this.token}`,
+                            "Content-Type": contentType,
+                            Accept: "application/json",
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const results: ResultNoteApi[] = await response.json();
+                return results;
             }
-
-            const results: ResultNoteApi[] = await response.json();
-            return results;
-        }
-
         } catch (error) {
-            elizaLogger.error('Search failed:', error.message);
+            elizaLogger.error("Search failed:", error.message);
             throw error;
         }
     }
-
 
     /**
      * Searches for notes in the vault based on the provided query and options.
@@ -609,10 +610,7 @@ export class ObsidianProvider {
         // Split on OR to get main chunks
         const orQueries = query.split(/\s+OR\s+/).map((q) => q.trim());
 
-        elizaLogger.log(
-            `Processing search query with OR operator:`,
-            orQueries
-        );
+        elizaLogger.log(`Processing search query with OR operator:`, orQueries);
 
         try {
             const allResults: ResultNoteApi[] = [];
@@ -654,13 +652,14 @@ export class ObsidianProvider {
         }
     }
 
-
     /**
      * Recursively scans directories and builds a list of all files
      * @param directory - The directory to scan, empty string for root
      * @returns Array of file paths in format 'directory/file.md'
      */
-    private async scanDirectoryRecursively(directory: string = ''): Promise<string[]> {
+    private async scanDirectoryRecursively(
+        directory: string = ""
+    ): Promise<string[]> {
         const allFiles: string[] = [];
         const dirsToProcess: string[] = [directory];
         const processedDirs = new Set<string>();
@@ -677,22 +676,29 @@ export class ObsidianProvider {
                 const items = await this.listDirectoryFiles(currentDir);
 
                 for (const item of items) {
-                    if (item.endsWith('/')) {
+                    if (item.endsWith("/")) {
                         // It's a directory, add to processing queue
-                        const fullPath = currentDir ? `${currentDir}${item}` : item;
+                        const fullPath = currentDir
+                            ? `${currentDir}${item}`
+                            : item;
                         if (!processedDirs.has(fullPath)) {
                             dirsToProcess.push(fullPath);
                         }
-                    } else if (item.endsWith('.md')) {
+                    } else if (item.endsWith(".md")) {
                         // It's a markdown file, add to results
-                        const filePath = currentDir ? `${currentDir}${item}` : item;
+                        const filePath = currentDir
+                            ? `${currentDir}${item}`
+                            : item;
                         allFiles.push(filePath);
                     }
                 }
 
                 processedDirs.add(currentDir);
             } catch (error) {
-                elizaLogger.error(`Error scanning directory ${currentDir}:`, error);
+                elizaLogger.error(
+                    `Error scanning directory ${currentDir}:`,
+                    error
+                );
             }
         }
 
@@ -716,17 +722,21 @@ export class ObsidianProvider {
             const allFiles: string[] = [];
 
             // Process root level markdown files
-            const rootMdFiles = rootItems.filter(item => item.endsWith('.md'));
+            const rootMdFiles = rootItems.filter((item) =>
+                item.endsWith(".md")
+            );
             allFiles.push(...rootMdFiles);
 
             // Process directories
-            const directories = rootItems.filter(item => item.endsWith('/'));
+            const directories = rootItems.filter((item) => item.endsWith("/"));
             for (const dir of directories) {
                 const dirFiles = await this.scanDirectoryRecursively(dir);
                 allFiles.push(...dirFiles);
             }
 
-            elizaLogger.info(`Completed scanning. Found ${allFiles.length} files in vault`);
+            elizaLogger.info(
+                `Completed scanning. Found ${allFiles.length} files in vault`
+            );
 
             // Remove any duplicates
             const uniqueFiles = [...new Set(allFiles)];
@@ -754,7 +764,7 @@ export class ObsidianProvider {
             for (const file of allFiles) {
                 try {
                     // Only process markdown files
-                    if (!file.endsWith('.md')) {
+                    if (!file.endsWith(".md")) {
                         continue;
                     }
 
@@ -769,12 +779,12 @@ export class ObsidianProvider {
                         .update(JSON.stringify(content))
                         .digest("hex");
 
-                    const knowledgeId = stringToUuid(
-                        `obsidian-${file}`
-                    );
+                    const knowledgeId = stringToUuid(`obsidian-${file}`);
 
                     const existingDocument =
-                        await this.runtime.documentsManager.getMemoryById(knowledgeId);
+                        await this.runtime.documentsManager.getMemoryById(
+                            knowledgeId
+                        );
 
                     if (
                         existingDocument &&
@@ -799,14 +809,13 @@ export class ObsidianProvider {
                                 path: file,
                                 tags: content.tags,
                                 frontmatter: content.frontmatter,
-                                stats: content.stat
+                                stats: content.stat,
                             },
                         },
                     });
 
                     // delay to avoid throttling
-                    await new Promise(resolve => setTimeout(resolve, 100));
-
+                    await new Promise((resolve) => setTimeout(resolve, 100));
                 } catch (error) {
                     elizaLogger.error(`Error processing file ${file}:`, error);
                     continue;
@@ -816,7 +825,6 @@ export class ObsidianProvider {
             elizaLogger.success("Finished creating memories from vault notes");
 
             return allFiles.length;
-
         } catch (error) {
             elizaLogger.error("Error in createMemoriesFromFiles:", error);
             return 0;

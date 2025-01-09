@@ -655,6 +655,7 @@ Makes Eliza TEE-aware by using the [Marlin Oyster](https://github.com/marlinprot
 **Configuration:**
 
 Add the following to your `.env` file to enable the plugin:
+
 ```
 TEE_MARLIN=yes
 ```
@@ -666,6 +667,7 @@ TEE_MARLIN=yes
 **REMOTE_ATTESTATION Configuration:**
 
 The agent fetches the remote attestation from an attestation server whose URL can be configured in the `.env` file:
+
 ```
 # Optional, default is http://127.0.0.1:1350
 TEE_MARLIN_ATTESTATION_ENDPOINT="http://127.0.0.1:1350"

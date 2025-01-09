@@ -1,13 +1,21 @@
 import { elizaLogger } from "@elizaos/core";
 import NodeCache from "node-cache";
-import { ProcessedTokenData, TokenSecurityData, TokenTradeData, DexScreenerPair } from "../types/token";
+import {
+    ProcessedTokenData,
+    TokenSecurityData,
+    TokenTradeData,
+    DexScreenerPair,
+} from "../types/token";
 import { toBN } from "../utils/bignumber";
 
 export class TokenProvider {
     private cache: NodeCache;
     private isBase: boolean;
 
-    constructor(private tokenAddress: string, options?: { isBase?: boolean }) {
+    constructor(
+        private tokenAddress: string,
+        options?: { isBase?: boolean }
+    ) {
         this.cache = new NodeCache({ stdTTL: 300 });
         this.isBase = options?.isBase || false;
     }
@@ -25,11 +33,13 @@ export class TokenProvider {
             // Calculate security metrics
             const security: TokenSecurityData = {
                 ownerBalance: toBN(pair.liquidity.base).toString(),
-                creatorBalance: '0',
+                creatorBalance: "0",
                 ownerPercentage: 0,
                 creatorPercentage: 0,
-                top10HolderBalance: toBN(pair.liquidity.base).times(0.1).toString(),
-                top10HolderPercent: 10
+                top10HolderBalance: toBN(pair.liquidity.base)
+                    .times(0.1)
+                    .toString(),
+                top10HolderPercent: 10,
             };
 
             // Calculate trade metrics
@@ -39,11 +49,12 @@ export class TokenProvider {
                 volume24h: pair.volume.h24,
                 volume24hUsd: toBN(pair.volume.h24).toString(),
                 uniqueWallets24h: pair.txns.h24.buys + pair.txns.h24.sells,
-                uniqueWallets24hChange: 0
+                uniqueWallets24hChange: 0,
             };
 
             // Analyze holder distribution
-            const holderDistributionTrend = this.analyzeHolderDistribution(tradeData);
+            const holderDistributionTrend =
+                this.analyzeHolderDistribution(tradeData);
 
             const processedData: ProcessedTokenData = {
                 security,
@@ -53,7 +64,7 @@ export class TokenProvider {
                 highValueHolders: [],
                 recentTrades: pair.volume.h24 > 0,
                 highSupplyHoldersCount: 0,
-                tokenCodex: { isScam: false }
+                tokenCodex: { isScam: false },
             };
 
             this.cache.set(cacheKey, processedData);
@@ -65,8 +76,10 @@ export class TokenProvider {
     }
 
     private analyzeHolderDistribution(tradeData: TokenTradeData): string {
-        const buyRatio = tradeData.uniqueWallets24h > 0 ?
-            tradeData.uniqueWallets24hChange / tradeData.uniqueWallets24h : 0;
+        const buyRatio =
+            tradeData.uniqueWallets24h > 0
+                ? tradeData.uniqueWallets24hChange / tradeData.uniqueWallets24h
+                : 0;
 
         if (buyRatio > 0.1) return "increasing";
         if (buyRatio < -0.1) return "decreasing";
@@ -85,9 +98,13 @@ export class TokenProvider {
         );
     }
 
-    private async fetchDexScreenerData(): Promise<{ pairs: DexScreenerPair[] }> {
-        const chainParam = this.isBase ? 'base' : 'solana';
-        const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${this.tokenAddress}?chainId=${chainParam}`);
+    private async fetchDexScreenerData(): Promise<{
+        pairs: DexScreenerPair[];
+    }> {
+        const chainParam = this.isBase ? "base" : "solana";
+        const response = await fetch(
+            `https://api.dexscreener.com/latest/dex/tokens/${this.tokenAddress}?chainId=${chainParam}`
+        );
         const data = await response.json();
         return data;
     }

@@ -186,7 +186,9 @@ async function handler(runtime: IAgentRuntime, message: Memory) {
                 const tokenAddress = result?.baseToken?.address;
                 rec.contractAddress = tokenAddress;
                 if (!tokenAddress) {
-                    elizaLogger.warn("Could not find contract address for token");
+                    elizaLogger.warn(
+                        "Could not find contract address for token"
+                    );
                     continue;
                 }
             }

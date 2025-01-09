@@ -2,44 +2,43 @@ import { ASTQueueItem } from "../../types";
 import { FileDocsGroup, OrganizedDocs } from "../types";
 
 export class DocumentOrganizer {
-
-        public organizeDocumentation(docs: ASTQueueItem[]): OrganizedDocs {
-            return docs.reduce(
-                (acc: OrganizedDocs, doc) => {
-                    // Use nodeType to determine the category
-                    switch (doc.nodeType) {
-                        case "ClassDeclaration":
-                            acc.classes.push(doc);
-                            break;
-                        case "MethodDefinition":
-                        case "TSMethodSignature":
-                            acc.methods.push(doc);
-                            break;
-                        case "TSInterfaceDeclaration":
-                            acc.interfaces.push(doc);
-                            break;
-                        case "TSTypeAliasDeclaration":
-                            acc.types.push(doc);
-                            break;
-                        case "FunctionDeclaration":
-                            acc.functions.push(doc);
-                            break;
-                        case "VariableDeclaration":
-                            acc.variables.push(doc);
-                            break;
-                    }
-                    return acc;
-                },
-                {
-                    classes: [],
-                    methods: [],
-                    interfaces: [],
-                    types: [],
-                    functions: [],
-                    variables: [],
+    public organizeDocumentation(docs: ASTQueueItem[]): OrganizedDocs {
+        return docs.reduce(
+            (acc: OrganizedDocs, doc) => {
+                // Use nodeType to determine the category
+                switch (doc.nodeType) {
+                    case "ClassDeclaration":
+                        acc.classes.push(doc);
+                        break;
+                    case "MethodDefinition":
+                    case "TSMethodSignature":
+                        acc.methods.push(doc);
+                        break;
+                    case "TSInterfaceDeclaration":
+                        acc.interfaces.push(doc);
+                        break;
+                    case "TSTypeAliasDeclaration":
+                        acc.types.push(doc);
+                        break;
+                    case "FunctionDeclaration":
+                        acc.functions.push(doc);
+                        break;
+                    case "VariableDeclaration":
+                        acc.variables.push(doc);
+                        break;
                 }
-            );
-        }
+                return acc;
+            },
+            {
+                classes: [],
+                methods: [],
+                interfaces: [],
+                types: [],
+                functions: [],
+                variables: [],
+            }
+        );
+    }
 
     public groupDocsByFile(docs: OrganizedDocs): FileDocsGroup[] {
         // Get unique file paths
@@ -72,5 +71,4 @@ export class DocumentOrganizer {
             };
         });
     }
-
 }

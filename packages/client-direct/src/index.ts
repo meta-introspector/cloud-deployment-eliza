@@ -25,6 +25,7 @@ import {
 import { createApiRouter } from "./api.ts";
 import * as fs from "fs";
 import * as path from "path";
+import OpenAI from "openai";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -153,6 +154,7 @@ export class DirectClient {
                 }
 
                 let runtime = this.agents.get(agentId);
+                const apiKey = runtime.getSetting("OPENAI_API_KEY");
 
                 // if runtime is null, look for runtime with the same name
                 if (!runtime) {
@@ -168,26 +170,16 @@ export class DirectClient {
                     return;
                 }
 
-                const formData = new FormData();
-                const audioBlob = new Blob([audioFile.buffer], {
-                    type: audioFile.mimetype,
+                const openai = new OpenAI({
+                    apiKey,
                 });
-                formData.append("file", audioBlob, audioFile.originalname);
-                formData.append("model", "whisper-1");
 
-                const response = await fetch(
-                    "https://api.openai.com/v1/audio/transcriptions",
-                    {
-                        method: "POST",
-                        headers: {
-                            Authorization: `Bearer ${runtime.token}`,
-                        },
-                        body: formData,
-                    }
-                );
+                const transcription = await openai.audio.transcriptions.create({
+                    file: fs.createReadStream(audioFile.path),
+                    model: "whisper-1",
+                });
 
-                const data = await response.json();
-                res.json(data);
+                res.json(transcription);
             }
         );
 
@@ -885,6 +877,79 @@ export class DirectClient {
                 const audioBuffer = await speechResponse.arrayBuffer();
 
                 // Set appropriate headers for audio streaming
+                res.set({
+                    "Content-Type": "audio/mpeg",
+                    "Transfer-Encoding": "chunked",
+                });
+
+                res.send(Buffer.from(audioBuffer));
+            } catch (error) {
+                elizaLogger.error(
+                    "Error processing message or generating speech:",
+                    error
+                );
+                res.status(500).json({
+                    error: "Error processing message or generating speech",
+                    details: error.message,
+                });
+            }
+        });
+
+        this.app.post("/:agentId/tts", async (req, res) => {
+            const text = req.body.text;
+
+            if (!text) {
+                res.status(400).send("No text provided");
+                return;
+            }
+
+            try {
+                // Convert to speech using ElevenLabs
+                const elevenLabsApiUrl = `https://api.elevenlabs.io/v1/text-to-speech/${process.env.ELEVENLABS_VOICE_ID}`;
+                const apiKey = process.env.ELEVENLABS_XI_API_KEY;
+
+                if (!apiKey) {
+                    throw new Error("ELEVENLABS_XI_API_KEY not configured");
+                }
+
+                const speechResponse = await fetch(elevenLabsApiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "xi-api-key": apiKey,
+                    },
+                    body: JSON.stringify({
+                        text,
+                        model_id:
+                            process.env.ELEVENLABS_MODEL_ID ||
+                            "eleven_multilingual_v2",
+                        voice_settings: {
+                            stability: parseFloat(
+                                process.env.ELEVENLABS_VOICE_STABILITY || "0.5"
+                            ),
+                            similarity_boost: parseFloat(
+                                process.env.ELEVENLABS_VOICE_SIMILARITY_BOOST ||
+                                    "0.9"
+                            ),
+                            style: parseFloat(
+                                process.env.ELEVENLABS_VOICE_STYLE || "0.66"
+                            ),
+                            use_speaker_boost:
+                                process.env
+                                    .ELEVENLABS_VOICE_USE_SPEAKER_BOOST ===
+                                "true",
+                        },
+                    }),
+                });
+
+                if (!speechResponse.ok) {
+                    throw new Error(
+                        `ElevenLabs API error: ${speechResponse.statusText}`
+                    );
+                }
+
+                const audioBuffer = await speechResponse.arrayBuffer();
+
                 res.set({
                     "Content-Type": "audio/mpeg",
                     "Transfer-Encoding": "chunked",

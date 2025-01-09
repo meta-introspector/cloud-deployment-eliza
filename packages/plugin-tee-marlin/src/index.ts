@@ -3,8 +3,7 @@ import { remoteAttestationAction } from "./actions/remoteAttestation";
 
 export const teeMarlinPlugin: Plugin = {
     name: "Marlin TEE Plugin",
-    description:
-        "TEE plugin with actions to generate remote attestations",
+    description: "TEE plugin with actions to generate remote attestations",
     actions: [
         /* custom actions */
         remoteAttestationAction,

@@ -14,7 +14,7 @@ import { Buffer } from "buffer";
 import { createOllama } from "ollama-ai-provider";
 import OpenAI from "openai";
 import { encodingForModel, TiktokenModel } from "js-tiktoken";
-import { AutoTokenizer } from "@huggingface/transformers";
+//import { AutoTokenizer } from "@huggingface/transformers";
 import Together from "together-ai";
 import { ZodSchema } from "zod";
 import { elizaLogger } from "./index.ts";
@@ -94,7 +94,8 @@ export async function trimTokens(
 
     // Choose the truncation method based on tokenizer type
     if (tokenizerType === TokenizerType.Auto) {
-        return truncateAuto(tokenizerModel, context, maxTokens);
+        //        return truncateAuto(tokenizerModel, context, maxTokens);
+        throw new Error("not implemented");
     }
 
     if (tokenizerType === TokenizerType.TikToken) {
@@ -109,31 +110,31 @@ export async function trimTokens(
     return truncateTiktoken("gpt-4o", context, maxTokens);
 }
 
-async function truncateAuto(
-    modelPath: string,
-    context: string,
-    maxTokens: number
-) {
-    try {
-        const tokenizer = await AutoTokenizer.from_pretrained(modelPath);
-        const tokens = tokenizer.encode(context);
+// async function truncateAuto(
+//     modelPath: string,
+//     context: string,
+//     maxTokens: number
+// ) {
+//     try {
+//         const tokenizer = await AutoTokenizer.from_pretrained(modelPath);
+//         const tokens = tokenizer.encode(context);
 
-        // If already within limits, return unchanged
-        if (tokens.length <= maxTokens) {
-            return context;
-        }
+//         // If already within limits, return unchanged
+//         if (tokens.length <= maxTokens) {
+//             return context;
+//         }
 
-        // Keep the most recent tokens by slicing from the end
-        const truncatedTokens = tokens.slice(-maxTokens);
+//         // Keep the most recent tokens by slicing from the end
+//         const truncatedTokens = tokens.slice(-maxTokens);
 
-        // Decode back to text - js-tiktoken decode() returns a string directly
-        return tokenizer.decode(truncatedTokens);
-    } catch (error) {
-        elizaLogger.error("Error in trimTokens:", error);
-        // Return truncated string if tokenization fails
-        return context.slice(-maxTokens * 4); // Rough estimate of 4 chars per token
-    }
-}
+//         // Decode back to text - js-tiktoken decode() returns a string directly
+//         return tokenizer.decode(truncatedTokens);
+//     } catch (error) {
+//         elizaLogger.error("Error in trimTokens:", error);
+//         // Return truncated string if tokenization fails
+//         return context.slice(-maxTokens * 4); // Rough estimate of 4 chars per token
+//     }
+// }
 
 async function truncateTiktoken(
     model: TiktokenModel,
@@ -215,7 +216,10 @@ export async function generateText({
     elizaLogger.log("Using provider:", runtime.modelProvider);
     // If verifiable inference is requested and adapter is provided, use it
     if (verifiableInference && runtime.verifiableInferenceAdapter) {
-        elizaLogger.log("Using verifiable inference adapter:", runtime.verifiableInferenceAdapter);
+        elizaLogger.log(
+            "Using verifiable inference adapter:",
+            runtime.verifiableInferenceAdapter
+        );
         try {
             const result: VerifiableInferenceResult =
                 await runtime.verifiableInferenceAdapter.generateText(
@@ -353,6 +357,7 @@ export async function generateText({
             case ModelProviderName.LLAMACLOUD:
             case ModelProviderName.NANOGPT:
             case ModelProviderName.HYPERBOLIC:
+            case ModelProviderName.NINETEEN_AI:
             case ModelProviderName.TOGETHER:
             case ModelProviderName.AKASH_CHAT_API: {
                 elizaLogger.debug("Initializing OpenAI model.");
@@ -390,7 +395,8 @@ export async function generateText({
                     apiKey,
                     baseURL: endpoint,
                     fetch: async (url: string, options: any) => {
-                        const chain_id = runtime.getSetting("ETERNALAI_CHAIN_ID") || "45762"
+                        const chain_id =
+                            runtime.getSetting("ETERNALAI_CHAIN_ID") || "45762";
                         if (options?.body) {
                             const body = JSON.parse(options.body);
                             body.chain_id = chain_id;
@@ -789,10 +795,12 @@ export async function generateText({
 
             case ModelProviderName.GALADRIEL: {
                 elizaLogger.debug("Initializing Galadriel model.");
-                const headers = {}
-                const fineTuneApiKey = runtime.getSetting("GALADRIEL_FINE_TUNE_API_KEY")
+                const headers = {};
+                const fineTuneApiKey = runtime.getSetting(
+                    "GALADRIEL_FINE_TUNE_API_KEY"
+                );
                 if (fineTuneApiKey) {
-                    headers["Fine-Tune-Authentication"] = fineTuneApiKey
+                    headers["Fine-Tune-Authentication"] = fineTuneApiKey;
                 }
                 const galadriel = createOpenAI({
                     headers,
@@ -1224,6 +1232,7 @@ export const generateImage = async (
                           // If no specific match, try the fallback chain
                           return (
                               runtime.getSetting("HEURIST_API_KEY") ??
+                              runtime.getSetting("NINETEEN_AI_API_KEY") ??
                               runtime.getSetting("TOGETHER_API_KEY") ??
                               runtime.getSetting("FAL_API_KEY") ??
                               runtime.getSetting("OPENAI_API_KEY") ??
@@ -1415,6 +1424,43 @@ export const generateImage = async (
                 if (!base64String) {
                     throw new Error(
                         "Empty base64 string in Venice AI response"
+                    );
+                }
+                return `data:image/png;base64,${base64String}`;
+            });
+
+            return { success: true, data: base64s };
+        }else if (runtime.imageModelProvider === ModelProviderName.NINETEEN_AI) {
+            const response = await fetch(
+                "https://api.nineteen.ai/v1/text-to-image",
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${apiKey}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        model: data.modelId || "dataautogpt3/ProteusV0.4-Lightning",
+                        prompt: data.prompt,
+                        negative_prompt: data.negativePrompt,
+                        width: data.width,
+                        height: data.height,
+                        steps: data.numIterations,
+                        cfg_scale: data.guidanceScale || 3
+                    }),
+                }
+            );
+
+            const result = await response.json();
+
+            if (!result.images || !Array.isArray(result.images)) {
+                throw new Error("Invalid response format from Nineteen AI");
+            }
+
+            const base64s = result.images.map((base64String) => {
+                if (!base64String) {
+                    throw new Error(
+                        "Empty base64 string in Nineteen AI response"
                     );
                 }
                 return `data:image/png;base64,${base64String}`;

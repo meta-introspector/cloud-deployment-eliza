@@ -7,4 +7,3 @@ export const BN = BigNumber;
 export function toBN(value: string | number | BigNumber): BigNumber {
     return new BigNumber(value);
 }
-

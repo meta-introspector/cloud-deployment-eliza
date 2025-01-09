@@ -131,4 +131,4 @@ For support, please open an issue in the repository or reach out to the maintain
 - [CoinGecko API Documentation](https://www.coingecko.com/en/api)
 - [CoinCap API Documentation](https://docs.coincap.io/)
 - [CoinMarketCap API Documentation](https://coinmarketcap.com/api/documentation/v1/)
-- [GitHub Repository](https://github.com/elizaOS/eliza/tree/main/packages/plugin-coinprice)
+- [GitHub Repository](https://github.com/elizaos/eliza/tree/main/packages/plugin-coinprice)

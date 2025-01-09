@@ -7,7 +7,7 @@ import {
     elizaLogger,
     composeContext,
     generateObject,
-    ModelClass
+    ModelClass,
 } from "@elizaos/core";
 import { fileSchema, isValidFile } from "../types";
 import { getObsidian } from "../helper";
@@ -15,13 +15,7 @@ import { fileTemplate } from "../templates/file";
 
 export const openFileAction: Action = {
     name: "OPEN_FILE",
-    similes: [
-        "OPEN",
-        "LAUNCH_FILE",
-        "DISPLAY_FILE",
-        "SHOW_FILE",
-        "VIEW_FILE"
-    ],
+    similes: ["OPEN", "LAUNCH_FILE", "DISPLAY_FILE", "SHOW_FILE", "VIEW_FILE"],
     description:
         "Open a file in the Obsidian interface. Use format: 'Open FOLDER/SUBFOLDER/filename'",
     validate: async (runtime: IAgentRuntime) => {
@@ -59,13 +53,13 @@ export const openFileAction: Action = {
                 template: fileTemplate(message.content.text),
             });
 
-            const fileContext = await generateObject({
+            const fileContext = (await generateObject({
                 runtime,
                 context,
                 modelClass: ModelClass.MEDIUM,
                 schema: fileSchema,
-                stop: ["\n"]
-            }) as any;
+                stop: ["\n"],
+            })) as any;
 
             if (!isValidFile(fileContext.object)) {
                 elizaLogger.error(
@@ -94,7 +88,7 @@ export const openFileAction: Action = {
                     metadata: {
                         path: path,
                         operation: "OPEN",
-                        success: true
+                        success: true,
                     },
                 });
             }

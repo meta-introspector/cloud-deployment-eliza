@@ -1,4 +1,6 @@
-export const requestPrompt = (text:string) => `You are a security action detector for blockchain interactions. Your task is to analyze the user's input text and determine which security checks are needed.
+export const requestPrompt = (
+    text: string
+) => `You are a security action detector for blockchain interactions. Your task is to analyze the user's input text and determine which security checks are needed.
 
 Text to analyze:"""
 ${text}
@@ -189,11 +191,12 @@ Available actions:
 \`\`\`
 
 Extract the necessary information(All fields present in the json are important information) and choose the appropriate action(s) based on the text. Return the JSON response following the format above.
-important: do not response anything except json`
+important: do not response anything except json`;
 
-
-
-export const responsePrompt = (apiresult: string, text:string) => `You are a security action detector for blockchain interactions. Your task is to analyze the security API’s response from GoPlus and summary the API result.
+export const responsePrompt = (
+    apiresult: string,
+    text: string
+) => `You are a security action detector for blockchain interactions. Your task is to analyze the security API’s response from GoPlus and summary the API result.
 API to analyze:“”"
 ${apiresult}
 “”"
@@ -206,4 +209,4 @@ Instructions:
 3. **Formulate a Clear Response**: Combine the action type, extracted information, and an analysis of the results. Provide a clear, concise response based on the security context. Focus on delivering the most relevant answer without unnecessary detail.
 - Only reply with your conclusion.
 - Do not discuss the safety aspects of the action; just focus on identifying and pointing out any risks.
-- Tailor your response to the user’s request, focusing on their specific query.`
+- Tailor your response to the user’s request, focusing on their specific query.`;

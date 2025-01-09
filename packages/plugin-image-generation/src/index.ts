@@ -81,6 +81,7 @@ const imageGeneration: Action = {
         await validateImageGenConfig(runtime);
 
         const anthropicApiKeyOk = !!runtime.getSetting("ANTHROPIC_API_KEY");
+        const nineteenAiApiKeyOk = !!runtime.getSetting("NINETEEN_AI_API_KEY");
         const togetherApiKeyOk = !!runtime.getSetting("TOGETHER_API_KEY");
         const heuristApiKeyOk = !!runtime.getSetting("HEURIST_API_KEY");
         const falApiKeyOk = !!runtime.getSetting("FAL_API_KEY");
@@ -97,6 +98,7 @@ const imageGeneration: Action = {
             falApiKeyOk ||
             openAiApiKeyOk ||
             veniceApiKeyOk ||
+            nineteenAiApiKeyOk ||
             livepeerGatewayUrlOk
         );
     },

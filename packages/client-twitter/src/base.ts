@@ -361,7 +361,7 @@ export class ClientBase extends EventEmitter {
             .slice(0, count);
         // TODO: Once the 'count' parameter is fixed in the 'fetchTimeline' method of the 'agent-twitter-client',
         // this workaround can be removed.
-        // Related issue: https://github.com/elizaOS/agent-twitter-client/issues/43
+        // Related issue: https://github.com/elizaos/agent-twitter-client/issues/43
     }
 
     async fetchSearchTweets(

@@ -11,13 +11,13 @@ export const imageGenEnvSchema = z
         },
         {
             message: "The LetzAI API KEY has not been set.",
-        },
+        }
     );
 
 export type ImageGenConfig = z.infer<typeof imageGenEnvSchema>;
 
 export async function validateImageGenConfig(
-    runtime: IAgentRuntime,
+    runtime: IAgentRuntime
 ): Promise<ImageGenConfig> {
     try {
         const config = {
@@ -31,7 +31,7 @@ export async function validateImageGenConfig(
                 .map((err) => `${err.path.join(".")}: ${err.message}`)
                 .join("\n");
             throw new Error(
-                `Image generation configuration validation failed:\n${errorMessages}`,
+                `Image generation configuration validation failed:\n${errorMessages}`
             );
         }
         throw error;

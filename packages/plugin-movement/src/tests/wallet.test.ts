@@ -50,7 +50,7 @@ describe("WalletProvider", () => {
         const aptosClient = new Aptos(
             new AptosConfig({
                 network: Network.CUSTOM,
-                fullnode: MOVEMENT_NETWORK_CONFIG.bardock.fullnode
+                fullnode: MOVEMENT_NETWORK_CONFIG.bardock.fullnode,
             })
         );
         const movementAccount = Account.fromPrivateKey({
@@ -75,10 +75,11 @@ describe("WalletProvider", () => {
                 ...defaultCharacter,
                 settings: {
                     secrets: {
-                        MOVEMENT_PRIVATE_KEY: "0x5b4ca82e1835dcc51e58a3dec44b857edf60a26156b00f73d74bf96f5daecfb5",
-                        MOVEMENT_NETWORK: "bardock"
-                    }
-                }
+                        MOVEMENT_PRIVATE_KEY:
+                            "0x5b4ca82e1835dcc51e58a3dec44b857edf60a26156b00f73d74bf96f5daecfb5",
+                        MOVEMENT_NETWORK: "bardock",
+                    },
+                },
             },
         };
     });
@@ -89,12 +90,14 @@ describe("WalletProvider", () => {
 
     describe("Movement Wallet Integration", () => {
         it("should check wallet address and balance", async () => {
-            const result = await walletProvider.getFormattedPortfolio(mockedRuntime);
+            const result =
+                await walletProvider.getFormattedPortfolio(mockedRuntime);
 
             const prices = await walletProvider.fetchPrices();
-            const moveAmountOnChain = await walletProvider.aptosClient.getAccountAPTAmount({
-                accountAddress: walletProvider.address,
-            });
+            const moveAmountOnChain =
+                await walletProvider.aptosClient.getAccountAPTAmount({
+                    accountAddress: walletProvider.address,
+                });
             const moveAmount = new BigNumber(moveAmountOnChain)
                 .div(new BigNumber(10).pow(MOVE_DECIMALS))
                 .toFixed(4);
@@ -106,8 +109,8 @@ describe("WalletProvider", () => {
             expect(result).toContain(`$${totalUsd}`);
             expect(result).toContain(`${moveAmount} Move`);
 
-            expect(result).toContain('Total Value:');
-            expect(result).toContain('Wallet Address:');
+            expect(result).toContain("Total Value:");
+            expect(result).toContain("Wallet Address:");
         });
 
         it("should fetch Movement token prices", async () => {
@@ -124,21 +127,28 @@ describe("WalletProvider", () => {
         it("should use cached wallet info when available", async () => {
             const cachedInfo = {
                 totalUsd: "100.00",
-                totalMove: "50.0000"
+                totalMove: "50.0000",
             };
             mockCacheManager.get.mockResolvedValueOnce(cachedInfo);
 
-            const result = await walletProvider.getFormattedPortfolio(mockedRuntime);
+            const result =
+                await walletProvider.getFormattedPortfolio(mockedRuntime);
             expect(result).toContain(cachedInfo.totalUsd);
             expect(result).toContain(cachedInfo.totalMove);
         });
 
         it("should handle network errors gracefully", async () => {
             const mockError = new Error("Network error");
-            vi.spyOn(walletProvider.aptosClient, "getAccountAPTAmount").mockRejectedValueOnce(mockError);
+            vi.spyOn(
+                walletProvider.aptosClient,
+                "getAccountAPTAmount"
+            ).mockRejectedValueOnce(mockError);
 
-            const result = await walletProvider.getFormattedPortfolio(mockedRuntime);
-            expect(result).toBe("Unable to fetch wallet information. Please try again later.");
+            const result =
+                await walletProvider.getFormattedPortfolio(mockedRuntime);
+            expect(result).toBe(
+                "Unable to fetch wallet information. Please try again later."
+            );
         });
     });
 });

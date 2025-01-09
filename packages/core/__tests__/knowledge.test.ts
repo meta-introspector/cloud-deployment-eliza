@@ -117,6 +117,5 @@ describe("Knowledge Module", () => {
                 expect(result).toEqual([]);
             });
         });
-        });
     });
-
+});

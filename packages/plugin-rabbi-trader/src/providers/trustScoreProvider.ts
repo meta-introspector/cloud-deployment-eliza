@@ -7,18 +7,17 @@ export class TrustScoreProvider {
 
     getTokenProvider(tokenAddress: string): TokenProvider {
         if (!this.tokenProviders.has(tokenAddress)) {
-            this.tokenProviders.set(tokenAddress, new TokenProvider(tokenAddress));
+            this.tokenProviders.set(
+                tokenAddress,
+                new TokenProvider(tokenAddress)
+            );
         }
         return this.tokenProviders.get(tokenAddress)!;
     }
 
     async calculateTrustScore(tokenData: ProcessedTokenData): Promise<number> {
         const pair = tokenData.dexScreenerData.pairs[0];
-        const {
-            liquidity,
-            volume,
-            marketCap
-        } = pair;
+        const { liquidity, volume, marketCap } = pair;
 
         // Weight factors
         const LIQUIDITY_WEIGHT = 0.4;
@@ -26,7 +25,8 @@ export class TrustScoreProvider {
         const MCAP_WEIGHT = 0.2;
 
         // Calculate component scores
-        const liquidityScore = Math.min(liquidity.usd / 100000, 1) * LIQUIDITY_WEIGHT;
+        const liquidityScore =
+            Math.min(liquidity.usd / 100000, 1) * LIQUIDITY_WEIGHT;
         const volumeScore = Math.min(volume.h24 / 50000, 1) * VOLUME_WEIGHT;
         const mcapScore = Math.min(marketCap / 1000000, 1) * MCAP_WEIGHT;
 
@@ -46,8 +46,8 @@ export class TrustScoreProvider {
             const pair = tokenData.dexScreenerData.pairs[0];
 
             // Risk assessment
-            const riskLevel = trustScore > 0.7 ? "LOW" :
-                            trustScore > 0.4 ? "MEDIUM" : "HIGH";
+            const riskLevel =
+                trustScore > 0.7 ? "LOW" : trustScore > 0.4 ? "MEDIUM" : "HIGH";
 
             // Trading signals
             let tradingAdvice: "BUY" | "SELL" | "HOLD" = "HOLD";

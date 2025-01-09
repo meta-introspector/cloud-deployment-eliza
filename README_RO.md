@@ -4,38 +4,38 @@
 
 ## Funcționalități
 
--   🛠 Conectori compleți pentru Discord, Twitter și Telegram
--   👥 Suport pentru agenți multipli și camere
--   📚 Ingestie și interacțiune ușoară cu documentele tale
--   💾 Memorie recuperabilă și stocare de documente
--   🚀 Extensibil în mod ridicat – creează propriile acțiuni și clienți pentru a extinde capacitățile
--   ☁️ Suportă multe modele, inclusiv Llama local, OpenAI, Anthropic, Groq și altele
--   📦 Funcționează perfect!
+- 🛠 Conectori compleți pentru Discord, Twitter și Telegram
+- 👥 Suport pentru agenți multipli și camere
+- 📚 Ingestie și interacțiune ușoară cu documentele tale
+- 💾 Memorie recuperabilă și stocare de documente
+- 🚀 Extensibil în mod ridicat – creează propriile acțiuni și clienți pentru a extinde capacitățile
+- ☁️ Suportă multe modele, inclusiv Llama local, OpenAI, Anthropic, Groq și altele
+- 📦 Funcționează perfect!
 
 ## Pentru ce pot să-l folosesc?
 
--   🤖 Chatbot-uri
--   🕵️ Agenți autonomi
--   📈 Gestiunea proceselor de afaceri
--   🎮 NPC-uri în jocuri video
+- 🤖 Chatbot-uri
+- 🕵️ Agenți autonomi
+- 📈 Gestiunea proceselor de afaceri
+- 🎮 NPC-uri în jocuri video
 
 # Început
 
 **Cerințe preliminare (OBLIGATORIU):**
 
--   [Python 2.7+](https://www.python.org/downloads/)
--   [Node.js 23.3+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
--   [pnpm](https://pnpm.io/installation)
+- [Python 2.7+](https://www.python.org/downloads/)
+- [Node.js 23.3+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm](https://pnpm.io/installation)
 
 ### Edite fișierul .env
 
--   Copiați `.env.example` în `.env` și completați valorile corespunzătoare
--   Editați variabilele de mediu pentru TWITTER pentru a adăuga numele de utilizator și parola botului dvs.
+- Copiați `.env.example` în `.env` și completați valorile corespunzătoare
+- Editați variabilele de mediu pentru TWITTER pentru a adăuga numele de utilizator și parola botului dvs.
 
 ### Edite fișierul de personaj
 
--   Verificați fișierul `src/core/defaultCharacter.ts` – îl puteți modifica
--   De asemenea, puteți încărca personaje cu comanda `pnpm start --characters="path/to/your/character.json"` și rula mai mulți boți în același timp.
+- Verificați fișierul `src/core/defaultCharacter.ts` – îl puteți modifica
+- De asemenea, puteți încărca personaje cu comanda `pnpm start --characters="path/to/your/character.json"` și rula mai mulți boți în același timp.
 
 După ce ați configurat fișierul .env și fișierul de personaj, puteți porni botul cu următoarea comandă:
 
@@ -174,9 +174,9 @@ pnpm test:sqljs    # Execută testele cu SQL.js
 
 Testele sunt scrise folosind Jest și pot fi găsite în fișierele `src/**/*.test.ts`. Mediul de testare este configurat pentru:
 
--   Încărcarea variabilelor de mediu din `.env.test`
--   Utilizarea unui timeout de 2 minute pentru teste de lungă durată
--   Suport pentru module ESM
--   Rularea testelor în secvență (`--runInBand`)
+- Încărcarea variabilelor de mediu din `.env.test`
+- Utilizarea unui timeout de 2 minute pentru teste de lungă durată
+- Suport pentru module ESM
+- Rularea testelor în secvență (`--runInBand`)
 
 Pentru a crea teste noi, adăugați un fișier `.test.ts` adiacent codului pe care îl testați.

@@ -1,6 +1,12 @@
-import { elizaLogger, generateText, HandlerCallback, IAgentRuntime, ModelClass, State } from "@elizaos/core";
+import {
+    elizaLogger,
+    generateText,
+    HandlerCallback,
+    IAgentRuntime,
+    ModelClass,
+    State,
+} from "@elizaos/core";
 import { Memory } from "@elizaos/core";
-
 
 /*
 const improvePrompt = false;
@@ -32,7 +38,7 @@ async function pollLetzAiImageStatus(
         await new Promise((resolve) => setTimeout(resolve, pollIntervalMs));
         polls++;
 
-       callback({
+        callback({
             text: `Still working on your image... (Poll #${polls})`,
         });
 
@@ -129,17 +135,20 @@ export const letzAiImageGeneration = {
     ) => {
         try {
             // 1) Get the LLM's response
-            elizaLogger.log("Composing state for message:", message.content.text);
+            elizaLogger.log(
+                "Composing state for message:",
+                message.content.text
+            );
 
             // Removed logging of non-existent property recentMessagesData
             callback({
                 text: message.content.text,
-
             });
 
             // 2) Next, send the prompt to LetzAI
             const userPrompt = message?.content?.text || "No prompt provided.";
-            const letzAiApiKey = runtime.getSetting("LETZAI_API_KEY") || "fake_api_key";
+            const letzAiApiKey =
+                runtime.getSetting("LETZAI_API_KEY") || "fake_api_key";
             const letzAiModels = runtime.getSetting("LETZAI_MODELS") || "";
 
             const width = options.width ?? 720;
@@ -148,7 +157,7 @@ export const letzAiImageGeneration = {
             const creativity = options.creativity ?? 1;
             const hasWatermark = options.hasWatermark ?? true;
             const systemVersion = options.systemVersion ?? 3;
-            const mode = options.mode?? "default";
+            const mode = options.mode ?? "default";
 
             //use this if you want to improve your prompts some more before submitting them
             //we're not using it rn, because the generateText() function doesn't seem to work properly and returns bad prompts
@@ -186,10 +195,9 @@ export const letzAiImageGeneration = {
                     creativity,
                     hasWatermark,
                     systemVersion,
-                    mode
+                    mode,
                 }),
             });
-
 
             const createData = await createResp.json();
             if (!createResp.ok) {
@@ -199,8 +207,6 @@ export const letzAiImageGeneration = {
                 return;
             }
 
-
-
             // 3) Let the user know we’ve started generating
             const { id, status, progress } = createData;
             callback({
@@ -208,7 +214,13 @@ export const letzAiImageGeneration = {
             });
 
             // 4) Begin polling every 5s
-            await pollLetzAiImageStatus(id, letzAiApiKey, callback, /* maxPolls */ 20, /* pollIntervalMs */ 5000);
+            await pollLetzAiImageStatus(
+                id,
+                letzAiApiKey,
+                callback,
+                /* maxPolls */ 20,
+                /* pollIntervalMs */ 5000
+            );
         } catch (error: any) {
             callback({
                 text: `Error while requesting LetzAI: ${error.message}`,
@@ -254,7 +266,6 @@ export const letzAiImageGeneration = {
                 },
             },
         ],
-
     ],
 };
 

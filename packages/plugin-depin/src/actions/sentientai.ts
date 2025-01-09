@@ -3,16 +3,12 @@ import {
     HandlerCallback,
     IAgentRuntime,
     Memory,
-    State
+    State,
 } from "@elizaos/core";
 
 export const sentientAI: Action = {
     name: "SENTIENT_AI",
-    similes: [
-        "SENTIENT",
-        "NEWS",
-        "WEATHER"
-    ],
+    similes: ["SENTIENT", "NEWS", "WEATHER"],
     description: "Provde realtime information for Weather, News.",
     examples: [
         [
@@ -43,7 +39,7 @@ export const sentientAI: Action = {
                     text: "Looking at London's forecast: There's a 60% chance of rain on Wednesday with temperatures around 15°C. The rest of the week should be mostly cloudy with occasional showers.",
                     action: "WEATHER",
                 },
-            }
+            },
         ],
         [
             {

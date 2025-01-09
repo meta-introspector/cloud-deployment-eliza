@@ -29,7 +29,8 @@ export default {
         // Always validate to true since we have a fallback API
         return true;
     },
-    description: "Get the current price of a cryptocurrency from CoinGecko, CoinMarketCap, or CoinCap",
+    description:
+        "Get the current price of a cryptocurrency from CoinGecko, CoinMarketCap, or CoinCap",
     handler: async (
         runtime: IAgentRuntime,
         message: Memory,
@@ -66,8 +67,13 @@ export default {
 
             // Get API keys if available
             const coingeckoApiKey = runtime.getSetting("COINGECKO_API_KEY");
-            const coinmarketcapApiKey = runtime.getSetting("COINMARKETCAP_API_KEY");
-            const priceService = createPriceService(coingeckoApiKey, coinmarketcapApiKey);
+            const coinmarketcapApiKey = runtime.getSetting(
+                "COINMARKETCAP_API_KEY"
+            );
+            const priceService = createPriceService(
+                coingeckoApiKey,
+                coinmarketcapApiKey
+            );
 
             try {
                 const priceData = await priceService.getPrice(
@@ -81,7 +87,7 @@ export default {
 
                 if (callback) {
                     callback({
-                        text: `The current price of ${content.cryptoName} ${content.symbol} is ${(priceData.price).toLocaleString()} ${content.currency.toUpperCase()} \nMarket Cap is ${(priceData.marketCap).toLocaleString()} ${content.currency.toUpperCase()} \n24h Volume is ${(priceData.volume24h).toLocaleString()} ${content.currency.toUpperCase()} \nThe 24h percent change is ${(priceData.percentChange24h).toFixed(2)}%`,
+                        text: `The current price of ${content.cryptoName} ${content.symbol} is ${priceData.price.toLocaleString()} ${content.currency.toUpperCase()} \nMarket Cap is ${priceData.marketCap.toLocaleString()} ${content.currency.toUpperCase()} \n24h Volume is ${priceData.volume24h.toLocaleString()} ${content.currency.toUpperCase()} \nThe 24h percent change is ${priceData.percentChange24h.toFixed(2)}%`,
                         content: {
                             symbol: content.symbol,
                             cryptoName: content.cryptoName,

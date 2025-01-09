@@ -16,7 +16,8 @@ import { updateFileAction } from "./actions/updateFile";
 
 export const obsidianPlugin = {
     name: "obsidian",
-    description: "Integration with Obsidian vault using Omnisearch / Deep traversal search and memoryknowledge base",
+    description:
+        "Integration with Obsidian vault using Omnisearch / Deep traversal search and memoryknowledge base",
     actions: [
         searchAction,
         listNotesAction,
@@ -30,7 +31,7 @@ export const obsidianPlugin = {
         noteTraversalAction,
         saveFileAction,
         openFileAction,
-        updateFileAction
+        updateFileAction,
     ],
     evaluators: [],
     services: [],

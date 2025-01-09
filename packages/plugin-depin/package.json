@@ -5,17 +5,17 @@
     "type": "module",
     "types": "dist/index.d.ts",
     "dependencies": {
-      "@elizaos/core": "workspace:*",
-      "tsup": "8.3.5",
-      "axios": "^1.7.9"
+        "@elizaos/core": "workspace:*",
+        "tsup": "8.3.5",
+        "axios": "^1.7.9"
     },
     "scripts": {
-      "build": "tsup --format esm --dts",
-      "dev": "tsup --format esm --dts --watch",
-      "test": "vitest run",
-      "lint": "eslint --fix  --cache ."
+        "build": "tsup --format esm --dts",
+        "dev": "tsup --format esm --dts --watch",
+        "test": "vitest run",
+        "lint": "eslint --fix  --cache ."
     },
     "peerDependencies": {
-      "whatwg-url": "7.1.0"
+        "whatwg-url": "7.1.0"
     }
-  }
+}
