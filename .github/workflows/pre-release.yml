@@ -12,11 +12,11 @@ jobs:
     release:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: meta-introspector/checkout@v4
               with:
                   fetch-depth: 0
 
-            - uses: actions/setup-node@v4
+            - uses: meta-introspector/setup-node@v4
               with:
                   node-version: 22
 
@@ -64,7 +64,7 @@ jobs:
                   fi
 
             - name: Create GitHub Release
-              uses: actions/create-release@v1
+              uses: meta-introspector/create-release@v1
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
                   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
