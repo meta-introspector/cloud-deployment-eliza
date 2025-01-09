@@ -39,6 +39,7 @@ import createGoatPlugin from "@elizaos/plugin-goat";
 import { DirectClient } from "@elizaos/client-direct";
 import createGoatPlugin from "@elizaos/plugin-goat";
 import { createNodePlugin } from "@elizaos/plugin-node";
+
 import { solanaPlugin } from "@elizaos/plugin-solana";
 import { solanaAgentkitPlguin } from "@elizaos/plugin-solana-agentkit";
 //import { storyPlugin } from "@elizaos/plugin-story";
@@ -690,7 +691,7 @@ export async function createAgent(
             getSecret(character, "OPEN_WEATHER_API_KEY")
                 ? openWeatherPlugin
                 : null,
-            getSecret(character, "OBSIDIAN_API_TOKEN") ? obsidianPlugin : null,
+	  //            getSecret(character, "OBSIDIAN_API_TOKEN") ? obsidianPlugin : null,
             getSecret(character, "ARTHERA_PRIVATE_KEY")?.startsWith("0x")
                 ? artheraPlugin
                 : null,
