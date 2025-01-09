@@ -7,6 +7,7 @@ ls -latr
 . ./.env # for secrets
 set -e # stop  on any error
 export WORKSOURCE="/opt/eliza"
+snap install aws-cli --classic
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 916723593639.dkr.ecr.us-east-2.amazonaws.com
 adduser --disabled-password --gecos "" eliza --home "/home/eliza"  || echo ignore
 git config --global --add safe.directory "/opt/eliza"
