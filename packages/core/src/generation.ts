@@ -507,30 +507,33 @@ export async function generateText({
 
 	  case ModelProviderName.BEDROCK: {
                 elizaLogger.debug("Initializing Bedrock model.");
-
-                const { text: bedrockResponse } = await aiGenerateText({
-                    model: bedrock(model),
-                    prompt: context,
-                    system:
+	    try {
+              const { text: bedrockResponse } = await aiGenerateText({
+                model: bedrock(model),
+                prompt: context,
+                system:
                         runtime.character.system ??
-                        settings.SYSTEM_PROMPT ??
+                          settings.SYSTEM_PROMPT ??
                         undefined,
-                    tools: tools,
-                    onStepFinish: onStepFinish,
-                    maxSteps: maxSteps,
-                    temperature: temperature,
-                    maxTokens: max_response_length,
-                    frequencyPenalty: frequency_penalty,
-                    presencePenalty: presence_penalty,
-                    experimental_telemetry: experimental_telemetry,
+                tools: tools,
+                onStepFinish: onStepFinish,
+                maxSteps: maxSteps,
+                temperature: temperature,
+                maxTokens: max_response_length,
+                frequencyPenalty: frequency_penalty,
+                presencePenalty: presence_penalty,
+                experimental_telemetry: experimental_telemetry,
                 });
-
-                response = bedrockResponse;
-                elizaLogger.debug("Received response from bedrock model.");
-                break;
-            }
-
-            case ModelProviderName.CLAUDE_VERTEX: {
+              response = bedrockResponse;
+              elizaLogger.debug("Received response from bedrock model.");
+	    } catch (error) {
+              elizaLogger.error("Error in bedrock:", error);
+              throw error;
+	    }	  
+            break;
+	  }
+      
+      case ModelProviderName.CLAUDE_VERTEX: {
                 elizaLogger.debug("Initializing Claude Vertex model.");
 
                 const anthropic = createAnthropic({
