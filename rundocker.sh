@@ -1,4 +1,5 @@
 #!/bin/bash
+# FIXME move this and related files into the user data via templates and compression
 # this is the install script 
 #  install_script = "/opt/agent/rundocker.sh"
 # called on boot.

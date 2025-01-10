@@ -30,6 +30,15 @@ cd eliza-starter
 git checkout   feature/opentelemetry
 pnpm start --characters=characters/eliza.character.json`
 ```
+# server notes
+
+ ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND  No package.json (or package.yaml, or package.json5) was found in "/var/agent".
+that means the workdir was missing
+
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @elizaos/agent@0.1.7 start: `node --loader ts-node/esm src/index.ts "--isRoot"`
+Exit status 1
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?
+
 
 # Eliza 🤖
 
