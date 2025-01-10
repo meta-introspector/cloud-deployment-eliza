@@ -71,6 +71,10 @@ export const models: Models = {
                 temperature: 0.6,
 
             },
+	    [ModelClass.EMBEDDING]: {
+                name: settings.EMBEDDING_BEDROCK_MODEL || "amazon.titan-embed-text-v1",
+            },
+
             [ModelClass.LARGE]: {
 		name: settings.LARGE_BEDROCK_MODEL || "amazon.nova-lite-v1:0",
 		                stop: [],

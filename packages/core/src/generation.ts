@@ -46,7 +46,6 @@ import {
     IVerifiableInferenceAdapter,
     VerifiableInferenceOptions,
     VerifiableInferenceResult,
-    VerifiableInferenceProvider,
     TelemetrySettings,
     TokenizerType,
 } from "./types.ts";
@@ -511,28 +510,30 @@ export async function generateText({
               const { text: bedrockResponse } = await aiGenerateText({
                 model: bedrock(model),
                 prompt: context,
-                system:
+                  /*
+		    system:
                         runtime.character.system ??
                           settings.SYSTEM_PROMPT ??
-                        undefined,
-                tools: tools,
-                onStepFinish: onStepFinish,
-                maxSteps: maxSteps,
-                temperature: temperature,
+                          undefined,
+			  */
+                //tools: tools,
+                //onStepFinish: onStepFinish,
+                //maxSteps: maxSteps,
+                  temperature: temperature,
                 maxTokens: max_response_length,
-                frequencyPenalty: frequency_penalty,
-                presencePenalty: presence_penalty,
-                experimental_telemetry: experimental_telemetry,
+                //frequencyPenalty: frequency_penalty,
+                //presencePenalty: presence_penalty,
+               // experimental_telemetry: experimental_telemetry,
                 });
               response = bedrockResponse;
               elizaLogger.debug("Received response from bedrock model.");
 	    } catch (error) {
               elizaLogger.error("Error in bedrock:", error);
               throw error;
-	    }	  
+	    }
             break;
 	  }
-      
+
       case ModelProviderName.CLAUDE_VERTEX: {
                 elizaLogger.debug("Initializing Claude Vertex model.");
 
