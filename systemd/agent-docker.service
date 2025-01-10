@@ -24,7 +24,7 @@ ExecStartPre=/usr/bin/bash -c 'docker login -u AWS -p $(aws ecr get-login-passwo
 ExecStartPre=/usr/bin/docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest
 
 # must run in /app where the docker installed the node modules for now
-ExecStart=/usr/bin/docker run -p 3000:3000 --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name %n 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest
+ExecStart=/usr/bin/docker run -p 3000:3000 --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name %n 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest pnpm start:debug --characters=characters/eliza.character.json
 
 # FIXME: update cloudwatch logs
 StandardOutput=file:/var/log/agent_systemd.log
