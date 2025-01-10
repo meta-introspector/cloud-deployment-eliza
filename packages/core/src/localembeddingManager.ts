@@ -1,11 +1,11 @@
 import path from "node:path";
 import { fileURLToPath } from "url";
-import { FlagEmbedding, EmbeddingModel } from "fastembed";
+//import { FlagEmbedding, EmbeddingModel } from "fastembed";
 import elizaLogger from "./logger";
 
 class LocalEmbeddingModelManager {
     private static instance: LocalEmbeddingModelManager | null;
-    private model: FlagEmbedding | null = null;
+    private model: null = null;
     private initPromise: Promise<void> | null = null;
     private initializationLock = false;
 
@@ -79,11 +79,11 @@ class LocalEmbeddingModelManager {
 
             elizaLogger.debug("Initializing BGE embedding model...");
 
-            this.model = await FlagEmbedding.init({
-                cacheDir: cacheDir,
-                model: EmbeddingModel.BGESmallENV15,
-                maxLength: 512,
-            });
+            // this.model = await FlagEmbedding.init({
+            //     cacheDir: cacheDir,
+            //     model: EmbeddingModel.BGESmallENV15,
+            //     maxLength: 512,
+            // });
 
             elizaLogger.debug("BGE model initialized successfully");
         } catch (error) {

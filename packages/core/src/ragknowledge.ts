@@ -367,7 +367,7 @@ export class RAGKnowledgeManager implements IRAGKnowledgeManager {
         };
 
         const startTime = Date.now();
-        let content = file.content;
+        const content = file.content;
 
         try {
             const fileSizeKB = new TextEncoder().encode(content).length / 1024;

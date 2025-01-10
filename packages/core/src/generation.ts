@@ -1,4 +1,5 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { bedrock } from '@ai-sdk/amazon-bedrock';
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createGroq } from "@ai-sdk/groq";
 import { createOpenAI } from "@ai-sdk/openai";
@@ -45,7 +46,6 @@ import {
     IVerifiableInferenceAdapter,
     VerifiableInferenceOptions,
     VerifiableInferenceResult,
-    VerifiableInferenceProvider,
     TelemetrySettings,
     TokenizerType,
 } from "./types.ts";
@@ -504,7 +504,37 @@ export async function generateText({
                 break;
             }
 
-            case ModelProviderName.CLAUDE_VERTEX: {
+	  case ModelProviderName.BEDROCK: {
+                elizaLogger.debug("Initializing Bedrock model.");
+	    try {
+              const { text: bedrockResponse } = await aiGenerateText({
+                model: bedrock(model),
+                prompt: context,
+                  /*
+		    system:
+                        runtime.character.system ??
+                          settings.SYSTEM_PROMPT ??
+                          undefined,
+			  */
+                //tools: tools,
+                //onStepFinish: onStepFinish,
+                //maxSteps: maxSteps,
+                  temperature: temperature,
+                maxTokens: max_response_length,
+                //frequencyPenalty: frequency_penalty,
+                //presencePenalty: presence_penalty,
+               // experimental_telemetry: experimental_telemetry,
+                });
+              response = bedrockResponse;
+              elizaLogger.debug("Received response from bedrock model.");
+	    } catch (error) {
+              elizaLogger.error("Error in bedrock:", error);
+              throw error;
+	    }
+            break;
+	  }
+
+      case ModelProviderName.CLAUDE_VERTEX: {
                 elizaLogger.debug("Initializing Claude Vertex model.");
 
                 const anthropic = createAnthropic({

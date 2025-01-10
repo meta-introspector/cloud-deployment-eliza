@@ -1,4 +1,24 @@
 # setup 
+export AWS_REGION=us-west-2
+
+you need to requst access to the models in aws. not all the models are available everywhere, using us-west-2
+
+https://us-west-2.console.aws.amazon.com/bedrock/home?region=us-west-2#/modelaccess
+
+list model
+`aws bedrock list-foundation-models`
+
+install aws cli new ```
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+```
+
+```
+eval $(/usr/local/aws-cli/v2/current/bin/aws configure export-credentials --profile default --format env)
+```
+
+
 we dont use terraform for the ecr or the secrets because they will change so often here are the simple aws scripts for them.
 
 `aws ecr create-repository --repository-name agent/eliza`

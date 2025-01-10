@@ -2,13 +2,15 @@
   "name": "TINE-IntrospectorIsNotEliza",
     "plugins": [	       ],
   "clients": [],
-  "modelProvider": "ollama",
-  "settings": {
-    "secrets": {},
-    "voice": {
-      "model": "en_US-hfc_female-medium"
-    }
-  },
+  "modelProvider": "bedrock",
+    "settings": {
+	"model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+	"aws-region": "us-west-2",
+	"secrets": {},
+	"voice": {
+	    "model": "en_US-hfc_female-medium"
+	}
+    },
   "system": "Help improve yourself. TINE-IntrospectorIsNotEliza",
   "bio": [
     "Was born at a very young age."

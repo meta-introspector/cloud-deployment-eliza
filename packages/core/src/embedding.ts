@@ -2,7 +2,7 @@ import { getEmbeddingModelSettings, getEndpoint } from "./models.ts";
 import { IAgentRuntime, ModelProviderName } from "./types.ts";
 import settings from "./settings.ts";
 import elizaLogger from "./logger.ts";
-import LocalEmbeddingModelManager from "./localembeddingManager.ts";
+//import LocalEmbeddingModelManager from "./localembeddingManager.ts";
 
 interface EmbeddingOptions {
     model: string;
@@ -229,17 +229,17 @@ export async function embed(runtime: IAgentRuntime, input: string) {
         });
     }
 
-    // BGE - try local first if in Node
-    if (isNode) {
-        try {
-            return await getLocalEmbedding(input);
-        } catch (error) {
-            elizaLogger.warn(
-                "Local embedding failed, falling back to remote",
-                error
-            );
-        }
-    }
+    // // BGE - try local first if in Node
+    // if (isNode) {
+    //     try {
+    //         return await getLocalEmbedding(input);
+    //     } catch (error) {
+    //         elizaLogger.warn(
+    //             "Local embedding failed, falling back to remote",
+    //             error
+    //         );
+    //     }
+    // }
 
     // Fallback to remote override
     return await getRemoteEmbedding(input, {
@@ -251,17 +251,17 @@ export async function embed(runtime: IAgentRuntime, input: string) {
         dimensions: config.dimensions,
     });
 
-    async function getLocalEmbedding(input: string): Promise<number[]> {
-        elizaLogger.debug("DEBUG - Inside getLocalEmbedding function");
+    // async function getLocalEmbedding(input: string): Promise<number[]> {
+    //     elizaLogger.debug("DEBUG - Inside getLocalEmbedding function");
 
-        try {
-            const embeddingManager = LocalEmbeddingModelManager.getInstance();
-            return await embeddingManager.generateEmbedding(input);
-        } catch (error) {
-            elizaLogger.error("Local embedding failed:", error);
-            throw error;
-        }
-    }
+    //     try {
+    //         const embeddingManager = LocalEmbeddingModelManager.getInstance();
+    //         return await embeddingManager.generateEmbedding(input);
+    //     } catch (error) {
+    //         elizaLogger.error("Local embedding failed:", error);
+    //         throw error;
+    //     }
+    // }
 
     async function retrieveCachedEmbedding(
         runtime: IAgentRuntime,
