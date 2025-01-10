@@ -1,5 +1,25 @@
-# debug
+# setup 
+we dont use terraform for the ecr or the secrets because they will change so often here are the simple aws scripts for them.
 
+`aws ecr create-repository --repository-name agent/eliza`
+
+`set_secrets.sh` calls
+`aws ssm put-parameter     --name "agent_openai_key"  --value "${OPENAI_API_KEY}" --type String`
+
+## connecting with server
+
+`ssh-ssm.py` to find the server
+
+for example:
+`aws ssm start-session --target i-0e156165e86473c93 --profile mdupont --region us-east-2`
+
+## terraform-aws-oidc-github
+https://github.com/jmikedupont2/terraform-aws-oidc-github
+
+in my time 2024/12/18/terraform-aws-oidc-github on branch
+run the tofu apply in the example after editing the variables and files.
+
+# debug
 `pnpm start:debug --characters=./characters/eliza.character.json`
 
 start direct client here 
@@ -10,6 +30,15 @@ cd eliza-starter
 git checkout   feature/opentelemetry
 pnpm start --characters=characters/eliza.character.json`
 ```
+# server notes
+
+ ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND  No package.json (or package.yaml, or package.json5) was found in "/var/agent".
+that means the workdir was missing
+
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @elizaos/agent@0.1.7 start: `node --loader ts-node/esm src/index.ts "--isRoot"`
+Exit status 1
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?
+
 
 # Eliza 🤖
 

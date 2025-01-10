@@ -8,15 +8,15 @@
             "PNPM_VER": "9.15.2"
         }
     },
-    "privileged": true,
+    "privileged": false,
     "runArgs": [
         "-p=3000:3000", // Add port for server api
-        "-p=5173:5173", // Add port for client
+        "-p=5173:5173" // Add port for client
         //"--volume=/usr/lib/wsl:/usr/lib/wsl", // uncomment for WSL
         //"--volume=/mnt/wslg:/mnt/wslg", // uncomment for WSL
-        "--gpus=all", // ! uncomment for vGPU
+        //"--gpus=all", // ! uncomment for vGPU
         //"--device=/dev/dxg", // uncomment this for vGPU under WSL
-        "--device=/dev/dri"
+        //"--device=/dev/dri"
     ],
     "containerEnv": {
         //"MESA_D3D12_DEFAULT_ADAPTER_NAME": "NVIDIA", // uncomment for WSL
