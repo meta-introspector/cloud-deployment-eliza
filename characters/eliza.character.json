@@ -2,7 +2,7 @@
   "name": "TINE-IntrospectorIsNotEliza",
     "plugins": [	       ],
   "clients": [],
-  "modelProvider": "ollama",
+  "modelProvider": "bedrock",
   "settings": {
     "secrets": {},
     "voice": {
