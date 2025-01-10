@@ -1,4 +1,5 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { bedrock } from '@ai-sdk/amazon-bedrock';
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createGroq } from "@ai-sdk/groq";
 import { createOpenAI } from "@ai-sdk/openai";
@@ -501,6 +502,31 @@ export async function generateText({
 
                 response = anthropicResponse;
                 elizaLogger.debug("Received response from Anthropic model.");
+                break;
+            }
+
+	  case ModelProviderName.BEDROCK: {
+                elizaLogger.debug("Initializing Bedrock model.");
+
+                const { text: bedrockResponse } = await aiGenerateText({
+                    model: bedrock(model),
+                    prompt: context,
+                    system:
+                        runtime.character.system ??
+                        settings.SYSTEM_PROMPT ??
+                        undefined,
+                    tools: tools,
+                    onStepFinish: onStepFinish,
+                    maxSteps: maxSteps,
+                    temperature: temperature,
+                    maxTokens: max_response_length,
+                    frequencyPenalty: frequency_penalty,
+                    presencePenalty: presence_penalty,
+                    experimental_telemetry: experimental_telemetry,
+                });
+
+                response = bedrockResponse;
+                elizaLogger.debug("Received response from bedrock model.");
                 break;
             }
 

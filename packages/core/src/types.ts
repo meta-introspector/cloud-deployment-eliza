@@ -204,6 +204,7 @@ export type Models = {
     [ModelProviderName.OPENAI]: Model;
     [ModelProviderName.ETERNALAI]: Model;
     [ModelProviderName.ANTHROPIC]: Model;
+    [ModelProviderName.BEDROCK]: Model;
     [ModelProviderName.GROK]: Model;
     [ModelProviderName.GROQ]: Model;
     [ModelProviderName.LLAMACLOUD]: Model;
@@ -235,6 +236,7 @@ export enum ModelProviderName {
     OPENAI = "openai",
     ETERNALAI = "eternalai",
     ANTHROPIC = "anthropic",
+    BEDROCK = "bedrock",    
     GROK = "grok",
     GROQ = "groq",
     LLAMACLOUD = "llama_cloud",
