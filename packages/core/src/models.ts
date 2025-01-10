@@ -49,6 +49,40 @@ export const models: Models = {
             },
         },
     },
+    [ModelProviderName.BEDROCK]: {
+        model: {
+            [ModelClass.SMALL]: {
+                name: settings.SMALL_BEDROCK_MODEL || "amazon.nova-lite-v1:0",
+				                stop: [],
+                maxInputTokens: 128000,
+                maxOutputTokens: 8192,
+                frequency_penalty: 0.0,
+                presence_penalty: 0.0,
+                temperature: 0.6,
+
+            },
+            [ModelClass.MEDIUM]: {
+		name: settings.MEDIUM_BEDROCK_MODEL || "amazon.nova-lite-v1:0",
+		                stop: [],
+                maxInputTokens: 128000,
+                maxOutputTokens: 8192,
+                frequency_penalty: 0.0,
+                presence_penalty: 0.0,
+                temperature: 0.6,
+
+            },
+            [ModelClass.LARGE]: {
+		name: settings.LARGE_BEDROCK_MODEL || "amazon.nova-lite-v1:0",
+		                stop: [],
+                maxInputTokens: 128000,
+                maxOutputTokens: 8192,
+                frequency_penalty: 0.0,
+                presence_penalty: 0.0,
+                temperature: 0.6,
+
+            }
+        },
+    },
     [ModelProviderName.ETERNALAI]: {
         endpoint: settings.ETERNALAI_URL,
         model: {
