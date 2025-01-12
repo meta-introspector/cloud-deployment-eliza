@@ -85,4 +85,4 @@ jobs:
               uses: meta-introspector/build-push-action@v6.10.0
               with:
                 push: true
-                tags: h4ckermike/elizaos-eliza:akash
+                tags: h4ckermike/elizaos-eliza:ai-token-team

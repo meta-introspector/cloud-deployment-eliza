@@ -14,7 +14,7 @@ echo for now install helper tools
 apt install -y lsof strace nmap
 #apt install -y emacs-nox
 # FIXME another account hardcoded
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
+aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 699475930706.dkr.ecr.us-west-1.amazonaws.com
 adduser --disabled-password --gecos "" agent --home "/home/agent"  || echo ignore
 git config --global --add safe.directory "/opt/agent"
 cd "/opt/agent/" || exit 1 # "we need agent"
