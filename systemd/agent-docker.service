@@ -1,0 +1,37 @@
+# derived from https://phil.lavin.me.uk/2021/12/running-docker-containers-from-aws-ecr-with-systemd/
+# derived from https://github.com/encode/uvicorn/issues/678
+# derived from https://blog.container-solutions.com/running-docker-containers-with-systemd
+
+[Unit]
+Description=agent
+After=docker.service
+Requires=docker.service
+StartLimitInterval=200
+StartLimitBurst=10
+
+[Service]
+EnvironmentFile=/var/run/agent/secrets/env
+RestartSec=10
+TimeoutStartSec=0
+Restart=always
+
+ExecStartPre=-/usr/bin/docker exec %n stop || echo cannot prestop
+ExecStartPre=-/usr/bin/docker rm %n || echo cannot preremove
+
+#FIXME hardcoded aws id
+ExecStartPre=/usr/bin/bash -c 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-2) 767503528736.dkr.ecr.us-east-2.amazonaws.com'
+#                                 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest
+ExecStartPre=/usr/bin/docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest
+
+# must run in /app where the docker installed the node modules for now
+ExecStart=/usr/bin/docker run -p 3000:3000 --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name %n 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:latest
+
+# FIXME: update cloudwatch logs
+StandardOutput=file:/var/log/agent_systemd.log
+StandardError=file:/var/log/agent_systemd.log
+ExecReload=/bin/kill -HUP ${MAINPID}
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

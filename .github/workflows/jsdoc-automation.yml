@@ -48,17 +48,17 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: meta-introspector/checkout@v4
               with:
                   fetch-depth: 0
 
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: meta-introspector/setup-node@v4
               with:
                   node-version: "20"
 
             - name: Install pnpm
-              uses: pnpm/action-setup@v2
+              uses: meta-introspector/action-setup@v2
               with:
                   version: 8
                   run_install: false

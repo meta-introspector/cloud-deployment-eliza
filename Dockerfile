@@ -34,7 +34,7 @@ FROM node:23.3.0-slim
 # Install runtime dependencies if needed
 RUN npm install -g pnpm@9.4.0 && \
     apt-get update && \
-    apt-get install -y git python3 && \
+    apt-get install -y git python3 curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -52,4 +52,4 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/characters ./characters
 
 # Set the command to run the application
-CMD ["pnpm", "start"]
+CMD ["pnpm", "start", "--characters=characters/eliza.character.json"]

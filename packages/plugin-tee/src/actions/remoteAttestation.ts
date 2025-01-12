@@ -1,26 +1,31 @@
-import type { IAgentRuntime, Memory, State, HandlerCallback } from "@elizaos/core";
+import type {
+    IAgentRuntime,
+    Memory,
+    State,
+    HandlerCallback,
+} from "@elizaos/core";
 import { RemoteAttestationProvider } from "../providers/remoteAttestationProvider";
 import { fetch, type BodyInit } from "undici";
 
 function hexToUint8Array(hex: string) {
     hex = hex.trim();
     if (!hex) {
-      throw new Error("Invalid hex string");
+        throw new Error("Invalid hex string");
     }
     if (hex.startsWith("0x")) {
-      hex = hex.substring(2);
+        hex = hex.substring(2);
     }
     if (hex.length % 2 !== 0) {
-      throw new Error("Invalid hex string");
+        throw new Error("Invalid hex string");
     }
 
     const array = new Uint8Array(hex.length / 2);
     for (let i = 0; i < hex.length; i += 2) {
-      const byte = parseInt(hex.slice(i, i + 2), 16);
-      if (isNaN(byte)) {
-        throw new Error("Invalid hex string");
-      }
-      array[i / 2] = byte;
+        const byte = parseInt(hex.slice(i, i + 2), 16);
+        if (isNaN(byte)) {
+            throw new Error("Invalid hex string");
+        }
+        array[i / 2] = byte;
     }
     return array;
 }
@@ -28,31 +33,39 @@ function hexToUint8Array(hex: string) {
 async function uploadUint8Array(data: Uint8Array) {
     const blob = new Blob([data], { type: "application/octet-stream" });
     const formData = new FormData();
-    formData.append("file", blob, 'quote.bin');
+    formData.append("file", blob, "quote.bin");
 
     return await fetch("https://proof.t16z.com/api/upload", {
         method: "POST",
         body: formData as BodyInit,
-      });
+    });
 }
 
 export const remoteAttestationAction = {
     name: "REMOTE_ATTESTATION",
-    similes: ["REMOTE_ATTESTATION", "TEE_REMOTE_ATTESTATION", "TEE_ATTESTATION"],
-    description: "Generate a remote attestation to prove that the agent is running in a TEE",
+    similes: [
+        "REMOTE_ATTESTATION",
+        "TEE_REMOTE_ATTESTATION",
+        "TEE_ATTESTATION",
+    ],
+    description:
+        "Generate a remote attestation to prove that the agent is running in a TEE",
     handler: async (
         runtime: IAgentRuntime,
         _message: Memory,
         _state: State,
         _options: { [key: string]: unknown },
-        callback: HandlerCallback,
+        callback: HandlerCallback
     ) => {
         try {
             // Get the remote attestation of the agentId
             const agentId = runtime.agentId;
             const teeMode = runtime.getSetting("TEE_MODE");
             const provider = new RemoteAttestationProvider(teeMode);
-            const attestation = await provider.generateAttestation(agentId, 'raw');
+            const attestation = await provider.generateAttestation(
+                agentId,
+                "raw"
+            );
             const attestationData = hexToUint8Array(attestation.quote);
             const response = await uploadUint8Array(attestationData);
             const data = await response.json();
@@ -84,7 +97,7 @@ export const remoteAttestationAction = {
                     text: "Of course, one second...",
                     action: "REMOTE_ATTESTATION",
                 },
-            }
+            },
         ],
     ],
 };

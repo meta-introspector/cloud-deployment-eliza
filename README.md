@@ -1,3 +1,16 @@
+# debug
+
+`pnpm start:debug --characters=./characters/eliza.character.json`
+
+start direct client here 
+
+```
+git clone  https://github.com/meta-introspector/eliza-starter.git  eliza-starter
+cd eliza-starter
+git checkout   feature/opentelemetry
+pnpm start --characters=characters/eliza.character.json`
+```
+
 # Eliza 🤖
 
 <div align="center">
@@ -147,3 +160,4 @@ pnpm install --include=optional sharp
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
+
