@@ -1,3 +1,6 @@
+#! pnpm list --long --json
+`pnpm list --long --json`
+`gron packages2.json | grep github | grep ".git" | grep repository | cut -d = -f2 | cut '-d"' -f 2 | cut '-d+' -f2`
 
 Tetsing Building locally with 
 `docker build --platform linux/arm64 .`
