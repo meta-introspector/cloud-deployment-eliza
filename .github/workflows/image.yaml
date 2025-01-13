@@ -28,7 +28,13 @@ jobs:
               role-session-name: github-actions-${{ env.APP_NAME || 'eliza'}}
               # FIXME hard coded
               role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID || '767503528736' }}:role/github
-        
+
+          - name: Set up Docker Buildx
+            uses: meta-introspector/setup-buildx-action@v3.8.0
+            with:
+              install: true
+              platforms: linux/amd64,linux/arm/v7,linux/arm/v8
+              
           - name: Login to Amazon ECR
             id: login-ecr
             uses: meta-introspector/amazon-ecr-login@v1
