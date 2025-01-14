@@ -77,7 +77,6 @@ jobs:
               push: true
               tags: |
                 ${{ steps.meta.outputs.tags }}
-                arm64
               labels: ${{ steps.meta.outputs.labels }}
 
           - name: Generate artifact attestation
