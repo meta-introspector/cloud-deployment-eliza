@@ -21,10 +21,10 @@ ExecStartPre=-/usr/bin/docker rm %n || echo cannot preremove
 #FIXME hardcoded aws id
 ExecStartPre=/usr/bin/bash -c 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-2) 767503528736.dkr.ecr.us-east-2.amazonaws.com'
 
-ExecStartPre=/usr/bin/docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-micro
+ExecStartPre=/usr/bin/docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed
 
 # must run in /app where the docker installed the node modules for now
-ExecStart=/usr/bin/docker run -p 3000:3000 --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name %n 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-micro
+ExecStart=/usr/bin/docker run -p 3000:3000 --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name %n 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed
 
 # FIXME: update cloudwatch logs
 StandardOutput=file:/var/log/agent_systemd.log
