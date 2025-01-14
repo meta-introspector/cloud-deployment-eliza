@@ -1,7 +1,7 @@
 # Use a specific Node.js version for better reproducibility
 #FROM node:23.3.0-slim AS builder
 # note this architecture is listed twice in this file!
-FROM arm64v8/node:23-bookworm-slim AS builder
+FROM node:23-bookworm-slim AS builder
 
 RUN apt-get update
 RUN apt-get install -y bash
@@ -32,7 +32,7 @@ RUN pnpm install \
 
 # Create a new stage for the final image
 #FROM node:23.3.0-slim
-FROM arm64v8/node:23-bookworm-slim
+FROM node:23-bookworm-slim
 
 # Install runtime dependencies if needed
 RUN apt-get update 
