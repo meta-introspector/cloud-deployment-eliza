@@ -1,0 +1,160 @@
+Translate to plantuml
+Translate to mermaid diagram 
+# Diagram
+
+1. windows pc
+   putty
+   
+2. linux server
+   sshd  -> putty
+   ssm -> forward ssh 22->2222 (pipe1)
+   tmux  -  emacs - shell
+   git pull via pipe1
+   
+3. aws server 
+   ssm agent
+   sshd - 22 ->pipe1
+   ubuntu user /opt/git/agent
+   agent runs as /opt/agent
+   push from opt/agent to opt/git/agent
+   
+   
+
+*** 1. Windows PC with PuTTY
+
+- *PuTTY*: A terminal emulator that allows you to connect to the Linux server using SSH.
+
+*** 2. Linux Server
+
+**** Components:
+- *sshd*: The OpenSSH daemon that handles SSH connections.
+- *SSM (Session Manager)*: AWS Systems Manager's tool for managing and automating tasks on instances
+   in an Amazon EC2 environment.
+- *tmux*: A terminal multiplexer that allows you to create multiple virtual terminals within a
+   single physical terminal session.
+- *Emacs*: An extensible text editor.
+- *Git*: A distributed version control system.
+
+**** Workflow:
+1. *SSH Connection via PuTTY*:
+   - You connect to the Linux server using PuTTY.
+   
+2. *Forwarding SSH Port (pipe1)*:
+   - SSM forwards the SSH port from the aws server (default 22) to a custom port (2222) on the Linux
+     server.
+
+3. *Using tmux and Emacs*:
+   - You use ~tmux~ to create multiple virtual terminals.
+   - Within these terminals, you run ~emacs~ as your editor.
+   
+4. *Git Pull via pipe1*:
+   - You perform a ~git pull~ operation through the forwarded SSH port.
+
+*** 3. AWS Server
+
+**** Components:
+- *SSM Agent*: A service that allows you to manage and automate tasks on instances in an Amazon EC2
+   environment.
+- *sshd*: The OpenSSH daemon.
+- *Ubuntu User*: An account on the Ubuntu server.
+- */opt/git/agent*: A directory where a Git agent script is located.
+
+**** Workflow:
+1. *SSM Agent*:
+   - The SSM Agent runs as a service and allows you to manage and automate tasks on the instance.
+
+2. *SSH Connection via Pipe1*:
+   - The Linux server forwards the SSH port to a custom port (2222) on the AWS server.
+
+3. *Git Agent Script*:
+   - A script located at ~/opt/git/agent~ is used for Git operations.
+   - This script might perform actions like pulling updates, pushing changes, or managing
+     repositories.
+
+*** Interactions Between Components
+
+1. *Windows PC -> Linux Server*:
+   - PuTTY connects to the Linux server using SSH.
+   - SSM forwards the port 22 on the AWS server to port 2222 on the Linux server.
+
+2. *Linux Server -> AWS Server*:
+   - The Linux server performs an ~ssh~ connection to the AWS server through the forwarded port
+     (pipe1).
+   - The script at ~/opt/git/agent~ runs on the AWS server and can pull or push changes using Git.
+
+*** Diagram Representation
+#+BEGIN_SRC
+[Windows PC] --> PuTTY --> [Linux Server]
+                              |
+                              | SSH Port Forwarding (22 -> 2222)
+         v
+[AWS Server] -- SSM Agent --> [Git Agent Script (/opt/git/agent)]
+#+END_SRC
+
+This setup allows for a seamless interaction between the Windows client and the AWS server using
+various tools and protocols.
+
+
+Here is the PlantUML representation of your diagram:
+#+BEGIN_SRC plantuml
+@startuml
+!define RECTANGLE class
+
+title Network Components
+
+RECTANGLE "Windows PC" {
+  [PuTTY]
+}
+
+RECTANGLE "Linux Server" as Linux {
+  [sshd]
+  [SSM (Session Manager)]
+  [tmux]
+  [Emacs]
+  [Git]
+}
+
+RECTANGLE "AWS Server" as AWS {
+  [SSM Agent]
+  [sshd]
+  [Ubuntu User]
+  [/opt/git/agent]
+}
+
+WindowsPC --> PuTTY --> Linux
+Linux --> AWS : SSH Port Forwarding (22 -> 2222)
+
+AWS -- SSM Agent --> GitAgentScript
+
+@enduml
+#+END_SRC
+
+This PlantUML script creates a simple network diagram with the components and their interactions as
+described in your text. You can copy this code into a PlantUML editor to visualize the diagram.
+
+Here is the Mermaid representation of your diagram:
+#+BEGIN_SRC mermaid
+graph TD;
+    WindowsPC --> PuTTY --> LinuxServer;
+
+    subgraph AWS_Server
+        SSMAgent -- "SSH Port Forwarding (22 -> 2222)" --> LinuxServer
+        UbuntuUser --> /opt/git/agent
+    end
+
+    subgraph Git_Agent_Script
+        /opt/git/agent --> GitOperations
+    end
+
+    subgraph Linux_Server
+        sshd --> AWS_Server
+        tmux -- "Run Emacs as Editor" --> emacs
+        git_pull_via_pipe1 --> GitAgentScript
+    end
+
+    AWS_Server -- SSM_Agent --> GitAgentScript;
+#+END_SRC
+
+This Mermaid diagram visually represents the components and their interactions as described in your
+text. You can copy this code into a Mermaid live editor or integrate it into your documentation to
+visualize the network setup.

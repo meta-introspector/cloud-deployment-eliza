@@ -1,8 +1,10 @@
 
+docker
+
 `bash runlocaldocker2.sh`
 ```
 ]0;root@ip-10-0-4-156: /opt/agentroot@ip-10-0-4-156:/opt/agent# git pull
-git pull
+gcodeit pull
 remote: Enumerating objects: 4, done.
 remote: Counting objects: 100% (4/4), done.
 remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0 (from 0)
@@ -329,4 +331,76 @@ pnpm install --include=optional sharp
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
+
+
+## notes
+
+```
+cd
+cd cloud-deployment-eliza/
+python ./ssh-ssm.py
+```
+
+`asciinema rec  port_forward.cast`
+`asciinema upload  port_forward.cast`
+
+
+# diagnose ssh
+`ssh localhost -p 2222`
+`ssh -vvvvvv localhost -p 2222`
+
+# checking key
+`cat ~/id_rsa.pub `
+`cat ~/.ssh/id_rsa.pub  | pastebinit -b paste.debian.net`
+
+# missing user (defaults to current)
+`ssh -vvvvvv localhost -p 2222`
+
+# find the right user name
+`ssh ubuntu@localhost -p 2222`
+
+
+# pull and copy from server
+`git remote add agentgit git+ssh://ubuntu@localhost:2222/opt/git/agent`
+`git pull agentgit`
+`git checkout -b agentgit/feature/arm64_fastembed`
+`git push origin`
+
+
+## local git
+
+
+* tunnel to aws
+
+1. we can use this from cheaper hosting to create connections to aws, for ssm parameters.
+2. and for git
+3. allow you to share resources with agents from pc or phone
+
+```
+mkdir -p /opt/git/agent
+ git init /opt/git/agent/
+  git remote add local /opt/git/agent/.git/
+  git commit -m 'readme' -a
+  git push local
+  chown ubuntu: -R /opt/git/agent/
+  history >> hist
+```
+```
+aws ssm start-session --target i-06a744b2cf12e2356 --document-name AWS-StartPortForwardingSession  --parameters '{"portNumber": ["22"], "localPortNumber": ["2222"]}'
+```
+
+* tunnel to aws
+
+1. we can use this from cheaper hosting to create connections to aws, for ssm parameters.
+2. and for git
+3. allow you to share resources with agents from pc or phone
+
+
+```
+python ./ssh-ssm.py
+```
+```
+aws ssm start-session --target i-06a744b2cf12e2356 --document-name AWS-StartPortForwardingSession  --parameters '{"portNumber": ["22"], "localPortNumber": ["2222"]}'
+```
+
 

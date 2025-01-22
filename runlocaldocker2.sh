@@ -11,11 +11,22 @@
 # second step we debug with strace entrypoint
 # first we create a volumee
 #mount /node_modules/tokenizers/ from 767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest  into
-#"/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/"
+#"/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-token
+#convert to a copy service in docker compose
+docker run -v tokenizer:/node_modules/tokenizers/  767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest
 
+izers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/"
+
+#convert to a copy service in docker compose
 docker run -v tokenizer:/node_modules/tokenizers/  767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest 
 
 # now bind it in
-/usr/bin/docker run -p 3000:3000  -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name "agent-docker.service" --entrypoint /opt/agent/docker-entrypoint-strace2.sh 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed  
+/usr/bin/docker run -p 3000:3000  -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/e now bind it in
+/usr/bin/docker run -p 3000:3000  -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed\
+/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4oj\
+cbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/e\
+nv  --rm --name "agent-docker.service" --entrypoint /opt/agent/docker-entrypoint-strace2.sh 767503528736.dkr.ecr.us-east-2.amaz\
+onaws.com/agent/eliza:feature-arm64_fastembed
+nv  --rm --name "agent-docker.service" --entrypoint /opt/agent/docker-entrypoint-strace2.sh 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed  
 #100755 >
 

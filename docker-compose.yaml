@@ -1,65 +1,29 @@
 services:
-  tee:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    stdin_open: true
-    tty: true
+  agentstrace:
+    image: "767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed"
+    container_name: agent-docker-trace.service
+    entrypoint: /opt/agent/docker-entrypoint-strace2.sh
+    ports:
+      - "3001:3000"
     volumes:
+      - tokenizer:/app/node_modules/@anush008/tokenizers/
+      - tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008
+      - /opt/agent:/opt/agent
       - /var/run/tappd.sock:/var/run/tappd.sock
       - tee:/app/packages/client-twitter/src/tweetcache
-      # docker will copy existing files into the new volumn
       - akash-plugin-data:/app/packages/plugin-akash/src/
       - tee:/app/db.sqlite
-    environment:
-      # FIXME: passing secrets via env is not best practice, use secrets
-      OPENAI_API_KEY: "${OPENAI_API_KEY}"
-      AKASH_MNEMONIC: "${AKASH_MNEMONIC}"
-      AKASH_WALLET_ADDRESS: "${AKASH_WALLET_ADDRESS}"
-      AKASH_ENV: mainnet
-      AKASH_NET: https://raw.githubusercontent.com/ovrclk/net/master/mainnet
-      RPC_ENDPOINT: https://rpc.akashnet.net:443
-      AKASH_GAS_PRICES: 0.025uakt
-      AKASH_GAS_ADJUSTMENT: 1.5
-      AKASH_KEYRING_BACKEND: os
-      AKASH_FROM: default
-      AKASH_FEES: 20000uakt
-      AKASH_DEPOSIT: 500000uakt
-      AKASH_PRICING_API_URL: https://console-api.akash.network/v1/pricing
-      AKASH_DEFAULT_CPU: 1000
-      AKASH_DEFAULT_MEMORY: 1000000000
-      AKASH_DEFAULT_STORAGE: 1000000000
-      AKASH_CLOSE_DEP: closeAll
-      AKASH_CLOSE_DSEQ: 19729929
-      AKASH_PROVIDER_INFO: akash1ccktptfkvdc67msasmesuy5m7gpc76z75kukpz
-      AKASH_DEP_STATUS: dseq
-      AKASH_DEP_DSEQ: 19729929
-      AKASH_GAS_OPERATION: close
-      AKASH_GAS_DSEQ: 19729929
-      AKASH_MANIFEST_MODE: auto
-      AKASH_MANIFEST_VALIDATION_LEVEL: strict
-      ELEVENLABS_MODEL_ID: eleven_multilingual_v2
-      ELEVENLABS_VOICE_ID: 21m00Tcm4TlvDq8ikWAM
-      ELEVENLABS_VOICE_STABILITY: 0.5
-      ELEVENLABS_VOICE_SIMILARITY_BOOST: 0.9
-      ELEVENLABS_VOICE_STYLE: 0.66
-      ELEVENLABS_VOICE_USE_SPEAKER_BOOST: false
-      ELEVENLABS_OPTIMIZE_STREAMING_LATENCY: 4
-      ELEVENLABS_OUTPUT_FORMAT: pcm_16000
-      TWITTER_DRY_RUN: false
-      TWITTER_USERNAME:
-      TWITTER_PASSWORD:
-      TWITTER_EMAIL:
-      BIRDEYE_API_KEY:
-      SOL_ADDRESS: So11111111111111111111111111111111111111112
-      SLIPPAGE: 1
-      SOLANA_RPC_URL: https://api.mainnet-beta.solana.com
-      HELIUS_API_KEY:
-      SERVER_PORT: 3000
-      WALLET_SECRET_SALT: secret_salt
-    ports:
-      - "3000:3000"
-    restart: always
+    env_file:
+    - /var/run/agent/secrets/env
+    - /var/run/agent/secrets/settings
+    restart: unless-stopped
+
+  tokenizer:
+    image: "767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest"
+    volumes:
+    - tokenizer:/node_modules/tokenizers/
+
 volumes:
-    tee:
-    akash-plugin-data:
+  tokenizer: # npm nodemodules/tokenizer:latest
+  tee:
+  akash-plugin-data:
