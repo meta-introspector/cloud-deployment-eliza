@@ -25,17 +25,18 @@ pnpm add @elizaos/client-github
 
 The GitHub client requires the following environment variables:
 
-| Variable           | Description                        | Required |
-|-------------------|------------------------------------|----------|
-| `GITHUB_OWNER`    | Owner of the GitHub repository     | Yes      |
-| `GITHUB_REPO`     | Repository name                    | Yes      |
-| `GITHUB_BRANCH`   | Target branch (default: `main`)    | Yes      |
-| `GITHUB_PATH`     | Path to focus on within the repo   | Yes      |
-| `GITHUB_API_TOKEN`| GitHub API token for authentication| Yes      |
+| Variable           | Description                         | Required |
+| ------------------ | ----------------------------------- | -------- |
+| `GITHUB_OWNER`     | Owner of the GitHub repository      | Yes      |
+| `GITHUB_REPO`      | Repository name                     | Yes      |
+| `GITHUB_BRANCH`    | Target branch (default: `main`)     | Yes      |
+| `GITHUB_PATH`      | Path to focus on within the repo    | Yes      |
+| `GITHUB_API_TOKEN` | GitHub API token for authentication | Yes      |
 
 ## Usage
 
 ### Initialization
+
 typescript:packages/client-github/README.md
 import { GitHubClientInterface } from "@elizaos/client-github";
 // Initialize the client
@@ -47,7 +48,7 @@ const client = await GitHubClientInterface.start(runtime);
 // Convert repository files to agent memories
 await client.createMemoriesFromFiles();
 
-typescript
+typescript;
 // Convert repository files to agent memories
 await client.createMemoriesFromFiles();
 ```
@@ -61,41 +62,35 @@ await client.createPullRequest(
     [
         {
             path: "src/feature.ts",
-            content: "// New feature implementation"
-        }
+            content: "// New feature implementation",
+        },
     ],
     "Implements new functionality with tests"
 );
 
-
-typescript
+typescript;
 await client.createPullRequest(
-"Feature: Add new functionality",
-"feature/new-feature",
-[
-{
-path: "src/feature.ts",
-content: "// New feature implementation"
-}
-],
-"Implements new functionality with tests"
+    "Feature: Add new functionality",
+    "feature/new-feature",
+    [
+        {
+            path: "src/feature.ts",
+            content: "// New feature implementation",
+        },
+    ],
+    "Implements new functionality with tests"
 );
 ```
 
 ### Direct Commits
 
 ```typescript
-await client.createCommit(
-    "Update configuration",
-    [
-        {
-            path: "config.json",
-            content: JSON.stringify(config, null, 2)
-        }
-    ]
-);
-
-
+await client.createCommit("Update configuration", [
+    {
+        path: "config.json",
+        content: JSON.stringify(config, null, 2),
+    },
+]);
 ```
 
 ## API Reference

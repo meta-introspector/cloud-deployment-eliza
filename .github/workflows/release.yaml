@@ -9,15 +9,15 @@ jobs:
     release:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: meta-introspector/checkout@v4
               with:
                   fetch-depth: 0
 
-            - uses: actions/setup-node@v4
+            - uses: meta-introspector/setup-node@v4
               with:
                   node-version: 23.3.0
 
-            - uses: pnpm/action-setup@v3
+            - uses: meta-introspector/action-setup@v3
               with:
                   version: 9.15.0
 
