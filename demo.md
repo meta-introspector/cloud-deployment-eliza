@@ -88,6 +88,9 @@ aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}
 aws ssm put-parameter     --name "tine_agent_groq_key"  --value "${GROQ_API_KEY}" --type String
 ```
 
+Check key without exposing.
+grep GROQ /var/run/agent/secrets/env | cut -b1-14
+
 
 Make sure you dont put chat/completions in the url
 to overwrite :
