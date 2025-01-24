@@ -84,7 +84,10 @@ aws ssm put-parameter     --name "agent_openai_key"  --value "${OPENAI_API_KEY}"
 aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String
+
+aws ssm put-parameter     --name "tine_agent_groq_key"  --value "${GROQ_API_KEY}" --type String
 ```
+
 
 Make sure you dont put chat/completions in the url
 to overwrite :

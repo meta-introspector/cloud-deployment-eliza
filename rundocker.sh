@@ -48,8 +48,7 @@ echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
 
 GROQ_API_KEY=$(aws ssm get-parameter     --name "tine_agent_groq_key" | jq .Parameter.Value -r )
 export GROQ_API_KEY
-echo "GROQ_API_KEY=${GROQ_KEY}" >> "/var/run/agent/secrets/env"
-
+echo "GROQ_API_KEY=${GROQ_API_KEY}" >> "/var/run/agent/secrets/env"
 
 set -x
 ## TURN ON LOGGING
