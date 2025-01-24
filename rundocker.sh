@@ -39,7 +39,7 @@ echo "XAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
 
 OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" | jq .Parameter.Value -r )
 export OPENAI_API_URL
-echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
+echo "=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
 
 set -x
 ## TURN ON LOGGING

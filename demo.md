@@ -143,3 +143,21 @@ OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" |
 export OPENAI_API_URL
 echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
 set -x
+
+
+
+
+first we login and pull our changes from the localhost to the server:
+```
+aws ssm start-session --target i-06a744b2cf12e2356 
+sudo su -
+cd /opt/agent/
+/opt/agent
+git fetch --all
+git fetch --all
+From https://github.com/meta-introspector/cloud-deployment-eliza
+   af5f0b8e..8d56ff49  origin_feature/arm64_fastembed -> origin/origin_feature/arm64_fastembed
+```
+
+now we will restart the server 
+
