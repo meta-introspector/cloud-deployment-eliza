@@ -57,3 +57,30 @@ asciinema rec server.ac
 ```
 aws ssm start-session --target i-06a744b2cf12e2356 
 ```
+
+# next configure our access to llm api 
+
+We will use the free tier LLM Model
+https://build.nvidia.com/tiiuae/falcon3-7b-instruct
+
+set env variables
+```
+export LLMMODEL="tiiuae/falcon3-7b-instruct"
+export OPENAI_API_BASE='https://integrate.api.nvidia.com/v1/chat/completions'
+```
+The secret 
+```
+export OPENAI_API_KEY='i can't believe it's not butter!'
+```
+Will be set via 
+```
+source ~/projects/nvidia/api
+```
+
+Now lets put this into aws and overwrite the old key 
+```
+aws ssm put-parameter     --name "agent_openai_key"  --value "${OPENAI_API_KEY}" --type String --overwrite
+aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String
+```
