@@ -16,6 +16,6 @@
 docker run -v tokenizer:/node_modules/tokenizers/  767503528736.dkr.ecr.us-east-2.amazonaws.com/nodemodules/tokenizer:latest 
 
 # now bind it in
-/usr/bin/docker run -d -p 3000:3000  -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --env-file /var/run/agent/secrets/env  --rm --name "agent-docker.service" --entrypoint /opt/agent/docker-entrypoint-strace2.sh groq
+/usr/bin/docker run -d -p 3000:3000  -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ --env-file /var/run/agent/secrets/env  --rm --name "agent-docker.service" --entrypoint /opt/agent/docker-entrypoint-strace2.sh groq
 #100755 >
 
