@@ -2,7 +2,7 @@
   "name": "TINE-IntrospectorIsNotEliza",
     "plugins": [	"@elizaos/plugin-akash"       ],
   "clients": [],
-  "modelProvider": "openai",
+  "modelProvider": "groq",
   "settings": {
     "secrets": {},
     "voice": {

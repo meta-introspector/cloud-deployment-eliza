@@ -15,6 +15,8 @@ apt install -y lsof strace nmap
 #apt install -y emacs-nox
 # FIXME another account hardcoded
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
+
+
 adduser --disabled-password --gecos "" agent --home "/home/agent"  || echo ignore
 git config --global --add safe.directory "/opt/agent"
 cd "/opt/agent/" || exit 1 # "we need agent"
@@ -44,6 +46,11 @@ OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" |
 export OPENAI_API_URL
 echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
 
+GROQ_API_KEY=$(aws ssm get-parameter     --name "tine_agent_groq_key" | jq .Parameter.Value -r )
+export GROQ_API_KEY
+echo "GROQ_API_KEY=${GROQ_KEY}" >> "/var/run/agent/secrets/env"
+
+
 set -x
 ## TURN ON LOGGING
 
@@ -58,6 +65,8 @@ grep . -h -n /etc/systemd/system/agent-docker.service
 chown -R agent:agent /var/run/agent/
 chown -R agent:agent /opt/agent/
 systemctl daemon-reload
+#docker stop agent-docker.service || echo oops
+#docker rm agent-docker.service || echo oops
 systemctl start agent-docker || echo failed
 systemctl enable agent-docker || echo failed
 systemctl status agent-docker || echo oops2
