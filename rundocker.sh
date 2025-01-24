@@ -36,6 +36,9 @@ echo "OPENAI_API_KEY=${OPENAI_KEY}" >> "/var/run/agent/secrets/env"
 XAI_MODEL=$(aws ssm get-parameter     --name "tine_agent_openai_model" | jq .Parameter.Value -r )
 export XAI_MODEL
 echo "XAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "SMALL_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "MEDIUM_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "LARGE_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
 
 OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" | jq .Parameter.Value -r )
 export OPENAI_API_URL

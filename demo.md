@@ -160,4 +160,7 @@ From https://github.com/meta-introspector/cloud-deployment-eliza
 ```
 
 now we will restart the server 
+`bash ./rundocker.sh` is the normal bootscript
+`bash ./runlocaldocker2.sh`
+
 
