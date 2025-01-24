@@ -24,12 +24,26 @@ mkdir -p "/var/agent/logs"
 chown -R agent:agent "/var/agent/" "/home/agent" "/opt/agent"
 mkdir -p "/var/run/agent/secrets/"
 
+# we are using parameters prefixed by tine_ for multiple 
 ## TURN OFF LOGGING
 set +x
-OPENAI_KEY=$(aws ssm get-parameter     --name "agent_openai_key" | jq .Parameter.Value -r )
+OPENAI_KEY=$(aws ssm get-parameter     --name "tine_agent_openai_key" | jq .Parameter.Value -r )
 export OPENAI_KEY
 echo "OPENAI_KEY=${OPENAI_KEY}" > "/var/run/agent/secrets/env"
 echo "OPENAI_API_KEY=${OPENAI_KEY}" >> "/var/run/agent/secrets/env"
+
+# now the model name
+XAI_MODEL=$(aws ssm get-parameter     --name "tine_agent_openai_model" | jq .Parameter.Value -r )
+export XAI_MODEL
+echo "XAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "SMALL_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "MEDIUM_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+echo "LARGE_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+
+OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" | jq .Parameter.Value -r )
+export OPENAI_API_URL
+echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
+
 set -x
 ## TURN ON LOGGING
 
