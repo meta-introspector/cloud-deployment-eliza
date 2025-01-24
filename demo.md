@@ -67,7 +67,7 @@ https://build.nvidia.com/tiiuae/falcon3-7b-instruct
 set env variables
 ```
 export LLMMODEL="tiiuae/falcon3-7b-instruct"
-export OPENAI_API_BASE='https://integrate.api.nvidia.com/v1/chat/completions'
+export OPENAI_API_BASE='https://integrate.api.nvidia.com/v1/'
 ```
 The secret 
 ```
@@ -85,6 +85,10 @@ aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_
 aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String
 ```
+
+Make sure you dont put chat/completions in the url
+to overwrite :
+`aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String --overwrite`
 
 
 Now to fetch the results :
