@@ -43,8 +43,6 @@ declare -A params=(
     ["TWITTER_PASSWORD"]="${AGENT_NAME}_twitter_password"
     ["TWITTER_EMAIL"]="${AGENT_NAME}_twitter_email"
     ["TWITTER_USERNAME"]="${AGENT_NAME}_twitter_username"
-    ["VERBOSE"]="TRUE"
-    ["NODE_ENV"]="development"
 )
 
 for key in "${!params[@]}"; do
@@ -52,7 +50,17 @@ for key in "${!params[@]}"; do
     echo "$key=$value" >> "/var/run/agent/secrets/env"
 done
 
+# append these constant values to the env 
+declare -A params_const=(
+    ["VERBOSE"]="TRUE"
+    ["NODE_ENV"]="development"
+)
+for key in "${!params_const[@]}"; do
+    value= "${params[$key]}"
+    echo "$key=$value" >> "/var/run/agent/secrets/env"
+done
 
+    
 set -x
 ## TURN ON LOGGING
 
