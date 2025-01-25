@@ -1,3 +1,10 @@
+
+#
+bash ./get_secrets.sh
+
+docker kill agent-docker.service || echo skip
+docker rm --force agent-docker.service || echo skip
+
 /usr/bin/bash -c 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-2) 767503528736.dkr.ecr.us-east-2.amazonaws.com'
 
 /usr/bin/docker pull 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed
