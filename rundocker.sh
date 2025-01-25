@@ -33,6 +33,8 @@ set +x
 #fixme move to environment
 export AGENT_NAME="tine_agent"
 
+echo "" > "/var/run/agent/secrets/env" # blank the file
+
 declare -A params=(
 #  b ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
 #   ["XAI_MODEL"]="${AGENT_NAME}_openai_model"
@@ -56,7 +58,7 @@ declare -A params_const=(
     ["NODE_ENV"]="development"
 )
 for key in "${!params_const[@]}"; do
-    value="${params[$key]}"
+    value="${params_const[$key]}"
     echo "$key=$value" >> "/var/run/agent/secrets/env"
 done
 
