@@ -31,7 +31,7 @@ declare -A params_const=(
 )
 for key in "${!params_const[@]}"; do
     value="${params_const[$key]}"
-    echo "$key=$value" >> "/var/run/agent/secrets/env"
+    echo "$key=\"$value\"" >> "/var/run/agent/secrets/env"
 done
 
     
