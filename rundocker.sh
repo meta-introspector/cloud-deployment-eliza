@@ -34,7 +34,7 @@ set +x
 export AGENT_NAME="tine_agent"
 
 declare -A params=(
-#   ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
+#  b ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
 #   ["XAI_MODEL"]="${AGENT_NAME}_openai_model"
 #   ["XAI_L_MODEL"]="${AGENT_NAME}_large_openai_model"
 #   ["XAI_M_MODEL"]="${AGENT_NAME}_medium_openai_model"
@@ -43,6 +43,8 @@ declare -A params=(
     ["TWITTER_PASSWORD"]="${AGENT_NAME}_twitter_password"
     ["TWITTER_EMAIL"]="${AGENT_NAME}_twitter_email"
     ["TWITTER_USERNAME"]="${AGENT_NAME}_twitter_username"
+    ["VERBOSE"]="TRUE"
+    ["NODE_ENV"]="development"
 )
 
 for key in "${!params[@]}"; do
