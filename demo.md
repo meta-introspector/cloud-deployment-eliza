@@ -588,12 +588,6 @@ history
   385  docker commit  agent-docker.service groq
   386  git branch
   387  git pull
-  388  bash ./run_with_groq.sh
-  389  docker kill agent-docker.service
-  390  bash ./run_with_groq.sh
-  391  docker ps
-  392  docker exec -it agent-docker.service bash 
-  393  docker logs -f agent-docker.service
   394  docker ps
   395  docker exec -it agent-docker.service bash 
   396  command dirs
@@ -704,4 +698,15 @@ bash ./get_secrets.sh
 cat /var/run/agent/secrets/env
 	. /var/run/agent/secrets/env
 set | grep TWITTER  
+```
+
+```
+  docker exec -it agent-docker.service bash 
+```
+
+```
+  bash ./run_with_groq.sh
+  docker ps
+
+   docker logs -f agent-docker.service
 ```

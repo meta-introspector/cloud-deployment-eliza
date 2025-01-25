@@ -21,7 +21,7 @@ declare -A params=(
 
 for key in "${!params[@]}"; do
     value=$(aws ssm get-parameter --name "${params[$key]}" | jq .Parameter.Value -r)
-    echo "$key=\"${value}\"" >> "/var/run/agent/secrets/env"
+    echo "$key=${value}" >> "/var/run/agent/secrets/env"
 done
 
 # append these constant values to the env 
@@ -31,7 +31,7 @@ declare -A params_const=(
 )
 for key in "${!params_const[@]}"; do
     value="${params_const[$key]}"
-    echo "$key=\"$value\"" >> "/var/run/agent/secrets/env"
+    echo "$key=$value" >> "/var/run/agent/secrets/env"
 done
 
     
