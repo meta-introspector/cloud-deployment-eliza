@@ -80,11 +80,11 @@ source ~/projects/nvidia/api
 
 Now lets put this into aws and overwrite the old key 
 ```
-ssm put-parameter     --name "tine_agent_twitter_password"  --value "${TWITTER_PASSWORD}" --type String
-ssm put-parameter     --name "tine_agent_twitter_email"  --value "${TWITTER_EMAIL}" --type String
-ssm put-parameter     --name "tine_agent_twitter_username"  --value "${TWITTER_USERNAME}" --type String
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_password"  --value "${TWITTER_PASSWORD}" --type String 
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_email"  --value "${TWITTER_EMAIL}" --type String
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_username"  --value "${TWITTER_USERNAME}" --type String
 
-ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String
 
@@ -692,4 +692,16 @@ history
   492  bash ./run_with_groq.sh
 
 
+```
+
+
+for now, dont use any $ \ ? or such in your passsword
+test it like this
+
+get the secrets and make sure they can be read
+```
+bash ./get_secrets.sh
+cat /var/run/agent/secrets/env
+	. /var/run/agent/secrets/env
+set | grep TWITTER  
 ```
