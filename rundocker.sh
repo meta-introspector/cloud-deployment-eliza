@@ -29,30 +29,26 @@ mkdir -p "/var/run/agent/secrets/"
 # we are using parameters prefixed by tine_ for multiple 
 ## TURN OFF LOGGING
 set +x
-# OPENAI_KEY=$(aws ssm get-parameter     --name "tine_agent_openai_key" | jq .Parameter.Value -r )
-# export OPENAI_KEY
-# echo "OPENAI_KEY=${OPENAI_KEY}" > "/var/run/agent/secrets/env"
-# echo "OPENAI_API_KEY=${OPENAI_KEY}" >> "/var/run/agent/secrets/env"
 
-# # now the model name
-# XAI_MODEL=$(aws ssm get-parameter     --name "tine_agent_openai_model" | jq .Parameter.Value -r )
-# export XAI_MODEL
-# echo "XAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
-# echo "SMALL_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
-# echo "MEDIUM_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
-# echo "LARGE_OPENAI_MODEL=${XAI_MODEL}" >> "/var/run/agent/secrets/env"
+#fixme move to environment
+export AGENT_NAME="tine_agent"
 
-# OPENAI_API_URL=$(aws ssm get-parameter     --name "tine_agent_openai_endpoint" | jq .Parameter.Value -r )
-# export OPENAI_API_URL
-# echo "OPENAI_API_URL=${OPENAI_API_URL}" >> "/var/run/agent/secrets/env"
+declare -A params=(
+#   ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
+#   ["XAI_MODEL"]="${AGENT_NAME}_openai_model"
+#   ["XAI_L_MODEL"]="${AGENT_NAME}_large_openai_model"
+#   ["XAI_M_MODEL"]="${AGENT_NAME}_medium_openai_model"
+#   ["OPENAI_API_URL"]="${AGENT_NAME}_openai_endpoint"
+    ["GROQ_API_KEY"]="${AGENT_NAME}_groq_key"
+    ["TWITTER_PASSWORD"]="${AGENT_NAME}_twitter_password"
+    ["TWITTER_EMAIL"]="${AGENT_NAME}_twitter_email"
+    ["TWITTER_USERNAME"]="${AGENT_NAME}_twitter_username"
+)
 
-GROQ_API_KEY=$(aws ssm get-parameter     --name "tine_agent_groq_key" | jq .Parameter.Value -r )
-export GROQ_API_KEY
-echo "GROQ_API_KEY=${GROQ_API_KEY}" >> "/var/run/agent/secrets/env"
-
-echo "TWITTER_PASSWORD=${$(aws ssm get-parameter --name "tine_agent_twitter_password" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
-echo "TWITTER_EMAIL=${$(aws ssm get-parameter --name "tine_agent_twitter_email" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
-echo "TWITTER_USERNAME=${$(aws ssm get-parameter --name "tine_agent_twitter_username" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
+for key in "${!params[@]}"; do
+    value=$(aws ssm get-parameter --name "${params[$key]}" | jq .Parameter.Value -r)
+    echo "$key=$value" >> "/var/run/agent/secrets/env"
+done
 
 
 set -x
