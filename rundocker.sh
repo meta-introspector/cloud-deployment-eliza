@@ -56,7 +56,7 @@ declare -A params_const=(
     ["NODE_ENV"]="development"
 )
 for key in "${!params_const[@]}"; do
-    value= "${params[$key]}"
+    value="${params[$key]}"
     echo "$key=$value" >> "/var/run/agent/secrets/env"
 done
 
