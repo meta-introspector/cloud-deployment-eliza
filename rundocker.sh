@@ -50,6 +50,11 @@ GROQ_API_KEY=$(aws ssm get-parameter     --name "tine_agent_groq_key" | jq .Para
 export GROQ_API_KEY
 echo "GROQ_API_KEY=${GROQ_API_KEY}" >> "/var/run/agent/secrets/env"
 
+echo "TWITTER_PASSWORD=${$(aws ssm get-parameter --name "tine_agent_twitter_password" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
+echo "TWITTER_EMAIL=${$(aws ssm get-parameter --name "tine_agent_twitter_email" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
+echo "TWITTER_USERNAME=${$(aws ssm get-parameter --name "tine_agent_twitter_username" | jq .Parameter.Value -r )}" >> "/var/run/agent/secrets/env"
+
+
 set -x
 ## TURN ON LOGGING
 

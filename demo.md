@@ -80,8 +80,11 @@ source ~/projects/nvidia/api
 
 Now lets put this into aws and overwrite the old key 
 ```
-aws ssm put-parameter     --name "agent_openai_key"  --value "${OPENAI_API_KEY}" --type String --overwrite
-aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
+ssm put-parameter     --name "tine_agent_twitter_password"  --value "${TWITTER_PASSWORD}" --type String
+ssm put-parameter     --name "tine_agent_twitter_email"  --value "${TWITTER_EMAIL}" --type String
+ssm put-parameter     --name "tine_agent_twitter_username"  --value "${TWITTER_USERNAME}" --type String
+
+ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
 aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String
 
@@ -182,3 +185,13 @@ this appears not to work
 
 docker cp characters/eliza.character.json  agent-docker.service:/app/agent/characters/eliza.character.json
 docker commit  agent-docker.service groq
+
+
+# now to setup the twitter
+
+1. create file in secret  `~/.secrets/tine.twitter.env`
+2. source it ```
+source ~/.secrets/tine.twitter.env
+3. send it
+bash ./push_twitter.sh
+```
