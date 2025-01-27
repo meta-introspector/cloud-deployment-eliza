@@ -17,10 +17,15 @@ declare -A params=(
     ["TWITTER_PASSWORD"]="${AGENT_NAME}_twitter_password"
     ["TWITTER_EMAIL"]="${AGENT_NAME}_twitter_email"
     ["TWITTER_USERNAME"]="${AGENT_NAME}_twitter_username"
+    ["AGENT_IMAGE"]="${AGENT_NAME}_agent_image"
+    ["TOKENIZER_IMAGE"]="${AGENT_NAME}_tokenizer_image"
 )
 
+#systemctl set-environment enterUser=my-username
 for key in "${!params[@]}"; do
-    value=$(aws ssm get-parameter --name "${params[$key]}" | jq .Parameter.Value -r)
+    VARNAME="${params[$key]}"
+    aws ssm get-parameter --name "${VARNAME}"  > /dev/null || echo "Could not find ${VARNAME}"
+    value=$(aws ssm get-parameter --name "${VARNAME}" | jq .Parameter.Value -r)
     echo "$key=${value}" >> "/var/run/agent/secrets/env"
 done
 

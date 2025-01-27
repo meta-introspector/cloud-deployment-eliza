@@ -184,6 +184,7 @@ NOTE: the mount of /opt/agent is not working, the files are from docker
 this appears not to work
 
 docker cp characters/eliza.character.json  agent-docker.service:/app/agent/characters/eliza.character.json
+
 docker commit  agent-docker.service groq
 
 
