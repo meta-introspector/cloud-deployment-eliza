@@ -9,6 +9,11 @@ set -x
 apt update
 apt install -y strace
 
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+
+corepack enable && corepack install --global pnpm@9.8.0
+
+
 #strace -f -o /opt/agent/strace.log -s99999 node CMD ["pnpm", "start", "--characters=characters/eliza.character.json"]
 strace -f -o /opt/agent/strace.log -s99999 pnpm start --characters=characters/eliza.character.json
 #fi
