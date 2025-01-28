@@ -32,33 +32,6 @@ aws ssm start-session --target i-06a744b2cf12e2356 --document-name AWS-StartPort
 
 ```
 
-# now lets connect the agent  on what appears to be local host 9031
-```
-cd ~/eliza-starter/
-export SERVER_NAME=localhost:9301
-nvm use 23
-pnpm start 
-```
-
-```
-ssh ubuntu@localhost -p 2222
-sudo su -
-cd /opt/agent
-
-asciinema rec server.txt
-tail -f strace.log | grep -i TINE
-asciinema upload server.txt
-```
-
-Record cinema
-```
-asciinema rec server.ac
-```
-
-```
-aws ssm start-session --target i-06a744b2cf12e2356 
-```
-
 # next configure our access to llm api 
 
 We will use the free tier LLM Model
@@ -712,4 +685,31 @@ set | grep TWITTER
    docker logs -f agent-docker.service
 ```
 
+
+# now lets connect the agent  on what appears to be local host 9031
+```
+cd ~/eliza-starter/
+export SERVER_NAME=localhost:9301
+nvm use 23
+pnpm start 
+```
+
+```
+ssh ubuntu@localhost -p 2222
+sudo su -
+cd /opt/agent
+
+asciinema rec server.txt
+tail -f strace.log | grep -i TINE
+asciinema upload server.txt
+```
+
+Record cinema
+```
+asciinema rec server.ac
+```
+
+```
+aws ssm start-session --target i-06a744b2cf12e2356 
+```
 

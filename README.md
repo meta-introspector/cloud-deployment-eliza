@@ -330,3 +330,68 @@ pnpm install --include=optional sharp
 
 [![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
 
+
+
+
+## Notes
+
+```
+export AWS_REGION=us-east-1
+export AWS_DEFAULT_REGION=us-east-1
+aws ssm start-session --target i-0fe1eb04620fa49b6
+sudo su -
+cd /opt/agent/
+git branch
+* feature/systemd-parameters
+docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+apt install asciinema
+asciinema rec debug1.cast
+```
+
+cat /var/lib/cloud/instances/i-0fe1eb04620fa49b6/user-data.txt
+if [ ! -d "/opt/agent/" ]; then
+  git clone https://github.com/meta-introspector/cloud-deployment-eliza/ "/opt/agent/"
+fi
+cd "/opt/agent/" || exit 1
+git stash
+git fetch --all # get the latest version
+git checkout --track --force "origin/feature/systemd-parameters"
+bash -x /opt/agent/rundocker.sh
+
+Get our new version:
+```
+git pull
+```
+
+Better error messages:
+Could not find tine_agent_agent_image
+Could not find tine_agent_tokenizer_image
+Could not find tine_agent_twitter_email
+Could not find tine_agent_twitter_username
+Could not find tine_agent_groq_key
+Could not find tine_agent_twitter_password
+
+Now lets put this into aws and overwrite the old key
+```
+export AGENT_IMAGE=h4ckermike/arm64-tokenizers:feature-arm64
+export TOKENIZER_IMAGE=h4ckermike/elizaos-eliza:feature-arm64_fastembed
+…. All the variables mentioned.
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_password"  --value "${TWITTER_PASSWORD}" --type String                                                                  
+ aws ssm put-parameter --overwrite --name "tine_agent_twitter_email"  --value "${TWITTER_EMAIL}" --type String
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_username"  --value "${TWITTER_USERNAME}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String                                                                                   
+aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String                                                                                                                                                                                     aws ssm put-parameter     --name "tine_agent_groq_key"  --value "${GROQ_API_KEY}" --type String
+```                                                                                           
+This is in the set_secrets.sh
+
+Using docker images from docker hub will cause docker to block you eventually
+For bandwidth. You will want to host the docker images in your ECR repository  or somewhere you own for stability.
+
+ bash ./get_secrets.sh 
+ cat /var/run/agent/secrets/env 
+
+aws ssm start-session --target i-0fe1eb04620fa49b6 --region us-east-1
+
+https://github.com/jmikedupont2/ai-agent-terraform/tree/feature/codebuild
