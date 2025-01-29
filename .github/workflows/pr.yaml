@@ -10,7 +10,7 @@ jobs:
 
         steps:
             - name: Check out the repository
-              uses: actions/checkout@v3
+              uses: meta-introspector/checkout@v3
 
             - name: Validate PR title
               id: validate

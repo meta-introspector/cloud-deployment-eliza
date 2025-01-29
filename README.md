@@ -1,3 +1,185 @@
+
+`bash runlocaldocker2.sh`
+```
+]0;root@ip-10-0-4-156: /opt/agentroot@ip-10-0-4-156:/opt/agent# git pull
+git pull
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (4/4), 897 bytes | 149.00 KiB/s, done.
+From https://github.com/meta-introspector/cloud-deployment-eliza
+   fb07ce79..18347ce5  feature/arm64_fastembed -> origin/feature/arm64_fastembed
+Updating fb07ce79..18347ce5
+Fast-forward
+ notes.org          | 38 ++++++++++++++++++++++++++++++++++++++
+ runlocaldocker2.sh |  3 ++-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+]0;root@ip-10-0-4-156: /opt/agentroot@ip-10-0-4-156:/opt/agent# bash ./runlocaldocker2.sh
+bash ./runlocaldocker2.sh
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+feature-arm64_fastembed: Pulling from agent/eliza
+Digest: sha256:d13499b760ac4a41f189c779e419a10683f1ee123890458c964094662a9956fe
+Status: Image is up to date for 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed
+767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feature-arm64_fastembed
++ apt update
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8693 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [13.3 kB]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [237 kB]
+Fetched 9197 kB in 1s (7316 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+All packages are up to date.
++ apt install -y strace
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  strace
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1193 kB of archives.
+After this operation, 2514 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main arm64 strace arm64 6.1-0.1 [1193 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 1193 kB in 0s (14.4 MB/s)
+Selecting previously unselected package strace.
+(Reading database ... 11101 files and directories currently installed.)
+Preparing to unpack .../strace_6.1-0.1_arm64.deb ...
+Unpacking strace (6.1-0.1) ...
+Setting up strace (6.1-0.1) ...
++ strace -f -o /opt/agent/strace.log -s99999 pnpm start --characters=characters/eliza.character.json
+ WARN  Unsupported engine: wanted: {"node":"23.3.0"} (current: {"node":"v23.6.0","pnpm":"9.4.0"})
+
+> eliza@ start /app
+> pnpm --filter "@elizaos/agent" start --isRoot "--characters=characters/eliza.character.json"
+
+.                                        |  WARN  Unsupported engine: wanted: {"node":"23.3.0"} (current: {"node":"v23.6.0","pnpm":"9.14.4"})
+
+> @elizaos/agent@0.1.7 start /app/agent
+> node --loader ts-node/esm src/index.ts "--isRoot" "--characters=characters/eliza.character.json"
+
+(node:151) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:151) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[ElizaLogger] Initializing with:
+            isNode: true
+            verbose: false
+            VERBOSE env: undefined
+            NODE_ENV: undefined
+        
+ ℹ INFORMATIONS
+   Loading embedding settings: 
+   {"OLLAMA_EMBEDDING_MODEL":"mxbai-embed-large"} 
+
+ ℹ INFORMATIONS
+   Loading character settings: 
+   {"ARGV":["/usr/local/bin/node","/app/agent/src/index.ts","--isRoot","--characters=characters/eliza.character.json"],"CWD":"/app/agent"} 
+
+ ℹ INFORMATIONS
+   Parsed settings: 
+   {"USE_OPENAI_EMBEDDING_TYPE":"undefined","USE_OLLAMA_EMBEDDING_TYPE":"undefined","OLLAMA_EMBEDDING_MODEL":"mxbai-embed-large"} 
+
+ ℹ INFORMATIONS
+   Environment sources 
+   {"shellVars":[]} 
+
+
+┌════════════════════════════════════════┐
+│          AKASH NETWORK PLUGIN          │
+├────────────────────────────────────────┤
+│  Initializing Akash Network Plugin...  │
+│  Version: 0.1.0                        │
+└════════════════════════════════════════┘
+
+┌───────────────────────────┬───┬───┬───┬───────────────────────────────────────────────────────────┐
+│ Action                    │ H │ V │ E │ Similes                                                   │
+├───────────────────────────┼───┼───┼───┼────────────────────────────────────────────────────────────┤
+│ CREATE_DEPLOYMENT         │ ✓ │ ✓ │ ✓ │ DEPLOY, START_DEPLOYMENT, LAUNCH                             │
+│ CLOSE_DEPLOYMENT          │ ✓ │ ✓ │ ✓ │ CLOSE_AKASH_DEPLOYMENT, STOP_DEPLOYMENT, TERMINATE_DEPLOYMENT │
+│ GET_PROVIDER_INFO         │ ✓ │ ✓ │ ✓ │ CHECK_PROVIDER, PROVIDER_INFO, PROVIDER_STATUS, CHECK PROVIDER │
+│ GET_DEPLOYMENT_STATUS     │ ✓ │ ✓ │ ✓ │ CHECK_DEPLOYMENT, DEPLOYMENT_STATUS, DEPLOYMENT_STATE, CHECK DSEQ │
+│ ESTIMATE_GAS              │ ✓ │ ✓ │ ✓ │ CALCULATE_GAS, GET_GAS_ESTIMATE, CHECK_GAS                   │
+│ GET_DEPLOYMENTS           │ ✓ │ ✓ │ ✓ │ LIST_DEPLOYMENTS, FETCH_DEPLOYMENTS, SHOW_DEPLOYMENTS        │
+│ GET_GPU_PRICING           │ ✓ │ ✓ │ ✓ │ GET_PRICING, COMPARE_PRICES, CHECK_PRICING                   │
+│ GET_MANIFEST              │ ✓ │ ✓ │ ✓ │ LOAD_MANIFEST, READ_MANIFEST, PARSE_MANIFEST                 │
+│ GET_PROVIDERS_LIST        │ ✓ │ ✓ │ ✓ │ LIST_PROVIDERS, FETCH_PROVIDERS, GET_ALL_PROVIDERS           │
+└───────────────────────────┴───┴───┴───┴──────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│           Plugin Status             │
+├─────────────────────────────────────┤
+│ Name    : akash                     │
+│ Actions : 9                         │
+│ Status  : Loaded & Ready            │
+└─────────────────────────────────────┘
+
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+ ["◎ DirectClient constructor"] 
+
+ ℹ INFORMATIONS
+   Trying paths: 
+   [{"path":"characters/eliza.character.json","exists":false},{"path":"/app/agent/characters/eliza.character.json","exists":false},{"path":"/app/agent/agent/characters/eliza.character.json","exists":false},{"path":"/app/agent/src/characters/eliza.character.json","exists":false},{"path":"/app/agent/src/characters/eliza.character.json","exists":false},{"path":"/app/agent/characters/eliza.character.json","exists":false},{"path":"/app/characters/eliza.character.json","exists":true}] 
+
+ ℹ INFORMATIONS
+   Plugins are:  
+   ["@elizaos/plugin-akash"] 
+
+(node:151) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+ ["ℹ Successfully loaded character from: /app/characters/eliza.character.json"] 
+
+ ⛔ ERRORS
+   Failed to load sqlite-vec extensions: 
+   {} 
+
+ ⛔ ERRORS
+   Error starting agent for character TINE-IntrospectorIsNotEliza: 
+   {} 
+
+ ["⛔ Error: Loadble extension for sqlite-vec not found. Was the sqlite-vec-linux-arm64 package installed?"] 
+
+ ⛔ ERRORS
+   Error starting agents: 
+   {} 
+
+ ["◎ Run `pnpm start:client` to start the client and visit the outputted URL (http://localhost:5173) to chat with your agents. When running multiple agents, use client with different port `SERVER_PORT=3001 pnpm start:client`"] 
+
+ ["✓ REST API bound to 0.0.0.0:3000. If running locally, access it at http://localhost:3000."] 
+
+
+```
+
+Tetsing Building locally with 
+`docker build --platform linux/arm64 .`
+
+# debug
+
+`pnpm start:debug --characters=./characters/eliza.character.json`
+
+start direct client here 
+
+```
+git clone  https://github.com/meta-introspector/eliza-starter.git  eliza-starter
+cd eliza-starter
+git checkout   feature/opentelemetry
+pnpm start --characters=characters/eliza.character.json`
+```
+
 # Eliza 🤖
 
 <div align="center">
@@ -147,3 +329,69 @@ pnpm install --include=optional sharp
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
+
+
+
+
+## Notes
+
+```
+export AWS_REGION=us-east-1
+export AWS_DEFAULT_REGION=us-east-1
+aws ssm start-session --target i-0fe1eb04620fa49b6
+sudo su -
+cd /opt/agent/
+git branch
+* feature/systemd-parameters
+docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+apt install asciinema
+asciinema rec debug1.cast
+```
+
+cat /var/lib/cloud/instances/i-0fe1eb04620fa49b6/user-data.txt
+if [ ! -d "/opt/agent/" ]; then
+  git clone https://github.com/meta-introspector/cloud-deployment-eliza/ "/opt/agent/"
+fi
+cd "/opt/agent/" || exit 1
+git stash
+git fetch --all # get the latest version
+git checkout --track --force "origin/feature/systemd-parameters"
+bash -x /opt/agent/rundocker.sh
+
+Get our new version:
+```
+git pull
+```
+
+Better error messages:
+Could not find tine_agent_agent_image
+Could not find tine_agent_tokenizer_image
+Could not find tine_agent_twitter_email
+Could not find tine_agent_twitter_username
+Could not find tine_agent_groq_key
+Could not find tine_agent_twitter_password
+
+Now lets put this into aws and overwrite the old key
+```
+export AGENT_IMAGE=h4ckermike/arm64-tokenizers:feature-arm64
+export TOKENIZER_IMAGE=h4ckermike/elizaos-eliza:feature-arm64_fastembed
+…. All the variables mentioned.
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_password"  --value "${TWITTER_PASSWORD}" --type String                                                                  
+ aws ssm put-parameter --overwrite --name "tine_agent_twitter_email"  --value "${TWITTER_EMAIL}" --type String
+aws ssm put-parameter --overwrite --name "tine_agent_twitter_username"  --value "${TWITTER_USERNAME}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_key"  --value "${OPENAI_API_KEY}" --type String                                                                                   
+aws ssm put-parameter     --name "tine_agent_openai_endpoint"  --value "${OPENAI_API_BASE}" --type String
+aws ssm put-parameter     --name "tine_agent_openai_model"  --value "${LLMMODEL}" --type String                                                                                                                                                                                     aws ssm put-parameter     --name "tine_agent_groq_key"  --value "${GROQ_API_KEY}" --type String
+```                                                                                           
+This is in the set_secrets.sh
+
+Using docker images from docker hub will cause docker to block you eventually
+For bandwidth. You will want to host the docker images in your ECR repository  or somewhere you own for stability.
+
+ bash ./get_secrets.sh 
+ cat /var/run/agent/secrets/env 
+
+aws ssm start-session --target i-0fe1eb04620fa49b6 --region us-east-1
+
+https://github.com/jmikedupont2/ai-agent-terraform/tree/feature/codebuild

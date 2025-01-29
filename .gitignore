@@ -61,3 +61,63 @@ agent/content
 eliza.manifest
 eliza.manifest.sgx
 eliza.sig
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+# network security
+/network-security.data
+
+/docker-entrypoint-none.sh
+/packages/plugin-akash/src/.certificates/
+/eliza.sdl.yml.private
+/eliza.sdl.yml.private2
+/data/
+/.akash2.secrets
+/.docker
+/.secret.akash.sdl
+/akash.sh
+/akash_env.sh
+/ia

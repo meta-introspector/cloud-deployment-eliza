@@ -1,0 +1,80 @@
+---
+version: "2.0"
+services:
+  service-1:
+    image: h4ckermike/elizaos-eliza:akash
+    expose:
+      - port: 3000
+        as: 3000
+        to:
+          - global: true
+    command:
+      - bash
+      - "-c"
+    args:
+      - >-
+        curl
+        https://raw.githubusercontent.com/meta-introspector/cloud-deployment-eliza/refs/heads/feature/akash_docker/akash_boot.sh
+        | bash
+    params:
+      storage:
+        akash-data:
+          mount: /app/packages/plugin-akash/src/
+          readOnly: false
+    env:
+      - >-
+        OPENAI_API_KEY=FIXME
+      - >-
+        AKASH_MNEMONIC=FIXME
+      - AKASH_WALLET_ADDRESS=FIXME
+      - AKASH_ENV=mainnet
+      - AKASH_NET=https://raw.githubusercontent.com/ovrclk/net/master/mainnet
+      - RPC_ENDPOINT=https://rpc.akashnet.net:443
+      - AKASH_GAS_PRICES=0.025uakt
+      -	AKASH_GAS_ADJUSTMENT=1.5
+      - AKASH_KEYRING_BACKEND=os
+      - AKASH_FROM=default
+      - AKASH_FEES=20000uakt
+      - AKASH_DEPOSIT=500000uakt
+      - AKASH_PRICING_API_URL=https://console-api.akash.network/v1/pricing
+      - AKASH_DEFAULT_CPU=1000
+      - AKASH_DEFAULT_MEMORY=1000000000
+      - AKASH_DEFAULT_STORAGE=1000000000
+      - AKASH_CLOSE_DEP=closeAll
+      - AKASH_CLOSE_DSEQ=19729929
+      - AKASH_PROVIDER_INFO=akash1ccktptfkvdc67msasmesuy5m7gpc76z75kukpz
+      - AKASH_DEP_STATUS=dseq
+      - AKASH_DEP_DSEQ=19729929
+      - AKASH_GAS_OPERATION=close
+      - AKASH_GAS_DSEQ=19729929
+      - AKASH_MANIFEST_MODE=auto
+      - AKASH_MANIFEST_VALIDATION_LEVEL=strict
+      - AKASH_MANIFEST_PATH=
+
+profiles:
+  compute:
+    service-1:
+      resources:
+        cpu:
+          units: 2
+        memory:
+          size: 2048Mi
+        storage:
+          - size: 30Gi
+          - name: akash-data
+            size: 100Gi
+            attributes:
+              persistent: true
+              class: beta2
+
+  placement:
+    dcloud:
+      pricing:
+        service-1:
+          denom: uakt
+          amount: 10000
+deployment:
+  service-1:
+    dcloud:
+      profile: service-1
+      count: 1
