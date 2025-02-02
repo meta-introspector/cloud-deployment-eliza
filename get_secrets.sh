@@ -2,8 +2,7 @@
 ## TURN OFF LOGGING
 set +x
 
-#fixme move to environment
-export AGENT_NAME="tine_agent"
+#this script expects AGENT_NAME to be set to something like "tine_agent"
 
 echo "" > "/var/run/agent/secrets/env" # blank the file
 
