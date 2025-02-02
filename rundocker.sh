@@ -3,20 +3,26 @@
 # this is the install script 
 #  install_script = "/opt/agent/rundocker.sh"
 # called on boot.
-pwd
-ls -latr
-. ./.env # for secrets
+echo using "${AGENT_NAME}" as agent name base for keys
+export AGENT_NAME 
+#pwd
+#ls -latr
+#. ./.env # for secrets
 set -e # stop  on any error
 export WORKSOURCE="/opt/agent"
+
+echo for now install helper tools
 snap install aws-cli --classic
 apt install -y jq
-echo for now install helper tools
 apt install -y lsof strace nmap
 #apt install -y emacs-nox
-# FIXME another account hardcoded
-#aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
 
-adduser --disabled-password --gecos "" agent --home "/home/agent"  || echo ignore
+if ! id -u agent > /dev/null 2>&1; then
+    adduser --disabled-password --gecos "" agent --home "/home/agent"  || echo ignore
+else
+  echo "User agent already exists, ignoring..."
+fi
+
 git config --global --add safe.directory "/opt/agent"
 cd "/opt/agent/" || exit 1 # "we need agent"
 #git log -1 
