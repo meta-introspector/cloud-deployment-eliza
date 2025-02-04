@@ -1,18 +1,31 @@
-# Eliza 🤖
+# TINE- The Introspector is not Eliza 🤖
 
-<div align="center">
-  <img src="./docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
-</div>
+Nix Branch
 
-<div align="center">
+Goal :
 
-📑 [Technical Report](https://arxiv.org/pdf/2501.06781) |  📖 [Documentation](https://elizaos.github.io/eliza/) | 🎯 [Examples](https://github.com/thejoven/awesome-eliza)
+```MikeSpeek
+npm -> nix -> guix -> individual docker images from npm sources 
+for any packages not building on arm64 native :
 
-</div>
+npm packages -> find -> git sources/submodules -> fork and patch -> create individual docker images
+```
 
-## 🌍 README Translations
+1. **Start with npm packages**: Begin by identifying the npm packages that need to be built for arm64 architecture.
+2. **Find Git sources/submodules**: Locate the Git repositories or submodules associated with these npm packages.
+3. **Fork and patch**: Fork the Git repositories and apply patches as necessary to make them compatible with arm64 architecture.
+4. **Create individual Docker images**: Build individual Docker images for each patched package using the `nix` or `guix` package managers, which can handle the build process for arm64 architecture.
 
-[中文说明](i18n/readme/README_CN.md) | [日本語の説明](i18n/readme/README_JA.md) | [한국어 설명](i18n/readme/README_KOR.md) | [Persian](i18n/readme/README_FA.md) | [Français](i18n/readme/README_FR.md) | [Português](i18n/readme/README_PTBR.md) | [Türkçe](i18n/readme/README_TR.md) | [Русский](i18n/readme/README_RU.md) | [Español](i18n/readme/README_ES.md) | [Italiano](i18n/readme/README_IT.md) | [ไทย](i18n/readme/README_TH.md) | [Deutsch](i18n/readme/README_DE.md) | [Tiếng Việt](i18n/readme/README_VI.md) | [עִברִית](i18n/readme/README_HE.md) | [Tagalog](i18n/readme/README_TG.md) | [Polski](i18n/readme/README_PL.md) | [Arabic](i18n/readme/README_AR.md) | [Hungarian](i18n/readme/README_HU.md) | [Srpski](i18n/readme/README_RS.md) | [Română](i18n/readme/README_RO.md) | [Nederlands](i18n/readme/README_NL.md) | [Ελληνικά](i18n/readme/README_GR.md)
+See https://github.com/svanderburg/node2nix
+
+Steps
+```
+  git checkout main_develop
+  pnpm install -g node2nix
+  rm -rf node_modules/
+  node2nix
+```
+
 
 ## 🚩 Overview
 
