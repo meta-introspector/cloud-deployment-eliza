@@ -1,5 +1,5 @@
 {
-  description = "Eliza TypeScript Project Flake";
+  description = "Tine The Introspector is not Eliza TypeScript Project Flake";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -15,13 +15,14 @@
         devShell = pkgs.mkShell {
           # Shell environment setup for development
           buildInputs = [
-            pkgs.nodejs
+            pkgs.nodejs-23_x
+	          pkgs.nodePackages.pnpm
             pkgs.nodePackages.typescript
           ];
 
           # Optional: Set some environment variables if needed
           shellHook = ''
-            PS1="[node-nix]: "
+            PS1="[tine-node-nix]: "
 
             echo "Welcome to the Node.js TypeScript development shell!"
           '';
@@ -29,7 +30,7 @@
 
         # Build process: You can customize this if you have specific build steps
         packages.default = pkgs.stdenv.mkDerivation {
-          pname = "node-nix";
+          pname = "tine";
           version = "1.0.0";
 
           # Use the project directory (might be good to limit this to just source at some point)
@@ -48,8 +49,8 @@
             mkdir -p tmp-npm
             HOME=tmp-npm
 
-            npm install
-            npm run build
+            pnpm install
+            pnpm run build
           '';
 
           # Out the things we need to the output
@@ -70,7 +71,7 @@
           # Fixed output derivation. Means we can do impure things like access the internet (for NPM to work) as long as we lock down the output hash
           outputHashAlgo = "sha256";
           outputHashMode = "recursive";
-          outputHash = "sha256-Zah7U1zkOQdeIduKrWN3/Yryxa4wS+MK20FQIgUvjSA=";
+	  #          outputHash = "sha256-Zah7U1zkOQdeIduKrWN3/Yryxa4wS+MK20FQIgUvjSA=";
         };
       });
 }
