@@ -49,17 +49,13 @@
             # Need for NPM to work
             mkdir -p tmp-npm
             HOME=tmp-npm
-
-            pnpm install
-            pnpm run build
           '';
 
           # Out the things we need to the output
           installPhase = ''
             mkdir -p            $out/lib/
-            cp -r out           $out/lib/
             cp    package.json  $out/lib/
-            cp -r node_modules  $out/lib/
+
           '';
 
           # Set metadata
