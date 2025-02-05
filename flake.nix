@@ -40,6 +40,7 @@
           buildInputs = [
             pkgs.nodejs
             pkgs.nodePackages.typescript
+            pkgs.nodePackages.pnpm
             pkgs.cacert
           ];
 
