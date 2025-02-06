@@ -58,13 +58,13 @@ let
         sha512 = "YHK2rpj++wnLVc9vPGzGFP3Pjeld2MwhKinetA0zKXOoHAT/Jit5O8kZsxcSlJPu9wvcGT1UGZEjZrtO7PfFOQ==";
       };
     };
-    "@apollo/client-3.12.9" = {
+    "@apollo/client-3.12.10" = {
       name = "_at_apollo_slash_client";
       packageName = "@apollo/client";
-      version = "3.12.9";
+      version = "3.12.10";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@apollo/client/-/client-3.12.9.tgz";
-        sha512 = "rH2Vzfbp+IR0l/xAjUIbDH4/sqBzPATMbzXv/L36E33yhp40yM5LFJnC6cc4YDPUH2gom7Dk4BrYZVLbFpYTsA==";
+        url = "https://registry.npmjs.org/@apollo/client/-/client-3.12.10.tgz";
+        sha512 = "XVNOBLkU3mC/tmDSJhZ2lv0sgq8ahHTLtjMeCclcsRinXfUfV8neZQ+OAkE0Mkd0uYsaRjijN51xu0ok39mqbA==";
       };
     };
     "@coinbase/coinbase-sdk-0.10.0" = {
@@ -2488,13 +2488,13 @@ let
         sha512 = "b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==";
       };
     };
-    "viem-2.22.21" = {
+    "viem-2.22.22" = {
       name = "viem";
       packageName = "viem";
-      version = "2.22.21";
+      version = "2.22.22";
       src = fetchurl {
-        url = "https://registry.npmjs.org/viem/-/viem-2.22.21.tgz";
-        sha512 = "CujapStF+F3VP+bKBQOGFk5YHyJKZOY2TGvD1e04CAm8VrtLo3sfTydYW2Rri6LMktqp6ilGB9GvSiZczxvOBQ==";
+        url = "https://registry.npmjs.org/viem/-/viem-2.22.22.tgz";
+        sha512 = "0z7EFheP+paC/KRlVpu7zXYiqkTX6GR86G0p84LnYr5NgaVxGz0mGsiERy41ThERX1ahkTdEWGGiNgfi6wVqBQ==";
       };
     };
     "webidl-conversions-3.0.1" = {
@@ -2605,6 +2605,15 @@ let
         sha512 = "QZWQekv6iB72Naeake9hS1KxHlotfRpe+WGNbNx5/ta+R3DNjVO2bswf63gXlWDcs+EMd7XY8HfVQyP1X6T4Zg==";
       };
     };
+    "zod-3.24.1" = {
+      name = "zod";
+      packageName = "zod";
+      version = "3.24.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/zod/-/zod-3.24.1.tgz";
+        sha512 = "muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==";
+      };
+    };
   };
   args = {
     name = "eliza";
@@ -2622,7 +2631,7 @@ let
       sources."@adraffy/ens-normalize-1.11.0"
       sources."@ai-sdk/provider-0.0.26"
       sources."@ai-sdk/provider-utils-1.0.22"
-      sources."@apollo/client-3.12.9"
+      sources."@apollo/client-3.12.10"
       (sources."@coinbase/coinbase-sdk-0.10.0" // {
         dependencies = [
           sources."axios-1.7.9"
@@ -2978,7 +2987,7 @@ let
       sources."utf-8-validate-5.0.10"
       sources."util-deprecate-1.0.2"
       sources."uuid-9.0.1"
-      sources."viem-2.22.21"
+      sources."viem-2.22.22"
       sources."webidl-conversions-3.0.1"
       sources."websocket-1.0.35"
       sources."whatwg-url-5.0.0"
@@ -2993,6 +3002,7 @@ let
       sources."yaeti-0.0.6"
       sources."zen-observable-0.8.15"
       sources."zen-observable-ts-1.2.5"
+      sources."zod-3.24.1"
     ];
     buildInputs = globalBuildInputs;
     meta = {
