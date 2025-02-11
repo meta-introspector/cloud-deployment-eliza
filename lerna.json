@@ -1,17 +1,18 @@
 {
-  "version": "1.0.0-alpha.35",
-  "packages": [
-    "packages/*"
-  ],
-  "npmClient": "bun",
-  "command": {
-    "publish": {
-      "workspaceConfig": true,
-      "ignoreChanges": [
-        "packages/docs",
-        "packages/client",
-        "packages/autodoc"
-      ]
+    "version": "0.25.9",
+    "packages": [
+        "packages/*",
+        "docs",
+        "agent",
+        "client",
+        "!packages/_examples"
+    ],
+    "npmClient": "pnpm",
+    "command": {
+        "publish": {
+            "registry": "https://registry.npmjs.org/",
+            "access": "public",
+            "allowBranch": "main"
+        }
     }
-  }
 }

@@ -14,34 +14,42 @@ Before getting started with Eliza, ensure you have:
 - A code editor ([VS Code](https://code.visualstudio.com/), [Cursor](https://cursor.com/) or [VSCodium](https://vscodium.com) recommended)
 - [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) (optional, for GPU acceleration)
 
-## Installation
+---
 
-Clone the repository
+## Automated Installation
+
+Using https://github.com/elizaOS/eliza-starter
+
+```bash
+git clone https://github.com/elizaos/eliza-starter.git
+cd eliza-starter
+cp .env.example .env
+pnpm i && pnpm build && pnpm start
+```
+
+## Manual Installation
+
+After installing the prerequisites, clone the repository and enter the directory
 
 ```bash
 git clone https://github.com/elizaOS/eliza.git
-```
-
-Enter directory
-
-```bash
 cd eliza
 ```
 
-Switch to latest [stable version tag](https://github.com/elizaOS/eliza/tags)
+Switch to the latest [stable version tag](https://github.com/elizaOS/eliza/tags)
+This project moves quick, checkout the latest release known to work:
 
 ```bash
-# This project moves quickly, check out the latest release known to work
 git checkout $(git describe --tags --abbrev=0)
 ```
 
-Install dependencies
+Install the dependencies
 
 ```bash
 bun install
 ```
 
-**Note:** Please only use the `--no-frozen-lockfile` option when you're initially instantiating the repo or are bumping the version of a package or adding a new package to your package.json. This practice helps maintain consistency in your project's dependencies and prevents unintended changes to the lockfile.
+> **Note:** Please only use the `--no-frozen-lockfile` option when you're initially instantiating the repo or are bumping the version of a package or adding a new package to your package.json. This practice helps maintain consistency in your project's dependencies and prevents unintended changes to the lockfile.
 
 Build the local libraries
 
@@ -49,7 +57,9 @@ Build the local libraries
 bun run build
 ```
 
-## **Configure Environment**
+---
+
+## Configure Environment
 
 Copy example environment file
 
@@ -86,8 +96,6 @@ Eliza supports multiple AI models and you set which model to use inside the char
 - **Grok**: Set `XAI_MODEL=grok-beta`
 - **OpenAI**: Set `XAI_MODEL=gpt-4o-mini` or `gpt-4o`
 - **Livepeer**: Set `SMALL_LIVEPEER_MODEL`,`MEDIUM_LIVEPEER_MODEL`,`LARGE_LIVEPEER_MODEL` and `IMAGE_LIVEPEER_MODEL` to your desired models listed [here](https://livepeer-eliza.com/).
-
-## Local inference
 
 ### For llama_local inference:
 
@@ -275,6 +283,14 @@ NODE_MODULE_VERSION 131. This version of Node.js requires
 NODE_MODULE_VERSION 127. Please try re-compiling or re-installing
 ```
 
+or 
+
+```
+Error: Could not locate the bindings file. Tried:
+.../better_sqlite3.node
+...
+```
+
 You can try this, which will attempt to rebuild better-sqlite3.
 
 ```bash
@@ -293,6 +309,44 @@ Then reinstall the requirements
 bun i
 ```
 
+You can also add a postinstall script in your `package.json` if you want to automate this:
+```json
+scripts: {
+    "postinstall": "npm rebuild better-sqlite3"
+}
+```
+
+---
+
+## FAQ
+
+### Which Node.js version should I use?
+Use Node.js v23.3.0 with pnpm v9.x for optimal compatibility.
+
+### How do I run multiple agents?
+Create separate projects with unique character files and run in separate terminals, or use `pnpm start --characters="characters/agent1.json,characters/agent2.json"`.
+
+### How do I install and set up ElizaOS?
+Clone the repository, run `pnpm install --no-frozen-lockfile`, then `pnpm build`. Requires Node.js version 23.3.0.
+
+### What's the difference between eliza and eliza-starter?
+Eliza-starter is a lightweight version for simpler setups, while the main eliza repository includes all advanced features and plugins.
+
+### How do I fix build/installation issues?
+Use Node v23.3.0, run `pnpm clean`, then `pnpm install --no-frozen-lockfile`, followed by `pnpm build`. If issues persist, checkout the latest stable tag.
+
+### What are the minimum system requirements?
+8GB RAM recommended for build process. For deployment, a t2.large instance on AWS with 20GB storage running Ubuntu is the minimum tested configuration.
+
+### Which Node.js version should I use?
+Use Node.js version 23+ (specifically 23.3.0 is recommended). You can use nvm to manage Node versions with `nvm install 23` and `nvm use 23`.
+
+### How do I fix "Exit Status 1" errors?
+If you see `triggerUncaughtException` errors, try:
+1. Add dependencies to workspace root
+2. Add dependencies to specific packages
+3. Clean and rebuild
+
 ## Next Steps
 
 Once you have your agent running, explore:
@@ -301,7 +355,5 @@ Once you have your agent running, explore:
 2. 📝 [Create Custom Characters](./core/characterfile.md)
 3. ⚡ [Add Custom Actions](./core/actions.md)
 4. 🔧 [Advanced Configuration](./guides/configuration.md)
-
-For detailed API documentation, troubleshooting, and advanced features, check out our [full documentation](https://elizaos.github.io/eliza/).
 
 Join our [Discord community](https://discord.gg/ai16z) for support and updates!

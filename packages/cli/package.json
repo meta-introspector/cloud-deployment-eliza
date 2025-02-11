@@ -1,73 +1,18 @@
 {
-	"name": "@elizaos/cli",
-	"version": "1.0.0-alpha.35",
-	"description": "elizaOS CLI - Manage your AI agents and plugins",
-	"publishConfig": {
-		"access": "public"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "elizaOS",
-		"url": "https://twitter.com/eliza_OS"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/elizaOS/eliza.git",
-		"directory": "packages/cli"
-	},
-	"files": [
-		"dist",
-		"templates"
-	],
-	"keywords": [],
-	"type": "module",
-	"exports": {
-		".": "./dist/index.js",
-		"./package.json": "./package.json"
-	},
-	"bin": {
-		"elizaos": "./dist/index.js"
-	},
-	"scripts": {
-		"cli": "bun run build && node dist/index.js",
-		"build": "tsup && bun run src/scripts/copy-client-dist.ts && bun run src/scripts/copy-to-create-eliza.ts && bun run src/scripts/copy-templates.ts",
-		"test:dev": "REGISTRY_URL=http://localhost:3333 vitest run",
-		"lint": "biome check ./src --config-path=./ --apply-unsafe && biome format ./ --config-path=./ --write",
-		"clean": "rm -rf dist .turbo node_modules .turbo-tsconfig.json tsconfig.tsbuildinfo"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.22.1",
-		"@babel/parser": "^7.22.6",
-		"@elizaos/core": "workspace:*",
-		"@elizaos/plugin-anthropic": "workspace:*",
-		"@elizaos/plugin-openai": "workspace:*",
-		"@elizaos/plugin-sql": "workspace:*",
-		"@types/babel__core": "^7.20.1",
-		"@types/diff": "^5.0.3",
-		"@types/fs-extra": "^11.0.1",
-		"@types/lodash": "^4.17.7",
-		"@types/prompts": "^2.4.2",
-		"axios": "^1.7.9",
-		"commander": "^10.0.0",
-		"diff": "^5.1.0",
-		"dotenv": "^16.4.5",
-		"execa": "^7.0.0",
-		"fs-extra": "^11.1.0",
-		"glob": "^11.0.0",
-		"https-proxy-agent": "^6.2.0",
-		"prompts": "^2.4.2",
-		"recast": "^0.23.2",
-		"rimraf": "6.0.1",
-		"tsconfig-paths": "^4.2.0",
-		"tsup": "8.4.0",
-		"tsx": "^4.19.2",
-		"type-fest": "^3.8.0",
-		"typescript": "5.8.2",
-		"yoctocolors": "^2.1.1",
-		"zod": "^3.20.2"
-	},
-	"gitHead": "dc32785668d1663c0e7fb81909b4b9961db6e6de",
-	"dependencies": {
-		"@electric-sql/pglite": "^0.2.17"
-	}
+    "name": "cli",
+    "version": "0.25.9",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "elizaos": "index.js"
+    },
+    "author": "Odilitime",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "axios": "^1.8.1",
+        "commander": "^13.1.0"
+    }
 }

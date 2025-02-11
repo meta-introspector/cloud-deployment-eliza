@@ -1,13 +1,11 @@
-import logger from "./logger";
-import {
-	type IAgentRuntime,
-	type IMemoryManager,
-	type Memory,
-	type MemoryMetadata,
-	MemoryType,
-	ModelTypes,
-	type UUID,
-} from "./types";
+import { embed, getEmbeddingZeroVector } from "./embedding.ts";
+import elizaLogger from "./logger.ts";
+import type {
+    IAgentRuntime,
+    IMemoryManager,
+    Memory,
+    UUID,
+} from "./types.ts";
 
 const defaultMatchThreshold = 0.1;
 const defaultMatchCount = 10;
@@ -15,304 +13,236 @@ const defaultMatchCount = 10;
 /**
  * Manage memories in the database.
  */
-/**
- * The AgentRuntime instance associated with this manager.
- */
 export class MemoryManager implements IMemoryManager {
-	/**
-	 * The AgentRuntime instance associated with this manager.
-	 */
-	runtime: IAgentRuntime;
+    /**
+     * The AgentRuntime instance associated with this manager.
+     */
+    runtime: IAgentRuntime;
 
-	/**
-	 * The name of the database table this manager operates on.
-	 */
-	tableName: string;
+    /**
+     * The name of the database table this manager operates on.
+     */
+    tableName: string;
 
-	/**
-	 * Constructs a new MemoryManager instance.
-	 * @param opts Options for the manager.
-	 * @param opts.tableName The name of the table this manager will operate on.
-	 * @param opts.runtime The AgentRuntime instance associated with this manager.
-	 */
-	constructor(opts: { tableName: string; runtime: IAgentRuntime }) {
-		this.runtime = opts.runtime;
-		this.tableName = opts.tableName;
-	}
+    /**
+     * Constructs a new MemoryManager instance.
+     * @param opts Options for the manager.
+     * @param opts.tableName The name of the table this manager will operate on.
+     * @param opts.runtime The AgentRuntime instance associated with this manager.
+     */
+    constructor(opts: { tableName: string; runtime: IAgentRuntime }) {
+        this.runtime = opts.runtime;
+        this.tableName = opts.tableName;
+    }
 
-	private validateMetadata(metadata: MemoryMetadata): void {
-		// Check type first before any other validation
-		if (!metadata.type) {
-			throw new Error("Metadata type is required");
-		}
+    /**
+     * Adds an embedding vector to a memory object. If the memory already has an embedding, it is returned as is.
+     * @param memory The memory object to add an embedding to.
+     * @returns A Promise resolving to the memory object, potentially updated with an embedding vector.
+     */
+    /**
+     * Adds an embedding vector to a memory object if one doesn't already exist.
+     * The embedding is generated from the memory's text content using the runtime's
+     * embedding model. If the memory has no text content, an error is thrown.
+     *
+     * @param memory The memory object to add an embedding to
+     * @returns The memory object with an embedding vector added
+     * @throws Error if the memory content is empty
+     */
+    async addEmbeddingToMemory(memory: Memory): Promise<Memory> {
+        // Return early if embedding already exists
+        if (memory.embedding) {
+            return memory;
+        }
 
-		// Then validate other fields
-		if (metadata.source && typeof metadata.source !== "string") {
-			throw new Error("Metadata source must be a string");
-		}
+        const memoryText = memory.content.text;
 
-		if (metadata.sourceId && typeof metadata.sourceId !== "string") {
-			throw new Error("Metadata sourceId must be a UUID string");
-		}
+        // Validate memory has text content
+        if (!memoryText) {
+            throw new Error(
+                "Cannot generate embedding: Memory content is empty"
+            );
+        }
 
-		if (
-			metadata.scope &&
-			!["shared", "private", "room"].includes(metadata.scope)
-		) {
-			throw new Error('Metadata scope must be "shared", "private", or "room"');
-		}
+        try {
+            // Generate embedding from text content
+            memory.embedding = await embed(this.runtime, memoryText);
+        } catch (error) {
+            elizaLogger.error("Failed to generate embedding:", error);
+            // Fallback to zero vector if embedding fails
+            memory.embedding = getEmbeddingZeroVector().slice();
+        }
 
-		if (metadata.tags && !Array.isArray(metadata.tags)) {
-			throw new Error("Metadata tags must be an array of strings");
-		}
-	}
+        return memory;
+    }
 
-	/**
-	 * Adds an embedding vector to a memory object. If the memory already has an embedding, it is returned as is.
-	 * @param memory The memory object to add an embedding to.
-	 * @returns A Promise resolving to the memory object, potentially updated with an embedding vector.
-	 */
-	/**
-	 * Adds an embedding vector to a memory object if one doesn't already exist.
-	 * The embedding is generated from the memory's text content using the runtime's
-	 * embedding model. If the memory has no text content, an error is thrown.
-	 *
-	 * @param memory The memory object to add an embedding to
-	 * @returns The memory object with an embedding vector added
-	 * @throws Error if the memory content is empty
-	 */
-	async addEmbeddingToMemory(memory: Memory): Promise<Memory> {
-		// Return early if embedding already exists
-		if (memory.embedding) {
-			return memory;
-		}
+    /**
+     * Retrieves a list of memories by user IDs, with optional deduplication.
+     * @param opts Options including user IDs, count, and uniqueness.
+     * @param opts.roomId The room ID to retrieve memories for.
+     * @param opts.count The number of memories to retrieve.
+     * @param opts.unique Whether to retrieve unique memories only.
+     * @returns A Promise resolving to an array of Memory objects.
+     */
+    async getMemories({
+        roomId,
+        count = 10,
+        unique = true,
+        start,
+        end,
+    }: {
+        roomId: UUID;
+        count?: number;
+        unique?: boolean;
+        start?: number;
+        end?: number;
+    }): Promise<Memory[]> {
+        return await this.runtime.databaseAdapter.getMemories({
+            roomId,
+            count,
+            unique,
+            tableName: this.tableName,
+            agentId: this.runtime.agentId,
+            start,
+            end,
+        });
+    }
 
-		const memoryText = memory.content.text;
+    async getCachedEmbeddings(content: string): Promise<
+        {
+            embedding: number[];
+            levenshtein_score: number;
+        }[]
+    > {
+        return await this.runtime.databaseAdapter.getCachedEmbeddings({
+            query_table_name: this.tableName,
+            query_threshold: 2,
+            query_input: content,
+            query_field_name: "content",
+            query_field_sub_name: "text",
+            query_match_count: 10,
+        });
+    }
 
-		// Validate memory has text content
-		if (!memoryText) {
-			throw new Error("Cannot generate embedding: Memory content is empty");
-		}
+    /**
+     * Searches for memories similar to a given embedding vector.
+     * @param embedding The embedding vector to search with.
+     * @param opts Options including match threshold, count, user IDs, and uniqueness.
+     * @param opts.match_threshold The similarity threshold for matching memories.
+     * @param opts.count The maximum number of memories to retrieve.
+     * @param opts.roomId The room ID to retrieve memories for.
+     * @param opts.unique Whether to retrieve unique memories only.
+     * @returns A Promise resolving to an array of Memory objects that match the embedding.
+     */
+    async searchMemoriesByEmbedding(
+        embedding: number[],
+        opts: {
+            match_threshold?: number;
+            count?: number;
+            roomId: UUID;
+            unique?: boolean;
+        }
+    ): Promise<Memory[]> {
+        const {
+            match_threshold = defaultMatchThreshold,
+            count = defaultMatchCount,
+            roomId,
+            unique,
+        } = opts;
 
-		try {
-			// Generate embedding from text content
-			memory.embedding = await this.runtime.useModel(
-				ModelTypes.TEXT_EMBEDDING,
-				{
-					text: memoryText,
-				},
-			);
-		} catch (error) {
-			logger.error("Failed to generate embedding:", error);
-			// Fallback to zero vector if embedding fails
-			memory.embedding = await this.runtime.useModel(
-				ModelTypes.TEXT_EMBEDDING,
-				null,
-			);
-		}
+        const result = await this.runtime.databaseAdapter.searchMemories({
+            tableName: this.tableName,
+            roomId,
+            agentId: this.runtime.agentId,
+            embedding: embedding,
+            match_threshold: match_threshold,
+            match_count: count,
+            unique: !!unique,
+        });
 
-		return memory;
-	}
+        return result;
+    }
 
-	/**
-	 * Retrieves a list of memories by user IDs, with optional deduplication.
-	 * @param opts Options including user IDs, count, and uniqueness.
-	 * @param opts.roomId The room ID to retrieve memories for.
-	 * @param opts.count The number of memories to retrieve.
-	 * @param opts.unique Whether to retrieve unique memories only.
-	 * @returns A Promise resolving to an array of Memory objects.
-	 */
-	async getMemories(opts: {
-		roomId: UUID;
-		count?: number;
-		unique?: boolean;
-		start?: number;
-		end?: number;
-		agentId?: UUID;
-	}): Promise<Memory[]> {
-		return await this.runtime.getMemories({
-			roomId: opts.roomId,
-			count: opts.count,
-			unique: opts.unique,
-			tableName: this.tableName,
-			start: opts.start,
-			end: opts.end,
-		});
-	}
+    /**
+     * Creates a new memory in the database, with an option to check for similarity before insertion.
+     * @param memory The memory object to create.
+     * @param unique Whether to check for similarity before insertion.
+     * @returns A Promise that resolves when the operation completes.
+     */
+    async createMemory(memory: Memory, unique = false): Promise<void> {
+        // TODO: check memory.agentId == this.runtime.agentId
 
-	async getCachedEmbeddings(content: string): Promise<
-		{
-			embedding: number[];
-			levenshtein_score: number;
-		}[]
-	> {
-		return await this.runtime.getCachedEmbeddings({
-			query_table_name: this.tableName,
-			query_threshold: 2,
-			query_input: content,
-			query_field_name: "content",
-			query_field_sub_name: "text",
-			query_match_count: 10,
-		});
-	}
+        const existingMessage =
+            await this.runtime.databaseAdapter.getMemoryById(memory.id);
 
-	/**
-	 * Searches for memories similar to a given embedding vector.
-	 * @param opts Options for the memory search
-	 * @param opts.match_threshold The similarity threshold for matching memories.
-	 * @param opts.count The maximum number of memories to retrieve.
-	 * @param opts.roomId The room ID to retrieve memories for.
-	 * @param opts.agentId The agent ID to retrieve memories for.
-	 * @param opts.unique Whether to retrieve unique memories only.
-	 * @returns A Promise resolving to an array of Memory objects that match the embedding.
-	 */
-	async searchMemories(opts: {
-		embedding: number[];
-		match_threshold?: number;
-		count?: number;
-		roomId: UUID;
-		agentId?: UUID;
-		unique?: boolean;
-	}): Promise<Memory[]> {
-		const {
-			match_threshold = defaultMatchThreshold,
-			embedding,
-			count = defaultMatchCount,
-			roomId,
-			agentId,
-			unique = true,
-		} = opts;
+        if (existingMessage) {
+            elizaLogger.debug("Memory already exists, skipping");
+            return;
+        }
 
-		return await this.runtime.searchMemories({
-			tableName: this.tableName,
-			roomId,
-			embedding,
-			match_threshold,
-			count,
-			unique,
-		});
-	}
+        elizaLogger.log("Creating Memory", memory.id, memory.content.text);
 
-	/**
-	 * Creates a new memory in the database, with an option to check for similarity before insertion.
-	 * @param memory The memory object to create.
-	 * @param unique Whether to check for similarity before insertion.
-	 * @returns A Promise that resolves when the operation completes.
-	 */
-	async createMemory(memory: Memory, unique = false): Promise<UUID> {
-		if (memory.metadata) {
-			this.validateMetadata(memory.metadata); // This will check type first
-			this.validateMetadataRequirements(memory.metadata);
-		}
-		const existingMessage = await this.runtime
-			
-			.getMemoryById(memory.id);
+        await this.runtime.databaseAdapter.createMemory(
+            memory,
+            this.tableName,
+            unique
+        );
+    }
 
-		if (existingMessage) {
-			logger.debug("Memory already exists, skipping");
-			return;
-		}
+    async getMemoriesByRoomIds(params: { roomIds: UUID[], limit?: number; }): Promise<Memory[]> {
+        return await this.runtime.databaseAdapter.getMemoriesByRoomIds({
+            tableName: this.tableName,
+            agentId: this.runtime.agentId,
+            roomIds: params.roomIds,
+            limit: params.limit
+        });
+    }
 
-		if (!memory.metadata) {
-			memory.metadata = {
-				type: this.tableName,
-				scope: memory.agentId ? "private" : "shared",
-				timestamp: Date.now(),
-			} as MemoryMetadata;
-		}
+    async getMemoriesByIds(ids: UUID[]): Promise<Memory[]> {
+        return this.runtime.databaseAdapter.getMemoriesByIds(ids);
+    }
 
-		// Handle metadata if present
-		if (memory.metadata) {
-			// Validate metadata
-			this.validateMetadata(memory.metadata);
+    async getMemoryById(id: UUID): Promise<Memory | null> {
+        const result = await this.runtime.databaseAdapter.getMemoryById(id);
+        if (result && result.agentId !== this.runtime.agentId) return null;
+        return result;
+    }
 
-			// Ensure timestamp
-			if (!memory.metadata.timestamp) {
-				memory.metadata.timestamp = Date.now();
-			}
+    /**
+     * Removes a memory from the database by its ID.
+     * @param memoryId The ID of the memory to remove.
+     * @returns A Promise that resolves when the operation completes.
+     */
+    async removeMemory(memoryId: UUID): Promise<void> {
+        await this.runtime.databaseAdapter.removeMemory(
+            memoryId,
+            this.tableName
+        );
+    }
 
-			// Set default scope if not present
-			if (!memory.metadata.scope) {
-				memory.metadata.scope = memory.agentId ? "private" : "shared";
-			}
-		}
+    /**
+     * Removes all memories associated with a set of user IDs.
+     * @param roomId The room ID to remove memories for.
+     * @returns A Promise that resolves when the operation completes.
+     */
+    async removeAllMemories(roomId: UUID): Promise<void> {
+        await this.runtime.databaseAdapter.removeAllMemories(
+            roomId,
+            this.tableName
+        );
+    }
 
-		logger.log("Creating Memory", memory.id, memory.content.text);
-
-		if (!memory.embedding) {
-			memory.embedding = await this.runtime.useModel(
-				ModelTypes.TEXT_EMBEDDING,
-				null,
-			);
-		}
-
-		const memoryId = await this.runtime
-			
-			.createMemory(memory, this.tableName, unique);
-
-		return memoryId;
-	}
-
-	async getMemoriesByRoomIds(params: {
-		roomIds: UUID[];
-		limit?: number;
-		agentId?: UUID;
-	}): Promise<Memory[]> {
-		return await this.runtime.getMemoriesByRoomIds({
-			tableName: this.tableName,
-			roomIds: params.roomIds,
-			limit: params.limit,
-		});
-	}
-
-	async getMemoryById(id: UUID): Promise<Memory | null> {
-		const result = await this.runtime.getMemoryById(id);
-		if (result && result.agentId !== this.runtime.agentId) return null;
-		return result;
-	}
-
-	/**
-	 * Removes a memory from the database by its ID.
-	 * @param memoryId The ID of the memory to remove.
-	 * @returns A Promise that resolves when the operation completes.
-	 */
-	async removeMemory(memoryId: UUID): Promise<void> {
-		await this.runtime
-			
-			.removeMemory(memoryId, this.tableName);
-	}
-
-	/**
-	 * Removes all memories associated with a set of user IDs.
-	 * @param roomId The room ID to remove memories for.
-	 * @returns A Promise that resolves when the operation completes.
-	 */
-	async removeAllMemories(roomId: UUID): Promise<void> {
-		await this.runtime
-			
-			.removeAllMemories(roomId, this.tableName);
-	}
-
-	/**
-	 * Counts the number of memories associated with a set of user IDs, with an option for uniqueness.
-	 * @param roomId The room ID to count memories for.
-	 * @param unique Whether to count unique memories only.
-	 * @returns A Promise resolving to the count of memories.
-	 */
-	async countMemories(roomId: UUID, unique = true): Promise<number> {
-		return await this.runtime
-			
-			.countMemories(roomId, unique, this.tableName);
-	}
-
-	private validateMetadataRequirements(metadata: MemoryMetadata) {
-		if (metadata.type === MemoryType.FRAGMENT) {
-			if (!metadata.documentId) {
-				throw new Error("Fragment metadata must include documentId");
-			}
-			if (typeof metadata.position !== "number") {
-				throw new Error("Fragment metadata must include position");
-			}
-		}
-	}
+    /**
+     * Counts the number of memories associated with a set of user IDs, with an option for uniqueness.
+     * @param roomId The room ID to count memories for.
+     * @param unique Whether to count unique memories only.
+     * @returns A Promise resolving to the count of memories.
+     */
+    async countMemories(roomId: UUID, unique = true): Promise<number> {
+        return await this.runtime.databaseAdapter.countMemories(
+            roomId,
+            unique,
+            this.tableName
+        );
+    }
 }

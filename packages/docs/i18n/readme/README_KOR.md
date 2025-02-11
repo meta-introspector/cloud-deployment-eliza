@@ -1,7 +1,7 @@
 # Eliza 🤖
 
 <div align="center">
-  <img src="https://github.com/elizaOS/eliza/blob/develop/docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
+  <img src="/docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
 </div>
 
 <div align="center">
@@ -13,18 +13,17 @@
 ## 🚩 구조
 
 <div align="center">
-  <img src="./docs/static/img/eliza_diagram.jpg" alt="Eliza Diagram" width="100%" />
+  <img src="/docs/static/img/eliza_diagram.png" alt="Eliza Diagram" width="100%" />
 </div>
 
 ## ✨ 기능
 
-- 🛠 SNS 지원: 디스코드, 트위터, 텔레그램 연동 지원
-- 🔗 다양한 모델 지원 (Llama, Grok, OpenAI, Anthropic 등)
-- 👥 다중 지원: 다중 에이전트 및 채팅방 지원
-- 📚 높은 유연성: 데이터를 쉽게 추가하고 다양한 상호작용 가능
-- 💾 검색 지원: 데이터와 작업을 쉽게 찾아볼 수 있도록 검색 기능 지원
-- 🚀 높은 확장성: 사용자 정의 동작 및 클라이언트 생성 가능
-- ☁️ 다양한 AI 모델 지원: local Llama, OpenAI, Anthropic, Groq 등 다양한 AI 모델을 지원합니다
+- 🛠 SNS 지원 - 디스코드, X (구 트위터), 텔레그램 연동가능
+- 🔗 다양한 모델 지원 - (Llama, Grok, OpenAI, Anthropic, Gemini 등)
+- 👥 다중 에이전트 및 채팅방 지원
+- 📚 데이터를 쉽게 추가하고 다양한 상호작용 가능
+- 💾 되돌릴 수 있는 채팅 기록(메모리), 기존 자료 저장 기능
+- 🚀 높은 확장성 - 사용자 정의 동작 및 클라이언트 생성 가능
 - 📦 즐겁게 개발해 봐요!
 
 ## 튜토리얼 동영상
@@ -34,8 +33,8 @@
 ## 🎯 사용 사례
 
 - 🤖 챗봇
-- 🕵 ️자율 에이전트
-- 📈 자동화 프로세스
+- 🕵 ️자동화 에이전트
+- 📈 사업 운영 자동화
 - 🎮 비디오 게임 NPC
 - 🧠 트레이딩
 

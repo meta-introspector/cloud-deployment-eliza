@@ -1,0 +1,50 @@
+name: Update Changelog
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update_changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Check if autodocs branch exists and create or switch to it
+        run: |
+          if git ls-remote --heads origin autodocs | grep autodocs; then
+            echo "Branch autodocs exists, checking out"
+            git checkout autodocs
+            git pull origin autodocs
+          else
+            echo "Branch autodocs doesn't exist, creating"
+            git checkout -b autodocs
+          fi
+
+      - name: Generate changelog
+        run: python3 docs/scripts/get-changelog.py --output docs/docs/changelog.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.CHANGELOG_GITHUB_TOKEN }}
+
+      - name: Commit and push changes
+        run: |
+          git add docs/changelog.md
+          git commit -m "docs: update changelog for ${{ github.event.release.tag_name }}" || echo "No changes to commit"
+          git push origin autodocs
+        env:
+          GITHUB_TOKEN: ${{ secrets.CHANGELOG_GITHUB_TOKEN }}

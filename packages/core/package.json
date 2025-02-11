@@ -1,72 +1,73 @@
 {
-	"name": "@elizaos/core",
-	"version": "1.0.0-alpha.35",
-	"description": "",
-	"type": "module",
-	"main": "dist/index.js",
-	"module": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"exports": {
-		"./package.json": "./package.json",
-		".": {
-			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.js"
-			}
-		}
-	},
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"build": "tsup && tsc -p tsconfig.build.json",
-		"watch": "tsc --watch",
-		"clean": "rm -rf dist .turbo node_modules .turbo-tsconfig.json tsconfig.tsbuildinfo",
-		"dev": "tsup --watch",
-		"build:docs": "cd docs && bun run build",
-		"test": "vitest run",
-		"test:coverage": "vitest run --coverage",
-		"test:watch": "vitest"
-	},
-	"author": "",
-	"license": "MIT",
-	"devDependencies": {
-		"@eslint/js": "9.16.0",
-		"@rollup/plugin-commonjs": "25.0.8",
-		"@rollup/plugin-json": "6.1.0",
-		"@rollup/plugin-replace": "5.0.7",
-		"@rollup/plugin-terser": "0.1.0",
-		"@rollup/plugin-typescript": "11.1.6",
-		"@types/mocha": "10.0.10",
-		"@types/node": "^22.13.9",
-		"@types/uuid": "10.0.0",
-		"@typescript-eslint/eslint-plugin": "8.26.0",
-		"@typescript-eslint/parser": "8.26.0",
-		"@vitest/coverage-v8": "2.1.5",
-		"lint-staged": "15.2.10",
-		"nodemon": "3.1.7",
-		"pm2": "5.4.3",
-		"rimraf": "6.0.1",
-		"rollup": "2.79.2",
-		"ts-node": "10.9.2",
-		"tslib": "2.8.1",
-		"tsup": "^8.4.0",
-		"typescript": "5.8.2"
-	},
-	"dependencies": {
-		"dotenv": "16.4.5",
-		"events": "^3.3.0",
-		"glob": "11.0.0",
-		"handlebars": "^4.7.8",
-		"js-sha1": "0.7.0",
-		"langchain": "^0.3.15",
-		"pino": "^9.6.0",
-		"pino-pretty": "^13.0.0",
-		"unique-names-generator": "4.7.1",
-		"uuid": "11.0.3"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"gitHead": "dc32785668d1663c0e7fb81909b4b9961db6e6de"
+    "name": "@elizaos/core",
+    "version": "0.25.9",
+    "description": "",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "import": {
+                "@elizaos/source": "./src/index.ts",
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            }
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup --format esm --dts",
+        "watch": "tsc --watch",
+        "dev": "tsup --format esm --dts --watch",
+        "build:docs": "cd docs && pnpm run build",
+        "test": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "test:watch": "vitest"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "22.8.4",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3"
+    },
+    "dependencies": {
+        "@ai-sdk/amazon-bedrock": "1.1.6",
+        "@ai-sdk/anthropic": "1.1.6",
+        "@ai-sdk/google": "1.1.0",
+        "@ai-sdk/groq": "1.1.7",
+        "@ai-sdk/mistral": "1.1.6",
+        "@ai-sdk/openai": "1.1.9",
+        "@electric-sql/pglite": "^0.2.17",
+        "@fal-ai/client": "1.2.0",
+        "@supabase/supabase-js": "^2.49.1",
+        "@types/uuid": "10.0.0",
+        "ai": "4.1.16",
+        "better-sqlite3": "11.8.1",
+        "bignumber.js": "9.1.2",
+        "dotenv": "16.4.5",
+        "fastembed": "1.14.1",
+        "glob": "11.0.0",
+        "handlebars": "^4.7.8",
+        "js-sha1": "0.7.0",
+        "js-tiktoken": "1.0.15",
+        "ollama-ai-provider": "0.16.1",
+        "openai": "4.82.0",
+        "pino": "^9.6.0",
+        "pino-pretty": "^13.0.0",
+        "sql.js": "^1.12.0",
+        "together-ai": "0.7.0",
+        "unique-names-generator": "4.7.1",
+        "uuid": "11.0.3",
+        "viem": "2.21.58",
+        "vitest": "^3.0.5",
+        "zod": "^3.24.2"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }

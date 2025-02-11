@@ -1,6 +1,6 @@
 # Eliza
 
-<img src="./docs/static/img/eliza_banner.jpg" alt="Banner de Eliza" width="100%" />
+<img src="/docs/static/img/eliza_banner.jpg" alt="Banner de Eliza" width="100%" />
 
 ## Funcionalidades
 

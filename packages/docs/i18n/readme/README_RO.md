@@ -1,6 +1,21 @@
 # Eliza
 
-<img src="./docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
+<img src="../docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
+<div align="center">
+
+📖 [Documente](https://elizaos.github.io/eliza/) | 🎯 [Exemple](https://github.com/thejoven/awesome-eliza)
+
+</div>
+
+## 🌍 Traduceri README
+
+[中文说明](./README_CN.md) | [日本語の説明](./README_JA.md) | [한국어 설명](./README_KOR.md) | [Persian](./README_FA.md) | [Français](./README_FR.md) | [Português](./README_PTBR.md) | [Türkçe](./README_TR.md) | [Русский](./README_RU.md) | [Español](./README_ES.md) | [Italiano](./README_IT.md) | [ไทย](./README_TH.md) | [Deutsch](./README_DE.md) | [Tiếng Việt](./README_VI.md) | [עִברִית](https://github.com/elizaos/Elisa/blob/main/README_HE.md) | [Tagalog](./README_TG.md) | [Polski](./README_PL.md) | [Arabic](./README_AR.md) | [Hungarian](./README_HU.md) | [Srpski](./README_RS.md) | [Română](./README_RO.md) | [Nederlands](./README_NL.md)
+
+## 🚩 Cuprins
+
+<div align="center">
+  <img src="../docs/static/img/eliza_diagram.png" alt="Eliza Diagram" width="100%" />
+</div>
 
 ## Funcționalități
 
@@ -25,7 +40,7 @@
 
 -   [Python 2.7+](https://www.python.org/downloads/)
 -   [Node.js 23.3+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
--   [bun](https://bun.io/installation)
+-   [pnpm](https://pnpm.io/installation)
 
 ### Edite fișierul .env
 
@@ -34,14 +49,14 @@
 
 ### Edite fișierul de personaj
 
--   Verificați fișierul `packages/core/src/defaultCharacter.ts` – îl puteți modifica
--   De asemenea, puteți încărca personaje cu comanda `bun start --characters="path/to/your/character.json"` și rula mai mulți boți în același timp.
+-   Verificați fișierul `src/core/defaultCharacter.ts` – îl puteți modifica
+-   De asemenea, puteți încărca personaje cu comanda `pnpm start --characters="path/to/your/character.json"` și rula mai mulți boți în același timp.
 
 După ce ați configurat fișierul .env și fișierul de personaj, puteți porni botul cu următoarea comandă:
 
 ```
-bun i
-bun start
+pnpm i
+pnpm start
 ```
 
 # Personalizarea Eliza
@@ -69,7 +84,7 @@ Puteți rula modele OpenAI setând variabila de mediu `XAI_MODEL` la `gpt-4o-min
 Este posibil să fie necesară instalarea Sharp. Dacă întâmpinați o eroare la pornire, încercați să îl instalați cu următoarea comandă:
 
 ```
-bun install --include=optional sharp
+pnpm install --include=optional sharp
 ```
 
 # Configurarea mediului
@@ -81,7 +96,7 @@ Va trebui să adăugați variabile de mediu în fișierul dvs. `.env` pentru a v
 DISCORD_APPLICATION_ID=
 DISCORD_API_TOKEN= # Token do bot
 OPENAI_API_KEY=sk-* # Chave API do OpenAI, começando com sk-
-ELEVENLABS_API_KEY= # Chave API do elevenlabs
+ELEVENLABS_XI_API_KEY= # Chave API do elevenlabs
 GOOGLE_GENERATIVE_AI_API_KEY= # Chave API do Gemini
 
 # CONFIGURAÇÕES DO ELEVENLABS
@@ -138,7 +153,7 @@ TOGETHER_API_KEY=
 Dacă aveți un GPU NVIDIA, puteți instala CUDA pentru a accelera dramatic inferența locală.
 
 ```
-bun install
+pnpm install
 npx --no node-llama-cpp source download --gpu cuda
 ```
 
@@ -161,15 +176,15 @@ Pentru ajutor la configurarea Bot-ului Discord, consultați: https://discordjs.g
 Pentru a rula suita de teste:
 
 ```bash
-bun test           # Execută testele o dată
-bun test:watch    # Execută testele în modul watch
+pnpm test           # Execută testele o dată
+pnpm test:watch    # Execută testele în modul watch
 ```
 
 Pentru teste specifice bazei de date:
 
 ```bash
-bun test:sqlite   # Execută testele cu SQLite
-bun test:sqljs    # Execută testele cu SQL.js
+pnpm test:sqlite   # Execută testele cu SQLite
+pnpm test:sqljs    # Execută testele cu SQL.js
 ```
 
 Testele sunt scrise folosind Jest și pot fi găsite în fișierele `src/**/*.test.ts`. Mediul de testare este configurat pentru:

@@ -1,0 +1,27 @@
+.searchContainer {
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.searchInput {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.9rem;
+  transition: border-color var(--ifm-transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}

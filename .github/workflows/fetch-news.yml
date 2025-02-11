@@ -1,0 +1,27 @@
+name: Fetch News Files
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: autodocs
+
+      - name: Run news fetcher
+        run: |
+          chmod +x docs/scripts/fetch-news.sh
+          ./docs/scripts/fetch-news.sh
+
+      - name: Commit and push if changes exist
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/news/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update news files" && git push origin autodocs)
