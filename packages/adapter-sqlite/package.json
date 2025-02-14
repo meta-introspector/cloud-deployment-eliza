@@ -22,14 +22,16 @@
         "@elizaos/core": "workspace:*",
         "@types/better-sqlite3": "7.6.12",
         "better-sqlite3": "11.8.1",
-        "sqlite-vec": "0.1.6",
         "uuid": "11.0.5"
+        "sqlite-vec": "0.1.7-alpha.2",
+        "sqlite-vec-linux-arm64": "0.1.7-alpha.2"
     },
     "devDependencies": {
         "@types/uuid": "10.0.0",
+        "sqlite-vec-linux-arm64": "0.1.7-alpha.2"
+        "@vitest/coverage-v8": "^3.0.2",
         "tsup": "8.3.5",
-        "vitest": "^3.0.2",
-        "@vitest/coverage-v8": "^3.0.2"
+        "vitest": "^3.0.2"
     },
     "scripts": {
         "build": "tsup --format esm --dts",

@@ -9,9 +9,9 @@ import type {
     VerifiableLogQuery,
 } from "@elizaos/plugin-tee-verifiable-log";
 
-export function createVerifiableLogApiRouter(
-    agents: Map<string, IAgentRuntime>
-):Router {
+export function createVerifiableLogApiRouter  (
+    agents: Map<string, AgentRuntime>
+) : Router {
     const router = express.Router();
     router.use(cors());
     router.use(bodyParser.json());
@@ -98,7 +98,7 @@ export function createVerifiableLogApiRouter(
                     .getService<VerifiableLogService>(
                         ServiceType.VERIFIABLE_LOGGING
                     )
-                    ?.pageQueryLogs(verifiableLogQuery, page, pageSize);
+                    .pageQueryLogs(verifiableLogQuery, page, pageSize);
 
                 res.json({
                     success: true,
