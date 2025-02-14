@@ -14,16 +14,26 @@
             "outputs": ["dist/**"],
             "dependsOn": ["^@elizaos/core#build"]
         },
-        "@elizaos/client-direct#build": {
+        "@elizaos/plugin-solana#build": {
             "outputs": ["dist/**"],
-            "dependsOn": []
+            "dependsOn": [
+                "@elizaos/plugin-trustdb#build"
+            ]
         },
+        "@elizaos/plugin-nft-generation#build": {
+            "outputs": ["dist/**"],
+            "dependsOn": ["@elizaos/plugin-node#build"]
+        },
+        "@elizaos/plugin-evm#build": {
+            "outputs": ["dist/**"]
+        },
+
         "eliza-docs#build": {
             "outputs": ["build/**"]
         },
         "dev": {
             "persistent": true,
-            "cache": true
+            "cache": false
         }
     }
 }

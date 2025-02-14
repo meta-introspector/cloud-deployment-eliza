@@ -1,0 +1,181 @@
+{
+	"id": "cloud-deployment-eliza-2",
+	"name": "cloud-deployment-eliza-2",
+	"type": "altostra",
+	"description": "A simple CRUD service template",
+	"created": "2025-03-05T09:20:09.663Z",
+	"blueprints": [
+		{
+			"connections": {
+				"ApiEndpoint01": {
+					"HandleResources01": {
+						"from": "ApiEndpoint01",
+						"to": "HandleResources01",
+						"type": "connection.trigger"
+					}
+				},
+				"ApiEndpoint02": {
+					"HandleResources01": {
+						"from": "ApiEndpoint02",
+						"to": "HandleResources01",
+						"type": "connection.trigger"
+					}
+				},
+				"ApiEndpoint03": {
+					"HandleResources01": {
+						"from": "ApiEndpoint03",
+						"to": "HandleResources01",
+						"type": "connection.trigger"
+					}
+				},
+				"ApiEndpoint04": {
+					"HandleResources01": {
+						"from": "ApiEndpoint04",
+						"to": "HandleResources01",
+						"type": "connection.trigger"
+					}
+				},
+				"Data01": {},
+				"HandleResources01": {
+					"Data01": {
+						"accessLevel": "read-write",
+						"from": "HandleResources01",
+						"to": "Data01",
+						"type": "connection.resource-access"
+					}
+				}
+			},
+			"id": "cloud-deployment-eliza-2",
+			"metadata": {
+				"designer": {
+					"resourcePositions": {
+						"Api01": {
+							"x": 41,
+							"y": 229,
+							"z": 0
+						},
+						"Data01": {
+							"x": 645,
+							"y": 299,
+							"z": 0
+						},
+						"HandleResources01": {
+							"x": 357,
+							"y": 300,
+							"z": 0
+						}
+					}
+				}
+			},
+			"name": "cloud-deployment-eliza-2",
+			"resources": {
+				"Api01": {
+					"cors": {
+						"type": "api.cors.simple",
+						"origins": "*"
+					},
+					"endpoints": [
+						{
+							"id": "ApiEndpoint01",
+							"type": "ref"
+						},
+						{
+							"id": "ApiEndpoint02",
+							"type": "ref"
+						},
+						{
+							"id": "ApiEndpoint03",
+							"type": "ref"
+						},
+						{
+							"id": "ApiEndpoint04",
+							"type": "ref"
+						}
+					],
+					"id": "Api01",
+					"name": "api",
+					"type": "resource.api"
+				},
+				"ApiEndpoint01": {
+					"api": {
+						"id": "Api01",
+						"type": "ref"
+					},
+					"id": "ApiEndpoint01",
+					"method": "GET",
+					"name": "api-endpoint-0",
+					"path": "/resource/{resourceId}",
+					"type": "resource.api.endpoint"
+				},
+				"ApiEndpoint02": {
+					"api": {
+						"id": "Api01",
+						"type": "ref"
+					},
+					"id": "ApiEndpoint02",
+					"method": "POST",
+					"name": "api-endpoint-0",
+					"path": "/resource",
+					"type": "resource.api.endpoint"
+				},
+				"ApiEndpoint03": {
+					"api": {
+						"id": "Api01",
+						"type": "ref"
+					},
+					"id": "ApiEndpoint03",
+					"method": "PUT",
+					"name": "api-endpoint-0",
+					"path": "/resource/{resourceId}",
+					"type": "resource.api.endpoint"
+				},
+				"ApiEndpoint04": {
+					"api": {
+						"id": "Api01",
+						"type": "ref"
+					},
+					"id": "ApiEndpoint04",
+					"method": "GET",
+					"name": "api-endpoint-3",
+					"path": "/resource",
+					"type": "resource.api.endpoint"
+				},
+				"Data01": {
+					"aws": {
+						"billingModel": "PROVISIONED",
+						"throughput": {
+							"readUnits": 5,
+							"writeUnits": 5
+						}
+					},
+					"id": "Data01",
+					"key": {
+						"hash": {
+							"name": "pk",
+							"type": "STRING"
+						},
+						"range": {
+							"name": "sk",
+							"type": "STRING"
+						}
+					},
+					"name": "data",
+					"tableName": "data",
+					"type": "resource.table"
+				},
+				"HandleResources01": {
+					"entryPoint": "functions/handleResources.handler",
+					"id": "HandleResources01",
+					"layers": [],
+					"memory": 512,
+					"name": "handle-resource",
+					"runtime": "nodejs16.x",
+					"timeout": 6,
+					"type": "resource.compute.function"
+				}
+			},
+			"unsafe": false,
+			"version": "2019-10-24"
+		}
+	]
+}

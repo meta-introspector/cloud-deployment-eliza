@@ -29,7 +29,7 @@ const createStream = () => {
     });
 };
 
-const defaultLevel = process?.env?.DEFAULT_LOG_LEVEL || "info";
+const defaultLevel = process?.env?.DEFAULT_LOG_LEVEL || "trace";
 
 const options = {
     level: defaultLevel,
