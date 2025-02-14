@@ -1,5 +1,6 @@
 # Use a specific Node.js version for better reproducibility
-FROM node:23.3.0-slim AS builder
+#FROM node:23.3.0-slim AS builder
+FROM node:23.6.0 AS builder
 
 # Install pnpm globally and necessary build tools
 RUN npm install -g pnpm@9.15.4 && \
@@ -49,10 +50,7 @@ FROM node:23.3.0-slim
 # Install runtime dependencies
 RUN npm install -g pnpm@9.15.4 && \
     apt-get update && \
-    apt-get install -y \
-    git \
-    python3 \
-    ffmpeg && \
+    apt-get install -y git python3 curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

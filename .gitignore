@@ -98,3 +98,7 @@ ton_nft_metadata/*
 
 ton_nft_images/
 ton_nft_images/*
+/eliza.sdl.yml.private
+/eliza.sdl.yml.private2
+/.secret.akash.sdl
+/.akash2.secrets
