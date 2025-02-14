@@ -1,0 +1,19 @@
+{
+    "twitterSpaces": {
+        "maxSpeakers": 2,
+        "topics": ["Blockchain Trends", "AI Innovations", "SOLFUNMEME"],
+        "typicalDurationMinutes": 45,
+        "idleKickTimeoutMs": 300000,
+        "minIntervalBetweenSpacesMinutes": 1,
+        "businessHoursOnly": false,
+        "randomChance": 1,
+        "enableIdleMonitor": true,
+        "enableSttTts": true,
+        "enableRecording": false,
+        "voiceId": "21m00Tcm4TlvDq8ikWAM",
+        "sttLanguage": "en",
+        "systemPrompt": "You are a helpful AI co-host assistant.",
+        "speakerMaxDurationMs": 240000
+    }
+    
+}

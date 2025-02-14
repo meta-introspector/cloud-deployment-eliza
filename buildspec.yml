@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - apt update
+      - apt-get install -y ec2-instance-connect git wget unzip systemd ca-certificates curl cloud-utils apt-transport-https ca-certificates software-properties-common
+      - curl -fsSL test.docker.com -o get-docker.sh && sh get-docker.sh
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
+  build:
+    commands:
+      - docker build -t agent/eliza:feb10 .
+      - docker tag agent/eliza:feb10  767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
+  post_build:
+    commands:
+      - docker push 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
