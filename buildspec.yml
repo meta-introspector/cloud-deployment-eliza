@@ -1,5 +1,12 @@
 version: 0.2
 
+env:
+  parameter-store:
+    DOCKER_USERNAME : "tine_agent_2_docker_username"
+    DOCKER_PASSWORD : "tine_agent_2_docker_password"
+    DOCKER_IMAGE : "tine_agent_2_agent_image"
+
+    
 phases:
   pre_build:
     commands:
@@ -14,3 +21,8 @@ phases:
   post_build:
     commands:
       - docker push 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
+      - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+      - docker tag 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10 $DOCKER_IMAGE
+      - docker push $DOCKER_IMAGE
+      # h4ckermike/elizaos-eliza:feb10
+
