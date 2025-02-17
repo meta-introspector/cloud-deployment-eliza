@@ -1,0 +1,36 @@
+---
+schemaVersion: "2.2"
+description: "SSM document to update Docker container on EC2"
+parameters:
+  ImageParameterName:
+    description: "SSM parameter name for Docker image"
+    type: "String"
+  ConfigParameterName:
+    description: "SSM parameter name for app configuration"
+    type: "String"
+mainSteps:
+- inputs:
+    runCommand:
+    - "#!/bin/bash"
+    - "set -e"
+    - "IMAGE_NAME=$(aws ssm get-parameter --name {{ ImageParameterName }} --query\
+      \ \"Parameter.Value\" --output text)"
+    - "CONFIG=$(aws ssm get-parameter --name {{ ConfigParameterName }} --with-decryption\
+      \ --query \"Parameter.Value\" --output text)"
+    - "echo \"$CONFIG\" > /tmp/app_config.json"
+    - "docker pull $IMAGE_NAME"
+    - "docker stop app_container || true"
+    - "docker rm app_container || true"
+    - "docker run -d --name app_container -v /tmp/app_config.json:/app/config.json\
+      \ $IMAGE_NAME"
+  name: "UpdateDockerContainer"
+  action: "aws:runShellScript"
+- inputs:
+    runCommand:
+    - "#!/bin/bash"
+    - "if [ $? -ne 0 ]; then"
+    - "  echo \"Error occurred during container update\" >> /var/log/container_update_errors.log"
+    - "  docker logs app_container >> /var/log/container_update_errors.log"
+    - "fi"
+  name: "CaptureErrors"
+  action: "aws:runShellScript"
