@@ -6,6 +6,7 @@ set +x
 
 #this script expects AGENT_NAME to be set to something like "tine_agent"
 
+mkdir -p "/var/run/agent/secrets/"
 echo "" > "/var/run/agent/secrets/env" # blank the file
 
 #  b ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
