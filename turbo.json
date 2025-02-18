@@ -14,10 +14,6 @@
             "outputs": ["dist/**"],
             "dependsOn": ["^@elizaos/core#build"]
         },
-        "@elizaos/client-direct#build": {
-            "outputs": ["dist/**"]
-
-        },
         "@elizaos/plugin-solana#build": {
             "outputs": ["dist/**"],
             "dependsOn": [
