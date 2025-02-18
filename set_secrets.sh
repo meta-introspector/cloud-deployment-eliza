@@ -20,4 +20,9 @@ aws ssm put-parameter     --name "tine_agent_tokenizer_image"  --value "${TOKENI
 
 
 
-aws ssm put-parameter     --name "tine_agent_agent_image"  --value "h4ckermike/elizaos-eliza:feature-arm64_fastembed" --type String
+aws ssm put-parameter  --name "tine_agent_2_agent_image"  --value "h4ckermike/elizaos-eliza:feb10" --type String
+aws ssm put-parameter  --name "tine_agent_2_docker_username"  --value "${DOCKER_USERNAME}" --type String
+aws ssm put-parameter  --name "tine_agent_2_docker_password"  --value "${DOCKER_PASSWORD}" --type String
+
+
+# aws ssm put-parameter  --name "tine_agent_2_docker_username"  --value "${DOCKER_USERNAME}" --type String --profile solfunmeme_dev

@@ -1,3 +1,4 @@
+import {} from  "tracing.js";
 import { DirectClient } from "@elizaos/client-direct";
 import {
     AgentRuntime,
@@ -142,9 +143,11 @@ export async function loadCharacterFromOnchain(): Promise<Character[]> {
 
         // Handle plugins
         if (isAllStrings(character.plugins)) {
+	console.log("character.plugins:", character.plugins);
             elizaLogger.info("Plugins are: ", character.plugins);
             const importedPlugins = await Promise.all(
-                character.plugins.map(async (plugin) => {
+            character.plugins.map(async (plugin) => {
+	    console.log("plugin:", plugin);
                     const importedPlugin = await import(plugin);
                     return importedPlugin.default;
                 })
@@ -190,6 +193,7 @@ async function jsonToCharacter(
     filePath: string,
     character: any
 ): Promise<Character> {
+  console.log("jsonToCharacter:", filePath);
     validateCharacterConfig(character);
 
     // .id isn't really valid
@@ -210,7 +214,8 @@ async function jsonToCharacter(
             ...character.settings.secrets,
         };
     }
-    // Handle plugins
+  // Handle plugins
+  console.log("plugins:", character.plugins);
     character.plugins = await handlePluginImporting(character.plugins);
     if (character.extends) {
         elizaLogger.info(
