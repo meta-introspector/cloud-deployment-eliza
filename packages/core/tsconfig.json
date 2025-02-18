@@ -15,6 +15,7 @@
         "emitDeclarationOnly": true,
         "resolveJsonModule": true,
         "noImplicitAny": false,
+	"typeRoots":["./node_modulse/@types"],
         "allowJs": true,
         "checkJs": false,
         "noEmitOnError": false,

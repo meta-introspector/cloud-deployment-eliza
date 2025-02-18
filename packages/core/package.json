@@ -72,6 +72,7 @@
         "@hapi/shot": "^6.0.1",
         "@tavily/core": "^0.0.2",
         "@types/hapi": "^18.0.14",
+        "@types/hapi__shot": "^6.0.0",
         "@types/uuid": "10.0.0",
         "ai": "4.1.16",
         "anthropic-vertex-ai": "1.0.2",
