@@ -1,9 +1,13 @@
 import { Character, ModelProviderName } from "@elizaos/core";
 
+import { twitterPlugin } from "@elizaos/plugin-twitter";
+
 export const defaultCharacter: Character = {
     name: "Eliza",
     username: "eliza",
-    plugins: [],
+  plugins: [
+    twitterPlugin
+  ],
     modelProvider: ModelProviderName.LLAMALOCAL,
     settings: {
         secrets: {},
