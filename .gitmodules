@@ -1,0 +1,3 @@
+[submodule "vendor/elizaos/plugin-twitter"]
+	path = vendor/elizaos/plugin-twitter
+	url = https://github.com/meta-introspector/plugin-twitter

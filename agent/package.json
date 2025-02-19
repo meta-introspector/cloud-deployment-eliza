@@ -4,7 +4,8 @@
     "main": "src/index.ts",
     "type": "module",
     "scripts": {
-        "start": "node --heap-prof --cpu-prof  --prof --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
+        "start_prof": "node --heap-prof --cpu-prof  --prof --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
+        "start": "node --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
         "dev": "node --loader ts-node/esm src/index.ts",
         "check-types": "tsc --noEmit",
         "test": "jest"
@@ -21,7 +22,7 @@
         "@elizaos/client-direct": "workspace:*",
         "@elizaos/core": "workspace:*",
         "@elizaos/plugin-bootstrap": "workspace:*",
-        "@elizaos/plugin-twitter": "github:elizaos-plugins/plugin-twitter",
+        "@elizaos-plugins/plugin-twitter": "workspace:*",
         "@hapi/shot": "^6.0.1",
         "@opentelemetry/api": "^1.6.0",
         "@opentelemetry/auto-instrumentations-node": "^0.39.4",
