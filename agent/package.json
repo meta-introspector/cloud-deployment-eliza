@@ -4,7 +4,7 @@
     "main": "src/index.ts",
     "type": "module",
     "scripts": {
-        "start": "node --prof --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
+        "start": "node --heap-prof --cpu-prof  --prof --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
         "dev": "node --loader ts-node/esm src/index.ts",
         "check-types": "tsc --noEmit",
         "test": "jest"
