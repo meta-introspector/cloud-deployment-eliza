@@ -5,9 +5,7 @@
 	"VERBOSE":"true",
 	"DEFAULT_LOG_LEVEL":"trace",
 	"DEBUG" : "*",
-	"NODE_OPTIONS2" : "--trace-event-categories=v8",
-
- 	"NODE_OPTIONS": "--diagnostic-dir=\".zos\" --report-compact --report-dir=\".zos\" --report-filename=node-report --report-on-fatalerror --report-on-signal --report-signal=SIGUSR2 --report-uncaught-exception --pending-deprecation --trace-deprecation  --trace-exit --trace-sigint --trace-warnings --unhandled-rejections=strict --enable-source-maps --experimental-abortcontroller --experimental-fetch --experimental-import-meta-resolve --experimental-json-modules  --experimental-modules --experimental-specifier-resolution=node --experimental-top-level-await --tls-max-v1.3 --tls-min-v1.3 --use-largepages=on"
+ 	"NODE_OPTIONS": "--require mytracing.js   --diagnostic-dir=\".zos\" --report-compact --report-dir=\".zos\" --report-filename=node-report --report-on-fatalerror --report-on-signal --report-signal=SIGUSR2 --report-uncaught-exception --pending-deprecation --trace-deprecation  --trace-exit --trace-sigint --trace-warnings --unhandled-rejections=strict --enable-source-maps --experimental-abortcontroller --experimental-fetch --experimental-import-meta-resolve --experimental-json-modules  --experimental-modules --experimental-specifier-resolution=node --experimental-top-level-await --tls-max-v1.3 --tls-min-v1.3 --use-largepages=on"
     },
     "scripts": {
 	"format": "biome format --write .",

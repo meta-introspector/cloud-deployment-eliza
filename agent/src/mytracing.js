@@ -1,5 +1,5 @@
 // tracing.js
-console.log("DEBUG SOLFUNMEME")
+console.log("DEBUG SOLFUNMEME1")
 'use strict'
 const process = require('process');
 const opentelemetry = require('@opentelemetry/sdk-node');
