@@ -1,6 +1,9 @@
 {
   "name": "TINE-CloudAssistent",
-    "plugins": [ "@elizaos-plugins/plugin-twitter"   ],
+    "plugins": [       
+    "@elizaos-plugins/client-twitter",
+    "@elizaos-plugins/plugin-twitter"   
+  ],
     "clients": ["twitter"],
     "modelProvider": "groq",
 
