@@ -5,8 +5,8 @@
 console.log("DEBUG SOLFUNMEME")
 
 import { DirectClient } from "@elizaos/client-direct";
-import { TwitterClient } from "@elizaos-plugins/client-twitter";
-console.log("TwitterClient",TwitterClient)
+//import { twitterPlugin } from "@elizaos-plugins/client-twitter";
+//console.log("TwitterClient",TwitterClient)
 import {
     AgentRuntime,
     CacheManager,
@@ -30,9 +30,8 @@ import { defaultCharacter } from "./defaultCharacter.ts";
 
 import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
 import {  } from "@elizaos/core";
-import { twitterPlugin } from "@elizaos-plugins/plugin-twitter";
-
-console.log(twitterPlugin)
+//import { twitterPlugin } from "@elizaos-plugins/plugin-twitter";
+//console.log(twitterPlugin)
 
 // '@elizaos/plugin-twitter'
 
@@ -685,8 +684,8 @@ async function startAgent(
 
         // start assigned clients
         runtime.clients = await initializeClients(character, runtime);
+               
 
-        TwitterClient.registerAgent(runtime);
         // add to container
         directClient.registerAgent(runtime);
 

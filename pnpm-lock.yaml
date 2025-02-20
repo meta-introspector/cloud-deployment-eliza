@@ -661,6 +661,9 @@ importers:
 
   vendor/elizaos/client-twitter:
     dependencies:
+      '@elizaos/core':
+        specifier: workspace:0.25.6-alpha.1
+        version: link:../../../packages/core
       '@types/hapi__shot':
         specifier: ^6.0.0
         version: 6.0.0
