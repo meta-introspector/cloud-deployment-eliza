@@ -131,6 +131,9 @@ importers:
 
   agent:
     dependencies:
+      '@elizaos-plugins/client-twitter':
+        specifier: workspace:*
+        version: link:../vendor/elizaos/client-twitter
       '@elizaos-plugins/plugin-twitter':
         specifier: workspace:*
         version: link:../vendor/elizaos/plugin-twitter
