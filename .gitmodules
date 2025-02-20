@@ -1,3 +1,9 @@
 [submodule "vendor/elizaos/plugin-twitter"]
 	path = vendor/elizaos/plugin-twitter
 	url = https://github.com/meta-introspector/plugin-twitter
+[submodule "vendor/elizaos/agent-twitter-client"]
+	path = vendor/elizaos/agent-twitter-client
+	url = https://github.com/meta-introspector/agent-twitter-client.git
+[submodule "vendor/elizaos/client-twitter"]
+	path = vendor/elizaos/client-twitter
+	url = https://github.com/meta-introspector/client-twitter-eliza-zos
