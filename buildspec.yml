@@ -2,10 +2,9 @@ version: 0.2
 
 env:
   parameter-store:
-    DOCKER_U--SERNAME : "tine_agent_4_docker_username"
+    DOCKER_USERNAME : "tine_agent_4_docker_username"
     DOCKER_PASSWORD : "tine_agent_4_docker_password"
     DOCKER_IMAGE : "tine_agent_4_agent_image"
-
 
     
 phases:
