@@ -9,7 +9,6 @@ source /var/run/agent/secrets/env
 		--mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ 	\
 		--mount type=bind,source=/opt/agent/characters/eliza.character.json,target=/app/agent/characters/eliza.character.json 		\
 		--env-file /var/run/agent/secrets/env 	\
-		--rm 		\
 		--name "agent-docker.service" 	\
 		--entrypoint /opt/agent/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
 
