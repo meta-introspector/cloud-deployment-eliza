@@ -1,5 +1,5 @@
 {
-  "name": "TINE-CloudAssistent",
+  "name": "TINE-CloudAssistentRU",
     "plugins": [       
     "@elizaos-plugins/client-twitter",
     "@elizaos-plugins/plugin-twitter"   

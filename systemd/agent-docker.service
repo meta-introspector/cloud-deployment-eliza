@@ -25,12 +25,10 @@ ExecStart=/usr/bin/docker run \
           -v tokenizer:/app/node_modules/@anush008/tokenizers/ \
           -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ \
           --mount type=bind,source=/opt/agent,target=/opt/agent \
-          --mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ \
-          --mount type=bind,source=/opt/agent/characters/tine-test.character.json,target=/app/agent/characters/tine-test.character.json \
-          --mount type=bind,source=/opt/agent/package.json,target=/app/agent/package.json \
+          --mount type=bind,source=/opt/agent/characters/,target=/app/characters/ \
           --env-file /var/run/agent/secrets/env         \
           --name "agent-docker.service" \
-          --entrypoint /opt/agent/docker-entrypoint-strace2.sh \
+          --entrypoint /opt/agent/docker-entrypoint-none.sh \
           ${AGENT_IMAGE}
 StandardOutput=file:/var/log/agent_systemd.log
 StandardError=file:/var/log/agent_systemd.log
