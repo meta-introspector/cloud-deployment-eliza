@@ -4,7 +4,9 @@
     "main": "src/index.ts",
     "type": "module",
     "scripts": {
-        "start": "node --loader ts-node/esm src/index.ts",
+        "start_prof": "node --heap-prof --cpu-prof  --prof --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
+        "start_debug": "node --inspect-brk=0.0.0.0:9229 --require mytracing.js --loader ts-node/esm src/index.ts",
+	"start": "node --loader ts-node/esm src/index.ts",
         "dev": "node --loader ts-node/esm src/index.ts",
         "check-types": "tsc --noEmit",
         "test": "jest"
@@ -19,9 +21,17 @@
     },
     "dependencies": {
         "@elizaos/client-direct": "workspace:*",
+        "@elizaos-plugins/client-twitter" : "workspace:*",
         "@elizaos/core": "workspace:*",
         "@elizaos/plugin-bootstrap": "workspace:*",
-        "@elizaos/plugin-twitter": "0.25.6-alpha.1",
+        "@elizaos-plugins/plugin-twitter": "workspace:*",
+        "agent-twitter-client": "workspace:*",        
+        "@hapi/shot": "^6.0.1",
+        "@opentelemetry/api": "^1.6.0",
+        "@opentelemetry/auto-instrumentations-node": "^0.39.4",
+        "@opentelemetry/sdk-node": "^0.45.0",
+        "@types/hapi": "^18.0.14",
+        "@types/hapi__shot": "^6.0.0",
         "readline": "1.3.0",
         "ws": "8.18.0",
         "yargs": "17.7.2"

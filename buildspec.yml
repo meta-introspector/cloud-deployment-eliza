@@ -13,6 +13,9 @@ phases:
       - apt update
       - apt-get install -y ec2-instance-connect git wget unzip systemd ca-certificates curl cloud-utils apt-transport-https ca-certificates software-properties-common
       - curl -fsSL test.docker.com -o get-docker.sh && sh get-docker.sh
+      - echo $DOCKER_PASSWORD | md5sum
+      - echo $DOCKER_PASSWORD | wc
+      - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
   build:
     commands:
@@ -21,7 +24,6 @@ phases:
   post_build:
     commands:
       - docker push 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
-      - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - docker tag 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10 $DOCKER_IMAGE
       - docker push $DOCKER_IMAGE
       # h4ckermike/elizaos-eliza:feb10

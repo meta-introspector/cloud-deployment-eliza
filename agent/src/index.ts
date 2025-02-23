@@ -1,4 +1,12 @@
+//console.log("hello sfm");
+//import { debug_tracing } from  "./mytracing";
+//debug_tracing()
+// tracing.js
+console.log("DEBUG SOLFUNMEME")
+
 import { DirectClient } from "@elizaos/client-direct";
+//import { twitterPlugin } from "@elizaos-plugins/client-twitter";
+//console.log("TwitterClient",TwitterClient)
 import {
     AgentRuntime,
     CacheManager,
@@ -21,6 +29,11 @@ import {
 import { defaultCharacter } from "./defaultCharacter.ts";
 
 import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
+import {  } from "@elizaos/core";
+//import { twitterPlugin } from "@elizaos-plugins/plugin-twitter";
+//console.log(twitterPlugin)
+
+// '@elizaos/plugin-twitter'
 
 import fs from "fs";
 import net from "net";
@@ -105,65 +118,6 @@ function mergeCharacters(base: Character, child: Character): Character {
     };
     return mergeObjects(base, child);
 }
-/* function isAllStrings(arr: unknown[]): boolean {
-    return Array.isArray(arr) && arr.every((item) => typeof item === "string");
-}
-export async function loadCharacterFromOnchain(): Promise<Character[]> {
-    const jsonText = onchainJson;
-
-    console.log("JSON:", jsonText);
-    if (!jsonText) return [];
-    const loadedCharacters = [];
-    try {
-        const character = JSON.parse(jsonText);
-        validateCharacterConfig(character);
-
-        // .id isn't really valid
-        const characterId = character.id || character.name;
-        const characterPrefix = `CHARACTER.${characterId
-            .toUpperCase()
-            .replace(/ /g, "_")}.`;
-
-        const characterSettings = Object.entries(process.env)
-            .filter(([key]) => key.startsWith(characterPrefix))
-            .reduce((settings, [key, value]) => {
-                const settingKey = key.slice(characterPrefix.length);
-                settings[settingKey] = value;
-                return settings;
-            }, {});
-
-        if (Object.keys(characterSettings).length > 0) {
-            character.settings = character.settings || {};
-            character.settings.secrets = {
-                ...characterSettings,
-                ...character.settings.secrets,
-            };
-        }
-
-        // Handle plugins
-        if (isAllStrings(character.plugins)) {
-            elizaLogger.info("Plugins are: ", character.plugins);
-            const importedPlugins = await Promise.all(
-                character.plugins.map(async (plugin) => {
-                    const importedPlugin = await import(plugin);
-                    return importedPlugin.default;
-                })
-            );
-            character.plugins = importedPlugins;
-        }
-
-        loadedCharacters.push(character);
-        elizaLogger.info(
-            `Successfully loaded character from: ${process.env.IQ_WALLET_ADDRESS}`
-        );
-        return loadedCharacters;
-    } catch (e) {
-        elizaLogger.error(
-            `Error parsing character from ${process.env.IQ_WALLET_ADDRESS}: ${e}`
-        );
-        process.exit(1);
-    }
-} */
 
 async function loadCharactersFromUrl(url: string): Promise<Character[]> {
     try {
@@ -190,6 +144,7 @@ async function jsonToCharacter(
     filePath: string,
     character: any
 ): Promise<Character> {
+  console.log("jsonToCharacter:", filePath);
     validateCharacterConfig(character);
 
     // .id isn't really valid
@@ -210,7 +165,8 @@ async function jsonToCharacter(
             ...character.settings.secrets,
         };
     }
-    // Handle plugins
+  // Handle plugins
+  console.log("plugins:", character.plugins);
     character.plugins = await handlePluginImporting(character.plugins);
     if (character.extends) {
         elizaLogger.info(
@@ -567,6 +523,9 @@ export async function initializeClients(
                     elizaLogger.debug(
                         `Initializing client: ${client.name}`
                     );
+                   
+                console.log("DEBUG",client);
+                
                     clients.push(startedClient);
                 }
             }
@@ -725,6 +684,7 @@ async function startAgent(
 
         // start assigned clients
         runtime.clients = await initializeClients(character, runtime);
+               
 
         // add to container
         directClient.registerAgent(runtime);
