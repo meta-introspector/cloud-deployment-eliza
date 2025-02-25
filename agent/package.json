@@ -20,7 +20,7 @@
         "exec": "node --enable-source-maps --loader ts-node/esm src/index.ts"
     },
     "dependencies": {
-	"promptbook": "workspace:*",
+	"eliza-plugin-promptbook": "workspace:*",
         "@elizaos/client-direct": "workspace:*",
         "@elizaos-plugins/client-twitter" : "workspace:*",
         "@elizaos/core": "workspace:*",
