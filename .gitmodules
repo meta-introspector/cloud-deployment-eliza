@@ -7,3 +7,15 @@
 [submodule "vendor/elizaos/client-twitter"]
 	path = vendor/elizaos/client-twitter
 	url = https://github.com/meta-introspector/client-twitter-eliza-zos
+[submodule "vendor/ptbk/promptbook"]
+	path = vendor/ptbk/promptbook
+	url = https://github.com/jmikedupont2/promptbook
+[submodule "vendor/ptbk/book-pbtk-zos"]
+	path = vendor/ptbk/book-pbtk-zos
+	url = https://github.com/meta-introspector/book-pbtk-zos
+[submodule "vendor/ptbk/hello-world-node-js-pbtk-zos"]
+	path = vendor/ptbk/hello-world-node-js-pbtk-zos
+	url = https://github.com/meta-introspector/hello-world-node-js-pbtk-zos
+[submodule "vendor/ptbk/hello-world-next-js-pbtk-zos"]
+	path = vendor/ptbk/hello-world-next-js-pbtk-zos
+	url = https://github.com/meta-introspector/hello-world-next-js-pbtk-zos
