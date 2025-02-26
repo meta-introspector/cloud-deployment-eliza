@@ -10,6 +10,7 @@
         "build": "tsup",
         "dev": "tsup --watch",
         "start": "node dist/index.js",
+        "start_ts": "node --loader ts-node/esm src/index.ts",
         "clean": "rm -rf node_modules dist"
     },
     "keywords": [],

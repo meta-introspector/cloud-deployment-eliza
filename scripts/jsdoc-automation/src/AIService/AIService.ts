@@ -29,8 +29,8 @@ export class AIService {
      */
     constructor(private configuration: Configuration) {
 
-        this.chatModel = new wrapOpenAI(FakeListChatModule({ responses: []}));
-					this.chatModelFAQ = new wrapOpenAI(FakeListChatModule({	    responses: []        }));
+        this.chatModel = new FakeListChatModel({ responses: []});
+					this.chatModelFAQ = new FakeListChatModel({	    responses: []        });
         this.codeFormatter = new CodeFormatter();
     }
 
