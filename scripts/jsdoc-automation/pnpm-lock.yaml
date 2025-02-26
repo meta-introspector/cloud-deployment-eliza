@@ -14,9 +14,6 @@ importers:
       '@octokit/rest':
         specifier: ^21.0.2
         version: 21.0.2
-      '@types/hapi__shot':
-        specifier: ^6.0.0
-        version: 6.0.0
       '@typescript-eslint/parser':
         specifier: 6.18.1
         version: 6.18.1(eslint@9.17.0)(typescript@5.3.3)
@@ -522,10 +519,6 @@ packages:
 
   '@types/hapi@18.0.14':
     resolution: {integrity: sha512-/AlCHpOTzHOX7WYGlQAhL75Ca5gsm0S6X7mkW6RWW06e4Eot6xPm76qGXPHagVrpfs8qTKJdysJah/Uhtr8ojw==}
-
-  '@types/hapi__shot@6.0.0':
-    resolution: {integrity: sha512-CUxk0AEQRpIT2cx7EYXkqaXm60LP46ZyEhr/7uov7D/ZLysA5DKkfBtPIYnoWvn8qfcFV/7YHLd3U9gThuhb0A==}
-    deprecated: This is a stub types definition. @hapi/shot provides its own type definitions, so you do not need this installed.
 
   '@types/iron@5.0.5':
     resolution: {integrity: sha512-ndu2RvRJ5LWsSVF0kBMJe9qnNcFcAO9eYwzr2P4FOU6m5ypRrbdiX+d8x4GNG7lIn1mKShyQf3M08CIX4wPsEA==}
@@ -1871,10 +1864,6 @@ snapshots:
       '@types/podium': 1.0.4
       '@types/shot': 4.0.5
       joi: 17.13.3
-
-  '@types/hapi__shot@6.0.0':
-    dependencies:
-      '@hapi/shot': 6.0.1
 
   '@types/iron@5.0.5':
     dependencies:
