@@ -293,6 +293,11 @@ export async function embed(runtime: IAgentRuntime, input: string) {
             elizaLogger.log("No input to retrieve cached embedding for");
             return null;
         }
+        if (! runtime.messageManager) {
+            elizaLogger.log("No message manager");
+            throw Error("No message manager");
+            return null;
+        }
 
         const similaritySearchResult =
             await runtime.messageManager.getCachedEmbeddings(input);

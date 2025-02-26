@@ -20,7 +20,9 @@
         "noEmitOnError": false,
         "moduleDetection": "force",
         "allowArbitraryExtensions": true,
-        "customConditions": ["@elizaos/source"]
+        "typeRoots":["./node_modules/@types"],
+        "customConditions": ["@elizaos/source"],
+        "sourceMap": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "dist", "src/**/*.d.ts", "types/**/*.test.ts"]

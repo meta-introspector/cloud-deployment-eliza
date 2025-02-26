@@ -424,7 +424,7 @@ export class SqliteDatabaseAdapter
             ORDER BY levenshtein_score ASC
             LIMIT ?
         `;
-
+        console.log("similarity",sql)
         const rows = this.db
             .prepare(sql)
             .all(
@@ -439,7 +439,7 @@ export class SqliteDatabaseAdapter
                 opts.query_input,
                 opts.query_match_count
             ) as { embedding: Buffer; levenshtein_score: number }[];
-
+        console.log("found these",rows)
         return rows.map((row) => ({
             embedding: Array.from(new Float32Array(row.embedding as Buffer)),
             levenshtein_score: row.levenshtein_score,
@@ -1114,6 +1114,7 @@ const sqliteDatabaseAdapter: Adapter = {
             })
             .catch((error) => {
                 elizaLogger.error("Failed to connect to SQLite:", error);
+                throw error;
             });
 
         return db;

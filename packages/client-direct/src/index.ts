@@ -1027,7 +1027,7 @@ export class DirectClient {
                 elizaLogger.error(
                     "Could not close connections in time, forcefully shutting down"
                 );
-                process.exit(1);
+                process.exit(11);
             }, 5000);
         };
 

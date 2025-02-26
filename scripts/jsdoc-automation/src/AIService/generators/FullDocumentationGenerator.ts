@@ -1,11 +1,11 @@
-import type { ASTQueueItem, EnvUsage, PluginDocumentation, TodoItem, TodoSection } from "../../types";
+import type { ASTQueueItem, EnvUsage, PluginDocumentation, TodoItem, TodoSection } from "../../types/index.js";
 import type { Configuration } from "../../Configuration.js";
 import { TypeScriptParser } from "../../TypeScriptParser.js";
 import { CodeFormatter } from "../utils/CodeFormatter.js";
 import { DocumentOrganizer } from "../utils/DocumentOrganizer.js";
 import path from "path";
-import { PROMPT_TEMPLATES } from "../../utils/prompts";
-import type { FileDocsGroup, OrganizedDocs } from "../types";
+import { PROMPT_TEMPLATES } from "../../utils/prompts.js";
+import type { FileDocsGroup, OrganizedDocs } from "../types/index.js";
 import { AIService } from "../AIService.js";
 import { promises as fs } from "fs";
 
@@ -71,10 +71,28 @@ export class FullDocumentationGenerator {
         );
         const providersDocumentation = await this.generateProvidersDocumentation(exports.providers);
         const evaluatorsDocumentation = await this.generateEvaluatorsDocumentation(exports.evaluators);
-
+        console.log("PackageJson",packageJson);
+        console.log("ORG",organizedDocs);
         // Generate overview, FAQ, and troubleshooting together
         const overviewResponse = await this.generateOverview(organizedDocs, packageJson);
+        console.log("Overview response:", overviewResponse);
+        const foo : Troubleshooting ={ commonIssues:  [{
+            issue: "str",
+            cause: "str",
+            solution: "str"
+        }], debuggingTips:["str"] };
+        let parsedOverview = { 
+            "faq" : [],
+            "troubleshooting" : foo,
+            "overview" : {}
+        }
+        try {
         const parsedOverview = JSON.parse(overviewResponse);
+        } catch (error) {
+            console.error("Error parsing overview response:", error);
+            console.error("Overview response:", overviewResponse);
+           // throw error;
+        }
 
         const [
             installation,

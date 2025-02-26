@@ -1,3 +1,11 @@
+//const __filename = "error";
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+console.log(__filename);
+console.log(__dirname);
 import { DirectoryTraversal } from "./DirectoryTraversal.js";
 import { TypeScriptParser } from "./TypeScriptParser.js";
 import { JsDocAnalyzer } from "./JsDocAnalyzer.js";
@@ -5,7 +13,8 @@ import { JsDocGenerator } from "./JsDocGenerator.js";
 import { DocumentationGenerator } from "./DocumentationGenerator.js";
 import { Configuration } from "./Configuration.js";
 import { AIService } from "./AIService/AIService.js";
-import { GitManager } from "./GitManager.js";
+//import { GitManager } from "./GitManager.js";
+import { LocalGitManager } from "./LocalGitManager.js";
 import { PluginDocumentationGenerator } from "./PluginDocumentationGenerator.js";
 
 /**
@@ -17,7 +26,9 @@ async function main() {
     try {
         const configuration = new Configuration();
 
-        const gitManager = new GitManager({
+        console.log("owner", configuration.repository.owner);
+
+        const gitManager = new LocalGitManager({
             owner: configuration.repository.owner,
             name: configuration.repository.name,
         });
@@ -35,7 +46,7 @@ async function main() {
                 const files = await gitManager.getFilesInPullRequest(
                     configuration.repository.pullNumber
                 );
-                prFiles = files.map((file) => file.filename);
+                prFiles = files.map((file: { filename: any; }) => file.filename);
             } catch (prError) {
                 console.error("Error fetching PR files:", {
                     error: prError,
@@ -126,7 +137,7 @@ async function main() {
                 stack: error instanceof Error ? error.stack : undefined,
                 timestamp: new Date().toISOString(),
             });
-            process.exit(1);
+            process.exit(2);
         }
     } catch (error) {
         console.error("Critical error during documentation generation:", {
@@ -142,15 +153,30 @@ async function main() {
             nodeVersion: process.version,
             platform: process.platform,
         });
-        process.exit(1);
+        process.exit(12);
     }
 }
 
 // Simple error handling for the main function
-main().catch((error) => {
-    console.error(
-        "Fatal error:",
-        error instanceof Error ? error.message : String(error)
-    );
-    process.exit(1);
-});
+main()
+// .catch((error) => {
+//     console.log("ERROR");
+//     console.error(
+//         "Fatal error:",
+//         error instanceof Error ? error.message : String(error)
+//     );
+//     process.exit(10);
+// });
+
+
+export {
+    DirectoryTraversal,
+    TypeScriptParser,
+    JsDocAnalyzer,
+    JsDocGenerator,
+    DocumentationGenerator,
+    Configuration,
+    AIService,
+    LocalGitManager,
+    PluginDocumentationGenerator
+};

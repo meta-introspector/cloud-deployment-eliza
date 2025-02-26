@@ -5,12 +5,12 @@ import type {
     EnvUsage,
 } from "./types/index.js";
 import type { AIService } from "./AIService/AIService.js";
-import type { GitManager } from "./GitManager.js";
+import type { IGitManager } from "./IGitManager.js";
 import type { Configuration } from "./Configuration.js";
 import { FullDocumentationGenerator } from "./AIService/generators/FullDocumentationGenerator.js";
 import fs from "fs";
 import path from "path";
-
+let dryRun = true;
 /**
  * Generates comprehensive plugin documentation based on existing JSDoc comments
  */
@@ -18,7 +18,7 @@ export class PluginDocumentationGenerator {
     private fullDocumentationGenerator: FullDocumentationGenerator;
     constructor(
         private aiService: AIService,
-        private gitManager: GitManager,
+        private gitManager: IGitManager,
         private configuration: Configuration
     ) {
         this.fullDocumentationGenerator = new FullDocumentationGenerator(configuration);
@@ -48,6 +48,10 @@ export class PluginDocumentationGenerator {
         if (!packageJson) {
             console.error("package.json not found");
         }
+        console.log("existingDocs", existingDocs.length);
+        console.log("todoItems", todoItems.length);
+        console.log("envUsages", envUsages.length);
+        console.log("packageJson", packageJson);
         // Generate documentation
         const documentation = await this.fullDocumentationGenerator.generatePluginDocumentation({
             existingDocs,
@@ -71,12 +75,14 @@ export class PluginDocumentationGenerator {
             );
 
             // Commit the file to the correct location
+            if (!dryRun) {
             await this.gitManager.commitFile(
                 branchName,
                 relativeReadmePath,
                 markdownContent,
                 "docs: Update plugin documentation"
             );
+        }
         } else {
             console.error(
                 "No branch name provided, skipping commit for README-automated.md"

@@ -1,0 +1,11 @@
+# Secrets used
+- OPENAI_API_KEY
+- TURBO_TOKEN
+- TURBO_TEAM
+- NODE_AUTH_TOKEN
+
+# fixme: why 4 different gihthub tokens?
+- GH_PAT 
+- GITHUB_ACCESS_TOKEN
+- GITHUB_TOKEN
+- CHANGELOG_GITHUB_TOKEN 

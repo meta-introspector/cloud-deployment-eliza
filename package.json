@@ -76,6 +76,8 @@
     "node": "23.3.0"
   },
   "dependencies": {
+    "@hapi/shot": "^6.0.1",
+    "@types/hapi": "^18.0.14",
     "@0glabs/0g-ts-sdk": "0.2.1",
     "@coinbase/coinbase-sdk": "0.10.0",
     "@deepgram/sdk": "^3.9.0",

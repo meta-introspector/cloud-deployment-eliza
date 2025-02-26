@@ -25,11 +25,11 @@ export class GitManager {
      * @throws {Error} Throws an error if the GITHUB_ACCESS_TOKEN is not set
      */
     constructor(public repository: Repository) {
-        if (!process.env.GITHUB_ACCESS_TOKEN) {
+        if (!process.env["GITHUB_ACCESS_TOKEN"]) {
             throw new Error("GITHUB_ACCESS_TOKEN is not set");
         }
         this.octokit = new Octokit({
-            auth: process.env.GITHUB_ACCESS_TOKEN,
+            auth: process.env["GITHUB_ACCESS_TOKEN"],
         });
     }
 

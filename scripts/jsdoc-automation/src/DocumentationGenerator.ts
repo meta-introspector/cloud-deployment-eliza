@@ -10,7 +10,7 @@ import type {
     PrModeFileChange,
     TodoItem,
 } from "./types/index.js";
-import type { GitManager } from "./GitManager.js";
+import type { IGitManager } from "./IGitManager.js"
 import fs from "fs";
 import type { Configuration } from "./Configuration.js";
 import path from "path";
@@ -49,7 +49,7 @@ export class DocumentationGenerator {
         public typeScriptParser: TypeScriptParser,
         public jsDocAnalyzer: JsDocAnalyzer,
         public jsDocGenerator: JsDocGenerator,
-        public gitManager: GitManager,
+        public gitManager: IGitManager,
         public configuration: Configuration,
         public aiService: AIService
     ) {
@@ -75,7 +75,7 @@ export class DocumentationGenerator {
         if (pullNumber) {
             const prFiles =
                 await this.gitManager.getFilesInPullRequest(pullNumber);
-            fileChanges = prFiles.filter((file) => {
+            fileChanges = prFiles.filter((file: { filename: string; }) => {
                 // Convert PR file path (which is repo-relative) to absolute path
                 const absolutePath = this.configuration.toAbsolutePath(
                     file.filename

@@ -114,6 +114,10 @@ export class MemoryManager implements IMemoryManager {
             levenshtein_score: number;
         }[]
     > {
+        if (!this.runtime.databaseAdapter){
+            throw Error("Database adapter not initialized");
+
+        }
         return await this.runtime.databaseAdapter.getCachedEmbeddings({
             query_table_name: this.tableName,
             query_threshold: 2,

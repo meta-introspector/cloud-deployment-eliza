@@ -1,5 +1,5 @@
-import type { ASTQueueItem } from "../../types";
-import type { FileDocsGroup, OrganizedDocs } from "../types";
+import type { ASTQueueItem } from "../../types/index.js";
+import type { FileDocsGroup, OrganizedDocs } from "../types/index.js";
 
 export class DocumentOrganizer {
 
