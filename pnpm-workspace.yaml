@@ -3,4 +3,5 @@ packages:
     - "packages/*"
     - "vendor/elizaos/*"
     - "vendor/ptbk/*"
+    - "vendor/ptbk/promptbook"
     - "agent"
