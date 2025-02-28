@@ -1,4 +1,4 @@
-import { DirectClient } from "@elizaos/client-direct";
+
 import {
     type Adapter,
     AgentRuntime,
@@ -18,9 +18,8 @@ import {
     stringToUuid,
     validateCharacterConfig,
 } from "@elizaos/core";
-import { defaultCharacter } from "./defaultCharacter.ts";
-
-import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
+//import { defaultCharacter } from "./defaultCharacter.ts";
+//import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
 
 import fs from "fs";
 import net from "net";
