@@ -108,7 +108,7 @@
     ]
   },
   "twitterSpaces": {
-        "maxSpeakers": 2,
+        "maxSpeakers": 10,
         "topics": ["Blockchain Trends", "AI Innovations", "Quantum Computing"],
         "typicalDurationMinutes": 45,
         "idleKickTimeoutMs": 300000,
