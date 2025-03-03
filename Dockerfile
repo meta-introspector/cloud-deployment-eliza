@@ -25,6 +25,16 @@ RUN npm install -g pnpm@9.15.4 && \
     libpango1.0-dev \
     libgif-dev \
     openssl \
+    ffmpeg \
+    v4l-utils \
+    libavcodec-extra \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswscale-dev \
+    libavfilter-dev \    
+    libopus-dev \
+    libvpx-dev \      
     libssl-dev libsecret-1-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
