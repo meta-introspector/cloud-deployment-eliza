@@ -1,7 +1,7 @@
 {
   "name": "ZOS-MycorrhizalMind",
   "plugins": [
-    
+    "@elizaos-plugins/plugin-speech-tts",
     "@elizaos-plugins/client-twitter",
     "@elizaos-plugins/client-discord",
     "@elizaos-plugins/plugin-twitter"   

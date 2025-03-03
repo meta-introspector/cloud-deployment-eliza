@@ -21,7 +21,9 @@
     },
     "dependencies": {
         "@confio/ics23": "^0.6.8",
+        "@elizaos-plugins/plugin-speech-tts": "workspace:*",
         "@elizaos-plugins/client-discord": "workspace:*",
+        
         "@elizaos-plugins/client-twitter": "workspace:*",
         "@elizaos-plugins/plugin-twitter": "workspace:*",
         "@elizaos/client-direct": "workspace:*",

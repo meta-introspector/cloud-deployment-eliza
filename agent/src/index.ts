@@ -329,11 +329,13 @@ async function handlePluginImporting(plugins: string[]) {
                         importedPlugin.default || importedPlugin[functionName]
                     );
                 } catch (importError) {
+                    console.log("Failed to import plugin: ", importError);
                     elizaLogger.error(
                         `Failed to import plugin: ${plugin}`,
                         importError
                     );
                     return []; // Return null for failed imports
+                    throw importError;
                 }
             })
         );
