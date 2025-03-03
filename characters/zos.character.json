@@ -3,9 +3,10 @@
   "plugins": [
     
     "@elizaos-plugins/client-twitter",
+    "@elizaos-plugins/client-discord",
     "@elizaos-plugins/plugin-twitter"   
   ],
-  "clients": ["twitter"],
+  "clients": ["twitter","discord"],
   "modelProvider": "groq",
   "settings": {
     "secrets": {},
@@ -109,7 +110,7 @@
   },
   "twitterSpaces": {
         "maxSpeakers": 10,
-        "topics": ["Blockchain Trends", "AI Innovations", "Quantum Computing"],
+        "topics": ["Building and Testing Twitter Spaces Live SOLFUNMEME"],
         "typicalDurationMinutes": 45,
         "idleKickTimeoutMs": 300000,
         "minIntervalBetweenSpacesMinutes": 1,
@@ -117,7 +118,7 @@
         "randomChance": 1,
         "enableIdleMonitor": true,
         "enableSttTts": true,
-        "enableRecording": false,
+        "enableRecording": true,
         "voiceId": "21m00Tcm4TlvDq8ikWAM",
         "sttLanguage": "en",
         "gptModel": "gpt-3.5-turbo",
