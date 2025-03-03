@@ -10,3 +10,6 @@
 [submodule "vendor/elizaos/client-discord-eliza-zos"]
 	path = vendor/elizaos/client-discord-eliza-zos
 	url = https://github.com/meta-introspector/client-discord-eliza-zos
+[submodule "vendor/elizaos/plugin-speech-tts"]
+	path = vendor/elizaos/plugin-speech-tts
+	url = https://github.com/meta-introspector/plugin-speech-tts-eliza-zos
