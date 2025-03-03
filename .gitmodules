@@ -7,3 +7,6 @@
 [submodule "vendor/elizaos/client-twitter"]
 	path = vendor/elizaos/client-twitter
 	url = https://github.com/meta-introspector/client-twitter-eliza-zos
+[submodule "vendor/elizaos/client-discord-eliza-zos"]
+	path = vendor/elizaos/client-discord-eliza-zos
+	url = https://github.com/meta-introspector/client-discord-eliza-zos
