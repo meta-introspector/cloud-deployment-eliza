@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "address": "ws://0.0.0.0:9229/ed28df18-379a-4990-b260-3b3fa3763ff8",
+            "address": "ws://0.0.0.0:9229/16a0e19d-f250-4fa1-af9a-75f7ec864b43",
             "localRoot": "${workspaceFolder}",
             "name": "Attach to Remote debug",
             "port": 9229,
