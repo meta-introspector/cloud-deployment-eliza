@@ -21,10 +21,9 @@
     },
     "dependencies": {
         "@confio/ics23": "^0.6.8",
-        "@elizaos-plugins/plugin-speech-tts": "workspace:*",
         "@elizaos-plugins/client-discord": "workspace:*",
-        
         "@elizaos-plugins/client-twitter": "workspace:*",
+        "@elizaos-plugins/plugin-speech-tts": "workspace:*",
         "@elizaos-plugins/plugin-twitter": "workspace:*",
         "@elizaos/client-direct": "workspace:*",
         "@elizaos/core": "workspace:*",
@@ -35,6 +34,7 @@
         "@opentelemetry/sdk-node": "^0.45.1",
         "@roamhq/wrtc": "^0.8.0",
         "@sinclair/typebox": "^0.32.35",
+        "@tsconfig/next": "^2.0.3",
         "@types/hapi": "^18.0.14",
         "agent-twitter-client": "workspace:*",
         "child_process": "^1.0.2",

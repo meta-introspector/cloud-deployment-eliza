@@ -18,6 +18,8 @@
 	"cleanstart:debug": "if [ -f agent/data/db.sqlite ]; then rm agent/data/db.sqlite; fi && cross-env NODE_ENV=development VERBOSE=true DEFAULT_LOG_LEVEL=debug DEBUG=eliza:* pnpm --filter \"@elizaos/agent\" start --isRoot",
 	"start": "pnpm --filter \"@elizaos/agent\" start --isRoot",
 	"start:debug": "cross-env pnpm --filter \"@elizaos/agent\" start --isRoot",
+	"start:debug2": "cross-env pnpm --filter \"@elizaos/agent\" start_debug --isRoot",
+	"nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node",
 	"dev": "bash ./scripts/dev.sh",
 	"release": "pnpm build && pnpm format && npx lerna publish --no-private --force-publish",
 	"clean": "bash ./scripts/clean.sh",
