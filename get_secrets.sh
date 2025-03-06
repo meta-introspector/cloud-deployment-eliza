@@ -1,34 +1,19 @@
 #!/bin/bash
-# we are using parameters prefixed by tine_ for multiple 
+# we are using parameters prefixed by ${AGENT_NAME}_, eg. "tine_agent_7_"
 ## TURN OFF LOGGING
 echo using "${AGENT_NAME}" as agent name base for keys
 set +x
 
-#this script expects AGENT_NAME to be set to something like "tine_agent"
+# This script expects AGENT_NAME to be set to something like "tine_agent"
 
 mkdir -p "/var/run/agent/secrets/"
 echo "" > "/var/run/agent/secrets/env" # blank the file
 
-#  b ["OPENAI_KEY"]="${AGENT_NAME}_openai_key"
-#   ["XAI_MODEL"]="${AGENT_NAME}_openai_model"
-#   ["XAI_L_MODEL"]="${AGENT_NAME}_large_openai_model"
-#   ["XAI_M_MODEL"]="${AGENT_NAME}_medium_openai_model"
-#   ["OPENAI_API_URL"]="${AGENT_NAME}_openai_endpoint"
-
-declare -A params=(["GROQ_API_KEY"]="${AGENT_NAME}_groq_key"
-		   ["TWITTER_PASSWORD"]="${AGENT_NAME}_twitter_password"
-		   ["TWITTER_EMAIL"]="${AGENT_NAME}_twitter_email"
-		   ["TWITTER_USERNAME"]="${AGENT_NAME}_twitter_username"
-		   ["AGENT_IMAGE"]="${AGENT_NAME}_agent_image"
-		   ["TOKENIZER_IMAGE"]="${AGENT_NAME}_tokenizer_image"
-		  )
-
-#systemctl set-environment enterUser=my-username
-for key in "${!params[@]}"; do
-    VARNAME="${params[$key]}"
-    aws ssm get-parameter --name "${VARNAME}"  > /dev/null || echo "Could not find ${VARNAME}"
-    value=$(aws ssm get-parameter --name "${VARNAME}" | jq .Parameter.Value -r)
-    echo "$key=${value}" >> "/var/run/agent/secrets/env"
+# Fetch all variables with the prefix and name them the same as the variable minus agent name underscore
+for key in $(aws ssm describe-parameters --query 'Parameters[?starts_with(Name, `'"${AGENT_NAME}"'_`)].Name' --output text); do
+    value=$(aws ssm get-parameter --name "$key" | jq .Parameter.Value -r)
+    var_name=$(echo "$key" | sed "s/^${AGENT_NAME}_//")
+    echo "$var_name=${value}" >> "/var/run/agent/secrets/env"
 done
 
 # append these constant values to the env 
@@ -41,6 +26,5 @@ for key in "${!params_const[@]}"; do
     echo "$key=$value" >> "/var/run/agent/secrets/env"
 done
 
-    
 set -x
 ## TURN ON LOGGING
