@@ -4,7 +4,7 @@ env:
   parameter-store:
     DOCKER_USERNAME : "tine_agent_4_docker_username"
     DOCKER_PASSWORD : "tine_agent_4_docker_password"
-    DOCKER_IMAGE : "tine_agent_4_agent_image"
+    DOCKER_IMAGE : "tine_agent_7_agent_image"
 
     
 phases:
