@@ -44,8 +44,13 @@ grep . -h -n /etc/systemd/system/agent-docker.service
 chown -R agent:agent /var/run/agent/
 chown -R agent:agent /opt/agent/
 systemctl daemon-reload
-#docker stop agent-docker.service || echo oops
-#docker rm agent-docker.service || echo oops
+
+# now we can kill any existing
+docker stop agent-docker.service || echo oops
+docker kill agent-docker.service || echo oops
+docker rm agent-docker.service || echo oops
+
+
 systemctl start agent-docker || echo failed
 systemctl enable agent-docker || echo failed
 #systemctl status agent-docker || echo oops2
