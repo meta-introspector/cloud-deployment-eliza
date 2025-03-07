@@ -13,3 +13,6 @@
 [submodule "vendor/elizaos/plugin-speech-tts"]
 	path = vendor/elizaos/plugin-speech-tts
 	url = https://github.com/meta-introspector/plugin-speech-tts-eliza-zos
+[submodule "vendor/elizaos/client-telegram"]
+	path = vendor/elizaos/client-telegram
+	url = https://github.com/meta-introspector/client-telegram-eliza-zos
