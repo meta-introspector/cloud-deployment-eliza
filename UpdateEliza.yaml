@@ -72,7 +72,7 @@ mainSteps:
     - "    -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/\
       \ \\\n"
     - "    --mount type=bind,source=/opt/agent,target=/opt/agent \\\n"
-    - "    --mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/\
+    - "    --mount type=bind,source=/opt/agent/characters/,target=/app/characters/\
       \ \\\n"
     - "    --env-file /var/run/agent/secrets/env \\\n"
     - "    --memory={{ ContainerMemory }}m \\\n"

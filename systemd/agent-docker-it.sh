@@ -6,12 +6,9 @@ source /var/run/agent/secrets/env
 		-v tokenizer:/app/node_modules/@anush008/tokenizers/ \
 		-v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ 	\
 		--mount type=bind,source=/opt/agent,target=/opt/agent 	\
-		--mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ 	\
-		--mount type=bind,source=/opt/agent/characters/eliza.character.json,target=/app/agent/characters/eliza.character.json 		\
+		--mount type=bind,source=/opt/agent/characters/,target=/app/characters/ 	\
 		--env-file /var/run/agent/secrets/env 	\
 		--name "agent-docker.service" --entrypoint "" -it ${AGENT_IMAGE} bash
 
 
-#  --entrypoint /opt/agent/docker-entrypoint-strace2.sh 
-#/usr/bin/docker run  -p 3000:3000 -v tokenizer:/app/node_modules/@anush008/tokenizers/ -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ --mount type=bind,source=/opt/agent,target=/opt/agent --mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ --mount type=bind,source=/opt/agent/characters/eliza.character.json,target=/app/agent/characters/eliza.character.json  --name agent-docker.service --entrypoint /opt/agent/docker-entrypoint-strace2.sh -it h4ckermike/elizaos-eliza:feb10 bash
 

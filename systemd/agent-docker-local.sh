@@ -7,8 +7,7 @@ source ./env
 		-v tokenizer:/app/node_modules/@anush008/tokenizers/ \
 		-v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ 	\
 		--mount type=bind,source=/opt/agent,target=/opt/agent 	\
-		--mount type=bind,source=/opt/agent/characters/,target=/app/agent/characters/ 	\
-		--mount type=bind,source=/opt/agent/characters/eliza.character.json,target=/app/agent/characters/eliza.character.json 		\
+		--mount type=bind,source=/opt/agent/characters/,target=/app/characters/ 	\
 		--env-file env 	\
 		--name "agent-docker.service" 	\
 		--entrypoint /opt/agent/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
