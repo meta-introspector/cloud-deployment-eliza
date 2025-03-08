@@ -1,3 +1,5 @@
+const logEverything=false;
+
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createMistral } from "@ai-sdk/mistral";
@@ -837,7 +839,9 @@ export async function generateText({
                     fetch: runtime.fetch,
                     baseURL,
                 });
-
+                if (logEverything)  {
+                    elizaLogger.trace("Groq Context:", { context });
+                }
                 const { text: groqResponse } = await aiGenerateText({
                     model: groq.languageModel(model),
                     prompt: context,

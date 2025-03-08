@@ -18,7 +18,7 @@ export default defineConfig({
         "http",
         "https",
         // Add other modules you want to externalize
-        "onnxruntime-node",
-        "sharp",
+        "onnxruntime-node", // FIXME remove this
+        "sharp", // FIXME remove this
     ],
 });

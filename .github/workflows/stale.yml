@@ -16,7 +16,7 @@ jobs:
             DAYS_BEFORE_CLOSE: 7 # Define the days-before-close value
 
         steps:
-            - uses: actions/stale@v5
+            - uses: meta-introspector/stale@v5
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   stale-issue-message: |

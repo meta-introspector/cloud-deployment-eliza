@@ -1,5 +1,6 @@
 # Use a specific Node.js version for better reproducibility
-FROM node:23.3.0-slim AS builder
+#FROM node:23.3.0-slim AS builder
+FROM node:23.6.0 AS builder
 
 # Install pnpm globally and necessary build tools
 RUN npm install -g pnpm@9.15.4 && \
@@ -11,7 +12,6 @@ RUN npm install -g pnpm@9.15.4 && \
     python3-pip \
     curl \
     node-gyp \
-    ffmpeg \
     libtool-bin \
     autoconf \
     automake \
@@ -24,6 +24,16 @@ RUN npm install -g pnpm@9.15.4 && \
     libpango1.0-dev \
     libgif-dev \
     openssl \
+    ffmpeg \
+    v4l-utils \
+    libavcodec-extra \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswscale-dev \
+    libavfilter-dev \    
+    libopus-dev \
+    libvpx-dev \      
     libssl-dev libsecret-1-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -48,13 +58,28 @@ RUN pnpm run build && pnpm prune --prod
 # Final runtime image
 FROM node:23.3.0-slim
 
+RUN npm install -g pnpm@9.15.4 && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+    ffmpeg \
+    v4l-utils \
+    libavcodec-extra \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswscale-dev \
+    libavfilter-dev \    
+    libopus-dev \
+    libvpx-dev \      
+    libssl-dev libsecret-1-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install runtime dependencies
 RUN npm install -g pnpm@9.15.4 && \
     apt-get update && \
-    apt-get install -y \
-    git \
-    python3 \
-    ffmpeg && \
+    apt-get install -y git python3 curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

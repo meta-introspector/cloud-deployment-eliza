@@ -1,3 +1,9 @@
+//console.log("hello sfm");
+//import { debug_tracing } from  "./mytracing";
+//debug_tracing()
+// tracing.js
+console.log("DEBUG SOLFUNMEME")
+
 import { DirectClient } from "@elizaos/client-direct";
 import { ProxyAgent, setGlobalDispatcher } from "undici";
 import {
@@ -23,7 +29,15 @@ import {
 import { defaultCharacter } from "./defaultCharacter.ts";
 
 import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
+<<<<<<< HEAD
 import JSON5 from "json5";
+=======
+import {  } from "@elizaos/core";
+//import { twitterPlugin } from "@elizaos-plugins/plugin-twitter";
+//console.log(twitterPlugin)
+
+// '@elizaos/plugin-twitter'
+>>>>>>> cd257991e (lets test)
 
 import fs from "fs";
 import net from "net";
@@ -143,9 +157,11 @@ export async function loadCharacterFromOnchain(): Promise<Character[]> {
 
         // Handle plugins
         if (isAllStrings(character.plugins)) {
+	console.log("character.plugins:", character.plugins);
             elizaLogger.info("Plugins are: ", character.plugins);
             const importedPlugins = await Promise.all(
-                character.plugins.map(async (plugin) => {
+            character.plugins.map(async (plugin) => {
+	    console.log("plugin:", plugin);
                     const importedPlugin = await import(plugin);
                     return importedPlugin.default;
                 })
@@ -191,6 +207,7 @@ async function jsonToCharacter(
     filePath: string,
     character: any
 ): Promise<Character> {
+  console.log("jsonToCharacter:", filePath);
     validateCharacterConfig(character);
 
     // .id isn't really valid
@@ -420,11 +437,13 @@ async function handlePluginImporting(plugins: string[]) {
                         npmName: plugin,
                     };
                 } catch (importError) {
-                    console.error(
+                    console.log("Failed to import plugin: ", importError);
+                    elizaLogger.error(
                         `Failed to import plugin: ${plugin}`,
                         importError
                     );
-                    return false; // Return null for failed imports
+                    return []; // Return null for failed imports
+                    throw importError;
                 }
             })
         );
@@ -795,6 +814,7 @@ async function startAgent(
 
         // start assigned clients
         runtime.clients = await initializeClients(character, runtime);
+               
 
         // add to container
         directClient.registerAgent(runtime);
