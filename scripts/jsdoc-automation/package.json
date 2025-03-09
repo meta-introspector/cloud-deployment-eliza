@@ -16,7 +16,9 @@
     "keywords": [],
     "author": "",
     "license": "MIT",
-    "dependencies": {
+    "dependencies": {        
+        "@elizaos/plugin-bootstrap": "workspace:*",
+        "@elizaos/core": "workspace:*",
         "@hapi/shot": "^6.0.1",
         "@octokit/rest": "^21.0.2",
         "@typescript-eslint/parser": "6.18.1",
