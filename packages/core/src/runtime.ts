@@ -84,7 +84,7 @@ export class AgentRuntime implements IAgentRuntime {
     /**
      * The base URL of the server where the agent's requests are processed.
      */
-    serverUrl = "http://localhost:7998";
+    //serverUrl = "http://localhost:7998";
 
     /**
      * The database adapter used for interacting with the database.
@@ -346,7 +346,7 @@ export class AgentRuntime implements IAgentRuntime {
             this.registerService(service);
         });
 
-        this.serverUrl = opts.serverUrl ?? this.serverUrl;
+        //this.serverUrl = opts.serverUrl ?? this.serverUrl;
 
         elizaLogger.info(`${this.character.name}(${this.agentId}) - Setting Model Provider:`, {
             characterModelProvider: this.character.modelProvider,
@@ -394,9 +394,9 @@ export class AgentRuntime implements IAgentRuntime {
             throw new Error(`Invalid model provider: ${this.modelProvider}`);
         }
 
-        if (!this.serverUrl) {
-            elizaLogger.warn("No serverUrl provided, defaulting to localhost");
-        }
+        //if (!this.serverUrl) {
+        //    elizaLogger.warn("No serverUrl provided, defaulting to localhost");
+        //}
 
         this.token = opts.token;
 

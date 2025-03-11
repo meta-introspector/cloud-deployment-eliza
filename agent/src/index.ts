@@ -106,65 +106,7 @@ function mergeCharacters(base: Character, child: Character): Character {
     };
     return mergeObjects(base, child);
 }
-/* function isAllStrings(arr: unknown[]): boolean {
-    return Array.isArray(arr) && arr.every((item) => typeof item === "string");
-}
-export async function loadCharacterFromOnchain(): Promise<Character[]> {
-    const jsonText = onchainJson;
 
-    console.log("JSON:", jsonText);
-    if (!jsonText) return [];
-    const loadedCharacters = [];
-    try {
-        const character = JSON5.parse(jsonText);
-        validateCharacterConfig(character);
-
-        // .id isn't really valid
-        const characterId = character.id || character.name;
-        const characterPrefix = `CHARACTER.${characterId
-            .toUpperCase()
-            .replace(/ /g, "_")}.`;
-
-        const characterSettings = Object.entries(process.env)
-            .filter(([key]) => key.startsWith(characterPrefix))
-            .reduce((settings, [key, value]) => {
-                const settingKey = key.slice(characterPrefix.length);
-                settings[settingKey] = value;
-                return settings;
-            }, {});
-
-        if (Object.keys(characterSettings).length > 0) {
-            character.settings = character.settings || {};
-            character.settings.secrets = {
-                ...characterSettings,
-                ...character.settings.secrets,
-            };
-        }
-
-        // Handle plugins
-        if (isAllStrings(character.plugins)) {
-            elizaLogger.info("Plugins are: ", character.plugins);
-            const importedPlugins = await Promise.all(
-                character.plugins.map(async (plugin) => {
-                    const importedPlugin = await import(plugin);
-                    return importedPlugin.default;
-                })
-            );
-            character.plugins = importedPlugins;
-        }
-
-        loadedCharacters.push(character);
-        elizaLogger.info(
-            `Successfully loaded character from: ${process.env.IQ_WALLET_ADDRESS}`
-        );
-        return loadedCharacters;
-    } catch (e) {
-        elizaLogger.error(
-            `Error parsing character from ${process.env.IQ_WALLET_ADDRESS}: ${e}`
-        );
-        process.exit(1);
-    }
-} */
 
 async function loadCharactersFromUrl(url: string): Promise<Character[]> {
     try {
@@ -956,8 +898,8 @@ const setProxy = () => {
 
 setProxy();
 
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
+//const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+//const __dirname = path.dirname(__filename); // get the name of the directory
 
 startAgents().catch((error) => {
     elizaLogger.error("Unhandled error in startAgents:", error);

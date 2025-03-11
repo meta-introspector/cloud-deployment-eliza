@@ -1,4 +1,4 @@
-import type { FileDocsGroup } from "../types";
+import type { FileDocsGroup } from "../types/index.js";
 
 export class CodeFormatter {
 

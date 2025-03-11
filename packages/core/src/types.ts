@@ -1288,7 +1288,7 @@ export abstract class Service {
 export interface IAgentRuntime {
     // Properties
     agentId: UUID;
-    serverUrl: string;
+    //serverUrl: string;
     databaseAdapter: IDatabaseAdapter;
     token: string | null;
     modelProvider: ModelProviderName;

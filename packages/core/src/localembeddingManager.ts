@@ -23,6 +23,7 @@ class LocalEmbeddingModelManager {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
         const rootPath = path.resolve(__dirname, "..");
+        console.log("ROOT",rootPath);
         return rootPath.includes("/eliza/")
             ? rootPath.split("/eliza/")[0] + "/eliza/"
             : path.resolve(__dirname, "..");

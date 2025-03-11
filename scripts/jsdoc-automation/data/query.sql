@@ -1,0 +1,2 @@
+-- SQLite
+select * from memories

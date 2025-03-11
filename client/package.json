@@ -10,6 +10,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@hapi/shot": "^6.0.1",
+        "@types/hapi__shot": "4.1.6",
+        "@types/hapi": "^18.0.14",
 		"@elizaos/core": "workspace:*",
 		"@radix-ui/react-avatar": "^1.1.2",
 		"@radix-ui/react-collapsible": "^1.1.2",

@@ -39,14 +39,14 @@ export class Configuration implements Omit<ConfigurationData, "rootDirectory"> {
     private _rootDirectory!: ConfigurationData["rootDirectory"];
     private readonly repoRoot: string;
     private _branch = "develop";
-    private _generateJsDoc = true;
+    private _generateJsDoc = false;
     private _generateReadme = false;
 
     public excludedDirectories: string[] = [];
     public repository: Repository = {
         owner: "elizaOS",
         name: "eliza",
-        pullNumber: undefined,
+        pullNumber: 42,
     };
     public commitMessage = "Generated JSDoc comments";
     public pullRequestTitle = "JSDoc Generation";
@@ -98,13 +98,37 @@ export class Configuration implements Omit<ConfigurationData, "rootDirectory"> {
     }
 
     private loadConfiguration(): void {
+               
+        var pullNumber = 0;
+
+        // Handle other inputs
+        if (process.env["INPUT_PULL_NUMBER"]) {
+            console.log(
+                "Setting pull number from env:",
+                process.env["INPUT_PULL_NUMBER"]
+            );
+            this.repository.pullNumber = Number.parseInt(
+                process.env["INPUT_PULL_NUMBER"]
+            );
+        }
+
+        if (process.env["GITHUB_REPOSITORY"]) {
+            console.log(             "Setting repo from env:", process.env["GITHUB_REPOSITORY"] );
+            this.repository.name =  process.env["GITHUB_REPOSITORY"];
+        }
+        if (process.env["GITHUB_ACTOR"]) {
+            console.log( "Setting owner from env:",  process.env["GITHUB_ACTOR"] );
+            this.repository.owner =  process.env["GITHUB_ACTOR"];
+        }
+    
+    
         // First try to get from environment variables
-        const rootDirectory = process.env.INPUT_ROOT_DIRECTORY;
-        this._generateJsDoc = process.env.INPUT_JSDOC
-            ? process.env.INPUT_JSDOC.toUpperCase() === "T"
+        const rootDirectory = process.env["INPUT_ROOT_DIRECTORY"];
+        this._generateJsDoc = process.env["INPUT_JSDOC"]
+            ? process.env["INPUT_JSDOC"].toUpperCase() === "T"
             : true; // Default from workflow
-        this._generateReadme = process.env.INPUT_README
-            ? process.env.INPUT_README.toUpperCase() === "T"
+        this._generateReadme = process.env["INPUT_README"]
+            ? process.env["INPUT_README"].toUpperCase() === "T"
             : true; // Default from workflow
 
         console.log("Documentation flags:", {
@@ -115,10 +139,10 @@ export class Configuration implements Omit<ConfigurationData, "rootDirectory"> {
         let inputs;
 
         console.log("Environment variables:", {
-            rootDirectory: process.env.INPUT_ROOT_DIRECTORY,
-            pullNumber: process.env.INPUT_PULL_NUMBER,
-            excludedDirs: process.env.INPUT_EXCLUDED_DIRECTORIES,
-            reviewers: process.env.INPUT_REVIEWERS,
+            rootDirectory: process.env["INPUT_ROOT_DIRECTORY"],
+            pullNumber: process.env["INPUT_PULL_NUMBER"],
+            excludedDirs: process.env["INPUT_EXCLUDED_DIRECTORIES"],
+            reviewers: process.env["INPUT_REVIEWERS"],
         });
 
         if (rootDirectory) {
@@ -131,11 +155,12 @@ export class Configuration implements Omit<ConfigurationData, "rootDirectory"> {
                 relative: rootDirectory.replace(/^\/+/, ""),
             };
         } else {
-            console.log("Falling back to workflow file configuration");
+            
             const workflowPath = join(
                 this.repoRoot,
                 ".github/workflows/jsdoc-automation.yml"
             );
+            console.log("Falling back to workflow file configuration",workflowPath);
             if (!fs.existsSync(workflowPath)) {
                 throw new Error(`Workflow file not found at ${workflowPath}`);
             }
@@ -165,28 +190,18 @@ export class Configuration implements Omit<ConfigurationData, "rootDirectory"> {
             relative: this._rootDirectory.relative,
         });
 
-        // Handle other inputs
-        if (process.env.INPUT_PULL_NUMBER) {
-            console.log(
-                "Setting pull number from env:",
-                process.env.INPUT_PULL_NUMBER
-            );
-            this.repository.pullNumber = Number.parseInt(
-                process.env.INPUT_PULL_NUMBER
-            );
-        }
-
+     
         this.excludedDirectories = this.parseCommaSeparatedInput(
-            process.env.INPUT_EXCLUDED_DIRECTORIES,
+            process.env["INPUT_EXCLUDED_DIRECTORIES"],
             ["node_modules", "dist", "test"]
         );
 
         this.pullRequestReviewers = this.parseCommaSeparatedInput(
-            process.env.INPUT_REVIEWERS,
+            process.env["INPUT_REVIEWERS"],
             []
         );
-
-        this._branch = process.env.INPUT_BRANCH || "develop";
+        // check github ref as a fallback
+        this._branch = process.env["INPUT_BRANCH"] || process.env["GITHUB_REF"]  || "develop";
         console.log("Using branch:", this._branch);
     }
 
