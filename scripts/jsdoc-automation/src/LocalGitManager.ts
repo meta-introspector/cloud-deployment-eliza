@@ -32,7 +32,7 @@ export class LocalGitManager {
         const log = await this.git.log({
             //from: "main",
         //    to: `origin/pull/${pullNumber}/head`,
-        maxCount: 100,
+        maxCount: 1000,
         });
 
             // resolve the following information from the current branch
