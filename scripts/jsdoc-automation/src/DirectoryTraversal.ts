@@ -1,6 +1,15 @@
-import * as fs from "fs";
+//import { promises as fs } from "fs";
 import * as path from "path";
 import type { Configuration } from "./Configuration.js";
+
+export interface FileChange {
+    filename: string;
+    status: string;
+    additions: number;
+    deletions: number;
+    changes: number;
+    contents_url?: string;
+}
 
 /**
  * DirectoryTraversal class for traversing through directories and files.
@@ -30,15 +39,19 @@ export class DirectoryTraversal {
         "static",
     ];
 
+    private fileChanges: Map<string, FileChange>;
+
     /**
      * Constructor for directory traversal
      * @param {Configuration} config - Configuration object containing paths and exclusions
-     * @param {string[]} [prFiles=[]] - PR files to process
+     * @param {FileChange[]} [changes=[]] - Array of file changes from git diff
      */
     constructor(
         private config: Configuration,
-        public prFiles: string[] = []
-    ) {}
+        changes: FileChange[] = []
+    ) {
+        this.fileChanges = new Map(changes.map(change => [change.filename, change]));
+    }
 
     /**
      * Gets the absolute path for a file
@@ -55,62 +68,76 @@ export class DirectoryTraversal {
     }
 
     /**
-     * Traverses the directory based on PRFiles or all files in the root directory.
-     * If PRFiles are detected, processes only files from the PR.
+     * Gets the file change information for a given file
+     * @param {string} filePath - The path to the file
+     * @returns {FileChange | undefined} The file change information if available
+     */
+    public getFileChange(filePath: string): FileChange | undefined {
+        const relativePath = this.getRelativePath(filePath);
+        return this.fileChanges.get(relativePath);
+    }
+
+    /**
+     * Traverses the directory based on file changes from git diff.
+     * If changes are detected, processes only changed files.
      * Otherwise, scans all files in the root directory for TypeScript files.
-     *
      *
      * @returns An array of string containing the files to process.
      */
     public traverse(): string[] {
-        if (this.prFiles.length > 0) {
-            console.log("Detected PR Files:", this.prFiles);
+        if (this.fileChanges.size > 0) {
+            console.log("Detected Changes:", Array.from(this.fileChanges.values()));
 
-            // PR files are already relative to repo root, filter and convert to absolute paths
-            const files = this.prFiles
-                .filter((file) => {
-                    // Convert PR file (repo-relative) to absolute path
+            // Changes are already relative to repo root, filter and convert to absolute paths
+            const files = Array.from(this.fileChanges.entries())
+                .filter(([file, change]: [string, FileChange]) => {
+                    // Skip deleted files
+                    if (change.status === 'deleted') {
+                        return false;
+                    }
+
+                    // Convert file (repo-relative) to absolute path
                     const absolutePath = this.config.toAbsolutePath(file);
 
-                    // Check if the file is within our target directory
-                    const isInTargetDir = absolutePath.startsWith(
-                        this.config.absolutePath
-                    );
+                    // // Check if the file is within our target directory
+                    // const isInTargetDir = absolutePath.startsWith(
+                    //     this.config.absolutePath
+                    // );
 
-                    return (
-                        isInTargetDir &&
-                        fs.existsSync(absolutePath) &&
-                        !this.isExcluded(absolutePath) &&
-                        path.extname(file) === ".ts"
-                    );
+                    // return (
+                    //     isInTargetDir &&
+                    //     fs.existsSync(absolutePath) &&
+                    //     !this.isExcluded(absolutePath) &&
+                    //     path.extname(file) === ".ts"
+                    // );
                 })
-                .map((file) => this.config.toAbsolutePath(file));
+                .map(([file]) => this.config.toAbsolutePath(file));
 
             console.log("Files to process:", files);
             return files;
         } else {
             console.log(
-                "No PR Files Detected, Scanning all files in root directory"
+                "No Changes Detected, Scanning all files in root directory"
             );
             const typeScriptFiles: string[] = [];
 
             const traverseDirectory = (currentDirectory: string) => {
-                const files = fs.readdirSync(currentDirectory);
+                // const files = fs.readdirSync(currentDirectory);
 
-                files.forEach((file) => {
-                    const filePath = path.join(currentDirectory, file);
-                    const stats = fs.statSync(filePath);
+                // files.forEach((file) => {
+                //     const filePath = path.join(currentDirectory, file);
+                //     const stats = fs.statSync(filePath);
 
-                    if (stats.isDirectory()) {
-                        if (!this.isExcluded(filePath)) {
-                            traverseDirectory(filePath);
-                        }
-                    } else if (stats.isFile() && !this.isExcluded(filePath)) {
-                        if (path.extname(file) === ".ts") {
-                            typeScriptFiles.push(filePath);
-                        }
-                    }
-                });
+                //     if (stats.isDirectory()) {
+                //         if (!this.isExcluded(filePath)) {
+                //             traverseDirectory(filePath);
+                //         }
+                //     } else if (stats.isFile() && !this.isExcluded(filePath)) {
+                //         if (path.extname(file) === ".ts") {
+                //             typeScriptFiles.push(filePath);
+                //         }
+                //     }
+                // });
             };
 
             traverseDirectory(this.config.absolutePath);
