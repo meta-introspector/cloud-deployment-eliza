@@ -46,7 +46,179 @@ async function main() {
                 const files = await gitManager.getFilesInPullRequest(
                     configuration.repository.pullNumber
                 );
-                prFiles = files.map((file: { filename: any; }) => file.filename);
+                // Log the changes for debugging
+                console.log("Files changed in PR:", files.map(f => ({
+                    file: f.filename,
+                    changes: f.changes,
+                    additions: f.additions,
+                    deletions: f.deletions,
+                    status: f.status
+                })));
+                
+                try {
+                    const directoryTraversal = new DirectoryTraversal(
+                        configuration,
+                        files
+                    );
+                    const typeScriptParser = new TypeScriptParser();
+                    const jsDocAnalyzer = new JsDocAnalyzer(typeScriptParser);
+                    const aiService = new AIService(configuration);
+                    const jsDocGenerator = new JsDocGenerator(aiService);
+
+                    const documentationGenerator = new DocumentationGenerator(
+                        directoryTraversal,
+                        typeScriptParser,
+                        jsDocAnalyzer,
+                        jsDocGenerator,
+                        gitManager,
+                        configuration,
+                        aiService
+                    );
+
+                    const pluginDocGenerator = new PluginDocumentationGenerator(
+                        aiService,
+                        gitManager,
+                        configuration
+                    );
+
+                    const { todoItems, envUsages } =
+                        await documentationGenerator.analyzeCodebase();
+
+                    // Generate JSDoc documentation first
+                    const { documentedItems, branchName } =
+                        await documentationGenerator.generate(
+                            configuration.repository.pullNumber
+                        );
+
+                    // If both are true, use JSDoc branch for README
+                    // If only README is true, create new branch
+                    if (configuration.generateReadme) {
+                        const targetBranch =
+                            configuration.generateJsDoc && branchName
+                                ? branchName
+                                : `docs-update-readme-${Date.now()}`;
+
+                        if (!configuration.generateJsDoc) {
+                            await gitManager.createBranch(
+                                targetBranch,
+                                configuration.branch
+                            );
+                        }
+
+                        await pluginDocGenerator.generate(
+                            documentedItems,
+                            targetBranch,
+                            todoItems,
+                            envUsages
+                        );
+
+                        // Only create PR if we're not also generating JSDoc (otherwise changes go in JSDoc PR)
+                        if (!configuration.generateJsDoc) {
+                            const prContent = {
+                                title: "docs: Update plugin documentation",
+                                body: "Updates plugin documentation with latest changes",
+                            };
+
+                            await gitManager.createPullRequest({
+                                title: prContent.title,
+                                body: prContent.body,
+                                head: targetBranch,
+                                base: configuration.branch,
+                                labels: ["documentation", "automated-pr"],
+                                reviewers: configuration.pullRequestReviewers || [],
+                            });
+                        }
+                    }
+
+
+
+                    try {
+                        const typeScriptParser = new TypeScriptParser();
+                        const jsDocAnalyzer = new JsDocAnalyzer(typeScriptParser);
+                        const aiService = new AIService(configuration);
+                        const jsDocGenerator = new JsDocGenerator(aiService);
+            
+                        const documentationGenerator = new DocumentationGenerator(
+                            directoryTraversal,
+                            typeScriptParser,
+                            jsDocAnalyzer,
+                            jsDocGenerator,
+                            gitManager,
+                            configuration,
+                            aiService
+                        );
+            
+                        const pluginDocGenerator = new PluginDocumentationGenerator(
+                            aiService,
+                            gitManager,
+                            configuration
+                        );
+            
+                        const { todoItems, envUsages } =
+                            await documentationGenerator.analyzeCodebase();
+            
+                        // Generate JSDoc documentation first
+                        const { documentedItems, branchName } =
+                            await documentationGenerator.generate(
+                                configuration.repository.pullNumber
+                            );
+            
+                        // If both are true, use JSDoc branch for README
+                        // If only README is true, create new branch
+                        if (configuration.generateReadme) {
+                            const targetBranch =
+                                configuration.generateJsDoc && branchName
+                                    ? branchName
+                                    : `docs-update-readme-${Date.now()}`;
+            
+                            if (!configuration.generateJsDoc) {
+                                await gitManager.createBranch(
+                                    targetBranch,
+                                    configuration.branch
+                                );
+                            }
+            
+                            await pluginDocGenerator.generate(
+                                documentedItems,
+                                targetBranch,
+                                todoItems,
+                                envUsages
+                            );
+            
+                            // Only create PR if we're not also generating JSDoc (otherwise changes go in JSDoc PR)
+                            if (!configuration.generateJsDoc) {
+                                const prContent = {
+                                    title: "docs: Update plugin documentation",
+                                    body: "Updates plugin documentation with latest changes",
+                                };
+            
+                                await gitManager.createPullRequest({
+                                    title: prContent.title,
+                                    body: prContent.body,
+                                    head: targetBranch,
+                                    base: configuration.branch,
+                                    labels: ["documentation", "automated-pr"],
+                                    reviewers: configuration.pullRequestReviewers || [],
+                                });
+                            }
+                        }
+                    } catch (error) {
+                        console.error("Error during documentation generation:", {
+                            message: error instanceof Error ? error.message : String(error),
+                            stack: error instanceof Error ? error.stack : undefined,
+                            timestamp: new Date().toISOString(),
+                        });
+                        process.exit(2);
+                    }
+                    
+                } catch (error) {
+                    console.error("Error during documentation generation:", {
+                        error: error instanceof Error ? error.message : String(error),
+                        stack: error instanceof Error ? error.stack : undefined,
+                        timestamp: new Date().toISOString(),
+                    });
+                    process.exit(2);
+                }
             } catch (prError) {
                 console.error("Error fetching PR files:", {
                     error: prError,
@@ -57,88 +229,7 @@ async function main() {
             }
         }
 
-        try {
-            const directoryTraversal = new DirectoryTraversal(
-                configuration,
-                prFiles
-            );
-            const typeScriptParser = new TypeScriptParser();
-            const jsDocAnalyzer = new JsDocAnalyzer(typeScriptParser);
-            const aiService = new AIService(configuration);
-            const jsDocGenerator = new JsDocGenerator(aiService);
-
-            const documentationGenerator = new DocumentationGenerator(
-                directoryTraversal,
-                typeScriptParser,
-                jsDocAnalyzer,
-                jsDocGenerator,
-                gitManager,
-                configuration,
-                aiService
-            );
-
-            const pluginDocGenerator = new PluginDocumentationGenerator(
-                aiService,
-                gitManager,
-                configuration
-            );
-
-            const { todoItems, envUsages } =
-                await documentationGenerator.analyzeCodebase();
-
-            // Generate JSDoc documentation first
-            const { documentedItems, branchName } =
-                await documentationGenerator.generate(
-                    configuration.repository.pullNumber
-                );
-
-            // If both are true, use JSDoc branch for README
-            // If only README is true, create new branch
-            if (configuration.generateReadme) {
-                const targetBranch =
-                    configuration.generateJsDoc && branchName
-                        ? branchName
-                        : `docs-update-readme-${Date.now()}`;
-
-                if (!configuration.generateJsDoc) {
-                    await gitManager.createBranch(
-                        targetBranch,
-                        configuration.branch
-                    );
-                }
-
-                await pluginDocGenerator.generate(
-                    documentedItems,
-                    targetBranch,
-                    todoItems,
-                    envUsages
-                );
-
-                // Only create PR if we're not also generating JSDoc (otherwise changes go in JSDoc PR)
-                if (!configuration.generateJsDoc) {
-                    const prContent = {
-                        title: "docs: Update plugin documentation",
-                        body: "Updates plugin documentation with latest changes",
-                    };
-
-                    await gitManager.createPullRequest({
-                        title: prContent.title,
-                        body: prContent.body,
-                        head: targetBranch,
-                        base: configuration.branch,
-                        labels: ["documentation", "automated-pr"],
-                        reviewers: configuration.pullRequestReviewers || [],
-                    });
-                }
-            }
-        } catch (error) {
-            console.error("Error during documentation generation:", {
-                message: error instanceof Error ? error.message : String(error),
-                stack: error instanceof Error ? error.stack : undefined,
-                timestamp: new Date().toISOString(),
-            });
-            process.exit(2);
-        }
+        
     } catch (error) {
         console.error("Critical error during documentation generation:", {
             error:

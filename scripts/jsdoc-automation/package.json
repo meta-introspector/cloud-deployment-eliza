@@ -13,7 +13,7 @@
         "dbg": "node --inspect-brk --loader ts-node/esm src/index.ts",
         "dbg2": "node --inspect --loader ts-node/esm src/index.ts",
         "dbg3": "npx --node-options=--inspect-brk  tsx ./src/index",
-        "ts": "NODE_ENV=development VERBOSE=true DEFAULT_LOG_LEVEL=debug DEBUG=eliza:* npx tsx src/index",
+        "ts": "npx tsx src/index",
         "clean": "rm -rf node_modules dist"
     },
     "keywords": [],
