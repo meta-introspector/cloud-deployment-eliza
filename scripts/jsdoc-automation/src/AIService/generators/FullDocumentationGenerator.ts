@@ -86,13 +86,13 @@ export class FullDocumentationGenerator {
             "troubleshooting" : foo,
             "overview" : {}
         }
-        try {
-        const parsedOverview = JSON.parse(overviewResponse);
-        } catch (error) {
-            console.error("Error parsing overview response:", error);
-            console.error("Overview response:", overviewResponse);
-           // throw error;
-        }
+        // try {
+        // //const parsedOverview = JSON.parse(overviewResponse);
+        // } catch (error) {
+        //     //console.error("Error parsing overview response:", error);
+        //     //console.error("Overview response:", overviewResponse);
+        //    // throw error;
+        // }
 
         const [
             installation,

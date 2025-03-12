@@ -31,6 +31,7 @@
         "@typescript-eslint/typescript-estree": "8.26.0",
         "agentkeepalive": "^4.6.0",
         "dotenv": "^16.4.7",
+        "gitlog": "^5.1.0",
         "http": "0.0.1-security",
         "langchain": "^0.3.7",
         "langsmith": "^0.3.11",

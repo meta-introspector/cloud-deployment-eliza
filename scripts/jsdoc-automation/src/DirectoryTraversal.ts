@@ -86,7 +86,7 @@ export class DirectoryTraversal {
      */
     public traverse(): string[] {
         if (this.fileChanges.size > 0) {
-            console.log("Detected Changes:", Array.from(this.fileChanges.values()));
+            console.log(":", Array.from(this.fileChanges.values()));
 
             // Changes are already relative to repo root, filter and convert to absolute paths
             const files = Array.from(this.fileChanges.entries())

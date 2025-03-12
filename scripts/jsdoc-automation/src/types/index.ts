@@ -13,6 +13,7 @@ export interface ASTQueueItem {
 }
 
 export interface Repository {
+    rootDirectory : string,
     owner: string;
     name: string;
     pullNumber?: number;

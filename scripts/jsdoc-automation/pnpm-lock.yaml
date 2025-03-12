@@ -41,6 +41,9 @@ importers:
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
+      gitlog:
+        specifier: ^5.1.0
+        version: 5.1.0
       http:
         specifier: 0.0.1-security
         version: 0.0.1-security
@@ -2231,6 +2234,10 @@ packages:
 
   github-from-package@0.0.0:
     resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
+
+  gitlog@5.1.0:
+    resolution: {integrity: sha512-spyAYX1jeLGvK6mplNvlxb7zETa1DJTL7KKe9c8rwk6Tfmbju0cAk9VZuZx5xe4CkL3q/JkFHgP3eou/aV/31w==}
+    engines: {node: '>= 20.x'}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -5781,6 +5788,12 @@ snapshots:
       es-object-atoms: 1.1.1
 
   github-from-package@0.0.0: {}
+
+  gitlog@5.1.0:
+    dependencies:
+      debug: 4.4.0
+    transitivePeerDependencies:
+      - supports-color
 
   glob-parent@5.1.2:
     dependencies:

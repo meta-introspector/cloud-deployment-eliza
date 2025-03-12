@@ -256,8 +256,8 @@ export class AIService {
                   runtime: this.runtime,
                   tableName: "lore",
               });
-              console.log("KM",this.runtime.knowledgeManager)
-              console.log("Before",this.runtime.memoryManagers)
+              //console.log("KM",this.runtime.knowledgeManager)
+              //console.log("Before",this.runtime.memoryManagers)
               this.runtime.memoryManagers.set(this.runtime.knowledgeManager.tableName, this.runtime.knowledgeManager);
               this.runtime.messageManager =this.runtime.knowledgeManager;
 
@@ -368,7 +368,7 @@ async function processChunk(prompt: string, manager: string, runtime: AgentRunti
             return "Success";
         }
         else {
-            console.log("existingResponse", memId, existingResponse);
+            console.log("existingResponse", memId, existingResponse.content.text.substring(0,40));
             return "Success";
         } 
         

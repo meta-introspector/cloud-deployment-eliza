@@ -29,6 +29,7 @@ async function main() {
         console.log("owner", configuration.repository.owner);
 
         const gitManager = new LocalGitManager({
+            rootDirectory: configuration.rootDirectory.absolute,
             owner: configuration.repository.owner,
             name: configuration.repository.name,
         });
