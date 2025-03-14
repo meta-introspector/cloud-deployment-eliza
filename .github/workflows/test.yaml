@@ -1,8 +1,7 @@
 name: testdocker
 on:
     workflow_dispatch:
-    push:
-    pull_request:
+    
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
