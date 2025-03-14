@@ -78,7 +78,7 @@ None: Automated tests are acceptable.
 ## Deployment instructions
 -->
 
-<!-- If you are on Discord, please join https://discord.gg/ai16z and state your Discord username here for the contributor role and join us in #development-feed -->
+<!-- If you are on Discord, please join https://discord.gg/elizaOS and state your Discord username here for the contributor role and join us in #development-feed -->
 <!--
 ## Discord username
 
