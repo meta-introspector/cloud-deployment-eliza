@@ -1,14 +1,14 @@
-name: Integration Tests
+name: smoke-test
 on:
   push:
     branches:
       - "*"
-  pull_request_target:
+  pull_request:
     branches:
       - "*"
 
 jobs:
-  integration-tests:
+  smoke-tests:
     runs-on: ubuntu-latest
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -19,7 +19,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true  # Ensures submodules are checked out
-
       - uses: pnpm/action-setup@v3
         with:
           version: 9.15.0
@@ -29,18 +28,12 @@ jobs:
           node-version: "23.3"
           cache: "pnpm"
 
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+      - name: Run smoke tests
+        run: pnpm run smokeTests
 
-      - name: Build packages
-        run: pnpm build
-
-      - name: Check for API key
-        run: |
-          if [ -z "$OPENAI_API_KEY" ]; then
-              echo "Error: OPENAI_API_KEY is not set."
-              exit 1
-          fi
-
-      - name: Run integration tests
-        run: pnpm run integrationTests
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{env.MODIFIED_BRANCH_NAME}}
+          path: ${{env.OUTPUT_TEST_DIR}}

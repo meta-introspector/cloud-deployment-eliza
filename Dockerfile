@@ -11,6 +11,13 @@ RUN apt-get update && \
 
 # Install bun using npm (more reliable across architectures)
 RUN npm install -g bun turbo@2.3.3
+# Clone the repository
+COPY . /app/eliza
+
+WORKDIR /app/eliza
+
+# List files to ensure package.json is present
+RUN echo "Listing files in /app/eliza:" && ls -la
 
 # Set Python 3 as the default python
 RUN ln -s /usr/bin/python3 /usr/bin/python
@@ -26,8 +33,6 @@ COPY renovate.json .
 COPY scripts ./scripts
 # Copy source code
 COPY packages ./packages
-
-
 
 # Install dependencies
 RUN bun install
@@ -52,6 +57,7 @@ RUN apt-get update && \
 RUN npm install -g bun turbo@2.3.3
 
 # Copy built artifacts and production dependencies from the builder stage
+
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/tsconfig.json ./
 COPY --from=builder /app/turbo.json ./
@@ -62,11 +68,14 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/scripts ./scripts
 
+
+
 # Set environment variables
 ENV NODE_ENV=production
 
 # Expose any necessary ports (if needed)
 EXPOSE 3000 5173
+
 
 # Start the application
 CMD ["bun", "run", "start"] 
