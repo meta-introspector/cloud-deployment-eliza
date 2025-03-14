@@ -1,12 +1,7 @@
 name: Integration Tests
 
 on:
-  push:
-    branches:
-      - "*"
-  pull_request_target:
-    branches:
-      - "*"
+  workflow_dispatch:
 
 env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
