@@ -17,4 +17,4 @@ set -x
 #pnpm start --characters=$(ls -1p characters/*.json |  paste -sd,)
 #fi
 #exec "$@"
-bun start # --characters=$(ls -1p characters/*.json |  paste -sd,)
+bun run start # --characters=$(ls -1p characters/*.json |  paste -sd,)
