@@ -34,8 +34,7 @@ RUN bun install
 RUN bun add better-sqlite3
 
 # Build the project
-RUN bun run build:core
-
+RUN bun run build
 
 # Create a new stage for the final image
 FROM node:23.3.0-slim
@@ -73,4 +72,4 @@ EXPOSE 3000 5173
 
 
 # Start the application
-CMD ["bun", "run", "start"] 
+CMD ["bun", "start"] 
