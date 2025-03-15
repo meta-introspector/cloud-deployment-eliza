@@ -115,3 +115,4 @@ flycheck_*.el
 /network-security.data
 
 packages/autodoc/text_objects/*
+/env

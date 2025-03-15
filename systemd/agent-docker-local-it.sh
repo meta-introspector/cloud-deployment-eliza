@@ -1,7 +1,8 @@
 #!/bin/bash
 
 source ./env
-/usr/bin/docker remove agent-docker.service
+/usr/bin/docker kill agent-docker.service || echo ok
+/usr/bin/docker remove agent-docker.service || echo ok
 
 /usr/bin/docker run  -p 3000:3000  	\
 		-v tokenizer:/app/node_modules/@anush008/tokenizers/ \
