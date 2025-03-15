@@ -14,7 +14,7 @@ apt install -y strace
 
 
 #strace -f -o /opt/agent/strace.log -s99999 node CMD ["pnpm", "start", "--characters=characters/eliza.character.json"]
-strace -f -o /opt/agent/strace.log -s99999 bun run start 
+strace -f -o /opt/agent/strace.log -s99999 bun start 
 #pnpm start:debug --characters=$(ls -1p characters/*.json |  paste -sd,)
 #fi
 #exec "$@"
