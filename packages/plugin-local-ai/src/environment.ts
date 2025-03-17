@@ -11,12 +11,12 @@ import { z } from 'zod';
  * - StudioLM configurations including server URL, models, and embedding models
  */
 export const configSchema = z.object({
-  USE_LOCAL_AI: z.boolean().default(true),
+  USE_LOCAL_AI: z.boolean().default(false),
   USE_STUDIOLM_TEXT_MODELS: z.boolean().default(false),
   USE_OLLAMA_TEXT_MODELS: z.boolean().default(false),
 
   // Ollama Configuration
-  OLLAMA_SERVER_URL: z.string().default('http://localhost:11434'),
+  OLLAMA_SERVER_URL: z.string().default('http://192.168.1.90:11434'),
   OLLAMA_MODEL: z.string().default('deepseek-r1-distill-qwen-7b'),
   USE_OLLAMA_EMBEDDING: z.boolean().default(false),
   OLLAMA_EMBEDDING_MODEL: z.string().default(''),
@@ -25,7 +25,7 @@ export const configSchema = z.object({
   LARGE_OLLAMA_MODEL: z.string().default('deepseek-r1:7b'),
 
   // StudioLM Configuration
-  STUDIOLM_SERVER_URL: z.string().default('http://localhost:1234'),
+  STUDIOLM_SERVER_URL: z.string().default('http://192.168.1.90:1234'),
   STUDIOLM_SMALL_MODEL: z.string().default('lmstudio-community/deepseek-r1-distill-qwen-1.5b'),
   STUDIOLM_MEDIUM_MODEL: z.string().default('deepseek-r1-distill-qwen-7b'),
   STUDIOLM_EMBEDDING_MODEL: z.union([z.boolean(), z.string()]).default(false),
@@ -50,11 +50,12 @@ function validateModelConfig(config: Record<string, boolean>): void {
     USE_OLLAMA_TEXT_MODELS: config.USE_OLLAMA_TEXT_MODELS,
   });
 
-  // Ensure USE_LOCAL_AI is always true
-  if (!config.USE_LOCAL_AI) {
-    config.USE_LOCAL_AI = true;
-    logger.info("Setting USE_LOCAL_AI to true as it's required");
-  }
+  // NOPE
+  // // Ensure USE_LOCAL_AI is always true
+  // if (!config.USE_LOCAL_AI) {
+  // 	config.USE_LOCAL_AI = true;
+  // 	logger.info("Setting USE_LOCAL_AI to true as it's required");
+  // }
 
   // Only validate that StudioLM and Ollama are not both enabled
   if (config.USE_STUDIOLM_TEXT_MODELS && config.USE_OLLAMA_TEXT_MODELS) {
@@ -83,7 +84,7 @@ export async function validateConfig(config: Record<string, string>): Promise<Co
 
     // Parse environment variables with proper boolean conversion
     const booleanConfig = {
-      USE_LOCAL_AI: true, // Always true
+      USE_LOCAL_AI: false, // Always true
       USE_STUDIOLM_TEXT_MODELS: config.USE_STUDIOLM_TEXT_MODELS === 'true',
       USE_OLLAMA_TEXT_MODELS: config.USE_OLLAMA_TEXT_MODELS === 'true',
       USE_OLLAMA_EMBEDDING: config.USE_OLLAMA_EMBEDDING === 'true',
@@ -97,13 +98,13 @@ export async function validateConfig(config: Record<string, string>): Promise<Co
     // Create full config with all values
     const fullConfig = {
       ...booleanConfig,
-      OLLAMA_SERVER_URL: config.OLLAMA_SERVER_URL || 'http://localhost:11434',
+      OLLAMA_SERVER_URL: config.OLLAMA_SERVER_URL || 'http://192.168.1.90:11434',
       OLLAMA_MODEL: config.OLLAMA_MODEL || 'deepseek-r1-distill-qwen-7b',
       OLLAMA_EMBEDDING_MODEL: config.OLLAMA_EMBEDDING_MODEL || '',
       SMALL_OLLAMA_MODEL: config.SMALL_OLLAMA_MODEL || 'deepseek-r1:1.5b',
       MEDIUM_OLLAMA_MODEL: config.MEDIUM_OLLAMA_MODEL || 'deepseek-r1:7b',
       LARGE_OLLAMA_MODEL: config.LARGE_OLLAMA_MODEL || 'deepseek-r1:7b',
-      STUDIOLM_SERVER_URL: config.STUDIOLM_SERVER_URL || 'http://localhost:1234',
+      STUDIOLM_SERVER_URL: config.STUDIOLM_SERVER_URL || 'http://192.168.1.90:1234',
       STUDIOLM_SMALL_MODEL:
         config.STUDIOLM_SMALL_MODEL || 'lmstudio-community/deepseek-r1-distill-qwen-1.5b',
       STUDIOLM_MEDIUM_MODEL: config.STUDIOLM_MEDIUM_MODEL || 'deepseek-r1-distill-qwen-7b',

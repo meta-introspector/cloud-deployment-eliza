@@ -43,7 +43,7 @@ export interface ServerOptions {
   postgresUrl?: string;
 }
 const AGENT_RUNTIME_URL =
-  process.env.AGENT_RUNTIME_URL?.replace(/\/$/, '') || 'http://localhost:3000';
+  process.env.AGENT_RUNTIME_URL?.replace(/\/$/, '') || 'http://192.168.1.90:3000';
 
 /**
  * Class representing an agent server.
@@ -498,11 +498,11 @@ export class AgentServer {
       this.server.listen(port, () => {
         // Display the dashboard URL with the correct port after the server is actually listening
         console.log(
-          `\x1b[32mStartup successful!\nGo to the dashboard at \x1b[1mhttp://localhost:${port}\x1b[22m\x1b[0m`
+          `\x1b[32mStartup successful!\nGo to the dashboard at \x1b[1mhttp://192.168.1.90:${port}\x1b[22m\x1b[0m`
         );
 
         logger.success(
-          `REST API bound to 0.0.0.0:${port}. If running locally, access it at http://localhost:${port}.`
+          `REST API bound to 0.0.0.0:${port}. If running locally, access it at http://192.168.1.90:${port}.`
         );
         logger.debug(`Active agents: ${this.agents.size}`);
         this.agents.forEach((agent, id) => {

@@ -5,7 +5,7 @@ import { io, type Socket } from 'socket.io-client';
 import { WorldManager } from './world-manager';
 import { randomUUID } from './utils';
 
-//const BASE_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}`;
+//const BASE_URL = `http://192.168.1.90:${import.meta.env.VITE_SERVER_PORT}`;
 
 /**
  * SocketIOManager handles real-time communication between the client and server

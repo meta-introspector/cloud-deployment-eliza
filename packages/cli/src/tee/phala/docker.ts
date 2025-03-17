@@ -246,7 +246,7 @@ export class DockerOperations {
       console.log('\nUseful commands:');
       console.log(`- View logs: docker logs -f ${containerId}`);
       console.log(`- Stop simulator: docker stop ${containerId}`);
-      console.log('\nSimulator is running on http://localhost:8090');
+      console.log('\nSimulator is running on http://192.168.1.90:8090');
     } catch (error) {
       console.error('Error running simulator:', error);
       throw error;

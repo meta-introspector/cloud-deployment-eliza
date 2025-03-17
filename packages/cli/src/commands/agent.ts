@@ -6,10 +6,9 @@ import { logger } from '@elizaos/core';
 import type { Agent } from '@elizaos/core';
 import { Command } from 'commander';
 
-const AGENT_RUNTIME_URL =
-  process.env.AGENT_RUNTIME_URL?.replace(/\/$/, '') ||
-  `http://localhost:${process.env.SERVER_PORT}`;
-const AGENTS_BASE_URL = `${AGENT_RUNTIME_URL}/api/agents`;
+  process.env.AGENT_RUNTIME_URL?.replace(/\/$/, '') || 'http://192.168.1.90:3000';
+const AGENTS_BASE_URL = `${AGENT_RUNTIME_URL}/agents`;
+
 
 // Define basic agent interface for type safety
 /**

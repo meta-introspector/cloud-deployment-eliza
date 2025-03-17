@@ -173,7 +173,7 @@ async function listEnvVars(): Promise<void> {
   logger.info('\n');
   logger.info(
     colors.cyan(
-      'You can also edit environment variables in the web UI: http://localhost:3000/settings'
+      'You can also edit environment variables in the web UI: http://192.168.1.90:3000/settings'
     )
   );
 }
@@ -568,7 +568,7 @@ env.action(() => {
   console.log('  reset                 Reset all environment variables and wipe the cache folder');
   console.log('  interactive           Start interactive environment variable manager');
   console.log('\nYou can also edit environment variables in the web UI:');
-  console.log('  http://localhost:3000/settings');
+  console.log('  http://192.168.1.90:3000/settings');
 });
 
 /**

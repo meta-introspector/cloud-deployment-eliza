@@ -18,6 +18,7 @@ import { type TiktokenModel, encodingForModel } from 'js-tiktoken';
 import { z } from 'zod';
 
 /**
+<<<<<<< HEAD
  * Gets the Cloudflare Gateway base URL for a specific provider if enabled
  * @param runtime The runtime environment
  * @param provider The model provider name
@@ -62,6 +63,8 @@ function getCloudflareGatewayBaseURL(runtime: IAgentRuntime, provider: string): 
 }
 
 /**
+=======
+>>>>>>> 3a6e28248 (start of groq)
  * Asynchronously tokenizes the given text based on the specified model and prompt.
  *
  * @param {ModelTypeName} model - The type of model to use for tokenization.
@@ -135,7 +138,11 @@ async function detokenizeText(model: ModelTypeName, tokens: number[]) {
                 });
 
                 response = groqResponse;
+<<<<<<< HEAD
                 logger.debug("Received response from Groq model.");
+=======
+                elizaLogger.debug("Received response from Groq model.");
+>>>>>>> 3a6e28248 (start of groq)
                 break;
             }
      async function handleGroq({
@@ -148,9 +155,15 @@ async function detokenizeText(model: ModelTypeName, tokens: number[]) {
     modelOptions,
     runtime,
 }: ProviderOptions): Promise<GenerationResult> {
+<<<<<<< HEAD
     logger.debug("Handling Groq request with Cloudflare check");
     const baseURL = getCloudflareGatewayBaseURL(runtime, "groq");
     logger.debug("Groq handleGroq baseURL:", { baseURL });
+=======
+    elizaLogger.debug("Handling Groq request with Cloudflare check");
+    const baseURL = getCloudflareGatewayBaseURL(runtime, "groq");
+    elizaLogger.debug("Groq handleGroq baseURL:", { baseURL });
+>>>>>>> 3a6e28248 (start of groq)
 
     const groq = createGroq({ 
         apiKey, 
@@ -192,9 +205,21 @@ export const groqPlugin: Plugin = {
 
     //   // Verify API key only if we have one
     //   try {
+<<<<<<< HEAD
+<<<<<<< HEAD
     //     //const baseURL = process.env.GROQ_BASE_URL ?? 'https://api.openai.com/v1';
     //     const response = await fetch(`${baseURL}/models`, {
     //       headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` },
+=======
+    //     //const baseURL = process.env.OPENAI_BASE_URL ?? 'https://api.openai.com/v1';
+    //     const response = await fetch(`${baseURL}/models`, {
+    //       headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
+>>>>>>> 3a6e28248 (start of groq)
+=======
+    //     //const baseURL = process.env.GROQ_BASE_URL ?? 'https://api.openai.com/v1';
+    //     const response = await fetch(`${baseURL}/models`, {
+    //       headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` },
+>>>>>>> 5699cb6a8 (update)
     //     });
 
     //     if (!response.ok) {
@@ -214,7 +239,15 @@ export const groqPlugin: Plugin = {
     //   logger.warn(
     //     `OpenAI plugin configuration issue: ${error.errors
     //       .map((e) => e.message)
+<<<<<<< HEAD
+<<<<<<< HEAD
     //       .join(', ')} - You need to configure the GROQ_API_KEY in your environment variables`
+=======
+    //       .join(', ')} - You need to configure the OPENAI_API_KEY in your environment variables`
+>>>>>>> 3a6e28248 (start of groq)
+=======
+    //       .join(', ')} - You need to configure the GROQ_API_KEY in your environment variables`
+>>>>>>> 5699cb6a8 (update)
     //   );
     // }
   },
@@ -255,15 +288,31 @@ export const groqPlugin: Plugin = {
       }
 
       try {
+<<<<<<< HEAD
+<<<<<<< HEAD
         const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
         const model = runtime.getSetting('EMBEDDING_GROQ_MODEL') ?? 'text-embedding-3-small';
+=======
+        const baseURL = process.env.OPENAI_BASE_URL ?? 'https://api.openai.com/v1';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+>>>>>>> 5699cb6a8 (update)
 
         // Call the OpenAI API
         const response = await fetch(`${baseURL}/embeddings`, {
           method: 'POST',
           headers: {
+<<<<<<< HEAD
+<<<<<<< HEAD
             Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+=======
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+>>>>>>> 3a6e28248 (start of groq)
+=======
+            Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+>>>>>>> 5699cb6a8 (update)
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -318,18 +367,46 @@ export const groqPlugin: Plugin = {
       const presence_penalty = 0.7;
       const max_response_length = 8192;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
       const openai = createGroq({
         apiKey: runtime.getSetting('GROQ_API_KEY'),
         fetch: runtime.fetch,
+=======
+      const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+
+      const openai = createGroq({
+        apiKey: runtime.getSetting('OPENAI_API_KEY'),
+>>>>>>> 3a6e28248 (start of groq)
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+      const openai = createGroq({
+        apiKey: runtime.getSetting('GROQ_API_KEY'),
+        fetch: runtime.fetch,
+>>>>>>> 5699cb6a8 (update)
         baseURL,
       });
 
       const model =
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5699cb6a8 (update)
         runtime.getSetting('GROQ_SMALL_MODEL') ??
         runtime.getSetting('SMALL_MODEL') ??
         'gpt-4o-mini2';
+=======
+        runtime.getSetting('OPENAI_SMALL_MODEL') ??
+        runtime.getSetting('SMALL_MODEL') ??
+<<<<<<< HEAD
+        'gpt-4o-mini';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        'gpt-4o-mini2';
+>>>>>>> 107ce176b (wip)
 
       logger.log('generating text');
       logger.log(prompt);
@@ -358,6 +435,8 @@ export const groqPlugin: Plugin = {
         presencePenalty = 0.7,
       }: GenerateTextParams
     ) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
       const groq = createGroq({
         apiKey: runtime.getSetting('GROQ_API_KEY'),
@@ -367,6 +446,31 @@ export const groqPlugin: Plugin = {
 
       const model =
         runtime.getSetting('GROQ_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4444o';
+=======
+      //const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+>>>>>>> 5699cb6a8 (update)
+      const groq = createGroq({
+        apiKey: runtime.getSetting('GROQ_API_KEY'),
+        fetch: runtime.fetch,
+        baseURL,
+      });
+
+      const model =
+<<<<<<< HEAD
+<<<<<<< HEAD
+        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        runtime.getSetting('OPENAI_LARGE_MODEL') ??
+        runtime.getSetting('LARGE_MODEL') ??
+        'gpt-4444o';
+>>>>>>> 107ce176b (wip)
+=======
+        runtime.getSetting('GROQ_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4444o';
+>>>>>>> 5699cb6a8 (update)
 
       const { text: openaiResponse } = await generateText({
         model: groq.languageModel(model),
@@ -389,12 +493,29 @@ export const groqPlugin: Plugin = {
         size?: string;
       }
     ) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
       const response = await fetch(`${baseURL}/images/generations`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+=======
+      const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+      const response = await fetch(`${baseURL}/images/generations`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${runtime.getSetting('OPENAI_API_KEY')}`,
+>>>>>>> 3a6e28248 (start of groq)
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+      const response = await fetch(`${baseURL}/images/generations`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+>>>>>>> 5699cb6a8 (update)
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -425,12 +546,29 @@ export const groqPlugin: Plugin = {
       }
 
       try {
+<<<<<<< HEAD
+<<<<<<< HEAD
         const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
         const apiKey = process.env.GROQ_API_KEY;
 
         if (!apiKey) {
           logger.error('Groq API key not set');
+=======
+        const baseURL = process.env.OPENAI_BASE_URL ?? 'https://api.openai.com/v1';
+        const apiKey = process.env.OPENAI_API_KEY;
+
+        if (!apiKey) {
+          logger.error('OpenAI API key not set');
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+        const apiKey = process.env.GROQ_API_KEY;
+
+        if (!apiKey) {
+          logger.error('Groq API key not set');
+>>>>>>> 5699cb6a8 (update)
           return {
             title: 'Failed to analyze image',
             description: 'API key not configured',
@@ -499,15 +637,32 @@ export const groqPlugin: Plugin = {
     },
     [ModelType.TRANSCRIPTION]: async (runtime, audioBuffer: Buffer) => {
       logger.log('audioBuffer', audioBuffer);
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
+=======
+      const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+>>>>>>> 5699cb6a8 (update)
       const formData = new FormData();
       formData.append('file', new Blob([audioBuffer], { type: 'audio/mp3' }));
       formData.append('model', 'whisper-1');
       const response = await fetch(`${baseURL}/audio/transcriptions`, {
         method: 'POST',
         headers: {
+<<<<<<< HEAD
+<<<<<<< HEAD
           Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+=======
+          Authorization: `Bearer ${runtime.getSetting('OPENAI_API_KEY')}`,
+>>>>>>> 3a6e28248 (start of groq)
+=======
+          Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+>>>>>>> 5699cb6a8 (update)
           // Note: Do not set a Content-Type header—letting fetch set it for FormData is best
         },
         body: formData,
@@ -521,6 +676,8 @@ export const groqPlugin: Plugin = {
       return data.text;
     },
     [ModelType.OBJECT_SMALL]: async (runtime, params: ObjectGenerationParams) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
       const groq = createGroq({
@@ -531,6 +688,25 @@ export const groqPlugin: Plugin = {
         runtime.getSetting('GROQ_SMALL_MODEL') ??
         runtime.getSetting('SMALL_MODEL') ??
         'gpt-4o-mini4';
+=======
+      const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+>>>>>>> 5699cb6a8 (update)
+      const groq = createGroq({
+        apiKey: runtime.getSetting('GROQ_API_KEY'),
+        baseURL,
+      });
+      const model =
+        runtime.getSetting('GROQ_SMALL_MODEL') ??
+        runtime.getSetting('SMALL_MODEL') ??
+<<<<<<< HEAD
+        'gpt-4o-mini';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        'gpt-4o-mini4';
+>>>>>>> 107ce176b (wip)
 
       try {
         if (params.schema) {
@@ -558,13 +734,29 @@ export const groqPlugin: Plugin = {
       }
     },
     [ModelType.OBJECT_LARGE]: async (runtime, params: ObjectGenerationParams) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
       const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+=======
+      //const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+>>>>>>> 5699cb6a8 (update)
       const groq = createGroq({
         apiKey: runtime.getSetting('GROQ_API_KEY'),
         //baseURL,
       });
       const model =
+<<<<<<< HEAD
+<<<<<<< HEAD
         runtime.getSetting('GROQ_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4444o';
+=======
+        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o';
+>>>>>>> 3a6e28248 (start of groq)
+=======
+        runtime.getSetting('GROQ_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4444o';
+>>>>>>> 5699cb6a8 (update)
 
       try {
         if (params.schema) {
@@ -599,11 +791,26 @@ export const groqPlugin: Plugin = {
         {
           name: 'openai_test_url_and_api_key_validation',
           fn: async (runtime) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
             const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
 
             const response = await fetch(`${baseURL}/models`, {
               headers: {
                 Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+=======
+            const baseURL = runtime.getSetting('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1';
+            const response = await fetch(`${baseURL}/models`, {
+              headers: {
+                Authorization: `Bearer ${runtime.getSetting('OPENAI_API_KEY')}`,
+>>>>>>> 3a6e28248 (start of groq)
+=======
+            const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+            const response = await fetch(`${baseURL}/models`, {
+              headers: {
+                Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+>>>>>>> 5699cb6a8 (update)
               },
             });
             const data = await response.json();
@@ -614,7 +821,11 @@ export const groqPlugin: Plugin = {
           },
         },
         {
+<<<<<<< HEAD
           name: 'groq_test_text_embedding',
+=======
+          name: 'openai_test_text_embedding',
+>>>>>>> 3a6e28248 (start of groq)
           fn: async (runtime) => {
             try {
               const embedding = await runtime.useModel(ModelType.TEXT_EMBEDDING, {

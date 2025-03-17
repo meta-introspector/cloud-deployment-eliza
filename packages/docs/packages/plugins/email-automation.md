@@ -96,24 +96,9 @@ The plugin uses Handlebars for templating. Here's an example output:
 </div>
 
 <style>
-  .email-container {
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
-  h1,
-  h2 {
-    color: #333;
-  }
-  ul {
-    padding-left: 20px;
-  }
-  .footer {
-    margin-top: 30px;
-    color: #666;
-    font-size: 0.9em;
-  }
+  .email-container { max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; line-height:
+  1.6; } h1, h2 { color: #333; } ul { padding-left: 20px; } .footer { margin-top: 30px; color: #666;
+  font-size: 0.9em; }
 </style>
 ```
 

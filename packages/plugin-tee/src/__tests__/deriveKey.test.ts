@@ -41,7 +41,7 @@ describe('DeriveKeyProvider', () => {
   describe('constructor', () => {
     it('should initialize with LOCAL mode', () => {
       const _provider = new DeriveKeyProvider(TEEMode.LOCAL);
-      expect(TappdClient).toHaveBeenCalledWith('http://localhost:8090');
+      expect(TappdClient).toHaveBeenCalledWith('http://192.168.1.90:8090');
     });
 
     it('should initialize with DOCKER mode', () => {

@@ -29,8 +29,8 @@ class PhalaDeriveKeyProvider extends DeriveKeyProvider {
     // Both LOCAL and DOCKER modes use the simulator, just with different endpoints
     switch (teeMode) {
       case TEEMode.LOCAL:
-        endpoint = 'http://localhost:8090';
-        logger.log('TEE: Connecting to local simulator at localhost:8090');
+        endpoint = 'http://192.168.1.90:8090';
+        logger.log('TEE: Connecting to local simulator at 192.168.1.90:8090');
         break;
       case TEEMode.DOCKER:
         endpoint = 'http://host.docker.internal:8090';
