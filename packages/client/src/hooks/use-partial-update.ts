@@ -1,4 +1,3 @@
-import { deepMerge } from '@/lib/utils';
 import { useState, useCallback } from 'react';
 
 /**
@@ -25,12 +24,9 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
    * @param newValue The new value for the field
    */
   const updateField = useCallback(<K>(path: string, newValue: K) => {
-    console.log('[usePartialUpdate] updateField called with path:', path, 'value:', newValue);
-
     setValue((prevValue) => {
       // Handle simple (non-nested) case
       if (!path.includes('.')) {
-        console.log('[usePartialUpdate] Updating simple field:', path);
         return {
           ...prevValue,
           [path]: newValue,
@@ -61,14 +57,6 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
           array[index] = updateNestedObject(array[index], deeperPath, newValue);
         }
 
-        console.log(
-          '[usePartialUpdate] Updating array field:',
-          arrayName,
-          'index:',
-          index,
-          'new array:',
-          array
-        );
         return {
           ...prevValue,
           [arrayName]: array,
@@ -78,7 +66,6 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
       // Special case for settings.secrets path
       if (path.startsWith('settings.secrets.')) {
         const secretKey = path.split('.')[2];
-        console.log('[usePartialUpdate] Updating secret:', secretKey, 'with value:', newValue);
 
         const currentSettings = (prevValue as any).settings || {};
         const currentSecrets = currentSettings.secrets || {};
@@ -87,8 +74,6 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
           ...currentSecrets,
           [secretKey]: newValue,
         };
-
-        console.log('[usePartialUpdate] New secrets object:', newSecrets);
 
         return {
           ...prevValue,
@@ -109,7 +94,6 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
         ),
       } as T;
 
-      console.log('[usePartialUpdate] Updated value with nested path:', path, 'Result:', result);
       return result;
     });
   }, []);
@@ -244,13 +228,6 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
   };
 
   /**
-   * Updates the entire object using deep merge
-   */
-  const updateObject = useCallback((newPartialValue: Partial<T>) => {
-    setValue((prev) => deepMerge(prev, newPartialValue));
-  }, []);
-
-  /**
    * Resets to the initial state
    */
   const reset = useCallback(() => {
@@ -258,23 +235,49 @@ export function usePartialUpdate<T extends object>(initialValue: T) {
   }, [initialValue]);
 
   // Special handling for updating the entire settings object
-  const updateSettings = useCallback((settings: any) => {
-    console.log('[usePartialUpdate] updateSettings called with:', settings);
-    setValue(
-      (prevValue) =>
-        ({
+  const updateSettings = useCallback(
+    (settings: any) => {
+      setValue((prevValue) => {
+        // Extract settings but remove 'secrets' key to avoid duplication
+        const { secrets, ...otherSettings } = settings;
+
+        // Create the updated settings object
+        const updatedSettings = {
+          ...(prevValue as any).settings, // Start with existing settings
+          ...otherSettings, // Add other settings (not secrets)
+        };
+
+        // Only add secrets if it was included in the update
+        if (secrets) {
+          // Create a new secrets object that only contains non-null values
+          const filteredSecrets: Record<string, any> = {};
+
+          Object.entries(secrets).forEach(([key, value]) => {
+            // If value is null, don't include it (this is how we delete)
+            if (value !== null) {
+              filteredSecrets[key] = value;
+            }
+          });
+
+          updatedSettings.secrets = filteredSecrets;
+        }
+
+        const result = {
           ...prevValue,
-          settings,
-        }) as T
-    );
-  }, []);
+          settings: updatedSettings,
+        } as T;
+
+        return result;
+      });
+    },
+    [] // Remove value from dependencies to avoid unnecessary rerenders
+  );
 
   return {
     value,
     updateField,
     addArrayItem,
     removeArrayItem,
-    updateObject,
     reset,
     updateSettings,
   };

@@ -140,7 +140,7 @@ export type CharacterFormProps = {
     updateField: <T>(path: string, value: T) => void;
     addArrayItem?: <T>(path: string, item: T) => void;
     removeArrayItem?: (path: string, index: number) => void;
-    updateObject?: (newPartialValue: Partial<Agent>) => void;
+    updateSetting?: (path: string, value: any) => void;
     [key: string]: any;
   };
 };
@@ -165,6 +165,17 @@ export default function CharacterForm({
 
     if (type === 'checkbox') {
       setCharacterValue.updateField(name, checked);
+    } else if (name.startsWith('settings.')) {
+      // Handle nested settings fields like settings.voice.model
+      const path = name.substring(9); // Remove 'settings.' prefix
+
+      if (setCharacterValue.updateSetting) {
+        // Use the specialized method if available
+        setCharacterValue.updateSetting(path, value);
+      } else {
+        // Fall back to generic updateField
+        setCharacterValue.updateField(name, value);
+      }
     } else {
       setCharacterValue.updateField(name, value);
     }
@@ -216,7 +227,7 @@ export default function CharacterForm({
     return char;
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -287,7 +298,7 @@ export default function CharacterForm({
         </div>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <Tabs defaultValue="basic" className="w-full">
           <TabsList
             className={'grid w-full mb-6'}

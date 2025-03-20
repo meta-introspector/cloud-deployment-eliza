@@ -32,6 +32,13 @@ export default function EnvSettingsPanel({ characterValue, setCharacterValue }: 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedValue, setEditedValue] = useState('');
+<<<<<<< HEAD
+=======
+  // Keep track of deleted keys to ensure proper removal
+  const [deletedKeys, setDeletedKeys] = useState<string[]>([]);
+  // Track if changes are pending to avoid unnecessary updates
+  const [changesPending, setChangesPending] = useState(false);
+>>>>>>> 34f5bfeb8 (chore: optimize logic for update)
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropRef = useRef<HTMLDivElement>(null);
@@ -118,8 +125,12 @@ export default function EnvSettingsPanel({ characterValue, setCharacterValue }: 
         }
         return updated;
       });
-      setName('');
-      setValue('');
+        setEnvs([...envs, { name, value, isNew: true }]);
+        setName('');
+        setValue('');
+        setChangesPending(true);
+      }
+
     }
   };
 
@@ -132,6 +143,12 @@ export default function EnvSettingsPanel({ characterValue, setCharacterValue }: 
   const saveEdit = (index: number) => {
     const updatedEnvs = [...envs];
     updatedEnvs[index].value = editedValue;
+    // Only mark as modified if the value actually changed
+    if (updatedEnvs[index].value !== editedValue) {
+      updatedEnvs[index].value = editedValue;
+      updatedEnvs[index].isModified = true;
+      setChangesPending(true);
+    }
     setEnvs(updatedEnvs);
     setEditingIndex(null);
   };
@@ -140,6 +157,7 @@ export default function EnvSettingsPanel({ characterValue, setCharacterValue }: 
     setEnvs(envs.filter((_, i) => i !== index));
     setOpenIndex(null);
     setEditingIndex(null);
+    setChangesPending(true);
   };
 
   useEffect(() => {
@@ -155,17 +173,73 @@ export default function EnvSettingsPanel({ characterValue, setCharacterValue }: 
     };
   }, []);
 
-  // Update the agent's settings whenever envs change
+  // Update character value when envs change, but only if there are actual changes
   useEffect(() => {
-    // Create the secrets object from the envs array
-    const secrets = Object.fromEntries(envs.map(({ name, value }) => [name, value]));
+    if (changesPending) {
+      // Create a minimal update object to send only the changes
+      const currentSecrets: Record<string, string | null> = {};
 
-    // Update just the settings.secrets part without touching other settings
-    updateField('settings.secrets', secrets);
+      // Map updated values
+      envs.forEach(({ name, value }) => {
+        currentSecrets[name] = value;
+      });
 
-    // Update the parent component's state
-    setCharacterValue(() => agentState);
-  }, [envs, setCharacterValue, updateField, agentState]);
+      // Add null values for deleted keys to explicitly mark them for removal
+      deletedKeys.forEach((key) => {
+        currentSecrets[key] = null;
+      });
+
+      // Create a minimal agent object with just the secrets changes
+      const updatedAgent: Partial<Agent> = {
+        settings: {
+          secrets: currentSecrets,
+        },
+      };
+
+      // Call the onChange prop with the updated agent
+      onChange(updatedAgent as Agent);
+
+      // Reset change tracking flags
+      setEnvs((prevEnvs) => {
+        return prevEnvs.map((env) => ({
+          ...env,
+          isNew: false,
+          isModified: false,
+        }));
+      });
+
+      // Clear deletedKeys after changes are applied
+      setDeletedKeys([]);
+      setChangesPending(false);
+    }
+  }, [envs, onChange, deletedKeys, changesPending]);
+
+  // Sync envs with characterValue when it changes (only if not in middle of edit)
+  useEffect(() => {
+    if (characterValue?.settings?.secrets && !changesPending) {
+      const currentSecretsEntries = Object.entries(characterValue.settings.secrets);
+      // Only update if the secrets have actually changed (different keys/number of entries)
+      const currentKeys = currentSecretsEntries
+        .map(([key]) => key)
+        .sort()
+        .join(',');
+      const envKeys = envs
+        .map((env) => env.name)
+        .sort()
+        .join(',');
+
+      if (currentKeys !== envKeys) {
+        const newEnvs = currentSecretsEntries.map(([name, value]) => ({
+          name,
+          value: String(value),
+          isNew: false,
+          isModified: false,
+          isDeleted: false,
+        }));
+        setEnvs(newEnvs);
+      }
+    }
+  }, [characterValue.settings?.secrets, envs, changesPending]);
 
   return (
     <div className="rounded-lg w-full flex flex-col gap-3">

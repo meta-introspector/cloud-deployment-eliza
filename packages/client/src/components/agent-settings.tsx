@@ -15,45 +15,39 @@ export default function AgentSettings({ agent, agentId }: { agent: Agent; agentI
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  console.log('[AgentSettings] Initializing with agent:', agent);
-
   // Use our enhanced agent update hook for more intelligent handling of JSONb fields
   const agentState = useAgentUpdate(agent);
 
   // Log whenever agent state changes
-  useEffect(() => {
-    console.log('[AgentSettings] Agent state updated:', agentState.agent);
-    console.log('[AgentSettings] Settings.secrets:', agentState.agent.settings?.secrets);
-  }, [agentState.agent]);
+  useEffect(() => {}, [agentState.agent]);
 
-  const handleSubmit = async (updatedAgent: Agent) => {
+  const handleSubmit = async () => {
     try {
       if (!agentId) {
         throw new Error('Agent ID is missing');
       }
 
-      console.log('[AgentSettings] Submitting agent update:', updatedAgent);
-      console.log('[AgentSettings] Settings being submitted:', updatedAgent.settings);
-      console.log('[AgentSettings] Secrets being submitted:', updatedAgent.settings?.secrets);
+      // Get only the fields that have changed
+      const changedFields = agentState.getChangedFields();
 
-      // Make sure we're properly handling all JSONb fields
-      const mergedAgent = {
-        ...updatedAgent,
-        // Explicitly ensure all these fields are properly included
+      // No need to send update if nothing changed
+      if (Object.keys(changedFields).length === 0) {
+        toast({
+          title: 'No Changes',
+          description: 'No changes were made to the agent',
+        });
+        navigate('/');
+        return;
+      }
+
+      // Always include the ID
+      const partialUpdate = {
         id: agentId,
-        bio: updatedAgent.bio || [],
-        topics: updatedAgent.topics || [],
-        adjectives: updatedAgent.adjectives || [],
-        plugins: updatedAgent.plugins || [],
-        style: updatedAgent.style || { all: [], chat: [], post: [] },
-        settings: updatedAgent.settings || { secrets: {} },
+        ...changedFields,
       };
 
-      console.log('[AgentSettings] Final merged agent being sent to API:', mergedAgent);
-      console.log('[AgentSettings] Final secrets being sent:', mergedAgent.settings?.secrets);
-
-      // Send the character update request to the agent endpoint
-      await apiClient.updateAgent(agentId, mergedAgent);
+      // Send the partial update
+      await apiClient.updateAgent(agentId, partialUpdate as Agent);
 
       // Invalidate both the agent query and the agents list
       queryClient.invalidateQueries({ queryKey: ['agent', agentId] });
@@ -66,7 +60,6 @@ export default function AgentSettings({ agent, agentId }: { agent: Agent; agentI
         description: 'Agent updated and restarted successfully',
       });
     } catch (error) {
-      console.error('[AgentSettings] Error updating agent:', error);
       toast({
         title: 'Error',
         description: error instanceof Error ? error.message : 'Failed to update agent',
@@ -118,8 +111,16 @@ export default function AgentSettings({ agent, agentId }: { agent: Agent; agentI
             <SecretPanel
               characterValue={agentState.agent}
               onChange={(updatedAgent) => {
-                console.log('[agent-settings] SecretPanel onChange called with:', updatedAgent);
-                agentState.updateObject(updatedAgent);
+                if (updatedAgent.settings && updatedAgent.settings.secrets) {
+                  // Create a new settings object with the updated secrets
+                  const updatedSettings = {
+                    ...agentState.agent.settings,
+                    secrets: updatedAgent.settings.secrets,
+                  };
+
+                  // Use updateSettings to properly handle the secrets
+                  agentState.updateSettings(updatedSettings);
+                }
               }}
             />
           ),

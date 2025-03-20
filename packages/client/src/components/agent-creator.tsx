@@ -18,6 +18,7 @@ const defaultCharacter: Partial<Agent> = {
   bio: [] as string[],
   topics: [] as string[],
   adjectives: [] as string[],
+  plugins: ['@elizaos/plugin-sql', '@elizaos/plugin-local-ai'],
   settings: { secrets: {} },
 };
 
@@ -53,11 +54,6 @@ export default function AgentCreator() {
   const handleSubmit = async (character: Agent) => {
     try {
       const completeCharacter = ensureRequiredFields(character);
-
-      console.log('[AgentCreator] Creating agent with:', completeCharacter);
-      console.log('[AgentCreator] Settings:', completeCharacter.settings);
-      console.log('[AgentCreator] Secrets:', completeCharacter.settings?.secrets);
-
       await apiClient.createAgent({
         characterJson: completeCharacter,
       });
@@ -72,7 +68,6 @@ export default function AgentCreator() {
       queryClient.invalidateQueries({ queryKey: ['agents'] });
       navigate('/');
     } catch (error) {
-      console.error('[AgentCreator] Error creating agent:', error);
       toast({
         title: 'Error',
         description: error instanceof Error ? error.message : 'Failed to create character',
@@ -88,7 +83,7 @@ export default function AgentCreator() {
       title="Character Settings"
       description="Configure your AI character's behavior and capabilities"
       onSubmit={handleSubmit}
-      onReset={agentState.reset}
+      onReset={() => agentState.reset()}
       onDelete={() => {
         navigate('/');
       }}
@@ -106,8 +101,7 @@ export default function AgentCreator() {
             <SecretPanel
               characterValue={agentState.agent}
               onChange={(updatedAgent) => {
-                console.log('[AgentCreator] SecretPanel onChange called with:', updatedAgent);
-                agentState.updateObject(updatedAgent);
+                agentState.updateSettings(updatedAgent.settings);
               }}
             />
           ),

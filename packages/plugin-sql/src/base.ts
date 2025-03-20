@@ -248,84 +248,7 @@ export abstract class BaseDrizzleAdapter<
   }
 
   /**
-   * Validates the agent update request
-   * @param agentId The ID of the agent to update
-   * @param agent The agent data to validate
-   * @throws Error if validation fails
-   */
-  private validateAgentUpdate(agentId: UUID, agent: Partial<Agent>): void {
-    if (!agent.id) {
-      throw new Error('Agent ID is required for update');
-    }
-  }
-
-  /**
-   * Merges nested JSONb objects within the agent settings
-   * @param existingAgent The current agent data
-   * @param updates The updates to apply
-   * @returns Merged settings object
-   */
-  private mergeAgentSettings(existingAgent: Agent, updates: Partial<Agent>): Agent['settings'] {
-    if (!updates.settings || !existingAgent.settings) {
-      return updates.settings || existingAgent.settings;
-    }
-
-    const mergedSettings = {
-      ...existingAgent.settings,
-      ...updates.settings,
-    };
-
-    // Handle nested secrets within settings
-    if (updates.settings.secrets && existingAgent.settings.secrets) {
-      mergedSettings.secrets = {
-        ...existingAgent.settings.secrets,
-        ...updates.settings.secrets,
-      };
-    }
-
-    return mergedSettings;
-  }
-
-  /**
-   * Merges style-related fields, handling arrays appropriately
-   * @param existingAgent The current agent data
-   * @param updates The updates to apply
-   * @returns Merged style object
-   */
-  private mergeAgentStyle(existingAgent: Agent, updates: Partial<Agent>): Agent['style'] {
-    if (!updates.style) {
-      return existingAgent.style;
-    }
-
-    return {
-      ...existingAgent.style,
-      ...updates.style,
-    };
-  }
-
-  /**
-   * Merges array fields, replacing them entirely if provided
-   * @param existingAgent The current agent data
-   * @param updates The updates to apply
-   * @returns Object containing merged array fields
-   */
-  private mergeArrayFields(existingAgent: Agent, updates: Partial<Agent>): Partial<Agent> {
-    const mergedFields: Partial<Agent> = {};
-
-    // Handle array JSONb fields - these should be replaced entirely if provided
-    if (updates.plugins !== undefined) mergedFields.plugins = updates.plugins;
-    if (updates.bio !== undefined) mergedFields.bio = updates.bio;
-    if (updates.topics !== undefined) mergedFields.topics = updates.topics;
-    if (updates.adjectives !== undefined) mergedFields.adjectives = updates.adjectives;
-    if (updates.knowledge !== undefined) mergedFields.knowledge = updates.knowledge;
-
-    return mergedFields;
-  }
-
-  /**
    * Updates an agent in the database with the provided agent ID and data.
-   * Properly handles merging of nested JSONb fields.
-   *
    * @param {UUID} agentId - The unique identifier of the agent to update.
    * @param {Partial<Agent>} agent - The partial agent object containing the fields to update.
    * @returns {Promise<boolean>} - A boolean indicating if the agent was successfully updated.
@@ -333,26 +256,23 @@ export abstract class BaseDrizzleAdapter<
   async updateAgent(agentId: UUID, agent: Partial<Agent>): Promise<boolean> {
     return this.withDatabase(async () => {
       try {
-        this.validateAgentUpdate(agentId, agent);
-
-        // Get the existing agent to properly merge JSONb fields
-        const existingAgent = await this.getAgent(agentId);
-        if (!existingAgent) {
-          throw new Error(`Agent with ID ${agentId} not found`);
+        if (!agent.id) {
+          throw new Error('Agent ID is required for update');
         }
 
-        // Merge all fields using helper functions
-        const mergedAgent: Partial<Agent> = {
-          ...existingAgent,
-          ...agent,
-          updatedAt: Date.now(),
-          settings: this.mergeAgentSettings(existingAgent, agent),
-          style: this.mergeAgentStyle(existingAgent, agent),
-          ...this.mergeArrayFields(existingAgent, agent),
-        };
-
         await this.db.transaction(async (tx) => {
-          await tx.update(agentTable).set(mergedAgent).where(eq(agentTable.id, agentId));
+          // Handle settings update if present
+          if (agent.settings) {
+            agent.settings = await this.mergeAgentSettings(tx, agentId, agent.settings);
+          }
+
+          await tx
+            .update(agentTable)
+            .set({
+              ...agent,
+              updatedAt: Date.now(),
+            })
+            .where(eq(agentTable.id, agentId));
         });
 
         logger.debug('Agent updated successfully:', {
@@ -368,6 +288,63 @@ export abstract class BaseDrizzleAdapter<
         return false;
       }
     });
+  }
+
+  /**
+   * Merges updated agent settings with existing settings in the database,
+   * with special handling for nested objects like secrets.
+   * @param tx - The database transaction
+   * @param agentId - The ID of the agent
+   * @param updatedSettings - The settings object with updates
+   * @returns The merged settings object
+   * @private
+   */
+  private async mergeAgentSettings(
+    tx: DrizzleOperations,
+    agentId: UUID,
+    updatedSettings: any
+  ): Promise<any> {
+    // First get the current agent data
+    const currentAgent = await tx
+      .select({ settings: agentTable.settings })
+      .from(agentTable)
+      .where(eq(agentTable.id, agentId))
+      .limit(1);
+
+    if (currentAgent.length === 0 || !currentAgent[0].settings) {
+      return updatedSettings;
+    }
+
+    const currentSettings = currentAgent[0].settings;
+
+    // Handle secrets with special null-values treatment
+    if (updatedSettings.secrets) {
+      const currentSecrets = currentSettings.secrets || {};
+      const updatedSecrets = updatedSettings.secrets;
+
+      // Create a new secrets object
+      const mergedSecrets = { ...currentSecrets };
+
+      // Process the incoming secrets updates
+      for (const [key, value] of Object.entries(updatedSecrets)) {
+        if (value === null) {
+          // If value is null, remove the key
+          delete mergedSecrets[key];
+        } else {
+          // Otherwise, update the value
+          mergedSecrets[key] = value;
+        }
+      }
+
+      // Replace the secrets in updatedSettings with our processed version
+      updatedSettings.secrets = mergedSecrets;
+    }
+
+    // Deep merge the settings objects
+    return {
+      ...currentSettings,
+      ...updatedSettings,
+    };
   }
 
   /**

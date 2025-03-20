@@ -1,6 +1,6 @@
 import { usePartialUpdate } from '@/hooks/use-partial-update';
 import type { Agent } from '@elizaos/core';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 /**
  * A custom hook for handling Agent updates with specific handling for JSONb fields.
@@ -11,12 +11,14 @@ import { useCallback } from 'react';
  * @returns Object with agent state and update methods
  */
 export function useAgentUpdate(initialAgent: Agent) {
+  // Keep reference to the initial state for comparison
+  const initialAgentRef = useRef<Agent>(JSON.parse(JSON.stringify(initialAgent)));
+
   const {
     value: agent,
     updateField,
     addArrayItem,
     removeArrayItem,
-    updateObject,
     reset,
     updateSettings,
   } = usePartialUpdate(initialAgent);
@@ -30,7 +32,6 @@ export function useAgentUpdate(initialAgent: Agent) {
    */
   const updateSetting = useCallback(
     <T>(path: string, value: T) => {
-      console.log('[useAgentUpdate] updateSetting called for path:', path, 'value:', value);
       updateField(`settings.${path}`, value);
     },
     [updateField]
@@ -43,7 +44,6 @@ export function useAgentUpdate(initialAgent: Agent) {
    */
   const setSettings = useCallback(
     (settings: any) => {
-      console.log('[useAgentUpdate] setSettings called with:', settings);
       updateSettings(settings);
     },
     [updateSettings]
@@ -70,8 +70,6 @@ export function useAgentUpdate(initialAgent: Agent) {
    */
   const updateSecret = useCallback(
     (key: string, value: string) => {
-      console.log('[useAgentUpdate] updateSecret called for key:', key, 'value:', value);
-
       // Handle nested secrets object properly
       const currentSettings = agent.settings || {};
       const currentSecrets = currentSettings.secrets || {};
@@ -80,8 +78,6 @@ export function useAgentUpdate(initialAgent: Agent) {
         ...currentSecrets,
         [key]: value,
       };
-
-      console.log('[useAgentUpdate] New secrets object:', newSecrets);
 
       // Update entire settings object for better change detection
       updateSettings({
@@ -99,27 +95,19 @@ export function useAgentUpdate(initialAgent: Agent) {
    */
   const removeSecret = useCallback(
     (key: string) => {
-      console.log('[useAgentUpdate] removeSecret called for key:', key);
-
       // Get the current secrets object
       const currentSettings = agent.settings || {};
       const currentSecrets = currentSettings.secrets || {};
 
-      console.log('[useAgentUpdate] Current secrets before removal:', currentSecrets);
-
       // Create a new secrets object without the removed key
       const newSecrets = { ...currentSecrets };
       delete newSecrets[key];
-
-      console.log('[useAgentUpdate] New secrets after removal:', newSecrets);
 
       // Update the entire settings object to ensure nested changes are detected
       const updatedSettings = {
         ...currentSettings,
         secrets: newSecrets,
       };
-
-      console.log('[useAgentUpdate] Updated settings with removed secret:', updatedSettings);
 
       // Use updateSettings instead of updateField for better change detection
       updateSettings(updatedSettings);
@@ -272,14 +260,117 @@ export function useAgentUpdate(initialAgent: Agent) {
     [updateSetting]
   );
 
+  /**
+   * Returns an object containing only the fields that have changed
+   * compared to the initial agent state
+   */
+  const getChangedFields = useCallback(() => {
+    const changedFields: Partial<Agent> = {};
+    const current = agent;
+    const initial = initialAgentRef.current;
+
+    // Compare scalar properties
+    const scalarProps = ['name', 'username', 'system'] as const;
+    scalarProps.forEach((prop) => {
+      if (current[prop] !== initial[prop]) {
+        changedFields[prop] = current[prop];
+      }
+    });
+
+    if (current.enabled !== initial.enabled) {
+      changedFields.enabled = current.enabled;
+    }
+
+    // Compare array properties with type safety
+    if (JSON.stringify(current.bio) !== JSON.stringify(initial.bio)) {
+      changedFields.bio = current.bio;
+    }
+
+    if (JSON.stringify(current.topics) !== JSON.stringify(initial.topics)) {
+      changedFields.topics = current.topics;
+    }
+
+    if (JSON.stringify(current.adjectives) !== JSON.stringify(initial.adjectives)) {
+      changedFields.adjectives = current.adjectives;
+    }
+
+    if (JSON.stringify(current.plugins) !== JSON.stringify(initial.plugins)) {
+      changedFields.plugins = current.plugins;
+    }
+
+    // Compare style object
+    if (JSON.stringify(current.style) !== JSON.stringify(initial.style)) {
+      changedFields.style = current.style;
+    }
+
+    // More granular comparison for settings object
+    const initialSettings = initial.settings || {};
+    const currentSettings = current.settings || {};
+
+    // Check if any settings changed
+    if (JSON.stringify(currentSettings) !== JSON.stringify(initialSettings)) {
+      // Create a partial settings object with only changed fields
+      changedFields.settings = {};
+
+      // Check avatar separately
+      if (currentSettings.avatar !== initialSettings.avatar) {
+        changedFields.settings.avatar = currentSettings.avatar;
+      }
+
+      // Check voice settings
+      if (JSON.stringify(currentSettings.voice) !== JSON.stringify(initialSettings.voice)) {
+        changedFields.settings.voice = currentSettings.voice;
+      }
+
+      // Check secrets with special handling
+      if (JSON.stringify(currentSettings.secrets) !== JSON.stringify(initialSettings.secrets)) {
+        const initialSecrets = initialSettings.secrets || {};
+        const currentSecrets = currentSettings.secrets || {};
+
+        // Only include secrets that were added or modified
+        const changedSecrets: Record<string, any> = {};
+        let hasSecretChanges = false;
+
+        // Find added or modified secrets
+        Object.entries(currentSecrets).forEach(([key, value]) => {
+          if (initialSecrets[key] !== value) {
+            changedSecrets[key] = value;
+            hasSecretChanges = true;
+          }
+        });
+
+        // Find deleted secrets (null values indicate deletion)
+        Object.keys(initialSecrets).forEach((key) => {
+          if (currentSecrets[key] === undefined) {
+            changedSecrets[key] = null;
+            hasSecretChanges = true;
+          }
+        });
+
+        if (hasSecretChanges) {
+          if (!changedFields.settings) changedFields.settings = {};
+          changedFields.settings.secrets = changedSecrets;
+        }
+      }
+
+      // If no specific settings changed, don't include settings object
+      if (Object.keys(changedFields.settings).length === 0) {
+        delete changedFields.settings;
+      }
+    }
+
+    return changedFields;
+  }, [agent]);
+
   return {
     agent,
-    // Original methods
     updateField,
-    updateObject,
     reset,
     updateSettings,
     setSettings,
+
+    // Method to get only changed fields
+    getChangedFields,
 
     // Basic Info Tab
     updateSetting,
