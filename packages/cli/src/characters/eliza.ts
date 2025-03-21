@@ -21,15 +21,15 @@ dotenv.config({ path: '../../.env' });
 
 import * as Sql from '@elizaos/plugin-sql';
 import * as Groq from '@elizaos/plugin-groq';
-//import * as Discord from '@elizaos/plugin-discord';
-//import * as Twitter from '@elizaos/plugin-twitter';
+import * as Discord from '@elizaos/plugin-discord';
+import * as Twitter from '@elizaos/plugin-twitter';
 import * as Telgram from '@elizaos/plugin-telegram';
 
 const plugins = {
   '@elizaos/plugin-sql': Sql,
   ...(process.env.GROQ_API_KEY ? { '@elizaos/plugin-groq': Groq } : {}),
-  //...(process.env.DISCORD_API_TOKEN ? { '@elizaos/plugin-discord': Discord } : {}),
-  //...(process.env.TWITTER_USERNAME ? { '@elizaos/plugin-twitter': Twitter } : {}),
+  ...(process.env.DISCORD_API_TOKEN ? { '@elizaos/plugin-discord': Discord } : {}),
+  ...(process.env.TWITTER_USERNAME ? { '@elizaos/plugin-twitter': Twitter } : {}),
   ...(process.env.TELEGRAM_BOT_TOKEN ? { '@elizaos/plugin-telegram': Telgram } : {}),
 };
 
@@ -43,8 +43,8 @@ export const character: Character = {
   plugins: [
     '@elizaos/plugin-sql',
     ...(process.env.GROQ_API_KEY ? ['@elizaos/plugin-groq'] : []),
-    //...(process.env.DISCORD_API_TOKEN ? ['@elizaos/plugin-discord'] : []),
-    //...(process.env.TWITTER_USERNAME ? ['@elizaos/plugin-twitter'] : []),
+    ...(process.env.DISCORD_API_TOKEN ? ['@elizaos/plugin-discord'] : []),
+    ...(process.env.TWITTER_USERNAME ? ['@elizaos/plugin-twitter'] : []),
     ...(process.env.TELEGRAM_BOT_TOKEN ? ['@elizaos/plugin-telegram'] : []),
   ],
   secrets: {},
