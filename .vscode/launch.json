@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "url": "bws://localhost:9229/hhigw51enm5",
+      "name": "Attach bun",
+      "type": "bun",
+      "request": "attach"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Debug Entire Monorepo",

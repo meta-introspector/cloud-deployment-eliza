@@ -1,6 +1,6 @@
 {
   "name": "@elizaos/the-org",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.7",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,9 @@
     "@elizaos/core": "workspace:*",
     "@elizaos/plugin-anthropic": "workspace:*",
     "@elizaos/plugin-discord": "workspace:*",
+    "@elizaos/plugin-local-ai": "workspace:*",
     "@elizaos/plugin-openai": "workspace:*",
+    "@elizaos/plugin-groq": "workspace:*",
     "@elizaos/plugin-sql": "workspace:*",
     "@elizaos/plugin-tee": "workspace:*",
     "@elizaos/plugin-telegram": "workspace:*",
@@ -83,5 +85,5 @@
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5"
   },
-  "gitHead": "e98c03cf7e76ba967b203fdc3fc07cb438797559"
+  "gitHead": "9834bbd06128356b44b091f022fc2a2d024a875e"
 }

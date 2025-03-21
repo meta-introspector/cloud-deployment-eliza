@@ -523,6 +523,7 @@ export class AgentRuntime implements IAgentRuntime {
       this.runtimeLogger.warn(
         `[AgentRuntime][${this.character.name}] No TEXT_EMBEDDING model registered. Skipping embedding dimension setup.`
       );
+      console.log('DeBUG models', this.models);
     } else {
       // Only run ensureEmbeddingDimension if we have an embedding model
       await this.ensureEmbeddingDimension();
@@ -1190,7 +1191,7 @@ export class AgentRuntime implements IAgentRuntime {
    * @returns The room ID of the room between the agent and the user.
    * @throws An error if the room cannot be created.
    */
-  async ensureRoomExists({ id, name, source, type, channelId, serverId, worldId }: Room) {
+  async ensureRoomExists({ id, name, source, type, channelId, serverId, worldId, metadata }: Room) {
     const room = await this.adapter.getRoom(id);
     if (!room) {
       await this.adapter.createRoom({
@@ -1202,6 +1203,7 @@ export class AgentRuntime implements IAgentRuntime {
         channelId,
         serverId,
         worldId,
+        metadata,
       });
       this.runtimeLogger.debug(`Room ${id} created successfully.`);
     }

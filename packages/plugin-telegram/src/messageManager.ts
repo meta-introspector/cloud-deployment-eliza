@@ -75,7 +75,9 @@ export class MessageManager {
     try {
       let imageUrl: string | null = null;
 
-      logger.info(`Telegram Message: ${message}`);
+      logger.info(`Telegram Message id: ${message.message_id}`);
+      logger.info(`Telegram Message chat: ${message.chat}`);
+      logger.info(`Telegram Message from : ${message.from}`);
 
       if ('photo' in message && message.photo?.length > 0) {
         const photo = message.photo[message.photo.length - 1];
@@ -360,6 +362,11 @@ export class MessageManager {
 
       // Create callback for handling responses
       const callback: HandlerCallback = async (content: Content, _files?: string[]) => {
+        console.log('Telegram callback 1', content.url);
+        console.log('Telegram callback 2', content.text);
+        console.log('Telegram callback 3', content.providers);
+        console.log('Telegram callback 4', content.thought);
+        console.log('Telegram callback 5', message);
         try {
           const sentMessages = await this.sendMessageInChunks(ctx, content, message.message_id);
 
