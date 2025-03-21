@@ -21,6 +21,9 @@ import { test } from './commands/test';
 import { update } from './commands/update';
 import { loadEnvironment } from './utils/get-config';
 import { displayBanner } from './displayBanner';
+//import { discordPlugin } from "@elizaos/plugin-discord";
+import * as discordPlugin from '@elizaos/plugin-discord';
+console.log('discordPlugin', discordPlugin);
 process.on('SIGINT', () => process.exit(0));
 process.on('SIGTERM', () => process.exit(0));
 

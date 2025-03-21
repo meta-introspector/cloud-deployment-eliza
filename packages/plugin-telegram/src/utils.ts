@@ -41,6 +41,9 @@ export function escapeMarkdown(text: string): string {
  * @returns {string[]} An array containing the text message split into chunks.
  */
 export function splitMessage(text: string, maxLength = 4096): string[] {
+  if (text == undefined) {
+    return [];
+  }
   const chunks: string[] = [];
   let currentChunk = '';
 

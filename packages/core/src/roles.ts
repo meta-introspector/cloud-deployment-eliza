@@ -77,6 +77,10 @@ export async function findWorldForOwner(
 
     // Find world where the user is the owner
     for (const world of worlds) {
+      console.log('world name:', world.name);
+      console.log('world id:', world.id);
+      console.log('world agent:', world.agentId);
+      console.log('world metadata:', world.metadata);
       if (world.metadata?.ownership?.ownerId === entityId) {
         return world;
       }
