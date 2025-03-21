@@ -521,14 +521,18 @@ export async function initializeClients(
         for (const plugin of character.plugins) {
             if (plugin.clients) {
                 for (const client of plugin.clients) {
-                    const startedClient = await client.start(runtime);
-                    elizaLogger.debug(
-                        `Initializing client: ${client.name}`
-                    );
+		    try {
+			elizaLogger.debug(                         `before client: ${client.name}`			);
+			const startedClient = await client.start(runtime);
+			elizaLogger.debug(                         `Initializing client: ${client.name}`			);
                    
-                console.log("DEBUG",client);
+			console.log("DEBUG",client);
+			clients.push(startedClient);
+		    } catch (error:any) {
+			console.log(error)
+		    }
                 
-                    clients.push(startedClient);
+
                 }
             }
         }
