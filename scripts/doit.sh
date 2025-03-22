@@ -1,4 +1,5 @@
-
+#!/bin/bash
+#amazing the amount of work we need to do
 nvm use 23
 pnpm clean
 pnpm install --no-frozen-lockfile

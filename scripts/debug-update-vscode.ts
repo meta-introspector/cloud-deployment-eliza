@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// UNTESTED AI generated code
+// purpose to run debug inspect and update the inspector debugger command for vscode
 
 const { spawn } = require('child_process');
 const fs = require('fs').promises;

@@ -9,5 +9,5 @@ source ./env
 		--mount type=bind,source=/opt/agent,target=/opt/agent 	\
 		--env-file env 	\
 		--name "agent-docker.service" 	\
-		--entrypoint /opt/agent/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
+		--entrypoint /opt/agent/scripts/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
 

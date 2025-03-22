@@ -10,5 +10,5 @@ docker rm 	"agent-docker.service"
 		--mount type=bind,source=/opt/agent,target=/opt/agent 	\
 		--env-file /var/run/agent/secrets/env 	\
 		--name "agent-docker.service" 	\
-		--entrypoint /opt/agent/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
+		--entrypoint /opt/agent/scripts/docker-entrypoint-strace2.sh ${AGENT_IMAGE}
 

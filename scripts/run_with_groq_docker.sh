@@ -26,5 +26,5 @@ docker run -v tokenizer:/node_modules/tokenizers/  $TOKENIZERS_IMAGE
 		--env-file /var/run/agent/secrets/env \
 		--rm \
 		--name "agent-docker.service" \
-		--entrypoint /opt/agent/docker-entrypoint-strace2.sh $DOCKERIMAGE
+		--entrypoint /opt/agent/scripts/docker-entrypoint-strace2.sh $DOCKERIMAGE
 
