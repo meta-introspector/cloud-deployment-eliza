@@ -329,7 +329,7 @@ export class ClientBase {
       throw new Error(`Missing required Twitter credentials: ${missing.join(', ')}`);
     }
 
-    const maxRetries = 3;
+    const maxRetries = 10;
     let retryCount = 0;
     let lastError: Error | null = null;
 
@@ -377,11 +377,13 @@ export class ClientBase {
         }
       } catch (error) {
         lastError = error instanceof Error ? error : new Error(String(error));
-        logger.error(`Login attempt ${retryCount + 1} failed: ${lastError.message}`);
+
+        logger.error(`Twitter Login attempt ${retryCount + 1} failed: ${lastError.message}`);
+
         retryCount++;
 
         if (retryCount < maxRetries) {
-          const delay = 2 ** retryCount * 1000; // Exponential backoff
+          const delay = 2 ** retryCount * 10000; // Exponential backoff
           logger.info(`Retrying in ${delay / 1000} seconds...`);
           await new Promise((resolve) => setTimeout(resolve, delay));
         }

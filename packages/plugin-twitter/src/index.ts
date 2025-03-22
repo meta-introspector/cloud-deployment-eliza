@@ -1,7 +1,7 @@
 import {
   ChannelType,
   type Entity,
-  EventType,
+  //EventType,
   type IAgentRuntime,
   type Plugin,
   Role,
@@ -12,6 +12,7 @@ import {
   createUniqueUuid,
   logger,
 } from '@elizaos/core';
+import { EventType } from '@elizaos/core';
 import spaceJoin from './actions/spaceJoin';
 import { ClientBase } from './base';
 import { TWITTER_SERVICE_NAME } from './constants';

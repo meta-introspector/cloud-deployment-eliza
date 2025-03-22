@@ -351,7 +351,7 @@ const prepareChains = () => {
   const chainNames = ['hardhat'];
   chainNames.forEach(
     (chain) =>
-      (customChains[chain] = WalletProvider.genChainFromName(chain, 'http://localhost:8545'))
+      (customChains[chain] = WalletProvider.genChainFromName(chain, 'http://192.168.1.90:8545'))
   );
 
   return customChains;

@@ -23,6 +23,9 @@
     "templates",
     "drizzle"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [],
   "type": "module",
   "exports": {
@@ -76,6 +79,11 @@
   "gitHead": "9834bbd06128356b44b091f022fc2a2d024a875e",
   "dependencies": {
     "@electric-sql/pglite": "^0.2.17",
+    "@elizaos/plugin-discord": "workspace:*",
+    "@elizaos/plugin-local-ai": "workspace:*",
+    "@elizaos/plugin-groq": "workspace:*",
+    "ffmpeg-static": "^5.2.0",
+    "prism-media": "^1.3.5",
     "socket.io": "^4.8.1",
     "zod": "3.24.2"
   }

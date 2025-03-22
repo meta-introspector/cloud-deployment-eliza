@@ -1,0 +1,31 @@
+name: testdocker
+on:
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Login to Docker Hub
+        uses: meta-introspector/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build and push Docker image
+        id: push
+        uses: meta-introspector/build-push-action@v6.10.0
+        with:
+          platforms: linux/arm64,linux/arm64/v8
+          context: .
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

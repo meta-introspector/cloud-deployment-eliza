@@ -55,7 +55,7 @@ export class OllamaManager {
    * Private constructor for initializing OllamaManager.
    */
   private constructor() {
-    this.serverUrl = process.env.OLLAMA_SERVER_URL || 'http://localhost:11434';
+    this.serverUrl = process.env.OLLAMA_SERVER_URL || 'http://192.168.1.90:11434';
     logger.info('OllamaManager initialized with configuration:', {
       serverUrl: this.serverUrl,
       configuredModels: this.configuredModels,

@@ -11,16 +11,7 @@ env:
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
 on:
-  push:
-    branches: [main, develop, v2-develop]
-    paths:
-      - 'packages/app/**'
-      - '.github/workflows/**'
-  pull_request:
-    branches: [v2-develop]
-    paths:
-      - 'packages/app/**'
-      - '.github/workflows/**'
+  workflow_dispatch:
 
 jobs:
   test-build:
