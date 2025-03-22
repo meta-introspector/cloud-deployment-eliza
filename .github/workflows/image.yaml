@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   #push:
   #pull_request:
+  #  on:
+  push:
+    branches:
+      - main
+      - '*docker*'
 
 env:
   REGISTRY: ghcr.io
