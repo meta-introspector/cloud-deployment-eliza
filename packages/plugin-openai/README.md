@@ -19,7 +19,7 @@ The plugin requires these environment variables (can be set in .env file or char
   "OPENAI_API_KEY": "your_openai_api_key",
   "OPENAI_BASE_URL": "optional_custom_endpoint",
   "OPENAI_SMALL_MODEL": "gpt-4o-mini",
-  "OPENAI_LARGE_MODEL": "gpt-4o"
+  "OPENAI_LARGE_MODEL": "gpt-444444o"
 }
 ```
 

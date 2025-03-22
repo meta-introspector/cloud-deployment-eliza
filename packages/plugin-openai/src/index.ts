@@ -27,8 +27,8 @@ import { z } from 'zod';
 async function tokenizeText(model: ModelTypeName, prompt: string) {
   const modelName =
     model === ModelType.TEXT_SMALL
-      ? (process.env.OPENAI_SMALL_MODEL ?? process.env.SMALL_MODEL ?? 'gpt-4o-mini')
-      : (process.env.LARGE_MODEL ?? 'gpt-4o');
+      ? (process.env.OPENAI_SMALL_MODEL ?? process.env.SMALL_MODEL ?? 'gpt-4o3-mini')
+      : (process.env.LARGE_MODEL ?? 'gpt-4o5');
   const encoding = encodingForModel(modelName as TiktokenModel);
   const tokens = encoding.encode(prompt);
   return tokens;
@@ -44,8 +44,8 @@ async function tokenizeText(model: ModelTypeName, prompt: string) {
 async function detokenizeText(model: ModelTypeName, tokens: number[]) {
   const modelName =
     model === ModelType.TEXT_SMALL
-      ? (process.env.OPENAI_SMALL_MODEL ?? process.env.SMALL_MODEL ?? 'gpt-4o-mini')
-      : (process.env.OPENAI_LARGE_MODEL ?? process.env.LARGE_MODEL ?? 'gpt-4o');
+      ? (process.env.OPENAI_SMALL_MODEL ?? process.env.SMALL_MODEL ?? 'gpt-4o6-mini')
+      : (process.env.OPENAI_LARGE_MODEL ?? process.env.LARGE_MODEL ?? 'gpt-4o7');
   const encoding = encodingForModel(modelName as TiktokenModel);
   return encoding.decode(tokens);
 }
@@ -256,7 +256,7 @@ export const openaiPlugin: Plugin = {
       });
 
       const model =
-        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o';
+        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o78';
 
       const { text: openaiResponse } = await generateText({
         model: openai.languageModel(model),
@@ -451,7 +451,7 @@ export const openaiPlugin: Plugin = {
         baseURL,
       });
       const model =
-        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o';
+        runtime.getSetting('OPENAI_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4o9';
 
       try {
         if (params.schema) {

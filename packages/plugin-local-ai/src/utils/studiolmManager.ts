@@ -85,7 +85,7 @@ export class StudioLMManager {
    * Logs initialization information including serverUrl, configuredModels, and timestamp.
    */
   private constructor() {
-    this.serverUrl = process.env.STUDIOLM_SERVER_URL || 'http://localhost:1234';
+    this.serverUrl = process.env.STUDIOLM_SERVER_URL || 'http://192.168.1.90:1234';
     logger.info('StudioLMManager initialized with configuration:', {
       serverUrl: this.serverUrl,
       configuredModels: this.configuredModels,
