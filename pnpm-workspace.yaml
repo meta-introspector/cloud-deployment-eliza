@@ -2,6 +2,6 @@ packages:
     - "docs"
     - "packages/*"
     - "vendor/elizaos/*"
-    - "vendor/ptbk/*"
-    - "vendor/ptbk/promptbook"
+    - "vendor/ptbk/*"    
+    - "vendor/ptbk/promptbook/packages/*"
     - "agent"
