@@ -27,7 +27,7 @@ ExecStart=/usr/bin/docker run \
           --mount type=bind,source=/opt/agent,target=/opt/agent \
           --env-file /var/run/agent/secrets/env         \
           --name "agent-docker.service" \
-          --entrypoint /opt/agent/docker-entrypoint-none.sh \
+          --entrypoint /opt/agent/scripts/docker-entrypoint-none.sh \
           ${AGENT_IMAGE}
 StandardOutput=file:/var/log/agent_systemd.log
 StandardError=file:/var/log/agent_systemd.log
