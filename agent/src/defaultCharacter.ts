@@ -5,12 +5,12 @@ import discordPlugin  from "@elizaos-plugins/client-discord";
 import twitterPlugin  from "@elizaos-plugins/plugin-twitter";
 
 export const defaultCharacter: Character = {
-    name: "ZOS-MycorrhizalMind",
+    name: "ZOS-MycorrhizalMindDefault",
     username: "tine_cloud_zos", // retained from original as no new username provided
     plugins: [
-        speechTTS,//"@elizaos-plugins/plugin-speech-tts",
+//        speechTTS,//"@elizaos-plugins/plugin-speech-tts",
         //twitterClientPlugin,// "@elizaos-plugins/client-twitter",
-        discordPlugin ,//"@elizaos-plugins/client-discord",
+  //      discordPlugin ,//"@elizaos-plugins/client-discord",
         //twitterPlugin//"@elizaos-plugins/plugin-twitter"
     ],
     //clients: ["twitter", "discord"],
