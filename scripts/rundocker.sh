@@ -3,6 +3,11 @@
 # this is the install script 
 #  install_script = "/opt/agent/rundocker.sh"
 # called on boot.
+#source /etc/agent/env
+#export AGENT_NAME
+# FIXME hack 1
+# load variables from another agent
+export AGENT_NAME=tine_agent_7
 echo using "${AGENT_NAME}" as agent name base for keys
 export AGENT_NAME 
 #pwd

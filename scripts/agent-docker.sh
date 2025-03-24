@@ -1,7 +1,8 @@
 #!/bin/bash
 
-export $(source /var/run/agent/secrets/env| xargs)
+export $(cat /var/run/agent/secrets/env| xargs)
 
+echo AGENT_IMAGE ${AGENT_IMAGE}
 docker kill "agent-docker.service"     
 docker rm 	"agent-docker.service" 
 /usr/bin/docker run  -p 3000:3000  	\
