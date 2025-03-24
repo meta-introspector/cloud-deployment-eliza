@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - '*docker*'
+      - docker/*/*/*
 
 env:
   REGISTRY: ghcr.io
