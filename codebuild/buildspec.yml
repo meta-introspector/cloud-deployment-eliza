@@ -1,0 +1,30 @@
+version: 0.2
+
+env:
+  parameter-store:
+    DOCKER_USERNAME: 'tine_agent_4_docker_username'
+    DOCKER_PASSWORD: 'tine_agent_4_docker_password'
+    #DOCKER_IMAGE : "tine_agent_7_agent_image"
+  variables:
+    DOCKER_IMAGE: 'h4ckermike/elizaos-eliza:v2'
+
+phases:
+  pre_build:
+    commands:
+      - apt update
+      - apt-get install -y ec2-instance-connect git wget unzip systemd ca-certificates curl cloud-utils apt-transport-https ca-certificates software-properties-common
+      - curl -fsSL test.docker.com -o get-docker.sh && sh get-docker.sh
+      - echo $DOCKER_PASSWORD | md5sum
+      - echo $DOCKER_PASSWORD | wc
+      - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 767503528736.dkr.ecr.us-east-2.amazonaws.com
+  build:
+    commands:
+      - docker build -t agent/eliza:feb10 .
+      - docker tag agent/eliza:feb10  767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
+  post_build:
+    commands:
+      - docker push 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10
+      - docker tag 767503528736.dkr.ecr.us-east-2.amazonaws.com/agent/eliza:feb10 $DOCKER_IMAGE
+      - docker push $DOCKER_IMAGE
+      # h4ckermike/elizaos-eliza:feb10
