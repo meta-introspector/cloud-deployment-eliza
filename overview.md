@@ -78,11 +78,19 @@ given the agent assumed name, if you have permission read the secrets and use th
 * Promptbook
 * etc
   
-### Implementation of customer needs into agent framework
+### Carry or Implementation of customer wish/needs into agent framework
+Consistent and secure. 
+Translates wishes into quality metrics and checks.
 #### Character file for eliza
+memory updates.
+knowledge of your agent.
 ##### branch on git/repo
 ##### url on some server
 ##### variable in parameter store
 ##### other fancy char db
+
+## Update agent
+backup data.
+
 
 
