@@ -5,9 +5,6 @@ From humans for humans
 Our user is a customer who want to create an ai agent for some business purpose, to follow some regulated procedure
 that is documented in some formal manner and prove compliance.
 
-## Biometrics
-The user has biometrics that are used to authenticate themselves with the system, mfa, etc.
-
 # Cloud Account
 
 The agent will run locally or on a cloud server. Our focus is on using free tier cloud to help people 
@@ -20,8 +17,8 @@ get started with a "one click" installer. In fact its more than one click, but w
 ### Limited free tier
 ### Credit check for Pay as you go
 
-## akash account
-### Crypto payments
+## Crypto payments
+### akash account
 
 # Finance
 ## bank/credit card account 
@@ -157,5 +154,7 @@ knowledge of your agent.
 ## Update agent
 backup data.
 
+# Details
 
-
+## Biometrics
+The user has biometrics that are used to authenticate themselves with the system, mfa, etc.
