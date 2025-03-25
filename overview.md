@@ -10,6 +10,9 @@ The user has biometrics that are used to authenticate themselves with the system
 
 # Cloud Account
 
+The agent will run locally or on a cloud server. Our focus is on using free tier cloud to help people 
+get started with a "one click" installer. In fact its more than one click, but we reduce it to the minimum with no command line needed if all goes well. The problem is that many times you need to diagnose errors in misconfiguration.
+
 ## aws account 
 ### Free tier with credit card
 
