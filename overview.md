@@ -64,12 +64,17 @@ this allows reuse of agent variables. ( I guess we could have a list of alias to
 # Applications
 ## Customer applications
 
-## Boot scripts
-### git report/branch - cloudformation
-### modify to load variables from parameter store, to allow customization. 
-given the agent assumed name, if you have permission read the secrets and use those to load additional data.
+## Boot scripts (user data)
 
-## Docker image
+Stored in the launch template, 
+
+### git report/branch - created with cloudformation
+
+### TODO : modify to load variables from parameter store, to allow customization. 
+
+Fixed : given the agent_alias assumed name, if you have permission read the secrets and use those to load additional data.
+
+## AGENT_IMAGE : Docker image
 ### ssm parameter which docker image to load.
 
 eg:
