@@ -88,6 +88,14 @@ this allows reuse of agent variables. ( I guess we could have a list of alias to
 ## Api keys
 ### eg openai key
 
+## Systemd 
+Installed with rundocker.sh
+```
+cd /opt/agent/scripts
+git pull
+bash ./rundocker.sh
+```
+
 ## ssm parameters
 ### Read directly from api
 ### Prefixed for each agent/namespace
