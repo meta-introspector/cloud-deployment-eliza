@@ -38,7 +38,8 @@ From humans for humans
 ### cloudformation
 #### User data scripts 
 ##### Agent_name
-##### Agent_assumed_name
+##### Agent_assumed_name (Agent_Alias)
+this allows reuse of agent variables. ( I guess we could have a list of alias to load from etc)
 #### Terraform 
 
 ## Oracle
@@ -70,6 +71,9 @@ given the agent assumed name, if you have permission read the secrets and use th
 
 ## Docker image
 ### ssm parameter which docker image to load.
+
+eg:
+`tine_agent_7_AGENT_IMAGE` = `h4ckermike/elizaos-eliza:docker-2025-03-25`
 
 ## agent frameworks
 * Eliza
