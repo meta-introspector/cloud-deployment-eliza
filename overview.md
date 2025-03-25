@@ -37,6 +37,44 @@ From humans for humans
 ## AWS 
 ### cloudformation
 #### User data scripts 
+
+https://us-east-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchTemplateDetails:launchTemplateId=lt-0a10ab673e21f4aae
+
+see `echo GIT_BRANCH="feature/v2/telegram"  >> /etc/agent/env`
+and `export GIT_BRANCH="feature/v2/telegram"` 
+
+```
+#!/bin/bash -xe
+export AGENT_NAME="tine_agent_9"
+export GIT_REPO="https://github.com/meta-introspector/cloud-deployment-eliza/" # FIXME
+export GIT_BRANCH="feature/v2/telegram" # FIXME
+
+mkdir /etc/agent/
+
+echo AGENT_NAME="tine_agent_9" > /etc/agent/env
+echo GIT_REPO="https://github.com/meta-introspector/cloud-deployment-eliza/" >> /etc/agent/env
+echo GIT_BRANCH="feature/v2/telegram"  >> /etc/agent/env
+
+export HOME=/root
+apt update
+apt-get install -y ec2-instance-connect git wget unzip systemd curl
+apt-get install -y cloud-utils apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+apt-get update
+apt-get install -y docker-ce
+usermod -aG docker ubuntu
+snap install amazon-ssm-agent --classic || echo oops1
+snap start amazon-ssm-agent || echo oops2
+if [ ! -d "/opt/agent/" ]; then
+git clone "https://github.com/meta-introspector/cloud-deployment-eliza/" "/opt/agent/"
+fi
+cd "/opt/agent/" || exit 1
+git stash
+git fetch --all
+git checkout --track --force "origin/feature/v2/telegram"
+bash -x /opt/agent/scripts/rundocker.sh
+```
 ##### Agent_name
 ##### Agent_assumed_name (Agent_Alias)
 this allows reuse of agent variables. ( I guess we could have a list of alias to load from etc)
@@ -67,6 +105,8 @@ this allows reuse of agent variables. ( I guess we could have a list of alias to
 ## Boot scripts (user data)
 
 Stored in the launch template, 
+
+The branch is "feature/v2/telegram" in my example
 
 ### git report/branch - created with cloudformation
 
