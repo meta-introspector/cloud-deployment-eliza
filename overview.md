@@ -1,7 +1,12 @@
 From humans for humans 
 
 # Human 
+
+Our user is a customer who want to create an ai agent for some business purpose, to follow some regulated procedure
+that is documented in some formal manner and prove compliance.
+
 ## Biometrics
+The user has biometrics that are used to authenticate themselves with the system, mfa, etc.
 
 # Cloud Account
 
