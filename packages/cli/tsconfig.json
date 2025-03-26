@@ -6,6 +6,7 @@
     "module": "ESNext",
     "allowSyntheticDefaultImports": true,
     "target": "ESNext",
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@/*": ["*"],
       "@elizaos/core": ["../../core/src"],
