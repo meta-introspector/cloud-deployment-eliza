@@ -1,0 +1,43 @@
+# derived from https://phil.lavin.me.uk/2021/12/running-docker-containers-from-aws-ecr-with-systemd/
+# derived from https://github.com/encode/uvicorn/issues/678
+# derived from https://blog.container-solutions.com/running-docker-containers-with-systemd
+
+[Unit]
+Description=agent
+After=docker.service
+Requires=docker.service
+StartLimitInterval=200
+StartLimitBurst=10
+
+[Service]
+EnvironmentFile=/var/run/agent/secrets/env
+RestartSec=10
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker volume create agentdata
+ExecStartPre=-/usr/bin/docker exec %n stop || echo cannot prestop
+ExecStartPre=-/usr/bin/docker rm %n || echo cannot preremove
+ExecStartPre=/usr/bin/docker pull ${AGENT_IMAGE}
+ExecStartPre=/usr/bin/docker pull ${TOKENIZER_IMAGE}
+ExecStartPre=-/usr/bin/docker run --name copytoken \
+     -v tokenizer:/node_modules/tokenizers/ \
+      ${TOKENIZER_IMAGE}
+ExecStart=/usr/bin/docker run \
+	-p 3000:3000 \
+	 -v agentdata:/var/run/agent/database/ \
+	  -v tokenizer:/app/node_modules/@anush008/tokenizers/ \
+	  -v tokenizer:/app/node_modules/fastembed/node_modules/.pnpm/@anush008+tokenizers@https+++codeload.github.com+meta-introspector+arm64-tokenizers+tar.gz+98_s2457qj3pe4ojcbckddasgzfvu/node_modules/@anush008/ \
+	  --mount type=bind,source=/opt/agent,target=/opt/agent \
+	  --mount type=bind,source=/opt/agent/packages/cli/src/characters,target=/app/packages/cli/src/characters/ \
+	  --env-file /var/run/agent/secrets/env \
+	  --env PGLITE_DATA_DIR='/var/run/agent/database' \
+	  --name "agent-docker.service" \
+	  --entrypoint /opt/agent/scripts/docker-entrypoint-none.sh \
+	  ${AGENT_IMAGE}
+StandardOutput=file:/var/log/agent_systemd.log
+StandardError=file:/var/log/agent_systemd.log
+ExecReload=/bin/kill -HUP ${MAINPID}
+ExecStop=/usr/bin/docker stop  agent-docker.service
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

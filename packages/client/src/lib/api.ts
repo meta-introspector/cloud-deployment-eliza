@@ -254,12 +254,13 @@ export const apiClient = {
   },
   deleteAgent: (agentId: string): Promise<{ success: boolean }> =>
     fetcher({ url: `/agents/${agentId}`, method: 'DELETE' }),
-  updateAgent: (agentId: string, agent: Agent) =>
-    fetcher({
+  updateAgent: async (agentId: string, agent: Agent) => {
+    return fetcher({
       url: `/agents/${agentId}`,
       method: 'PATCH',
       body: agent,
-    }),
+    });
+  },
   createAgent: (params: { characterPath?: string; characterJson?: Character }) =>
     fetcher({
       url: '/agents/',
@@ -504,6 +505,40 @@ export const apiClient = {
     return fetcher({
       url: `/agents/groups/${serverId}`,
       method: 'DELETE',
+    });
+  },
+
+  getLocalEnvs: () => {
+    return fetcher({
+      url: `/envs/local`,
+      method: 'GET',
+    });
+  },
+
+  updateLocalEnvs: (envs: Record<string, string>) => {
+    return fetcher({
+      url: `/envs/local`,
+      method: 'POST',
+      body: {
+        content: envs,
+      },
+    });
+  },
+
+  getGlobalEnvs: () => {
+    return fetcher({
+      url: `/envs/global`,
+      method: 'GET',
+    });
+  },
+
+  updateGlobalEnvs: (envs: Record<string, string>) => {
+    return fetcher({
+      url: `/envs/global`,
+      method: 'POST',
+      body: {
+        content: envs,
+      },
     });
   },
 };

@@ -16,6 +16,7 @@ import {
 } from '@elizaos/core';
 import type { ClientBase } from './base';
 import type { AudioDataWithUser, JanusClient, Space } from './client';
+import { table } from 'node:console';
 
 /**
  * Interface for defining configuration options for a plugin.
@@ -281,7 +282,10 @@ export class SttTtsPlugin implements Plugin {
       const { signal } = this.ttsAbortController;
 
       try {
-        const responseStream = await this.runtime.useModel(ModelType.TEXT_TO_SPEECH, text);
+        const responseStream = (await this.runtime.useModel(
+          ModelType.TEXT_TO_SPEECH,
+          text
+        )) as Readable;
         if (!responseStream) {
           logger.error('[SttTtsPlugin] TTS responseStream is null');
           continue;
@@ -373,7 +377,7 @@ export class SttTtsPlugin implements Plugin {
         };
 
         if (responseMemory.content.text?.trim()) {
-          await this.runtime.createMemory(responseMemory);
+          await this.runtime.createMemory(responseMemory, 'memories');
           this.isProcessingAudio = false;
           this.volumeBuffers.clear();
           await this.speakText(content.text);

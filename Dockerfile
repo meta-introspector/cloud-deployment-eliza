@@ -5,7 +5,16 @@ WORKDIR /app
 
 # Install Node.js 23.3.0 and required dependencies
 RUN apt-get update && \
-    apt-get install -y curl git python3 make g++ unzip build-essential nodejs && \
+    apt-get install -y curl git python3 make g++ unzip build-essential nodejs \
+      node-gyp \
+      ffmpeg \
+      libopus-dev \
+      libcairo2-dev \
+      libjpeg-dev \
+      libpango1.0-dev \
+      libgif-dev \
+      openssl \
+      libssl-dev libsecret-1-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -14,6 +23,8 @@ RUN npm install -g bun turbo@2.3.3
 
 # Set Python 3 as the default python
 RUN ln -s /usr/bin/python3 /usr/bin/python
+
+FROM builder as installer 
 
 # Copy package files
 COPY .npmrc .
@@ -27,7 +38,6 @@ COPY scripts ./scripts
 COPY packages ./packages
 
 
-
 # Install dependencies
 RUN bun install
 
@@ -35,7 +45,7 @@ RUN bun install
 RUN bun run build
 
 # Create a new stage for the final image
-FROM node:23.3.0-slim
+FROM builder
 
 WORKDIR /app
 
@@ -48,15 +58,15 @@ RUN apt-get update && \
 # Install bun using npm
 RUN npm install -g bun turbo@2.3.3
 
-# Copy built artifacts and production dependencies from the builder stage
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/tsconfig.json ./
-COPY --from=builder /app/turbo.json ./
-COPY --from=builder /app/lerna.json ./
-COPY --from=builder /app/renovate.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/packages ./packages
-COPY --from=builder /app/scripts ./scripts
+# Copy built artifacts and production dependencies from the installer stage
+COPY --from=installer /app/package.json ./
+COPY --from=installer /app/tsconfig.json ./
+COPY --from=installer /app/turbo.json ./
+COPY --from=installer /app/lerna.json ./
+COPY --from=installer /app/renovate.json ./
+COPY --from=installer /app/node_modules ./node_modules
+COPY --from=installer /app/packages ./packages
+COPY --from=installer /app/scripts ./scripts
 
 # Set environment variables
 ENV NODE_ENV=production

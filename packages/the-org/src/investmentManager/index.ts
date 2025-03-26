@@ -29,13 +29,12 @@ dotenv.config({ path: '../../.env' });
  * @property {Object} style - Object containing communication style guidelines for the character
  */
 const character: Character = {
-  name: 'Spartan',
+  name: 'Spartan3',
   plugins: [
     '@elizaos/plugin-sql',
     '@elizaos/plugin-anthropic',
     '@elizaos/plugin-openai',
     '@elizaos/plugin-discord',
-    '@elizaos/plugin-twitter',
     '@elizaos/plugin-pdf',
     '@elizaos/plugin-video-understanding',
   ],
