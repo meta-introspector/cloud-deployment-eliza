@@ -50,11 +50,12 @@ function validateModelConfig(config: Record<string, boolean>): void {
     USE_OLLAMA_TEXT_MODELS: config.USE_OLLAMA_TEXT_MODELS,
   });
 
-  // Ensure USE_LOCAL_AI is always true
-  if (!config.USE_LOCAL_AI) {
-    config.USE_LOCAL_AI = true;
-    logger.info("Setting USE_LOCAL_AI to true as it's required");
-  }
+  // NOPE
+  // // Ensure USE_LOCAL_AI is always true
+  // if (!config.USE_LOCAL_AI) {
+  // 	config.USE_LOCAL_AI = true;
+  // 	logger.info("Setting USE_LOCAL_AI to true as it's required");
+  // }
 
   // Only validate that StudioLM and Ollama are not both enabled
   if (config.USE_STUDIOLM_TEXT_MODELS && config.USE_OLLAMA_TEXT_MODELS) {
@@ -83,7 +84,7 @@ export async function validateConfig(config: Record<string, string>): Promise<Co
 
     // Parse environment variables with proper boolean conversion
     const booleanConfig = {
-      USE_LOCAL_AI: true, // Always true
+      USE_LOCAL_AI: false, // Always true
       USE_STUDIOLM_TEXT_MODELS: config.USE_STUDIOLM_TEXT_MODELS === 'true',
       USE_OLLAMA_TEXT_MODELS: config.USE_OLLAMA_TEXT_MODELS === 'true',
       USE_OLLAMA_EMBEDDING: config.USE_OLLAMA_EMBEDDING === 'true',

@@ -311,6 +311,7 @@ export function agentRouter(
 
   // Start an existing agent
   router.post('/:agentId', async (req, res) => {
+    console.log('start agent req', req);
     const agentId = validateUuid(req.params.agentId);
     if (!agentId) {
       res.status(400).json({

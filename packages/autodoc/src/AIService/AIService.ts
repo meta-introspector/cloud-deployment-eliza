@@ -32,7 +32,7 @@ export class AIService {
     this.chatModel = new ChatOpenAI({ apiKey: process.env.OPENAI_API_KEY });
     this.chatModelFAQ = new ChatOpenAI({
       apiKey: process.env.OPENAI_API_KEY,
-      model: 'gpt-4o',
+      model: 'gpt-4o-no1',
     });
     this.codeFormatter = new CodeFormatter();
   }
