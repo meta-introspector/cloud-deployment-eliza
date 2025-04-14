@@ -1,6 +1,7 @@
 import { AgentRuntime, type Character, ChannelType } from '@elizaos/core';
 import sqlinit from '@elizaos/plugin-sql';
 //import schema from "@elizaos/plugin-sql";
+import { pgGenerate } from 'drizzle-dbml-generator'; // Using Postgres for this example
 
 const encryptedChar: Character = {
   name: '',
@@ -17,8 +18,11 @@ async function init() {
   //console.log(runtime.adapter.db.session._.fullSchema)
   //console.log(schema);
   //console.log(runtime.adapter);
-  const c = runtime.getDatabaseSchema();
-  console.log('SCHEMA', c);
+  const schema = runtime.getDatabaseSchema();
+  //console.log('SCHEMA', schema);
+  const out = './schema.dbml';
+  const relational = true;
+  pgGenerate({ schema, out, relational });
   //  Top-level await is not available in the configured target environment ("es2021")
   //console.log(runtime.adapter.db.session._.fullSchema);
 }
