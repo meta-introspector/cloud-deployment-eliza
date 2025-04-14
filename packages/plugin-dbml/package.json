@@ -19,7 +19,7 @@
   "dependencies": {
     "@hapi/shot": "^6.0.1",
     "@types/hapi": "^18.0.14",
-    "drizzle-dbml-generator": "^0.10.0",
+    "drizzle-dbml-generator": "workspace:0.10.1",
     "source-map-support": "^0.5.21"
   }
 }

@@ -19,3 +19,6 @@
 [submodule "characters"]
 	path = characters
 	url = https://github.com/meta-introspector/characters-eliza-zos
+[submodule "vendor/drizzle/drizzle-dbml-generator"]
+	path = vendor/drizzle/drizzle-dbml-generator
+	url = https://github.com/meta-introspector/drizzle-dbml-generator
