@@ -21,7 +21,7 @@ async function init() {
   const schema = runtime.getDatabaseSchema();
   //console.log('SCHEMA', schema);
   const out = './schema.dbml';
-  const relational = true;
+  const relational = false;
   pgGenerate({ schema, out, relational });
   //  Top-level await is not available in the configured target environment ("es2021")
   //console.log(runtime.adapter.db.session._.fullSchema);
