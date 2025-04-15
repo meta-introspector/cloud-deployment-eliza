@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { bootstrapPlugin } from './bootstrap';
 import { createUniqueUuid } from './entities';
 import { decryptSecret, getSalt, handlePluginImporting } from './index';
+
 import logger from './logger';
 import { splitChunks } from './prompts';
 // Import enums and values that are used as values
@@ -18,6 +19,7 @@ import type {
   HandlerCallback,
   IAgentRuntime,
   IDatabaseAdapter,
+  IDatabaseSchema,
   KnowledgeItem,
   Log,
   Memory,
@@ -302,7 +304,23 @@ export class Semaphore {
  * @property {Provider[]} providers - The list of providers for external services.
  * @property {Plugin[]} plugins - The list of plugins to extend functionality.
  */
+
 export class AgentRuntime implements IAgentRuntime {
+  getDatabaseSchema(): Promise<IDatabaseSchema> {
+    //console.log('getDatabaseSchema', this.adapter)
+    // PgliteDatabaseAdapter
+    return this.adapter.getDatabaseSchema();
+    // return [{
+    //   name: 'agent',
+    //   columns: [
+    //     { name: 'id', type: 'uuid', isPrimary: true },
+    //     { name: 'name', type: 'text' },
+    //     { name: 'description', type: 'text' },
+    //     { name: 'created_at', type: 'timestamp' },
+    //     { name: 'updated_at', type: 'timestamp' },
+    //   ],
+    // }] as unknown as Promise<IDatabaseSchema>;
+  }
   readonly #conversationLength: number; // this should be a dynamic setting
   readonly agentId: UUID;
   readonly character: Character;
@@ -594,7 +612,7 @@ export class AgentRuntime implements IAgentRuntime {
         pluginRegistrationPromises.push(await this.registerPlugin(plugin));
       }
     }
-
+    console.log('this.adapter:', this.adapter);
     await this.adapter.init();
 
     // First create the agent entity directly

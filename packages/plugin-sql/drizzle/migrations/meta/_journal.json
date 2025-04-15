@@ -8,6 +8,13 @@
       "when": 1740921883121,
       "tag": "20250302132443_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1744730292864,
+      "tag": "0001_task_upgrade",
+      "breakpoints": true
     }
   ]
 }

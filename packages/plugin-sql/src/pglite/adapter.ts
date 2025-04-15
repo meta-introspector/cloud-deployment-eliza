@@ -35,6 +35,7 @@ export class PgliteDatabaseAdapter extends BaseDrizzleAdapter<PgliteDatabase> {
     super(agentId);
     this.manager = manager;
     this.db = drizzle(this.manager.getConnection());
+    //console.log('CREATE DB', this.db);
   }
 
   /**

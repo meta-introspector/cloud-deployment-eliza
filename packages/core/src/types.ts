@@ -1,5 +1,5 @@
 import type { Readable } from 'node:stream';
-
+import { TableConfig } from 'drizzle-orm/pg-core/table';
 /**
  * Type definition for a Universally Unique Identifier (UUID) using a specific format.
  * @typedef {`${string}-${string}-${string}-${string}-${string}`} UUID
@@ -678,6 +678,18 @@ export interface Agent extends Character {
   createdAt: number;
   updatedAt: number;
 }
+export type IDatabaseSchema = TableConfig[];
+// [key: string]: {
+//   type: string;
+//   primary?: boolean;
+//   unique?: boolean;
+//   autoIncrement?: boolean;
+//   default?: any;
+//   references?: {
+//     table: string;
+//     column: string;
+//   };
+// };
 
 /**
  * Interface for database operations
@@ -894,6 +906,8 @@ export interface IDatabaseAdapter {
   getTasksByName(name: string): Promise<Task[]>;
   updateTask(id: UUID, task: Partial<Task>): Promise<void>;
   deleteTask(id: UUID): Promise<void>;
+
+  getDatabaseSchema(): Promise<IDatabaseSchema>;
 }
 
 /**

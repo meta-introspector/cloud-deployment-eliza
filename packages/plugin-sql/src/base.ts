@@ -45,6 +45,7 @@ import {
   worldTable,
 } from './schema/index';
 import type { DrizzleOperations } from './types';
+import { PgTableWithColumns } from 'drizzle-orm/pg-core/table';
 
 // Define the metadata type inline since we can't import it
 /**
@@ -76,6 +77,24 @@ import type { DrizzleOperations } from './types';
 export abstract class BaseDrizzleAdapter<
   TDatabase extends DrizzleOperations,
 > extends DatabaseAdapter<TDatabase> {
+  getDatabaseSchema() {
+    const tlist = [
+      agentTable,
+      cacheTable,
+      componentTable,
+      embeddingTable,
+      entityTable,
+      logTable,
+      memoryTable,
+      participantTable,
+      relationshipTable,
+      roomTable,
+      taskTable,
+      worldTable,
+    ];
+    //console.log('tlist', tlist);
+    return tlist;
+  }
   protected readonly maxRetries: number = 3;
   protected readonly baseDelay: number = 1000;
   protected readonly maxDelay: number = 10000;

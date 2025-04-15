@@ -3,6 +3,7 @@ import type {
   Component,
   Entity,
   IDatabaseAdapter,
+  IDatabaseSchema,
   Log,
   Memory,
   Participant,
@@ -540,4 +541,6 @@ export abstract class DatabaseAdapter<DB = unknown> implements IDatabaseAdapter 
    * @returns Promise resolving when the deletion is complete
    */
   abstract deleteTask(id: UUID): Promise<void>;
+
+  abstract getDatabaseSchema(): Promise<IDatabaseSchema>;
 }

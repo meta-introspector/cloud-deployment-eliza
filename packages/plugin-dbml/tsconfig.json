@@ -13,8 +13,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "noEmit": false,
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "typeRoots": ["./node_modules/@types"]
-  },
-  "include": ["src/**/*.ts"]
+  }
 }
