@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "dom"],
@@ -7,6 +8,8 @@
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "sourcemap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": false,
     "allowImportingTsExtensions": true,
