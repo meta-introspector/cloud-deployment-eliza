@@ -161,7 +161,7 @@ table tasks {
   description text [not null]
   room_id uuid
   world_id uuid
-  agent_id uuid [not null]
+  agent_id uuid
   tags text[]
   metadata jsonb
   created_at timestamp [default: `now()`]
@@ -238,5 +238,11 @@ ref fk_user_b: relationships.targetEntityId > entities.id [delete: cascade, upda
 ref rooms_agentId_agents_id_fk: rooms.agentId > agents.id [delete: cascade, update: no action]
 
 ref rooms_worldId_worlds_id_fk: rooms.worldId > worlds.id [delete: cascade, update: no action]
+
+ref tasks_room_id_rooms_id_fk: tasks.room_id > rooms.id [delete: cascade, update: no action]
+
+ref tasks_world_id_worlds_id_fk: tasks.world_id > worlds.id [delete: cascade, update: no action]
+
+ref tasks_agent_id_agents_id_fk: tasks.agent_id > agents.id [delete: cascade, update: no action]
 
 ref worlds_agentId_agents_id_fk: worlds.agentId > agents.id [delete: cascade, update: no action]
