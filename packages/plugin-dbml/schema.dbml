@@ -1,0 +1,242 @@
+table agents {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  enabled boolean [not null, default: true]
+  createdAt timestamptz [not null, default: `now()`]
+  updatedAt timestamptz [not null, default: `now()`]
+  name text
+  username text
+  system text
+  bio jsonb [not null]
+  message_examples jsonb [default: `'[]'::jsonb`]
+  post_examples jsonb [default: `'[]'::jsonb`]
+  topics jsonb [default: `'[]'::jsonb`]
+  adjectives jsonb [default: `'[]'::jsonb`]
+  knowledge jsonb [default: `'[]'::jsonb`]
+  plugins jsonb [default: `'[]'::jsonb`]
+  settings jsonb [default: `'{}'::jsonb`]
+  style jsonb [default: `'{}'::jsonb`]
+
+  indexes {
+    name [name: 'name_unique', unique]
+  }
+}
+
+table cache {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  key text [not null]
+  agentId uuid [not null]
+  value jsonb [not null]
+  createdAt timestamptz [not null, default: `now()`]
+  expiresAt timestamptz
+
+  indexes {
+    (key, agentId) [name: 'cache_key_agent_unique', unique]
+  }
+}
+
+table components {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  entityId uuid [not null]
+  agentId uuid [not null]
+  roomId uuid [not null]
+  worldId uuid
+  sourceEntityId uuid
+  type text [not null]
+  data jsonb [default: `'{}'::jsonb`]
+  createdAt timestamptz [not null, default: `now()`]
+}
+
+table embeddings {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  memory_id uuid
+  created_at timestamptz [not null, default: `now()`]
+  dim_384 vector(384)
+  dim_512 vector(512)
+  dim_768 vector(768)
+  dim_1024 vector(1024)
+  dim_1536 vector(1536)
+  dim_3072 vector(3072)
+
+  indexes {
+    
+    memory_id [name: 'idx_embedding_memory']
+    
+  }
+}
+
+table entities {
+  id uuid [pk, not null]
+  agentId uuid [not null]
+  createdAt timestamptz [not null, default: `now()`]
+  names text[] [default: `'{}'::text[]`]
+  metadata jsonb [default: `'{}'::jsonb`]
+
+  indexes {
+    (id, agentId) [name: 'id_agent_id_unique', unique]
+  }
+}
+
+table logs {
+  id uuid [not null, default: `gen_random_uuid()`]
+  createdAt timestamptz [not null, default: `now()`]
+  entityId uuid [not null]
+  body jsonb [not null]
+  type text [not null]
+  roomId uuid [not null]
+}
+
+table memories {
+  id uuid [pk, not null]
+  type text [not null]
+  createdAt timestamptz [not null, default: `now()`]
+  content jsonb [not null]
+  entityId uuid
+  agentId uuid
+  roomId uuid
+  unique boolean [not null, default: true]
+  metadata jsonb [not null, default: `{}`]
+
+  indexes {
+    (type, roomId) [name: 'idx_memories_type_room']
+    
+    
+    
+    TODO [name: 'idx_memories_metadata_type']
+    TODO [name: 'idx_memories_document_id']
+    (TODO, TODO) [name: 'idx_fragments_order']
+    
+    
+  }
+}
+
+table participants {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  createdAt timestamptz [not null, default: `now()`]
+  entityId uuid
+  roomId uuid
+  agentId uuid
+  roomState text
+
+  indexes {
+    entityId [name: 'idx_participants_user']
+    roomId [name: 'idx_participants_room']
+    
+    
+  }
+}
+
+table relationships {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  createdAt timestamptz [not null, default: `now()`]
+  sourceEntityId uuid [not null]
+  targetEntityId uuid [not null]
+  agentId uuid [not null]
+  tags text[]
+  metadata jsonb
+
+  indexes {
+    (sourceEntityId, targetEntityId) [name: 'idx_relationships_users']
+    (sourceEntityId, targetEntityId, agentId) [name: 'unique_relationship', unique]
+    
+    
+  }
+}
+
+table rooms {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  agentId uuid
+  source text [not null]
+  type text [not null]
+  serverId text
+  worldId uuid
+  name text
+  metadata jsonb
+  channelId text
+  createdAt timestamptz [not null, default: `now()`]
+}
+
+table tasks {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  name text [not null]
+  description text [not null]
+  room_id uuid
+  world_id uuid
+  agent_id uuid [not null]
+  tags text[]
+  metadata jsonb
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+table worlds {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  agentId uuid [not null]
+  name text [not null]
+  metadata jsonb
+  serverId text [not null]
+  createdAt timestamptz [not null, default: `now()`]
+}
+
+ref cache_agentId_agents_id_fk: cache.agentId > agents.id [delete: cascade, update: no action]
+
+ref components_entityId_entities_id_fk: components.entityId > entities.id [delete: cascade, update: no action]
+
+ref components_agentId_agents_id_fk: components.agentId > agents.id [delete: cascade, update: no action]
+
+ref components_roomId_rooms_id_fk: components.roomId > rooms.id [delete: cascade, update: no action]
+
+ref components_worldId_worlds_id_fk: components.worldId > worlds.id [delete: cascade, update: no action]
+
+ref components_sourceEntityId_entities_id_fk: components.sourceEntityId > entities.id [delete: cascade, update: no action]
+
+ref embeddings_memory_id_memories_id_fk: embeddings.memory_id > memories.id [delete: no action, update: no action]
+
+ref fk_embedding_memory: embeddings.memory_id > memories.id [delete: cascade, update: no action]
+
+ref entities_agentId_agents_id_fk: entities.agentId > agents.id [delete: cascade, update: no action]
+
+ref logs_entityId_entities_id_fk: logs.entityId > entities.id [delete: no action, update: no action]
+
+ref logs_roomId_rooms_id_fk: logs.roomId > rooms.id [delete: no action, update: no action]
+
+ref fk_room: logs.roomId > rooms.id [delete: cascade, update: no action]
+
+ref fk_user: logs.entityId > entities.id [delete: cascade, update: no action]
+
+ref memories_entityId_entities_id_fk: memories.entityId > entities.id [delete: cascade, update: no action]
+
+ref memories_agentId_agents_id_fk: memories.agentId > agents.id [delete: cascade, update: no action]
+
+ref memories_roomId_rooms_id_fk: memories.roomId > rooms.id [delete: cascade, update: no action]
+
+ref fk_room: memories.roomId > rooms.id [delete: cascade, update: no action]
+
+ref fk_user: memories.entityId > entities.id [delete: cascade, update: no action]
+
+ref fk_agent: memories.agentId > agents.id [delete: cascade, update: no action]
+
+ref participants_entityId_entities_id_fk: participants.entityId > entities.id [delete: cascade, update: no action]
+
+ref participants_roomId_rooms_id_fk: participants.roomId > rooms.id [delete: cascade, update: no action]
+
+ref participants_agentId_agents_id_fk: participants.agentId > agents.id [delete: cascade, update: no action]
+
+ref fk_room: participants.roomId > rooms.id [delete: cascade, update: no action]
+
+ref fk_user: participants.entityId > entities.id [delete: cascade, update: no action]
+
+ref relationships_sourceEntityId_entities_id_fk: relationships.sourceEntityId > entities.id [delete: cascade, update: no action]
+
+ref relationships_targetEntityId_entities_id_fk: relationships.targetEntityId > entities.id [delete: cascade, update: no action]
+
+ref relationships_agentId_agents_id_fk: relationships.agentId > agents.id [delete: cascade, update: no action]
+
+ref fk_user_a: relationships.sourceEntityId > entities.id [delete: cascade, update: no action]
+
+ref fk_user_b: relationships.targetEntityId > entities.id [delete: cascade, update: no action]
+
+ref rooms_agentId_agents_id_fk: rooms.agentId > agents.id [delete: cascade, update: no action]
+
+ref rooms_worldId_worlds_id_fk: rooms.worldId > worlds.id [delete: cascade, update: no action]
+
+ref worlds_agentId_agents_id_fk: worlds.agentId > agents.id [delete: cascade, update: no action]
