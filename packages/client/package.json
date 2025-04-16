@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "extract-version": "bash ./version.sh",
-    "start:client": "bun run extract-version && vite",
-    "dev:client": "bun run extract-version && vite",
-    "build": "bun run extract-version && vite build",
+    "start:client": " vite",
+    "dev:client": " vite",
+    "build": " vite build",
     "preview": "vite preview",
     "lint": "prettier --write ./src",
     "format": "prettier --write ./src",

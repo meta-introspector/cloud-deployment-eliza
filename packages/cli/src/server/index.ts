@@ -41,6 +41,7 @@ export interface ServerOptions {
   middlewares?: ServerMiddleware[];
   dataDir?: string;
   postgresUrl?: string;
+  body_body_parser: boolean;
 }
 const AGENT_RUNTIME_URL =
   process.env.AGENT_RUNTIME_URL?.replace(/\/$/, '') || 'http://localhost:3000';
@@ -59,6 +60,7 @@ export class AgentServer {
 
   public database: any;
   public startAgent!: (character: Character) => Promise<IAgentRuntime>;
+  public trainAgent!: (character: Character) => Promise<IAgentRuntime>;
   public stopAgent!: (runtime: IAgentRuntime) => void;
   public loadCharacterTryPath!: (characterPath: string) => Promise<Character>;
   public jsonToCharacter!: (character: unknown) => Promise<Character>;
@@ -143,8 +145,11 @@ export class AgentServer {
       // Setup middleware for all requests
       logger.debug('Setting up standard middlewares...');
       this.app.use(cors());
-      this.app.use(bodyParser.json());
-      this.app.use(bodyParser.urlencoded({ extended: true }));
+      if (options?.use_body_parser) {
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+      }
+
       this.app.use(
         express.json({
           limit: process.env.EXPRESS_MAX_PAYLOAD || '100kb',
@@ -482,6 +487,15 @@ export class AgentServer {
    * @param {number} port - The port number on which the server should listen.
    * @throws {Error} If the port is invalid or if there is an error while starting the server.
    */
+  public train() {
+    logger.debug('Training agent...');
+
+    // Implement training logic here
+    this.agents.forEach((agent, id) => {
+      logger.debug('Training agent debug', agent);
+      logger.debug(`- Agent ${id}: ${agent.character.name}`);
+    });
+  }
   public start(port: number) {
     try {
       if (!port || typeof port !== 'number') {

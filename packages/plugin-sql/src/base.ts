@@ -45,6 +45,7 @@ import {
   worldTable,
 } from './schema/index';
 import type { DrizzleOperations } from './types';
+import { PgTableWithColumns } from 'drizzle-orm/pg-core/table';
 
 // Define the metadata type inline since we can't import it
 /**
@@ -76,6 +77,33 @@ import type { DrizzleOperations } from './types';
 export abstract class BaseDrizzleAdapter<
   TDatabase extends DrizzleOperations,
 > extends DatabaseAdapter<TDatabase> {
+  getDatabaseSchema() {
+    const tlist = [
+      agentTable,
+      cacheTable,
+      componentTable,
+      embeddingTable,
+      entityTable,
+      logTable,
+      memoryTable,
+      participantTable,
+      relationshipTable,
+      roomTable,
+      taskTable,
+      worldTable,
+    ];
+    //console.log('tlist', tlist);
+    return tlist;
+  }
+
+  protected throwExceptions: bool = true;
+
+  protected maybeThrow(error: any) {
+    if (this.throwExceptions) {
+      throw error instanceof Error ? error : new Error(String(error));
+    }
+  }
+
   protected readonly maxRetries: number = 3;
   protected readonly baseDelay: number = 1000;
   protected readonly maxDelay: number = 10000;
@@ -247,6 +275,7 @@ export abstract class BaseDrizzleAdapter<
           agentId: agent.id,
           agent,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -290,6 +319,7 @@ export abstract class BaseDrizzleAdapter<
           agentId,
           agent,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -584,11 +614,13 @@ export abstract class BaseDrizzleAdapter<
               } catch (error) {
                 logger.error(`[DB] Error in transaction:`, error);
                 reject(error);
+                maybeThrow(error);
               }
             })
             .catch((transactionError) => {
               clearTimeout(timeoutId);
               reject(transactionError);
+              maybeThrow(error);
             });
         });
 
@@ -624,6 +656,7 @@ export abstract class BaseDrizzleAdapter<
         logger.error('Error counting agents:', {
           error: error instanceof Error ? error.message : String(error),
         });
+        maybeThrow(error);
         return 0;
       }
     });
@@ -754,6 +787,7 @@ export abstract class BaseDrizzleAdapter<
         });
         // trace the error
         logger.trace(error);
+        maybeThrow(error);
         return false;
       }
     });
@@ -783,6 +817,7 @@ export abstract class BaseDrizzleAdapter<
         error: error instanceof Error ? error.message : String(error),
         entityId: entity.id,
       });
+      maybeThrow(error);
       return false;
     }
   }
@@ -1206,6 +1241,7 @@ export abstract class BaseDrizzleAdapter<
           error instanceof Error &&
           error.message === 'levenshtein argument exceeds maximum length of 255 characters'
         ) {
+          maybeThrow(error);
           return [];
         }
         throw error;
@@ -1559,6 +1595,7 @@ export abstract class BaseDrizzleAdapter<
           error: error instanceof Error ? error.message : String(error),
           memoryId: memory.id,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -1857,6 +1894,7 @@ export abstract class BaseDrizzleAdapter<
           roomId,
           agentId: this.agentId,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -1894,6 +1932,7 @@ export abstract class BaseDrizzleAdapter<
           entityId,
           roomId,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -2004,6 +2043,7 @@ export abstract class BaseDrizzleAdapter<
           state,
           error: error instanceof Error ? error.message : String(error),
         });
+        maybeThrow(error);
         throw error;
       }
     });
@@ -2042,6 +2082,7 @@ export abstract class BaseDrizzleAdapter<
           error: error instanceof Error ? error.message : String(error),
           saveParams,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -2067,6 +2108,7 @@ export abstract class BaseDrizzleAdapter<
           error: error instanceof Error ? error.message : String(error),
           relationship,
         });
+
         throw error;
       }
     });
@@ -2115,6 +2157,7 @@ export abstract class BaseDrizzleAdapter<
           error: error instanceof Error ? error.message : String(error),
           params,
         });
+        maybeThrow(error);
         return null;
       }
     });
@@ -2169,6 +2212,7 @@ export abstract class BaseDrizzleAdapter<
           error: error instanceof Error ? error.message : String(error),
           params,
         });
+        maybeThrow(error);
         return [];
       }
     });
@@ -2194,6 +2238,7 @@ export abstract class BaseDrizzleAdapter<
           key: key,
           agentId: this.agentId,
         });
+        maybeThrow(error);
         return undefined;
       }
     });
@@ -2206,6 +2251,11 @@ export abstract class BaseDrizzleAdapter<
    * @returns {Promise<boolean>} A Promise that resolves to a boolean indicating whether the cache value was set successfully.
    */
   async setCache<T>(key: string, value: T): Promise<boolean> {
+    if (value == undefined) {
+      throw Error('need a value 1');
+    }
+    console.log('SetCache', 'agentid', this.agentId, 'key', key, 'value', value);
+
     return this.withDatabase(async () => {
       try {
         await this.db.transaction(async (tx) => {
@@ -2230,6 +2280,7 @@ export abstract class BaseDrizzleAdapter<
           key: key,
           agentId: this.agentId,
         });
+        maybeThrow(error);
         return false;
       }
     });
@@ -2255,6 +2306,8 @@ export abstract class BaseDrizzleAdapter<
           key: key,
           agentId: this.agentId,
         });
+
+        maybeThrow(error);
         return false;
       }
     });

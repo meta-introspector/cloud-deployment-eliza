@@ -94,6 +94,7 @@ class InMemoryDestination implements DestinationStream {
 
     // Filter out service registration logs unless in debug mode
     const isDebugMode = (process?.env?.LOG_LEVEL || '').toLowerCase() === 'debug';
+    //      console.log("DEBUG", isDebugMode, process?.env?.LOG_LEVEL )
     const isLoggingDiagnostic = Boolean(process?.env?.LOG_DIAGNOSTIC);
 
     if (isLoggingDiagnostic) {

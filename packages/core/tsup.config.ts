@@ -32,5 +32,8 @@ export default defineConfig({
     '@opentelemetry/context-async-hooks',
     '@opentelemetry/sdk-trace-node',
   ],
-  sourcemap: false,
+  sourcemap: true,
+  minify: true,
+  splitting: false,
+  treeshake: true,
 });

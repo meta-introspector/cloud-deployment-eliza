@@ -61,6 +61,12 @@ import { EventType, type MessagePayload } from './types';
  */
 const environmentSettings: RuntimeSettings = {};
 
+/**
+ * Loads environment variables from the nearest .env file in Node.js
+ * or returns configured settings in browser
+ * @returns {Settings} Environment variables object
+ */
+
 // Semaphore implementation for controlling concurrent operations
 export class Semaphore {
   private permits: number;
@@ -170,7 +176,8 @@ export class AgentRuntime implements IAgentRuntime {
     this.runtimeLogger = logger.child({
       agentName: this.character?.name,
       agentId: this.agentId,
-      level: logLevel === 'debug' ? 'debug' : 'error', // Show only errors unless debug mode is enabled
+      level: 'trace',
+      //logLevel === 'debug' ? 'debug' : 'error', // Show only errors unless debug mode is enabled
     });
 
     this.runtimeLogger.debug(`[AgentRuntime] Process working directory: ${process.cwd()}`);
@@ -209,15 +216,15 @@ export class AgentRuntime implements IAgentRuntime {
       // Create a no-op implementation
       this.instrumentationService = {
         getTracer: () => null,
-        start: async () => {},
-        stop: async () => {},
+        start: async () => { },
+        stop: async () => { },
         isStarted: () => false,
         isEnabled: () => false,
         name: 'INSTRUMENTATION',
         capabilityDescription: 'Disabled instrumentation service (fallback)',
         instrumentationConfig: { enabled: false },
         getMeter: () => null,
-        flush: async () => {},
+        flush: async () => { },
       } as any;
       this.tracer = null;
     }
@@ -240,17 +247,17 @@ export class AgentRuntime implements IAgentRuntime {
     // If instrumentation is disabled, create a mock span with no-op methods
     if (!this.instrumentationService?.isEnabled?.() || !this.tracer) {
       const mockSpan = {
-        setStatus: () => {},
-        setAttribute: () => {},
-        setAttributes: () => {},
-        recordException: () => {},
-        addEvent: () => {},
-        end: () => {},
+        setStatus: () => { },
+        setAttribute: () => { },
+        setAttributes: () => { },
+        recordException: () => { },
+        addEvent: () => { },
+        end: () => { },
         isRecording: () => false,
         spanContext: () => ({ traceId: '', spanId: '', traceFlags: 0 }),
-        updateName: () => {},
-        addLink: () => {},
-        addLinks: () => {},
+        updateName: () => { },
+        addLink: () => { },
+        addLinks: () => { },
       } as unknown as Span;
       return fn(mockSpan);
     }
@@ -306,17 +313,17 @@ export class AgentRuntime implements IAgentRuntime {
     if (!this.instrumentationService?.isEnabled?.() || !this.tracer) {
       // Return mock span if instrumentation is disabled
       return {
-        setStatus: () => {},
-        setAttribute: () => {},
-        setAttributes: () => {},
-        recordException: () => {},
-        addEvent: () => {},
-        end: () => {},
+        setStatus: () => { },
+        setAttribute: () => { },
+        setAttributes: () => { },
+        recordException: () => { },
+        addEvent: () => { },
+        end: () => { },
         isRecording: () => false,
         spanContext: () => ({ traceId: '', spanId: '', traceFlags: 0 }),
-        updateName: () => {},
-        addLink: () => {},
-        addLinks: () => {},
+        updateName: () => { },
+        addLink: () => { },
+        addLinks: () => { },
       } as unknown as Span;
     }
 
@@ -664,9 +671,34 @@ export class AgentRuntime implements IAgentRuntime {
       for (const service of this.servicesInitQueue) {
         await this.registerService(service);
       }
-
       span.addEvent('initialization_completed');
     });
+    // Check if TEXT_EMBEDDING model is registered
+    const embeddingModel = this.getModel(ModelType.TEXT_EMBEDDING);
+    if (!embeddingModel) {
+      this.runtimeLogger.warn(
+        `[AgentRuntime][${this.character.name}] No TEXT_EMBEDDING model registered. Skipping embedding dimension setup.`
+      );
+      this.runtimeLogger.info('DeBUG models', this.models);
+    } else {
+      // Only run ensureEmbeddingDimension if we have an embedding model
+      await this.ensureEmbeddingDimension();
+    }
+
+    // Process character knowledge
+    if (this.character?.knowledge && this.character.knowledge.length > 0) {
+      const stringKnowledge = this.character.knowledge.filter(
+        (item): item is string => typeof item === 'string'
+      );
+      await this.processCharacterKnowledge(stringKnowledge);
+    }
+
+    // Start all deferred services now that runtime is ready
+    for (const service of this.servicesInitQueue) {
+      await this.registerService(service);
+    }
+
+    this.isInitialized = true;
   }
 
   private async handleProcessingError(error: any, context: string) {
@@ -1886,8 +1918,8 @@ export class AgentRuntime implements IAgentRuntime {
           `[useModel] ${modelKey} output:`,
           Array.isArray(response)
             ? `${JSON.stringify(response.slice(0, 5))}...${JSON.stringify(
-                response.slice(-5)
-              )} (${response.length} items)`
+              response.slice(-5)
+            )} (${response.length} items)`
             : JSON.stringify(response)
         );
 
@@ -2249,6 +2281,7 @@ export class AgentRuntime implements IAgentRuntime {
   }
 
   async createMemory(memory: Memory, tableName: string, unique?: boolean): Promise<UUID> {
+    console.log('Create Memory', memory);
     return await this.adapter.createMemory(memory, tableName, unique);
   }
 

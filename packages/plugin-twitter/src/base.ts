@@ -330,69 +330,72 @@ export class ClientBase {
       throw new Error(`Missing required Twitter credentials: ${missing.join(', ')}`);
     }
 
-    const maxRetries = 3;
-    let retryCount = 0;
-    let lastError: Error | null = null;
+    if (this.runtime.getSetting('TWITTER_AUTH') == true) {
+      const maxRetries = 3;
+      let retryCount = 0;
+      let lastError: Error | null = null;
 
-    while (retryCount < maxRetries) {
-      try {
-        const authToken =
-          this.state?.TWITTER_COOKIES_AUTH_TOKEN ||
-          this.runtime.getSetting('TWITTER_COOKIES_AUTH_TOKEN');
-        const ct0 =
-          this.state?.TWITTER_COOKIES_CT0 || this.runtime.getSetting('TWITTER_COOKIES_CT0');
-        const guestId =
-          this.state?.TWITTER_COOKIES_GUEST_ID ||
-          this.runtime.getSetting('TWITTER_COOKIES_GUEST_ID');
+      while (retryCount < maxRetries) {
+        try {
+          const authToken =
+            this.state?.TWITTER_COOKIES_AUTH_TOKEN ||
+            this.runtime.getSetting('TWITTER_COOKIES_AUTH_TOKEN');
+          const ct0 =
+            this.state?.TWITTER_COOKIES_CT0 || this.runtime.getSetting('TWITTER_COOKIES_CT0');
+          const guestId =
+            this.state?.TWITTER_COOKIES_GUEST_ID ||
+            this.runtime.getSetting('TWITTER_COOKIES_GUEST_ID');
 
-        const createTwitterCookies = (authToken: string, ct0: string, guestId: string) =>
-          authToken && ct0 && guestId
-            ? [
-                { key: 'auth_token', value: authToken, domain: '.twitter.com' },
-                { key: 'ct0', value: ct0, domain: '.twitter.com' },
-                { key: 'guest_id', value: guestId, domain: '.twitter.com' },
-              ]
-            : null;
+          const createTwitterCookies = (authToken: string, ct0: string, guestId: string) =>
+            authToken && ct0 && guestId
+              ? [
+                  { key: 'auth_token', value: authToken, domain: '.twitter.com' },
+                  { key: 'ct0', value: ct0, domain: '.twitter.com' },
+                  { key: 'guest_id', value: guestId, domain: '.twitter.com' },
+                ]
+              : null;
 
-        const cachedCookies =
-          (await this.getCachedCookies(username)) || createTwitterCookies(authToken, ct0, guestId);
+          const cachedCookies =
+            (await this.getCachedCookies(username)) ||
+            createTwitterCookies(authToken, ct0, guestId);
 
-        if (cachedCookies) {
-          logger.info('Using cached cookies');
-          await this.setCookiesFromArray(cachedCookies);
-        }
+          if (cachedCookies) {
+            logger.info('Using cached cookies');
+            await this.setCookiesFromArray(cachedCookies);
+          }
 
-        logger.log('Waiting for Twitter login');
-        if (await this.twitterClient.isLoggedIn()) {
-          // cookies are valid, no login required
-          logger.info('Successfully logged in.');
-          break;
-        }
-        await this.twitterClient.login(username, password, email, twitter2faSecret);
-        if (await this.twitterClient.isLoggedIn()) {
-          // fresh login, store new cookies
-          logger.info('Successfully logged in.');
-          logger.info('Caching cookies');
-          await this.cacheCookies(username, await this.twitterClient.getCookies());
-          break;
-        }
-      } catch (error) {
-        lastError = error instanceof Error ? error : new Error(String(error));
-        logger.error(`Login attempt ${retryCount + 1} failed: ${lastError.message}`);
-        retryCount++;
+          logger.log('Waiting for Twitter login');
+          if (await this.twitterClient.isLoggedIn()) {
+            // cookies are valid, no login required
+            logger.info('Successfully logged in.');
+            break;
+          }
+          await this.twitterClient.login(username, password, email, twitter2faSecret);
+          if (await this.twitterClient.isLoggedIn()) {
+            // fresh login, store new cookies
+            logger.info('Successfully logged in.');
+            logger.info('Caching cookies');
+            await this.cacheCookies(username, await this.twitterClient.getCookies());
+            break;
+          }
+        } catch (error) {
+          lastError = error instanceof Error ? error : new Error(String(error));
+          logger.error(`Login attempt ${retryCount + 1} failed: ${lastError.message}`);
+          retryCount++;
 
-        if (retryCount < maxRetries) {
-          const delay = 2 ** retryCount * 1000; // Exponential backoff
-          logger.info(`Retrying in ${delay / 1000} seconds...`);
-          await new Promise((resolve) => setTimeout(resolve, delay));
+          if (retryCount < maxRetries) {
+            const delay = 2 ** retryCount * 1000; // Exponential backoff
+            logger.info(`Retrying in ${delay / 1000} seconds...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+          }
         }
       }
-    }
 
-    if (retryCount >= maxRetries) {
-      throw new Error(
-        `Twitter login failed after ${maxRetries} attempts. Last error: ${lastError?.message}`
-      );
+      if (retryCount >= maxRetries) {
+        throw new Error(
+          `Twitter login failed after ${maxRetries} attempts. Last error: ${lastError?.message}`
+        );
+      }
     }
 
     // Initialize Twitter profile
@@ -593,15 +596,20 @@ export class ClientBase {
     const timeline = await this.fetchHomeTimeline(cachedTimeline ? 10 : 50);
     const username = this.runtime.getSetting('TWITTER_USERNAME');
 
-    // Get the most recent 20 mentions and interactions
-    const mentionsAndInteractions = await this.fetchSearchTweets(
-      `@${username}`,
-      20,
-      SearchMode.Latest
-    );
+    if (this.runtime.getSetting('TWITTER_FETCH_SEARCH') == true) {
+      // Get the most recent 20 mentions and interactions
+      const mentionsAndInteractions = await this.fetchSearchTweets(
+        `@${username}`,
+        this.runtime.getSetting('TWITTER_FETCH_COUNT') || 20,
+        SearchMode.Latest
+      );
+    }
 
     // Combine the timeline tweets and mentions/interactions
-    const allTweets = [...timeline, ...mentionsAndInteractions.tweets];
+    const allTweets = [
+      ...timeline,
+      //...mentionsAndInteractions.tweets
+    ];
 
     // Create a Set to store unique tweet IDs
     const tweetIdsToCheck = new Set<string>();
@@ -831,18 +839,20 @@ export class ClientBase {
    * Fetches recent interactions (likes, retweets, quotes) for the authenticated user's tweets
    */
   async fetchInteractions() {
-    try {
-      const username = this.profile.username;
-      // Use fetchSearchTweets to get mentions instead of the non-existent get method
-      const mentionsResponse = await this.requestQueue.add(() =>
-        this.twitterClient.fetchSearchTweets(`@${username}`, 100, SearchMode.Latest)
-      );
+    if (this.runtime.getSetting('TWITTER_INTERACTIONS') == true) {
+      try {
+        const username = this.profile.username;
+        // Use fetchSearchTweets to get mentions instead of the non-existent get method
+        const mentionsResponse = await this.requestQueue.add(() =>
+          this.twitterClient.fetchSearchTweets(`@${username}`, 100, SearchMode.Latest)
+        );
 
-      // Process tweets directly into the expected interaction format
-      return mentionsResponse.tweets.map((tweet) => this.formatTweetToInteraction(tweet));
-    } catch (error) {
-      logger.error('Error fetching Twitter interactions:', error);
-      return [];
+        // Process tweets directly into the expected interaction format
+        return mentionsResponse.tweets.map((tweet) => this.formatTweetToInteraction(tweet));
+      } catch (error) {
+        logger.error('Error fetching Twitter interactions:', error);
+        return [];
+      }
     }
   }
 

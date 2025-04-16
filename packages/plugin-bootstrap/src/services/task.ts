@@ -46,7 +46,9 @@ export class TaskService extends Service {
    */
   static async start(runtime: IAgentRuntime): Promise<TaskService> {
     const service = new TaskService(runtime);
-    await service.startTimer();
+    if (runtime.getSetting('taskServiceEnabled') === true) {
+      await service.startTimer();
+    }
     // await service.createTestTasks();
     return service;
   }

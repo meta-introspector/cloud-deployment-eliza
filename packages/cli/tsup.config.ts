@@ -5,8 +5,9 @@ export default defineConfig({
   entry: ['src/index.ts', 'src/commands/*.ts'],
   format: ['esm'],
   dts: false,
-  sourcemap: false,
+
   external: ['@electric-sql/pglite', 'zod', '@elizaos/core'],
+  sourcemap: true,
   noExternal: [/^(?!(@electric-sql\/pglite|zod)).*/],
   platform: 'node',
   minify: false,

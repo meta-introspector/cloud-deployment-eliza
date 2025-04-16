@@ -18,9 +18,9 @@
     "dist"
   ],
   "dependencies": {
-    "@elizaos/core": "^1.0.0-beta.34",
+    "@elizaos/core": "workspace:*",
     "@roamhq/wrtc": "^0.8.0",
-    "@sinclair/typebox": "^0.32.20",
+    "@sinclair/typebox": "0.34.30",
     "glob": "11.0.0",
     "headers-polyfill": "^3.1.2",
     "json-stable-stringify": "^1.0.2",
@@ -30,7 +30,9 @@
     "twitter-api-v2": "^1.18.2",
     "undici": "^7.1.1",
     "undici-types": "^7.2.0",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "@hapi/shot": "^6.0.1",
+    "@types/hapi": "^18.0.14"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "1.1.3",

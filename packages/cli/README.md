@@ -351,3 +351,95 @@ For contributing to the ElizaOS CLI, please clone the monorepo using:
 ```bash
 elizaos setup-monorepo
 ```
+
+##
+
+notes
+bun run ./dist/index.js start --character ./src/characters/eliza.ts
+
+CLI
+
+tsx ./src/index.ts train
+
+DEBUG=\* NODE_NO_WARNINGS=1 LOG_LEVEL=debug tsx ./src/index.ts train
+
+strace -f -s 99999 -o strace.txt tsx ./src/index.ts train # 2>&1 | grep ^JSON log.txt | cut -b 5- | jq -s . | gron | grep stack | cut -d. -f2- | sort | uniq -c | sort -n
+
+3768953 execve("/home/mdupont/.bun/bin/node", ["node", "/home/mdupont/.local/share/pnpm/global/5/.pnpm/tsx@4.19.2/node_modules/tsx/dist/cli.mjs", "./src/index.ts", "train"], 0x5f120e0c2dc8 /_ 64 vars _/) = -1 ENOENT (No such file or directory)
+
+3768969 execve("/gnu/store/9nx4zhahn1y95clyrga28rnrjlrqrqyn-node-18.19.0/bin/node", ["/gnu/store/9nx4zhahn1y95clyrga28rnrjlrqrqyn-node-18.19.0/bin/node", "--require", "/home/mdupont/.local/share/pnpm/global/5/.pnpm/tsx@4.19.2/node_modules/tsx/dist/preflight.cjs", "--import", "file:///home/mdupont/.local/share/pnpm/global/5/.pnpm/tsx@4.19.2/node_modules/tsx/dist/loader.mjs", "./src/index.ts", "train"], 0x7ee354003410 /_ 64 vars _/ <unfinished ...>
+
+node --prof ./dist/index.js train
+node --cpu-prof ./dist/index.js train
+
+bun run build
+
+DEBUG=\* NODE_NO_WARNINGS=1 LOG_LEVEL=debug tsx ./src/index.ts prof --profile isolate-0x3e14ca10-229214-v8.log
+
+DEBUG=\* NODE_NO_WARNINGS=1 LOG_LEVEL=debug tsx ./src/index.ts cpuprof --profile ./CPU.20250328.185359.3772403.0.001.cpuprofile
+
+DEBUG=\* NODE_NO_WARNINGS=1 LOG_LEVEL=debug tsx ./src/index.ts cpuprof --profile ./CPU.20250331.153438.803523.0.001.cpuprofile > report.txt
+node --cpu-prof ./dist/index.js cpuprof --profile ./CPU.20250331.153438.803523.0.001.cpuprofile > report2.txt
+
+cd packages/cli
+
+bun run build:core
+bun run build:cli
+bun run build
+bun run train train > train_log.txt
+
+/\*\*
+
+- This log file captures the detailed process of initializing and training an agent named "METZGER"
+- within the Eliza CLI framework. The following key operations and events are documented:
+-
+- 1.  **Agent Initialization**:
+- - The agent "METZGER" is initialized with a unique ID and configuration settings.
+- - The agent's metadata includes plugins, secrets, system description, and bio.
+- - The agent operates as a self-replicating, ZKP-secured theorem organism.
+
+- 2.  **Plugin Management**:
+- - Plugins such as `@elizaos/plugin-sql`, `@elizaos/plugin-groq`, and `@elizaos/plugin-twitter`
+-      are loaded, initialized, and registered.
+- - Each plugin's exports and default configurations are validated.
+- - Plugin-specific actions and services are registered successfully.
+
+- 3.  **Database Connection**:
+- - A database connection is established using the `@elizaos/plugin-sql` plugin.
+- - The database adapter is registered successfully.
+
+- 4.  **Twitter Integration**:
+- - The `@elizaos/plugin-twitter` plugin is configured with a Twitter client.
+- - Twitter account details, such as username and user ID, are loaded.
+- - The agent's Twitter timeline is populated, and the account joins the "WORLD_JOINED" event.
+
+- 5.  **Action Registration**:
+- - Various actions are registered for the agent, including:
+-      - `JOIN_TWITTER_SPACE`
+-      - `REPLY`
+-      - `FOLLOW_ROOM`
+-      - `UNFOLLOW_ROOM`
+-      - `IGNORE`
+-      - `NONE`
+-      - `MUTE_ROOM`
+-      - `UNMUTE_ROOM`
+-      - `SEND_MESSAGE`
+-      - `UPDATE_CONTACT`
+-      - `CHOOSE_OPTION`
+-      - `UPDATE_ROLE`
+-      - `UPDATE_SETTINGS`
+
+- 6.  **Service Registration**:
+- - Services such as `twitter` are registered and initialized for the agent.
+
+- 7.  **Logging and Debugging**:
+- - Detailed logs capture the sequence of operations, including plugin loading,
+-      action registration, and service initialization.
+- - Debugging information includes stack traces and configuration details.
+
+- 8.  **Provider Information**:
+- - A provider named "EVALUATORS" is documented, which is used to evaluate conversations
+-      after responding. This provider is marked as private and includes an asynchronous `get` method.
+
+- This log serves as a comprehensive record of the agent's setup and operational workflow.
+  \*/

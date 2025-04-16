@@ -153,3 +153,8 @@ tmp/
 
 
 *.cursor*
+**/CPU.*.*.*.*.cpuprofile
+**/CPU.*.*.*.*.heapprofile
+**/CPU.*.*.*.*.goroutine
+
+
