@@ -53,6 +53,12 @@ import { stringToUuid } from './uuid';
  */
 let environmentSettings: RuntimeSettings = {};
 
+/**
+ * Loads environment variables from the nearest .env file in Node.js
+ * or returns configured settings in browser
+ * @returns {Settings} Environment variables object
+ */
+
 // Semaphore implementation for controlling concurrent operations
 export class Semaphore {
   private permits: number;
@@ -158,7 +164,8 @@ export class AgentRuntime implements IAgentRuntime {
     this.runtimeLogger = logger.child({
       agentName: this.character?.name,
       agentId: this.agentId,
-      level: logLevel === 'debug' ? 'debug' : 'error', // Show only errors unless debug mode is enabled
+      level: 'trace',
+      //logLevel === 'debug' ? 'debug' : 'error', // Show only errors unless debug mode is enabled
     });
 
     this.runtimeLogger.debug(`[AgentRuntime] Process working directory: ${process.cwd()}`);
@@ -187,6 +194,8 @@ export class AgentRuntime implements IAgentRuntime {
    * @param plugin The plugin to register
    */
   async registerPlugin(plugin: Plugin): Promise<void> {
+    this.runtimeLogger.debug('Registering plugin', plugin.name); // printing plugin exposes secrets
+
     if (!plugin) {
       this.runtimeLogger.error('*** registerPlugin plugin is undefined');
       throw new Error('*** registerPlugin plugin is undefined');
@@ -244,6 +253,7 @@ export class AgentRuntime implements IAgentRuntime {
     // Register plugin actions
     if (plugin.actions) {
       for (const action of plugin.actions) {
+        this.runtimeLogger.debug('Registering plugin action', action.name);
         this.registerAction(action);
       }
     }
@@ -258,6 +268,7 @@ export class AgentRuntime implements IAgentRuntime {
     // Register plugin providers
     if (plugin.providers) {
       for (const provider of plugin.providers) {
+        //console.log('provider', provider);
         this.registerContextProvider(provider);
       }
     }
@@ -286,7 +297,9 @@ export class AgentRuntime implements IAgentRuntime {
     }
 
     if (plugin.services) {
+      this.runtimeLogger.log('Register plugin services', plugin.services);
       for (const service of plugin.services) {
+        // FIXME : if initialize services
         if (this.isInitialized) {
           await this.registerService(service);
         } else {
@@ -422,6 +435,7 @@ export class AgentRuntime implements IAgentRuntime {
       this.runtimeLogger.warn(
         `[AgentRuntime][${this.character.name}] No TEXT_EMBEDDING model registered. Skipping embedding dimension setup.`
       );
+      this.runtimeLogger.info('DeBUG models', this.models);
     } else {
       // Only run ensureEmbeddingDimension if we have an embedding model
       await this.ensureEmbeddingDimension();
@@ -800,7 +814,14 @@ export class AgentRuntime implements IAgentRuntime {
     callback?: HandlerCallback,
     responses?: Memory[]
   ) {
+    if (message.id == undefined) {
+      throw Error('message id cannot be null 2');
+    }
+    this.runtimeLogger.log('Evaluate Mesage ID', message.id);
+    this.runtimeLogger.log('Evaluate', message);
+    this.runtimeLogger.log('Evaluators', this.evaluators);
     const evaluatorPromises = this.evaluators.map(async (evaluator: Evaluator) => {
+      this.runtimeLogger.log('Evaluator', evaluator);
       if (!evaluator.handler) {
         return null;
       }
@@ -809,7 +830,11 @@ export class AgentRuntime implements IAgentRuntime {
       }
       const result = await evaluator.validate(this, message, state);
 
+      this.runtimeLogger.log('Validate', message, state, result);
       if (result) {
+        return evaluator;
+      } else {
+        // Hack also return the evaluator even if it fails for testing FIXME remove
         return evaluator;
       }
       return null;
@@ -820,15 +845,26 @@ export class AgentRuntime implements IAgentRuntime {
     // get the evaluators that were chosen by the response handler
 
     if (evaluators.length === 0) {
+      this.runtimeLogger.log('no eval');
       return [];
     }
 
+    this.runtimeLogger.log('Message', message);
+    this.runtimeLogger.log('Message ID:', message.id);
+
     state = await this.composeState(message, ['RECENT_MESSAGES', 'EVALUATORS']);
+
+    this.runtimeLogger.log('state', state);
 
     await Promise.all(
       evaluators.map(async (evaluator) => {
+        this.runtimeLogger.log('evaluator', evaluator);
+
         if (evaluator.handler) {
           await evaluator.handler(this, message, state, {}, callback, responses);
+
+          this.runtimeLogger.log('evaluator', responses);
+
           // log to database
           this.adapter.log({
             entityId: message.entityId,
@@ -1155,10 +1191,10 @@ export class AgentRuntime implements IAgentRuntime {
     // Fetch data from selected providers
     const providerData = await Promise.all(
       providersToGet.map(async (provider) => {
-        const start = Date.now();
+        //const start = Date.now();
         const result = await provider.get(this, message, cachedState);
-        const duration = Date.now() - start;
-        this.runtimeLogger.debug(`${provider.name} Provider took ${duration}ms to respond`);
+        //const duration = Date.now() - start;
+        //this.runtimeLogger.debug(`${provider.name} Provider took ${duration}ms to respond`);
         return {
           ...result,
           providerName: provider.name,
@@ -1251,6 +1287,7 @@ export class AgentRuntime implements IAgentRuntime {
       return;
     }
 
+    this.runtimeLogger.debug('service start', service);
     const serviceInstance = await service.start(this);
 
     // Add the service to the services map
@@ -1330,10 +1367,10 @@ export class AgentRuntime implements IAgentRuntime {
     const response = await model(this, paramsWithRuntime);
 
     // Calculate elapsed time
-    const elapsedTime = performance.now() - startTime;
+    //    const elapsedTime = performance.now() - startTime;
 
     // Log timing
-    this.runtimeLogger.debug(`[useModel] ${modelKey} completed in ${elapsedTime.toFixed(2)}ms`);
+    //this.runtimeLogger.debug(`[useModel] ${modelKey} completed in ${elapsedTime.toFixed(2)}ms`);
 
     // Log response
     this.runtimeLogger.debug(
@@ -1640,6 +1677,7 @@ export class AgentRuntime implements IAgentRuntime {
   }
 
   async createMemory(memory: Memory, tableName: string, unique?: boolean): Promise<UUID> {
+    console.log('Create Memory', memory);
     return await this.adapter.createMemory(memory, tableName, unique);
   }
 

@@ -284,14 +284,21 @@ export class ScenarioService extends Service {
    * @returns True if all completed successfully, false if timeout occurred
    */
   async waitForCompletion(timeout = 30000): Promise<boolean> {
+    logger.debug('waitForCompletion');
+
     const startTime = Date.now();
 
     while (Date.now() - startTime < timeout) {
-      const allActionsComplete = Array.from(this.activeActions.values()).every(
-        (action) => action.completed
-      );
+      logger.debug('waitForCompletion', this);
+      const allActionsComplete = Array.from(this.activeActions.values()).every((action) => {
+        logger.debug('action', action);
+        return action.completed;
+      });
       const allEvaluatorsComplete = Array.from(this.activeEvaluators.values()).every(
-        (evaluator) => evaluator.completed
+        (evaluator) => {
+          logger.debug('evaluator', evaluator);
+          return evaluator.completed;
+        }
       );
 
       if (allActionsComplete && allEvaluatorsComplete) {

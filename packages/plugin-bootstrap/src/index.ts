@@ -579,7 +579,7 @@ const syncSingleUser = async (
       worldId,
     });
 
-    logger.success(`Successfully synced user: ${entity.id}`);
+    logger.info(`Successfully synced user: ${entity.id}`);
   } catch (error) {
     logger.error(`Error syncing user: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -657,6 +657,7 @@ const handleServerSync = async ({
 
         // Add a small delay between batches if not the last batch
         if (i + batchSize < entities.length) {
+          logger.debug('wait', entities);
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
       }
@@ -706,6 +707,7 @@ const events = {
 
   [EventType.POST_GENERATED]: [
     async (payload: InvokePayload) => {
+      console.log('POST GENERATED', payload);
       await postGeneratedHandler(payload);
     },
   ],

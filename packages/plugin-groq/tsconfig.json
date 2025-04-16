@@ -20,6 +20,7 @@
     "checkJs": false,
     "noEmitOnError": false,
     "moduleDetection": "force",
+    "typeRoots": ["./node_modules/@types"],
     "allowArbitraryExtensions": true,
     "paths": {
       "@elizaos/core": ["../core/src"],

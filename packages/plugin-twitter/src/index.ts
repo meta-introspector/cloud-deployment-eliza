@@ -12,6 +12,7 @@ import {
   createUniqueUuid,
   logger,
 } from '@elizaos/core';
+
 import spaceJoin from './actions/spaceJoin';
 import { ClientBase } from './base';
 import { TWITTER_SERVICE_NAME } from './constants';
@@ -99,15 +100,21 @@ export class TwitterService extends Service {
       await client.client.init();
 
       if (client.space) {
-        client.space.startPeriodicSpaceCheck();
+        if (runtime.getSetting('TWITTER_SPACES_ENABLE') === true) {
+          client.space.startPeriodicSpaceCheck();
+        }
       }
 
       if (client.post) {
-        client.post.start();
+        if (runtime.getSetting('TWITTER_POST_ENABLE') === true) {
+          client.post.start();
+        }
       }
 
       if (client.interaction) {
-        client.interaction.start();
+        if (runtime.getSetting('TWITTER_INTERACT_ENABLE') === true) {
+          client.interaction.start();
+        }
       }
 
       // Store the client instance

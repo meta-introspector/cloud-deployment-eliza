@@ -108,7 +108,12 @@ export class TwitterInteractionClient {
       this.handleTwitterInteractions();
       setTimeout(handleTwitterInteractionsLoop, interactionInterval);
     };
-    handleTwitterInteractionsLoop();
+
+    if (this.runtime.getSetting('TWITTER_POLL_INTERVAL') > 0) {
+      handleTwitterInteractionsLoop();
+    } else {
+      console.log('skipping twitter polling');
+    }
   }
 
   /**

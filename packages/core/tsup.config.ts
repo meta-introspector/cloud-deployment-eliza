@@ -29,5 +29,8 @@ export default defineConfig({
     'zod',
     '@hapi/shot',
   ],
-  sourcemap: false,
+  sourcemap: true,
+  minify: true,
+  splitting: false,
+  treeshake: true,
 });

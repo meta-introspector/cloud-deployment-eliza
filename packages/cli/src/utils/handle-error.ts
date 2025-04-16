@@ -18,7 +18,8 @@ export function handleError(error: unknown) {
     logger.error('Unknown error type:', typeof error);
     logger.error('Error value:', error);
   }
-  process.exit(1);
+  throw error;
+  //process.exit(1);
 }
 
 export async function checkServer(opts: OptionValues) {

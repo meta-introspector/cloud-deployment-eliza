@@ -150,3 +150,9 @@ playwright-report/
 *.temp
 temp/
 tmp/
+
+**/CPU.*.*.*.*.cpuprofile
+**/CPU.*.*.*.*.heapprofile
+**/CPU.*.*.*.*.goroutine
+
+

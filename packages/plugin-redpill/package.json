@@ -27,7 +27,9 @@
     "@elizaos/core": "^1.0.0-beta.32",
     "ai": "^4.1.25",
     "js-tiktoken": "^1.0.18",
-    "tsup": "8.4.0"
+    "tsup": "8.4.0",
+    "@hapi/shot": "^6.0.1",
+    "@types/hapi": "^18.0.14"
   },
   "scripts": {
     "build": "tsup",
@@ -51,6 +53,8 @@
   },
   "gitHead": "917e8b28d02cc09316dd61d1fb29c683f29689ef",
   "devDependencies": {
-    "prettier": "3.5.3"
+    "prettier": "3.5.3",
+    "@hapi/shot": "^6.0.1",
+    "@types/hapi": "^18.0.14"
   }
 }

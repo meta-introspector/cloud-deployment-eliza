@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "sourceMap": true,
     "inlineSources": true,
+    "inlineSourceMap": true,
     "declaration": true,
     "emitDeclarationOnly": true
   },

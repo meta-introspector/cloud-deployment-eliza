@@ -5,7 +5,10 @@ export default defineConfig({
   entry: ['src/index.ts', 'src/commands/*.ts'],
   format: ['esm'],
   dts: false,
-  sourcemap: false,
+  sourcemap: true,
+
+  inlineSources: true,
+  inlineDynamicImports: true,
   external: ['@electric-sql/pglite', 'zod'],
   noExternal: [/^(?!(@electric-sql\/pglite|zod)).*/],
   platform: 'node',
