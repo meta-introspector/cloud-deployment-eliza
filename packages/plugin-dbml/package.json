@@ -1,0 +1,25 @@
+{
+  "name": "@elizaos/plugin-dbml",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup index.ts",
+    "start": "bun run index.ts",
+    "build:core": "cd .. && turbo run build --filter=@elizaos/core --no-cache",
+    "build:dbml": "cd .. && turbo run build --filter=drizzle-dbml-generator --no-cache",
+    "build:sql": "cd .. && turbo run build --filter=@elizaos/plugin-sql --no-cache",
+    "build:all": "cd .. && turbo run build --filter=@elizaos/plugin-sql --filter=@elizaos/plugin-groq --filter=@elizaos/core --no-cache"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@hapi/shot": "^6.0.1",
+    "@types/hapi": "^18.0.14",
+    "drizzle-dbml-generator": "workspace:0.10.1",
+    "source-map-support": "^0.5.21"
+  }
+}
