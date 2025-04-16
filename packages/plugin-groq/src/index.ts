@@ -1,18 +1,22 @@
 import { createGroq } from '@ai-sdk/groq';
 import type {
-  //ImageDescriptionParams,
+  ImageDescriptionParams,
   ModelTypeName,
   ObjectGenerationParams,
   Plugin,
   TextEmbeddingParams,
-  DetokenizeTextParams,
-  GenerateTextParams,
-  TokenizeTextParams,
+  type DetokenizeTextParams,
+  type GenerateTextParams,
+  ModelType,
+  type TokenizeTextParams,
+  logger,
 } from '@elizaos/core';
-import { ModelType, logger } from '@elizaos/core';
 import { generateObject, generateText } from 'ai';
 import { type TiktokenModel, encodingForModel } from 'js-tiktoken';
 import { z } from 'zod';
+
+const DEFAULT_SMALL_MODEL = 'llama-3.1-8b-instant';
+const DEFAULT_LARGE_MODEL = 'llama-3.3-70b-versatile';
 
 /**
  * Runtime interface for the Groq plugin
@@ -32,54 +36,59 @@ interface Runtime {
  * @returns The Cloudflare Gateway base URL if enabled, undefined otherwise
  */
 function getCloudflareGatewayBaseURL(runtime: Runtime, provider: string): string | undefined {
-  const isCloudflareEnabled = runtime.getSetting('CLOUDFLARE_GW_ENABLED') === 'true';
-  const cloudflareAccountId = runtime.getSetting('CLOUDFLARE_AI_ACCOUNT_ID');
-  const cloudflareGatewayId = runtime.getSetting('CLOUDFLARE_AI_GATEWAY_ID');
+  try {
+    const isCloudflareEnabled = runtime.getSetting('CLOUDFLARE_GW_ENABLED') === 'true';
+    const cloudflareAccountId = runtime.getSetting('CLOUDFLARE_AI_ACCOUNT_ID');
+    const cloudflareGatewayId = runtime.getSetting('CLOUDFLARE_AI_GATEWAY_ID');
 
-  const defaultUrl = 'https://api.groq.com/openai/v1';
-  //  logger.debug('Cloudflare Gateway Configuration:', {
-  //    isEnabled: isCloudflareEnabled,
-  //    hasAccountId: !!cloudflareAccountId,
-  //    hasGatewayId: !!cloudflareGatewayId,
-  //    provider: provider,
-  //  });
+    const defaultUrl = 'https://api.groq.com/openai/v1';
+    logger.debug('Cloudflare Gateway Configuration:', {
+      isEnabled: isCloudflareEnabled,
+      hasAccountId: !!cloudflareAccountId,
+      hasGatewayId: !!cloudflareGatewayId,
+      provider: provider,
+    });
 
-  if (!isCloudflareEnabled) {
-    //    logger.debug('Cloudflare Gateway is not enabled');
-    return defaultUrl;
+    if (!isCloudflareEnabled) {
+      logger.debug('Cloudflare Gateway is not enabled');
+      return defaultUrl;
+    }
+
+    if (!cloudflareAccountId) {
+      logger.warn('Cloudflare Gateway is enabled but CLOUDFLARE_AI_ACCOUNT_ID is not set');
+      return defaultUrl;
+    }
+
+    if (!cloudflareGatewayId) {
+      logger.warn('Cloudflare Gateway is enabled but CLOUDFLARE_AI_GATEWAY_ID is not set');
+      return defaultUrl;
+    }
+
+    const baseURL = `https://gateway.ai.cloudflare.com/v1/${cloudflareAccountId}/${cloudflareGatewayId}/${provider.toLowerCase()}`;
+    logger.info('Using Cloudflare Gateway:', {
+      provider,
+      baseURL,
+      accountId: cloudflareAccountId,
+      gatewayId: cloudflareGatewayId,
+    });
+
+    return baseURL;
+  } catch (error) {
+    logger.error('Error in getCloudflareGatewayBaseURL:', error);
+    return 'https://api.groq.com/openai/v1';
   }
-
-  if (!cloudflareAccountId) {
-    //    logger.warn('Cloudflare Gateway is enabled but CLOUDFLARE_AI_ACCOUNT_ID is not set');
-    return defaultUrl;
-  }
-
-  if (!cloudflareGatewayId) {
-    //    logger.warn('Cloudflare Gateway is enabled but CLOUDFLARE_AI_GATEWAY_ID is not set');
-    return defaultUrl;
-  }
-
-  const baseURL = `https://gateway.ai.cloudflare.com/v1/${cloudflareAccountId}/${cloudflareGatewayId}/${provider.toLowerCase()}`;
-  //  logger.info('Using Cloudflare Gateway:', {
-  //    provider,
-  //    baseURL,
-  //    accountId: cloudflareAccountId,
-  //    gatewayId: cloudflareGatewayId,
-  //  });
-
-  return baseURL;
 }
 
 function findModelName(model: ModelTypeName): TiktokenModel {
   try {
     const name =
       model === ModelType.TEXT_SMALL
-        ? (process.env.SMALL_GROQ_MODEL ?? 'llama-3.1-8b-instant')
-        : (process.env.LARGE_GROQ_MODEL ?? 'llama-3.2-90b-vision-preview');
+        ? (process.env.GROQ_SMALL_MODEL ?? DEFAULT_SMALL_MODEL)
+        : (process.env.GROQ_LARGE_MODEL ?? 'llama-3.3-70b-versatile');
     return name as TiktokenModel;
   } catch (error) {
     logger.error('Error in findModelName:', error);
-    return 'llama-3.1-8b-instant' as TiktokenModel;
+    return DEFAULT_SMALL_MODEL as TiktokenModel;
   }
 }
 
@@ -227,6 +236,7 @@ export const groqPlugin: Plugin = {
   description: 'Groq plugin',
   config: {
     GROQ_API_KEY: process.env.GROQ_API_KEY,
+
     GROQ_SMALL_MODEL: process.env.GROQ_SMALL_MODEL,
     GROQ_MEDIUM_MODEL: process.env.GROQ_MEDIUM_MODEL,
     GROQ_LARGE_MODEL: process.env.GROQ_LARGE_MODEL,
@@ -276,42 +286,39 @@ export const groqPlugin: Plugin = {
       }
     },
     [ModelType.TEXT_SMALL]: async (runtime, { prompt, stopSequences = [] }: GenerateTextParams) => {
-      const temperature = 0.7;
-      const frequency_penalty = 0.7;
-      const presence_penalty = 0.7;
-      //      const max_response_length = 8000;
-      const max_response_length = 6000;
-      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-      const groq = createGroq({
-        apiKey: runtime.getSetting('GROQ_API_KEY'),
-        fetch: runtime.fetch,
-        baseURL,
-      });
+      try {
+        const temperature = 0.7;
+        const frequency_penalty = 0.7;
+        const presence_penalty = 0.7;
+        const max_response_length = 6000;
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+        const groq = createGroq({
+          apiKey: runtime.getSetting('GROQ_API_KEY'),
+          fetch: runtime.fetch,
+          baseURL,
+        });
 
-      const model =
-        runtime.getSetting('GROQ_SMALL_MODEL') ??
-        runtime.getSetting('SMALL_MODEL') ??
-        'llama-3.1-8b-instant-ope2';
+        const model =
+          runtime.getSetting('GROQ_SMALL_MODEL') ??
+          runtime.getSetting('SMALL_MODEL') ??
+          DEFAULT_SMALL_MODEL;
 
-      logger.log('generating text');
-      logger.log('PROMP357', prompt);
+        logger.log('generating text');
+        logger.log(prompt);
 
-      const response = await generateText({
-        model: groq.languageModel(model),
-        prompt: prompt,
-        system: runtime.character.system ?? undefined,
-        temperature: temperature,
-        maxTokens: max_response_length,
-        //max_tokens: 300,
-        frequencyPenalty: frequency_penalty,
-        presencePenalty: presence_penalty,
-        stopSequences: stopSequences,
-        seed: 42,
-      });
-      const { text: openaiResponse } = response;
-      logger.log('RESP357', openaiResponse);
-
-      return openaiResponse;
+        return await generateGroqText(groq, model, {
+          prompt,
+          system: runtime.character.system ?? undefined,
+          temperature,
+          maxTokens: max_response_length,
+          frequencyPenalty: frequency_penalty,
+          presencePenalty: presence_penalty,
+          stopSequences,
+        });
+      } catch (error) {
+        logger.error('Error in TEXT_SMALL model:', error);
+        return 'Error generating text. Please try again later.';
+      }
     },
     [ModelType.TEXT_LARGE]: async (
       runtime,
@@ -324,32 +331,31 @@ export const groqPlugin: Plugin = {
         presencePenalty = 0.7,
       }: GenerateTextParams
     ) => {
-      console.log('GROQ_LARGE_MODEL prompt DEBUG', prompt);
-      const model =
-        runtime.getSetting('GROQ_LARGE_MODEL') ?? runtime.getSetting('LARGE_MODEL') ?? 'gpt-4444o';
-      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-      const groq = createGroq({
-        apiKey: runtime.getSetting('GROQ_API_KEY'),
-        fetch: runtime.fetch,
-        baseURL,
-      });
-      const response = await generateText({
-        model: groq.languageModel(model),
-        prompt: prompt,
-        system: runtime.character.system ?? undefined,
-        temperature: temperature,
-        maxTokens: maxTokens,
-        seed: 42,
-        frequencyPenalty: frequencyPenalty,
-        presencePenalty: presencePenalty,
-        stopSequences: stopSequences,
-      });
-      const { text: openaiResponse } = response;
+      try {
+        const model =
+          runtime.getSetting('GROQ_LARGE_MODEL') ??
+          runtime.getSetting('LARGE_MODEL') ??
+          'llama-3.2-90b';
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+        const groq = createGroq({
+          apiKey: runtime.getSetting('GROQ_API_KEY'),
+          fetch: runtime.fetch,
+          baseURL,
+        });
 
-      logger.log('GROQ response2:', response);
-      logger.log('GROQ response:', openaiResponse);
-
-      return openaiResponse;
+        return await generateGroqText(groq, model, {
+          prompt,
+          system: runtime.character.system ?? undefined,
+          temperature,
+          maxTokens,
+          frequencyPenalty,
+          presencePenalty,
+          stopSequences,
+        });
+      } catch (error) {
+        logger.error('Error in TEXT_LARGE model:', error);
+        return 'Error generating text. Please try again later.';
+      }
     },
     [ModelType.IMAGE]: async (
       runtime,
@@ -359,177 +365,43 @@ export const groqPlugin: Plugin = {
         size?: string;
       }
     ) => {
-      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-      const response = await fetch(`${baseURL}/images/generations`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: params.prompt,
-          n: params.n || 1,
-          size: params.size || '1024x1024',
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to generate image: ${response.statusText}`);
-      }
-      const data = await response.json();
-      const typedData = data as { data: { url: string }[] };
-      return typedData.data;
-    },
-    // [ModelType.IMAGE_DESCRIPTION]: async (runtime, params: ImageDescriptionParams | string) => {
-    //   // Handle string case (direct URL)
-    //   let imageUrl: string;
-    //   let prompt: string | undefined;
-
-    //   if (typeof params === 'string') {
-    //     imageUrl = params;
-    //     prompt = undefined;
-    //   } else {
-    //     // Object parameter case
-    //     imageUrl = params.imageUrl;
-    //     prompt = params.prompt;
-    //   }
-
-    //   try {
-    //     const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-
-    //     const apiKey = process.env.GROQ_API_KEY;
-
-    //     if (!apiKey) {
-    //       logger.error('Groq API key not set');
-
-    //     const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-
-    //     const apiKey = process.env.GROQ_API_KEY;
-
-    //     if (!apiKey) {
-    //       logger.error('Groq API key not set');
-    //       return {
-    //         title: 'Failed to analyze image',
-    //         description: 'API key not configured',
-    //       };
-    //     }
-
-    //     // Call the GPT-4 Vision API
-    //     const response = await fetch(`${baseURL}/chat/completions`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization: `Bearer ${apiKey}`,
-    //       },
-    //       body: JSON.stringify({
-    //         model: 'gpt-4-vision-preview',
-    //         messages: [
-    //           {
-    //             role: 'user',
-    //             content: [
-    //               {
-    //                 type: 'text',
-    //                 text:
-    //                   prompt ||
-    //                   'Please analyze this image and provide a title and detailed description.',
-    //               },
-    //               {
-    //                 type: 'image_url',
-    //                 image_url: { url: imageUrl },
-    //               },
-    //             ],
-    //           },
-    //         ],
-    //         max_tokens: 300,
-    //       }),
-    //     });
-
-    //     if (!response.ok) {
-    //       throw new Error(`OpenAI API error: ${response.status}`);
-    //     }
-
-    //     const result: any = await response.json();
-    //     const content = result.choices?.[0]?.message?.content;
-
-    //     if (!content) {
-    //       return {
-    //         title: 'Failed to analyze image',
-    //         description: 'No response from API',
-    //       };
-    //     }
-
-    //     // Extract title and description
-    //     const titleMatch = content.match(/title[:\s]+(.+?)(?:\n|$)/i);
-    //     const title = titleMatch?.[1] || 'Image Analysis';
-
-    //     // Rest of content is the description
-    //     const description = content.replace(/title[:\s]+(.+?)(?:\n|$)/i, '').trim();
-    //     return { title, description };
-
-    //   }
-    // },
-    [ModelType.TRANSCRIPTION]: async (runtime, audioBuffer: Buffer) => {
-      logger.log('audioBuffer', audioBuffer);
-      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-
-      const formData = new FormData();
-      formData.append('file', new Blob([audioBuffer], { type: 'audio/mp3' }));
-      formData.append('model', 'whisper-1');
-      const response = await fetch(`${baseURL}/audio/transcriptions`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
-          // Note: Do not set a Content-Type header—letting fetch set it for FormData is best
-        },
-        body: formData,
-      });
-
-      logger.log('response', response);
-      if (!response.ok) {
-        throw new Error(`Failed to transcribe audio: ${response.statusText}`);
-      }
-      const data = (await response.json()) as { text: string };
-      return data.text;
-    },
-    [ModelType.OBJECT_SMALL]: async (runtime, params: ObjectGenerationParams) => {
-      logger.debug('ModelType.OBJECT_SMALL.prompt:', params.prompt);
-
-      // Rough token estimation (e.g., 1 token ≈ 4 characters)
-      const promptLength = params.prompt.length;
-      const estimatedTokens = Math.ceil(promptLength / 4);
-      const tokenLimit = 6000; // Adjust based on your actual TPM limit
-
-      if (estimatedTokens > tokenLimit) {
-        logger.warn(`Prompt exceeds token limit: ${estimatedTokens} > ${tokenLimit}`);
-        throw new Error(
-          `Prompt too large: ${estimatedTokens} tokens exceed the ${tokenLimit} TPM limit. Please shorten your prompt.`
-        );
-      } else {
-        logger.debug(`Prompt under token limit: ${estimatedTokens} < ${tokenLimit}`);
-      }
-      logger.debug('ModelType.OBJECT_SMALL.params:', params);
-      const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
-      const groq = createGroq({
-        apiKey: runtime.getSetting('GROQ_API_KEY'),
-        baseURL,
-      });
-      const model =
-        runtime.getSetting('GROQ_SMALL_MODEL') ??
-        runtime.getSetting('SMALL_MODEL') ??
-        'llama-3.1-8b-instant-noope';
-
       try {
-        if (params.schema) {
-          // Skip zod validation and just use the generateObject without schema
-          logger.info('Using OBJECT_SMALL without schema validation');
-
-          const { object } = await generateObject({
-            model: groq.languageModel(model),
-            output: 'no-schema',
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+        const response = await fetch(`${baseURL}/images/generations`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${runtime.getSetting('GROQ_API_KEY')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
             prompt: params.prompt,
-            temperature: params.temperature,
-          });
-          logger.debug('groq object:', object);
-          return object;
+            n: params.n || 1,
+            size: params.size || '1024x1024',
+          }),
+        });
+        if (!response.ok) {
+          logger.error(`Failed to generate image: ${response.statusText}`);
+          return [{ url: '' }];
+        }
+        const data = await response.json();
+        const typedData = data as { data: { url: string }[] };
+        return typedData.data;
+      } catch (error) {
+        logger.error('Error in IMAGE model:', error);
+        return [{ url: '' }];
+      }
+    },
+    [ModelType.TRANSCRIPTION]: async (runtime, audioBuffer: Buffer) => {
+      try {
+        logger.log('audioBuffer', audioBuffer);
+        const baseURL = getCloudflareGatewayBaseURL(runtime, 'groq');
+
+        // Create a FormData instance
+        const formData = new FormData();
+
+        // Create a proper interface for FormData to avoid type errors
+        interface EnhancedFormData extends FormData {
+          append(name: string, value: string | Blob, fileName?: string): void;
         }
 
         // Cast to our enhanced interface
@@ -544,6 +416,7 @@ export const groqPlugin: Plugin = {
           },
           body: formData,
         });
+
         logger.log('response', response);
         if (!response.ok) {
           logger.error(`Failed to transcribe audio: ${response.statusText}`);
@@ -566,7 +439,7 @@ export const groqPlugin: Plugin = {
         const model =
           runtime.getSetting('GROQ_SMALL_MODEL') ??
           runtime.getSetting('SMALL_MODEL') ??
-          'llama-3.1-8b-instant';
+          DEFAULT_SMALL_MODEL;
 
         if (params.schema) {
           logger.info('Using OBJECT_SMALL without schema validation');
@@ -595,14 +468,7 @@ export const groqPlugin: Plugin = {
           logger.info('Using OBJECT_LARGE without schema validation');
         }
 
-        const { object } = await generateObject({
-          model: groq.languageModel(model),
-          output: 'no-schema',
-          prompt: params.prompt,
-          temperature: params.temperature,
-        });
-        console.log('OBJECT_LARGER', object);
-        return object;
+        return await generateGroqObject(groq, model, params);
       } catch (error) {
         logger.error('Error in OBJECT_LARGE model:', error);
         // Return empty object instead of crashing
