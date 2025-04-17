@@ -5,12 +5,11 @@ import type {
   ObjectGenerationParams,
   Plugin,
   TextEmbeddingParams,
-  type DetokenizeTextParams,
-  type GenerateTextParams,
-  ModelType,
-  type TokenizeTextParams,
-  logger,
+  DetokenizeTextParams,
+  GenerateTextParams,
+  TokenizeTextParams,
 } from '@elizaos/core';
+import { ModelType, logger } from '@elizaos/core';
 import { generateObject, generateText } from 'ai';
 import { type TiktokenModel, encodingForModel } from 'js-tiktoken';
 import { z } from 'zod';
@@ -245,6 +244,7 @@ export const groqPlugin: Plugin = {
     if (!process.env.GROQ_API_KEY) {
       throw Error('Missing GROQ_API_KEY in environment variables');
     }
+    //console.log("Config", config);
   },
   models: {
     [ModelType.TEXT_EMBEDDING]: async (

@@ -6,7 +6,6 @@
     "typeRoots": ["./node_modules/@types"],
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
     "inlineSourceMap": true
   },
   "include": ["src/**/*"]
