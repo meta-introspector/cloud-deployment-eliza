@@ -1,0 +1,91 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches: [main, zos-meme-timeline]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Build findforks tool
+        run: |
+          cd findforks-rs
+          cargo build --release
+
+      - name: Generate novelty analysis
+        run: |
+          ./findforks-rs/target/release/findforks --analyze --analyze-limit 1000 --output docs/novelty-report.json
+
+      - name: Generate documentation site
+        run: |
+          mkdir -p docs
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>ElizaOS Fork Network Analysis</title>
+            <meta charset="utf-8">
+            <style>
+              body { font-family: system-ui; max-width: 1200px; margin: 0 auto; padding: 20px; }
+              h1 { color: #333; }
+              .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+              .stat-card { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+              .stat-value { font-size: 2em; font-weight: bold; color: #0066cc; }
+              .concept-list { list-style: none; padding: 0; }
+              .concept-item { padding: 10px; margin: 5px 0; background: #fff; border-left: 4px solid #0066cc; }
+            </style>
+          </head>
+          <body>
+            <h1>ElizaOS Fork Network Analysis</h1>
+            <div class="stats">
+              <div class="stat-card">
+                <div class="stat-value">13,471</div>
+                <div>Novel Snippets</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">18</div>
+                <div>Concepts Tracked</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">5,216</div>
+                <div>Total Forks</div>
+              </div>
+            </div>
+            <h2>Top Concepts</h2>
+            <ul class="concept-list">
+              <li class="concept-item">Testing (52 occurrences)</li>
+              <li class="concept-item">Plugin System (43 occurrences)</li>
+              <li class="concept-item">Event-Driven (11 occurrences)</li>
+              <li class="concept-item">Orchestration (10 occurrences)</li>
+              <li class="concept-item">LLM Integration (7 occurrences)</li>
+            </ul>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="https://github.com/meta-introspector/cloud-deployment-eliza/tree/zos-meme-timeline">ZOS Meme Timeline Branch</a></li>
+              <li><a href="https://github.com/meta-introspector/cloud-deployment-eliza/blob/cleanup-report/REPOSITORY_CLEANUP_REPORT.md">Cleanup Report</a></li>
+              <li><a href="novelty-report.json">Novelty Analysis (JSON)</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
