@@ -1,0 +1,3952 @@
+Fetching origin
+Fetching eliza
+Fetching VanThuan76
+Fetching MarSonyTM
+Fetching Jhon-crypt
+Fetching Conradlog
+Fetching cole-gillespie
+Fetching Packagefather
+Fetching THEMA-Financial
+Fetching peterpavlos
+remote: Repository not found.
+fatal: repository 'https://github.com/peterpavlos/eliza.git/' not found
+error: could not fetch peterpavlos
+Fetching SukhachevN
+Fetching N1ghtSh4de
+Fetching bihua-ai
+Fetching focus-incorporate
+Fetching pmaniora
+Fetching yaffleria
+remote: Repository not found.
+fatal: repository 'https://github.com/yaffleria/eliza.git/' not found
+error: could not fetch yaffleria
+Fetching JACarrionD
+Fetching wale-e
+Fetching udahal2
+Fetching micromingle
+Fetching jonymusky
+Fetching a43501
+Fetching maksymilianPadalak
+Fetching GoPlausible
+Fetching mohitM0
+remote: Repository not found.
+fatal: repository 'https://github.com/mohitM0/eliza.git/' not found
+error: could not fetch mohitM0
+Fetching wsniper
+Fetching dmytrobaida
+Fetching domilin
+remote: Repository not found.
+fatal: repository 'https://github.com/domilin/eliza.git/' not found
+error: could not fetch domilin
+Fetching iiifinal
+Fetching Niuran78
+Fetching Pay-Platform
+Fetching psimsa
+Fetching shangbuqixing
+Fetching alexx000x
+Fetching HydeAndGeek
+Fetching KaladinB4
+Fetching bendanzhentan
+Fetching anthonygregis
+Fetching spheronFdn
+remote: Repository not found.
+fatal: repository 'https://github.com/spheronFdn/eliza-spheron-extension.git/' not found
+error: could not fetch spheronFdn
+Fetching saonam
+Fetching Zeljko-Predjeskovic
+Fetching salazarsebas
+Fetching BeanExchange
+remote: Repository not found.
+fatal: repository 'https://github.com/BeanExchange/eliza.git/' not found
+error: could not fetch BeanExchange
+Fetching Inqut
+Fetching RussPalms
+Fetching KeyesCode
+Fetching yasiriqbal776
+Fetching Git-griz
+remote: Repository not found.
+fatal: repository 'https://github.com/Git-griz/eliza.git/' not found
+error: could not fetch Git-griz
+Fetching kaitoInfra
+Fetching JonathonJulian
+remote: Repository not found.
+fatal: repository 'https://github.com/JonathonJulian/eliza.git/' not found
+error: could not fetch JonathonJulian
+Fetching zwidev
+Fetching 0xFloyd
+Fetching AnkMister
+Fetching refistarter
+Fetching zkhashito
+Fetching Sword-zgz
+Fetching chiggaventures
+remote: Repository not found.
+fatal: repository 'https://github.com/chiggaventures/eliza.git/' not found
+error: could not fetch chiggaventures
+Fetching cheshireterminalai
+Fetching kiko09527
+Fetching drgnchan
+Fetching MrFixShit
+Fetching SwissAIHub
+remote: Repository not found.
+fatal: repository 'https://github.com/SwissAIHub/AIGango.git/' not found
+error: could not fetch SwissAIHub
+Fetching Fhaleen10
+Fetching Redsun777
+Fetching Brandon-zhong
+Fetching AKRD44
+remote: Repository not found.
+fatal: repository 'https://github.com/AKRD44/eliza.git/' not found
+error: could not fetch AKRD44
+Fetching sg-1validator
+Fetching haskell-monad
+remote: Repository not found.
+fatal: repository 'https://github.com/haskell-monad/eliza.git/' not found
+error: could not fetch haskell-monad
+Fetching d3vims
+Fetching Xenian84
+Fetching atong-xyz
+remote: Repository not found.
+fatal: repository 'https://github.com/atong-xyz/eliza.git/' not found
+error: could not fetch atong-xyz
+Fetching liunix61
+Fetching Mohameedidris17
+remote: Repository not found.
+fatal: repository 'https://github.com/Mohameedidris17/eliza.git/' not found
+error: could not fetch Mohameedidris17
+Fetching chadgpt
+Fetching dorucioclea
+Fetching yubing744
+Fetching Javsphere
+Fetching marsic3
+Fetching ankara020
+Fetching thisyc
+Fetching sw5park
+Fetching banza-xyz
+Fetching 3handsinsanetek
+Fetching warp-contracts
+Fetching conorkeo90
+Fetching gorillafape
+Fetching xiaozhu001
+Fetching jacobhjkim
+Fetching jooddang
+Fetching amirmabhout
+Fetching vicsam
+Fetching fazleenik
+Fetching rrw-zilliqa
+Fetching Zcy19980412
+remote: Repository not found.
+fatal: repository 'https://github.com/Zcy19980412/eliza.git/' not found
+error: could not fetch Zcy19980412
+Fetching shijianzhong
+Fetching sinecose
+Fetching sade-c
+Fetching zandrad10
+Fetching 0xscharki
+Fetching thuyhoang-hvtt
+Fetching npc7
+Fetching He1i0S-21
+Fetching gp-xyz
+Fetching gmh5225
+Fetching erhant
+Fetching osrm
+Fetching ekaratnida
+Fetching campuzan0
+Fetching MattPereira
+Fetching PickleYard
+remote: Repository not found.
+fatal: repository 'https://github.com/PickleYard/Terra.git/' not found
+error: could not fetch PickleYard
+Fetching 01xcoder
+Fetching cryptorich615
+Fetching cryptohardcore
+Fetching alcazar9491
+Fetching ponzienjoyer
+remote: Repository not found.
+fatal: repository 'https://github.com/ponzienjoyer/eliza.git/' not found
+error: could not fetch ponzienjoyer
+Fetching thecurioussailor
+Fetching marcellodesales
+Fetching adama323
+Fetching KellHuang
+Fetching Sruthi2357
+Fetching mdfikrie
+Fetching turbodaly
+Fetching kyle123c
+Fetching brkay54
+Fetching valentinuuiuiu
+Fetching Valetek
+Fetching astinz
+Fetching wizardsupreme
+remote: Repository not found.
+fatal: repository 'https://github.com/wizardsupreme/eliza.git/' not found
+error: could not fetch wizardsupreme
+Fetching jonathanmv
+Fetching any0ne
+Fetching Cult-of-Eliza
+Fetching leharo
+Fetching macfly-base
+Fetching simistern
+Fetching ru4871SG
+Fetching RektTillNoon
+remote: Repository not found.
+fatal: repository 'https://github.com/RektTillNoon/eliza.git/' not found
+error: could not fetch RektTillNoon
+Fetching alwaysabetterway
+Fetching leonzijun
+Fetching Saundr21
+Fetching FedeMadoery
+Fetching bentatum
+remote: Repository not found.
+fatal: repository 'https://github.com/bentatum/eliza.git/' not found
+error: could not fetch bentatum
+Fetching ratimics
+remote: Repository not found.
+fatal: repository 'https://github.com/ratimics/eliza-whiskers.git/' not found
+error: could not fetch ratimics
+Fetching Azukix0
+remote: Repository not found.
+fatal: repository 'https://github.com/Azukix0/eliza.git/' not found
+error: could not fetch Azukix0
+Fetching mrsalitre
+Fetching kaankork
+Fetching IterateFast-Labs
+Fetching KiyamaSanAI
+Fetching juanc07
+Fetching invisibleape
+Fetching Celeborn2BeAlive
+Fetching vnvizitiu
+Fetching Baretank
+Fetching mush-support
+Fetching louisaixyz
+Fetching mmlvc
+Fetching commonality2u
+remote: Repository not found.
+fatal: repository 'https://github.com/commonality2u/eliza.git/' not found
+error: could not fetch commonality2u
+Fetching FiberInEliza
+Fetching HindsightWise
+remote: Repository not found.
+fatal: repository 'https://github.com/HindsightWise/eliza.git/' not found
+error: could not fetch HindsightWise
+Fetching azomland
+Fetching Vpum
+Fetching luckyaxl
+Fetching affanabid
+Fetching rondelc
+Fetching bernatferragut
+Fetching aquaplant5
+Fetching 0xSalky
+Fetching bardulah
+remote: Repository not found.
+fatal: repository 'https://github.com/bardulah/eliza.git/' not found
+error: could not fetch bardulah
+Fetching equanaut-sha-w1
+Fetching arsml
+Fetching svelterust
+Fetching libapep
+Fetching web3Aicache
+Fetching dhruvkelawala
+Fetching 0xefrain
+Fetching ooguz166
+Fetching Nimadhn
+Fetching alderbwolf
+Fetching gpopzraw9
+Fetching zyqVizzzzz
+Fetching Pankajjha94
+Fetching allendaicool
+Fetching kesar
+Fetching mejiasd3v
+remote: Repository not found.
+fatal: repository 'https://github.com/mejiasd3v/eliza.git/' not found
+error: could not fetch mejiasd3v
+Fetching xircusweb3
+Fetching StevenChege
+Fetching smileclown2024
+Fetching Xayaan
+remote: Repository not found.
+fatal: repository 'https://github.com/Xayaan/eliza.git/' not found
+error: could not fetch Xayaan
+Fetching jam-so
+Fetching darkwaves-ofc
+Fetching EastAgile
+Fetching mameikagou
+Fetching loyality7
+Fetching Bird0x02
+Fetching bxlkm
+Fetching CondiWyu
+Fetching Mythsoul
+Fetching nodecattel
+Fetching WuiiiGithub
+remote: Repository not found.
+fatal: repository 'https://github.com/WuiiiGithub/Charachter-AIs.git/' not found
+error: could not fetch WuiiiGithub
+Fetching TaylorHonaker
+Fetching 358-now
+Fetching AsanteNuru
+remote: Repository not found.
+fatal: repository 'https://github.com/AsanteNuru/eliza_FutureInvest.git/' not found
+error: could not fetch AsanteNuru
+Fetching Prathampshettyai
+Fetching cfx-gspos
+remote: Repository not found.
+fatal: repository 'https://github.com/cfx-gspos/eliza.git/' not found
+error: could not fetch cfx-gspos
+Fetching Mountain-AI
+Fetching RaveenaBhasin
+Fetching satoshi-inc
+Fetching router-protocol
+Fetching yayashuxue
+Fetching dglewis
+remote: Repository not found.
+fatal: repository 'https://github.com/dglewis/eliza.git/' not found
+error: could not fetch dglewis
+Fetching JPXIII
+Fetching o-ray-o
+remote: Repository not found.
+fatal: repository 'https://github.com/o-ray-o/agent_playground.git/' not found
+error: could not fetch o-ray-o
+Fetching domanost
+Fetching makluganteng
+Fetching JackPie55
+Fetching M1NDB0T-B3TA
+Fetching ChainSupport
+Fetching Agency-LARP-Detection
+Fetching KillerGasy
+Fetching ArekHalpern
+Fetching fantafi
+Fetching kunalmalumich
+Fetching goalongway
+Fetching Manish-GenAI
+Fetching ImfanAi
+Fetching itsbrex
+Fetching VRAM-AI
+Fetching threewebcode
+Fetching IshaanGupta358
+Fetching guochaopeng
+Fetching mspremulli
+Fetching You-saku
+Fetching tyxivixi
+remote: Repository not found.
+fatal: repository 'https://github.com/tyxivixi/AIP.git/' not found
+error: could not fetch tyxivixi
+Fetching YoungLYR2099
+Fetching hafsabzahid
+Fetching KreeFPS
+Fetching project-89
+Fetching heojay0309
+Fetching PandasCoder
+Fetching riturajreso
+Fetching Peridax
+Fetching venusgalstar
+remote: Repository not found.
+fatal: repository 'https://github.com/venusgalstar/eliza.git/' not found
+error: could not fetch venusgalstar
+Fetching hugeeeeeeeee
+remote: Repository not found.
+fatal: repository 'https://github.com/hugeeeeeeeee/elizatest.git/' not found
+error: could not fetch hugeeeeeeeee
+Fetching dmcmillan86
+Fetching metasvit
+Fetching jonathanykh
+Fetching lewwang
+Fetching johnmendez2
+Fetching CapTake
+Fetching enong
+Fetching domjeck
+Fetching vibrant
+Fetching luislucena16
+Fetching KennethAshley
+remote: Repository not found.
+fatal: repository 'https://github.com/KennethAshley/eliza.git/' not found
+error: could not fetch KennethAshley
+Fetching maindcrypto
+Fetching katana108
+Fetching kristjanpeterson1
+Fetching simulacra-gg
+remote: Repository not found.
+fatal: repository 'https://github.com/simulacra-gg/simulacra-eliza.git/' not found
+error: could not fetch simulacra-gg
+Fetching PIN-AI
+remote: Repository not found.
+fatal: repository 'https://github.com/PIN-AI/pin-ai-eliza.git/' not found
+error: could not fetch PIN-AI
+Fetching Daelyte
+Fetching rferrari
+Fetching gusfraser
+Fetching IUYSY
+Fetching jiggly-intern
+Fetching 0xsarvesh
+Fetching yoyumiracle
+Fetching KP012-pixel
+remote: Repository not found.
+fatal: repository 'https://github.com/KP012-pixel/eliza.git/' not found
+error: could not fetch KP012-pixel
+Fetching Leobuaa
+Fetching Zzzztt555
+Fetching connorssullivan
+Fetching hyperfy-xyz
+Fetching Fluffy9
+Fetching Qinsir7
+Fetching uneeb123
+Fetching srajith
+remote: Repository not found.
+fatal: repository 'https://github.com/srajith/eliza.git/' not found
+error: could not fetch srajith
+Fetching ZZC-900309
+Fetching sunilrav
+Fetching gregsantos
+Fetching confluent-1
+remote: Repository not found.
+fatal: repository 'https://github.com/confluent-1/Shokami.git/' not found
+error: could not fetch confluent-1
+Fetching b2network
+Fetching mot1se
+Fetching asterai-io
+Fetching 934wildad
+Fetching p-boaz
+Fetching Aminechakr
+Fetching MaxJHardart
+remote: Repository not found.
+fatal: repository 'https://github.com/MaxJHardart/Sarah.git/' not found
+error: could not fetch MaxJHardart
+Fetching bogeyag
+Fetching JoshParkSJ
+Fetching MarioJovanovic
+Fetching Laimagen
+Fetching 0xinugami
+Fetching miokki
+remote: Repository not found.
+fatal: repository 'https://github.com/miokki/eliza-.git/' not found
+error: could not fetch miokki
+Fetching 1de2
+Fetching aymengharbi1
+Fetching arigatoexpress
+Fetching altexdnb
+Fetching philcockfield
+Fetching RizeLabs
+Fetching fction
+Fetching georgerosu26
+Fetching josemarnaiz
+Fetching zerotucks
+Fetching maciejwitowski
+Fetching talhamalik883
+Fetching AIDigitSoul
+remote: Repository not found.
+fatal: repository 'https://github.com/AIDigitSoul/digit_soul_core.git/' not found
+error: could not fetch AIDigitSoul
+Fetching indowebdeveloper
+Fetching dan13ram
+Fetching gamedaoco
+Fetching tomguluson92
+Fetching paintera-cap
+Fetching tomasp1189
+Fetching mustafasuphibinbay
+Fetching iskysun96
+Fetching bmardz
+Fetching wkddnjset
+Fetching SeraphAgent
+Fetching KumbleMadhu
+Fetching ChainRex
+Fetching palewaves
+Fetching jeanhackpy
+Fetching everimbaq
+Fetching pranjallyad
+Fetching hanzalaraza-data
+Fetching bigDudeoNtRee525
+Fetching spartanAI3000
+Fetching Pratik-jagdale
+Fetching Minhaj-ul-abidin
+Fetching MarcusWentz
+remote: Repository not found.
+fatal: repository 'https://github.com/MarcusWentz/eliza.git/' not found
+error: could not fetch MarcusWentz
+Fetching Amannji
+remote: Repository not found.
+fatal: repository 'https://github.com/Amannji/eliza.git/' not found
+error: could not fetch Amannji
+Fetching pann0x
+Fetching erickpinos
+Fetching Aravinthrselva
+Fetching monsterbunny007
+Fetching taofengno1
+Fetching AnthonyHarwood
+Fetching rRogick
+Fetching nevrax
+Fetching jinhipa
+Fetching Apple-Dog-Devs
+remote: Repository not found.
+fatal: repository 'https://github.com/Apple-Dog-Devs/agent-apple.git/' not found
+error: could not fetch Apple-Dog-Devs
+Fetching BoshiKDong
+remote: Repository not found.
+fatal: repository 'https://github.com/BoshiKDong/Macy.git/' not found
+error: could not fetch BoshiKDong
+Fetching derekbeau
+Fetching usxrc
+Fetching jeongmincho
+Fetching Wealldance
+Fetching ANOS-Initiative
+remote: Repository not found.
+fatal: repository 'https://github.com/ANOS-Initiative/eliza.git/' not found
+error: could not fetch ANOS-Initiative
+Fetching ProsventureDao
+Fetching meowyx
+remote: Repository not found.
+fatal: repository 'https://github.com/meowyx/eliza.git/' not found
+error: could not fetch meowyx
+Fetching mistayo
+Fetching niklasp
+Fetching jhotson
+Fetching describeme
+Fetching L-E-G-T
+Fetching earlyvibz
+Fetching rattadan
+remote: Repository not found.
+fatal: repository 'https://github.com/rattadan/eliza.git/' not found
+error: could not fetch rattadan
+Fetching francis2tm
+Fetching kooklife
+Fetching zealhsu
+Fetching emmirays
+Fetching MazBenOscar
+Fetching renowncoder
+Fetching purple-squirrel-network
+Fetching Carlosdvp
+Fetching NeuralEth
+Fetching intrepidcanadian
+Fetching otmanesat
+Fetching luvvpill3d
+Fetching bbopar
+Fetching OmerJauhar
+Fetching 0xcindyv
+Fetching greg2718
+Fetching Scarro
+Fetching tonycorona
+Fetching Ochunkele
+Fetching AudixAI
+Fetching donald-turner
+Fetching TableDuster
+Fetching cosminstoian
+Fetching 5252cars
+Fetching isanidhya
+Fetching adimverse
+Fetching tmellon
+Fetching sserrano44
+Fetching jameeso
+Fetching Aigena
+Fetching 0xDeRauX
+Fetching yaswanth2015
+Fetching PromiseGameFi
+Fetching John-peterson-coinbase
+Fetching huzhuang11
+Fetching santhoshkumar0918
+Fetching longwind48
+Fetching ripio
+Fetching i001962
+Fetching faridulhaque
+remote: Repository not found.
+fatal: repository 'https://github.com/faridulhaque/eliza.git/' not found
+error: could not fetch faridulhaque
+Fetching autonome-ai
+Fetching kenshinsee
+Fetching AIFlowML
+remote: Repository not found.
+fatal: repository 'https://github.com/AIFlowML/eliza_aiflow.git/' not found
+error: could not fetch AIFlowML
+Fetching neilydhan
+Fetching harryhuayuanchong
+Fetching criztiano
+Fetching eshalmin-basit
+Fetching bhanusanghi
+Fetching Talha1725
+Fetching Wikiup
+Fetching chainbase-labs
+Fetching ChunWang1998
+remote: Repository not found.
+fatal: repository 'https://github.com/ChunWang1998/eliza.git/' not found
+error: could not fetch ChunWang1998
+Fetching zhutony
+Fetching imaffe
+Fetching urbanslayers
+remote: Repository not found.
+fatal: repository 'https://github.com/urbanslayers/eliza.git/' not found
+error: could not fetch urbanslayers
+Fetching oksanaphmn
+Fetching ve-varun-sharma
+Fetching maxj723
+Fetching manolaz
+Fetching TanDuy03
+Fetching yazeed
+remote: Repository not found.
+fatal: repository 'https://github.com/yazeed/eliza.git/' not found
+error: could not fetch yazeed
+Fetching chrislatorres
+remote: Repository not found.
+fatal: repository 'https://github.com/chrislatorres/eliza.git/' not found
+error: could not fetch chrislatorres
+Fetching DJHellscream
+Fetching andrew-cong
+Fetching stark-arcade
+Fetching tariqdude
+Fetching AlessioFrateily
+Fetching davidniku
+Fetching madschristensen99
+Fetching filipposl
+Fetching loganbrr
+Fetching jaytoday
+Fetching anciri
+Fetching Ashwin1011
+Fetching michaelgreen06
+Fetching jonathancoulton
+Fetching aaronbmoore
+Fetching nishuzumi
+Fetching web3gh
+Fetching dshap474
+Fetching HalAgent
+remote: Repository not found.
+fatal: repository 'https://github.com/HalAgent/halagent.git/' not found
+error: could not fetch HalAgent
+Fetching haivOS
+Fetching Masood979899
+Fetching realdottechnology
+remote: Repository not found.
+fatal: repository 'https://github.com/realdottechnology/eliza.git/' not found
+error: could not fetch realdottechnology
+Fetching Quantum-MindShare-Corp
+Fetching ReFi-Starter
+Fetching skundu42
+Fetching oibofobio
+Fetching bxngxl
+Fetching chuasonglin1995
+Fetching AsafBitan
+Fetching 1796927303
+Fetching Yuyanze
+Fetching ThatTobMate
+Fetching 0xSero
+Fetching brightlystar0117
+Fetching ums-l200224246
+Fetching aokimarket
+Fetching okmoontx
+Fetching tanelabs
+Fetching Hosuke
+Fetching manager
+Fetching dandamiangow3t
+Fetching flissdrw1
+Fetching vinzvinci
+Fetching alexxxx001
+Fetching facialdna
+Fetching JasonWu55
+Fetching shovon
+Fetching albertjlguo
+remote: Repository not found.
+fatal: repository 'https://github.com/albertjlguo/eliza.git/' not found
+error: could not fetch albertjlguo
+Fetching MegistusAI
+Fetching LkingX33
+Fetching jkeith10
+Fetching JJ-Caro
+Fetching crossangle-whoseop
+Fetching tehsoul
+Fetching huiguyy
+Fetching TheGuildQuest
+Fetching vecdid
+Fetching yueliao11
+remote: Repository not found.
+fatal: repository 'https://github.com/yueliao11/eliza.git/' not found
+error: could not fetch yueliao11
+Fetching product-maity
+Fetching leejss
+remote: Repository not found.
+fatal: repository 'https://github.com/leejss/eliza.git/' not found
+error: could not fetch leejss
+Fetching sudiarth
+Fetching stevenjoe0906
+Fetching cellulalifegame
+Fetching PR0J3CT-M1NDB0T-2045
+Fetching s33dunda
+Fetching BRENMA
+Fetching gumaojie
+Fetching AvaxHefe
+Fetching ArbXSports
+Fetching 0x369D
+Fetching emzeemusic
+Fetching hkxx
+Fetching TaeheeLee-01
+Fetching sonatonagems
+Fetching AnonJon
+Fetching RalphLavelle
+remote: Repository not found.
+fatal: repository 'https://github.com/RalphLavelle/eliza.git/' not found
+error: could not fetch RalphLavelle
+Fetching damonclifford
+Fetching ai16azura
+Fetching vinicius-kiyoshi
+Fetching cryptodogtoshi
+Fetching shaunchurch
+Fetching joaoavf
+Fetching faizannaseerr
+Fetching chaig15
+Fetching mejorandro
+Fetching stechu
+Fetching DCUBE-LLC
+remote: Repository not found.
+fatal: repository 'https://github.com/DCUBE-LLC/eliza_test_2.git/' not found
+error: could not fetch DCUBE-LLC
+Fetching sodofi
+Fetching shishirsingh66g
+Fetching lightlink-network
+Fetching zkater
+remote: Repository not found.
+fatal: repository 'https://github.com/zkater/moneliza.git/' not found
+error: could not fetch zkater
+Fetching retdude
+Fetching pablo-carbajo
+Fetching Zeranamu
+Fetching antman1p
+Fetching PedroRosalba
+Fetching AnarchoFatSats
+remote: Repository not found.
+fatal: repository 'https://github.com/AnarchoFatSats/eliza.git/' not found
+error: could not fetch AnarchoFatSats
+Fetching EAZUUZ
+remote: Repository not found.
+fatal: repository 'https://github.com/EAZUUZ/eliza.git/' not found
+error: could not fetch EAZUUZ
+Fetching bescharov
+Fetching aditya520
+Fetching iant24
+Fetching dennyxxx
+Fetching AbdullZahir
+Fetching pimpmypixel
+Fetching vanmeter-t
+Fetching ICGNU3
+Fetching WAGMIBRO
+Fetching yoanslvy
+Fetching ThrifJorden
+Fetching Jonatan-Chaverri
+Fetching flavapuff
+Fetching jwei921118
+Fetching 0xsomesh
+Fetching vandeace
+Fetching matsuiguenta
+Fetching MarcusCg
+Fetching aspiers
+Fetching validsyntax1012
+Fetching offsoc
+Fetching rizkisyaf
+Fetching tolak
+Fetching Bgettinger
+Fetching Deadalus-art
+Fetching tripathiarpan20
+Fetching guangyangsjc18
+Fetching tusharwdesai
+Fetching stoicamarius
+Fetching jbrace02
+Fetching xiyu1984
+Fetching Lou1sVuong
+Fetching gmgege
+Fetching MbBrainz
+Fetching altpsider
+Fetching xlock0822
+Fetching alexblockchain
+Fetching Cutey385
+Fetching dsirt
+Fetching zk-xyz
+Fetching brucioamaphone
+Fetching fernando-syslabs
+Fetching 0x-jj
+Fetching ropstah
+Fetching Destore2023
+Fetching Laurentiu-Andronache
+Fetching 0xNubby
+Fetching BullpenFi
+remote: Repository not found.
+fatal: repository 'https://github.com/BullpenFi/bullpen-eliza.git/' not found
+error: could not fetch BullpenFi
+Fetching chaingas
+Fetching kaiqiangh
+remote: Repository not found.
+fatal: repository 'https://github.com/kaiqiangh/eliza.git/' not found
+error: could not fetch kaiqiangh
+Fetching myakeen
+Fetching StreamSwapProtocol
+Fetching subh700
+Fetching YANGSEOKWOO
+Fetching Nakamoto-Labs
+Fetching Billfuwj
+Fetching sangeethkc
+Fetching KLKTN
+Fetching Akshola00
+Fetching NillionNetwork
+Fetching srikalyan
+Fetching rengas
+Fetching tomzed
+Fetching MonkeyKing44
+Fetching SashimiSaketoro
+Fetching abdulrahimiqbal
+Fetching codeaudit
+Fetching Codethecoded
+remote: Repository not found.
+fatal: repository 'https://github.com/Codethecoded/eliza.git/' not found
+error: could not fetch Codethecoded
+Fetching starkhackai
+remote: Repository not found.
+fatal: repository 'https://github.com/starkhackai/eliza.git/' not found
+error: could not fetch starkhackai
+Fetching chadrandomdev
+remote: Repository not found.
+fatal: repository 'https://github.com/chadrandomdev/eliza.git/' not found
+error: could not fetch chadrandomdev
+Fetching petryshkaCODE
+Fetching CAEkblad
+Fetching Musa00789
+Fetching ariesfiredragonfu
+Fetching vikas00
+Fetching branarakic
+Fetching Devermint
+Fetching Walter-code-max
+Fetching bigzenos
+Fetching rzhwang
+Fetching Jamesyang2333
+Fetching peakyragnar
+Fetching LowPolyDuck
+remote: Repository not found.
+fatal: repository 'https://github.com/LowPolyDuck/elizaTesting.git/' not found
+error: could not fetch LowPolyDuck
+Fetching bodhi-crypo
+Fetching lovelgeorge99
+Fetching Wildanzr
+Fetching Ojajajajaja
+remote: Repository not found.
+fatal: repository 'https://github.com/Ojajajajaja/eliza-ojatest.git/' not found
+error: could not fetch Ojajajajaja
+Fetching jgarrettvml
+Fetching JimifTR8DZ
+remote: Repository not found.
+fatal: repository 'https://github.com/JimifTR8DZ/eliza.git/' not found
+error: could not fetch JimifTR8DZ
+Fetching soeasy13142
+Fetching bsnydr
+Fetching medardm
+Fetching mZhou106
+Fetching xircusfounder
+remote: Repository not found.
+fatal: repository 'https://github.com/xircusfounder/eliza.git/' not found
+error: could not fetch xircusfounder
+Fetching g4titanx
+Fetching michaeltombor
+Fetching maincharactermotion
+Fetching shilohma
+Fetching naturesimple
+Fetching augustin-v
+remote: Repository not found.
+fatal: repository 'https://github.com/augustin-v/eliza.git/' not found
+error: could not fetch augustin-v
+Fetching kaibaatem59
+Fetching rubenariasjimenez
+Fetching soft-law
+remote: Repository not found.
+fatal: repository 'https://github.com/soft-law/Alise.git/' not found
+error: could not fetch soft-law
+Fetching crypblizz8
+Fetching standardgalactic
+Fetching beiyonder
+Fetching 0xdebound
+Fetching xzrfax
+Fetching xaekks
+Fetching drpepeai
+Fetching pyanoxyz
+remote: Repository not found.
+fatal: repository 'https://github.com/pyanoxyz/eliza.git/' not found
+error: could not fetch pyanoxyz
+Fetching cxlice556
+Fetching ksiaz
+Fetching elitown
+remote: Repository not found.
+fatal: repository 'https://github.com/elitown/eliza.git/' not found
+error: could not fetch elitown
+Fetching LT7T
+Fetching bluepeople1
+Fetching RatakondalaArun
+Fetching trippydao
+remote: Repository not found.
+fatal: repository 'https://github.com/trippydao/eliza.git/' not found
+error: could not fetch trippydao
+Fetching tailm
+Fetching YASHRAO23
+Fetching fractalite
+remote: Repository not found.
+fatal: repository 'https://github.com/fractalite/eliza.git/' not found
+error: could not fetch fractalite
+Fetching blockchain-src
+remote: Repository not found.
+fatal: repository 'https://github.com/blockchain-src/eliza.git/' not found
+error: could not fetch blockchain-src
+Fetching web-chao
+Fetching Soham-ssd
+Fetching 800123
+Fetching hazelnutcloud
+Fetching blusehuang1121
+Fetching 0xli
+Fetching vinhan2020
+Fetching Arianassskm
+Fetching leyr1112
+Fetching alttabdlt
+remote: Repository not found.
+fatal: repository 'https://github.com/alttabdlt/ai-agent.git/' not found
+error: could not fetch alttabdlt
+Fetching SebaMat3
+Fetching linhuiw
+Fetching PlayOffP
+Fetching btwiuse
+Fetching SuperDappDeveloper
+Fetching koofree
+Fetching alx
+Fetching tntfanfan
+Fetching amaimi-mkhtar
+Fetching lukecd
+Fetching redactedCHAD
+Fetching zbailey83
+Fetching TheWizardsOfOrd
+remote: Repository not found.
+fatal: repository 'https://github.com/TheWizardsOfOrd/eliza.git/' not found
+error: could not fetch TheWizardsOfOrd
+Fetching krisp1
+remote: Repository not found.
+fatal: repository 'https://github.com/krisp1/eliza.git/' not found
+error: could not fetch krisp1
+Fetching julianluo
+Fetching kota1026
+Fetching Arrowana
+Fetching riluq
+Fetching kylebuildsstuff
+Fetching Elyt622
+Fetching NikVisel
+Fetching malexsnyder
+Fetching otavio939
+remote: Repository not found.
+fatal: repository 'https://github.com/otavio939/eliza.git/' not found
+error: could not fetch otavio939
+Fetching big-riz
+Fetching FlapJackson
+Fetching ar3systems
+Fetching PlayAINetwork
+Fetching yakkl
+Fetching tudorpintea999
+Fetching doctorloaf
+Fetching 1to3for5vi7ate9x
+Fetching dawksh
+Fetching kon0di0da
+Fetching tantodefi
+Fetching michaelessiet
+Fetching elieaj
+Fetching AlekOmOm
+Fetching x0protivol
+Fetching visionpixel
+Fetching TP-Lab
+Fetching pgoos
+Fetching lostgirldev
+Fetching jaxontrek
+Fetching romrlb
+Fetching XORs33r
+Fetching searchboxai
+remote: Repository not found.
+fatal: repository 'https://github.com/searchboxai/eliza.git/' not found
+error: could not fetch searchboxai
+Fetching apravint
+Fetching cndn
+Fetching sachin-km
+Fetching 0xnogo
+Fetching KSym04
+Fetching donbagger
+Fetching Letz-AI
+Fetching hellopleasures
+remote: Repository not found.
+fatal: repository 'https://github.com/hellopleasures/eliza.git/' not found
+error: could not fetch hellopleasures
+Fetching SmokeSol
+Fetching Samuraizan
+Fetching ayhth
+Fetching AnkithVijay
+Fetching ohhkaneda
+Fetching superoo7
+Fetching daniel-farina
+Fetching guo
+Fetching shenyisy
+Fetching inferanetwork
+Fetching sundjly
+Fetching iTakeSoulz
+remote: Repository not found.
+fatal: repository 'https://github.com/iTakeSoulz/Blar.git/' not found
+error: could not fetch iTakeSoulz
+Fetching aalonso777777
+Fetching minidoge-x
+Fetching noelotpyrc
+remote: Repository not found.
+fatal: repository 'https://github.com/noelotpyrc/eliza_genie.git/' not found
+error: could not fetch noelotpyrc
+Fetching chunyujin295
+remote: Repository not found.
+fatal: repository 'https://github.com/chunyujin295/eliza.git/' not found
+error: could not fetch chunyujin295
+Fetching mrg123
+Fetching atomzakk
+Fetching prasadabhishek
+Fetching manotoor
+Fetching degendan1
+remote: Repository not found.
+fatal: repository 'https://github.com/degendan1/eliza-playground.git/' not found
+error: could not fetch degendan1
+Fetching mister-bee
+Fetching igorperic17
+Fetching kerdosa
+Fetching rizza-cooks
+Fetching thetickerisdinoxyz
+remote: Repository not found.
+fatal: repository 'https://github.com/thetickerisdinoxyz/dino-cto.git/' not found
+error: could not fetch thetickerisdinoxyz
+Fetching MacsDickinson
+Fetching MagikHolder
+Fetching kwanRoshi
+Fetching carv-protocol
+Fetching sazilariel
+Fetching EthanInMel
+Fetching moose-codes
+Fetching BankkRoll
+Fetching MINJE-98
+Fetching zktx-io
+Fetching paulbettner
+Fetching jacktou
+Fetching moonwater
+Fetching 0xJchen
+Fetching RiccoSmooth
+Fetching Kstor10
+Fetching KONFeature
+Fetching kiddo4
+Fetching BooneTB
+Fetching taurusduan
+Fetching ZeroXClem
+Fetching andrewua85
+Fetching Dragonbutteth
+Fetching leongj2
+Fetching 0xw4t
+remote: Repository not found.
+fatal: repository 'https://github.com/0xw4t/eliza.git/' not found
+error: could not fetch 0xw4t
+Fetching venti-frappuccino
+Fetching jasonz1360
+Fetching melnikovics
+Fetching Solba31
+Fetching Sullivancryptic
+Fetching 0xstef1
+Fetching BurtTheCoder
+Fetching iampearceman
+Fetching bangarangel
+Fetching 2c1xt
+Fetching collinli2353
+Fetching Machiavelli-DaVinci
+Fetching leonshion
+Fetching leonardonorbiato
+Fetching alvdevcl
+Fetching VictorEZCodes
+Fetching sidneyswift
+remote: Repository not found.
+fatal: repository 'https://github.com/sidneyswift/eliza.git/' not found
+error: could not fetch sidneyswift
+Fetching ailevelup-ai
+Fetching narasim-teja
+Fetching raven-kus
+Fetching cxl-xuaner
+Fetching akcharlie24
+Fetching hemanth3152006
+remote: Repository not found.
+fatal: repository 'https://github.com/hemanth3152006/eliza.git/' not found
+error: could not fetch hemanth3152006
+Fetching FatherSama
+Fetching alexanderarmero
+Fetching Xaxis
+Fetching dc-devs
+Fetching Unit-Zero-Labs
+remote: Repository not found.
+fatal: repository 'https://github.com/Unit-Zero-Labs/eliza-loanshark.git/' not found
+error: could not fetch Unit-Zero-Labs
+Fetching mudaseriqbalshah
+Fetching pedronovikovborges
+Fetching NeoZ003
+Fetching w3llr00t3d
+Fetching ai-awesome-app
+Fetching btaionchain
+Fetching dxlliv
+Fetching enigmarikki
+Fetching Sharathxct
+Fetching mgunnin
+Fetching ZER0Mono
+Fetching djhardcore007
+Fetching openstream
+Fetching marmarko
+Fetching lorcann-rauzduel
+remote: Repository not found.
+fatal: repository 'https://github.com/lorcann-rauzduel/eliza.git/' not found
+error: could not fetch lorcann-rauzduel
+Fetching tdostilio
+Fetching go-numb
+Fetching 0xAEQI
+remote: Repository not found.
+fatal: repository 'https://github.com/0xAEQI/aeqi-eliza.git/' not found
+error: could not fetch 0xAEQI
+Fetching mugoosse
+Fetching mazgalesc
+remote: Repository not found.
+fatal: repository 'https://github.com/mazgalesc/eliza.git/' not found
+error: could not fetch mazgalesc
+Fetching EricForgy
+Fetching Chrisgr1
+Fetching degenpilot404
+Fetching rxdha1
+Fetching av459
+Fetching TechieTeee
+Fetching coxmars
+remote: Repository not found.
+fatal: repository 'https://github.com/coxmars/eliza.git/' not found
+error: could not fetch coxmars
+Fetching Jaxiii
+Fetching velvet-shark
+Fetching TheNewReality
+Fetching circularr
+Fetching aalimsahin
+Fetching jackypanster
+Fetching djpg
+Fetching dev-futurify
+Fetching daizhengxue
+Fetching Fusyona
+Fetching hanliu9574
+Fetching thetechnocratic
+Fetching kevindotpet
+Fetching rotoole1230
+remote: Repository not found.
+fatal: repository 'https://github.com/rotoole1230/eliza_experiment.git/' not found
+error: could not fetch rotoole1230
+Fetching BarronOng
+Fetching mobi8
+Fetching 0xNerd
+Fetching rof20004
+Fetching laizeren
+Fetching bigsby2
+Fetching metaanomaly
+remote: Repository not found.
+fatal: repository 'https://github.com/metaanomaly/eliza.git/' not found
+error: could not fetch metaanomaly
+Fetching affaan-m
+remote: Repository not found.
+fatal: repository 'https://github.com/affaan-m/eliza.git/' not found
+error: could not fetch affaan-m
+Fetching adamcanray
+Fetching ambernal
+Fetching 0xnuke
+Fetching samorbs01
+Fetching MaliciousGenius
+Fetching ifeyi
+Fetching flame-live
+Fetching JoeyKhd
+Fetching apple16z
+Fetching lisazhanglii
+Fetching srosy2
+Fetching Xiaxuliang
+Fetching boohyunsik
+Fetching th3architect
+Fetching jedomiguelo
+Fetching martinroad
+Fetching gnujoow
+Fetching kojhliang
+Fetching soon14
+Fetching punithbm
+Fetching Savant-Capital
+Fetching tavon1995
+Fetching baties
+Fetching Biocentrism
+Fetching agentbondo
+Fetching limindu
+Fetching mliou8
+Fetching David-Hoa2023
+Fetching 0xxbrain01
+remote: Repository not found.
+fatal: repository 'https://github.com/0xxbrain01/eliza-custom.git/' not found
+error: could not fetch 0xxbrain01
+Fetching capitalist42
+Fetching xNomad-AI
+Fetching hanpham32
+Fetching StudyHallAI
+remote: Repository not found.
+fatal: repository 'https://github.com/StudyHallAI/eliza.git/' not found
+error: could not fetch StudyHallAI
+Fetching cid0n
+Fetching dbellotti
+Fetching primus-labs
+Fetching ahmad2b
+Fetching kekewind
+remote: Repository not found.
+fatal: repository 'https://github.com/kekewind/eliza.git/' not found
+error: could not fetch kekewind
+Fetching 0xtailf0xtail
+Fetching simpleatelpmis
+Fetching casielane
+Fetching chainable-dev
+Fetching goldenfiredo
+Fetching xudean
+Fetching Bijan-Massoumi
+Fetching amahanti
+Fetching junaire
+remote: Repository not found.
+fatal: repository 'https://github.com/junaire/eliza.git/' not found
+error: could not fetch junaire
+Fetching zook111
+Fetching beotavalo
+Fetching lukegao209
+Fetching b08240
+Fetching Earth-Guardian
+Fetching MatthewFoxAF
+Fetching Warkode4
+Fetching Harthor
+Fetching davidayiki79
+Fetching boolkeys
+Fetching 0xRider
+Fetching ordin8
+Fetching ml-aware24k
+remote: Repository not found.
+fatal: repository 'https://github.com/ml-aware24k/eliza.git/' not found
+error: could not fetch ml-aware24k
+Fetching synplabs
+Fetching tomcharlesosman
+Fetching lexycole
+Fetching bloomverse
+Fetching FirstOrderNL
+Fetching MetalLegBob
+remote: Repository not found.
+fatal: repository 'https://github.com/MetalLegBob/eliza.git/' not found
+error: could not fetch MetalLegBob
+Fetching demoush
+remote: Repository not found.
+fatal: repository 'https://github.com/demoush/eliza.git/' not found
+error: could not fetch demoush
+Fetching gator-labs
+Fetching bk0z4k
+Fetching jex-dev
+Fetching bdieu178
+Fetching mdominikd
+remote: Repository not found.
+fatal: repository 'https://github.com/mdominikd/eliza.git/' not found
+error: could not fetch mdominikd
+Fetching mattvv
+Fetching dildoai
+remote: Repository not found.
+fatal: repository 'https://github.com/dildoai/dildoai.git/' not found
+error: could not fetch dildoai
+Fetching joelhagvall
+Fetching 0xmatt11
+Fetching dwgeneral
+Fetching Forecastorxyz
+Fetching hamzahamidi
+Fetching djtazty1984
+Fetching ResearchForumOnline
+Fetching makerdock
+Fetching Semenka
+Fetching Hmac512
+Fetching GeoCities
+Fetching 0xDanki
+Fetching markus-sam
+Fetching darkstar4401
+Fetching Etherow911
+Fetching jdhitch
+Fetching CodePhyt
+Fetching xR0am
+Fetching xMariem
+Fetching DemocracyEarth
+Fetching lyhiving
+Fetching POKENA7
+Fetching arifai7
+Fetching ulquiomaru
+Fetching webclinic017
+Fetching TaurusSilver201
+Fetching BarokDefi
+Fetching achimstruve
+Fetching 0xtuba
+Fetching dedf0x
+Fetching techgrowic
+Fetching AgentifyLABS
+remote: Repository not found.
+fatal: repository 'https://github.com/AgentifyLABS/ELIZA.git/' not found
+error: could not fetch AgentifyLABS
+Fetching paperwave
+Fetching oblonka
+Fetching Cabalcodes
+Fetching dexterai-labs
+Fetching BrianM2Smith
+Fetching leithergit
+Fetching mohansharma916
+Fetching williec89
+Fetching Swifilaboroka
+Fetching matt783
+Fetching xiaoxiaff
+Fetching sigmagentic
+remote: Repository not found.
+fatal: repository 'https://github.com/sigmagentic/eliza.git/' not found
+error: could not fetch sigmagentic
+Fetching timjrobinson
+Fetching taholding
+Fetching V4lulz
+remote: Repository not found.
+fatal: repository 'https://github.com/V4lulz/eliza.git/' not found
+error: could not fetch V4lulz
+Fetching ui0x
+remote: Repository not found.
+fatal: repository 'https://github.com/ui0x/eliza.git/' not found
+error: could not fetch ui0x
+Fetching Henxe
+remote: Repository not found.
+fatal: repository 'https://github.com/Henxe/misty.git/' not found
+error: could not fetch Henxe
+Fetching SolSoc
+Fetching derken
+Fetching yuntianfan
+Fetching Traddoo
+Fetching Mr-Don-Leo
+remote: Repository not found.
+fatal: repository 'https://github.com/Mr-Don-Leo/eliza.git/' not found
+error: could not fetch Mr-Don-Leo
+Fetching noumanjavaid96
+Fetching vangaurdkarthik
+Fetching Alpha8844
+Fetching leavenotrace
+Fetching Atgishere
+Fetching laurentvv
+Fetching smorebot69420
+Fetching jmaathur
+Fetching NullLabTests
+Fetching contentkingpins
+remote: Repository not found.
+fatal: repository 'https://github.com/contentkingpins/eliza.git/' not found
+error: could not fetch contentkingpins
+Fetching matthewhou19
+Fetching x0matt
+Fetching Rahat-ch
+Fetching 0hexquant
+Fetching tyldev
+remote: Repository not found.
+fatal: repository 'https://github.com/tyldev/eliza.git/' not found
+error: could not fetch tyldev
+Fetching nuvoqueonline
+Fetching photografereth
+Fetching projectvalis
+Fetching icepy
+remote: Repository not found.
+fatal: repository 'https://github.com/icepy/eliza.git/' not found
+error: could not fetch icepy
+Fetching 0xaaiden
+Fetching jokerinkx3
+Fetching Bolmstead
+remote: Repository not found.
+fatal: repository 'https://github.com/Bolmstead/eliza-billy.git/' not found
+error: could not fetch Bolmstead
+Fetching EchoCog
+Fetching CoinMasterJ
+Fetching meta-introspector
+Fetching S-max-bit
+Fetching 3even
+Fetching OtotaO
+Fetching youhouhou
+Fetching uongvancong
+remote: Repository not found.
+fatal: repository 'https://github.com/uongvancong/eliza.git/' not found
+error: could not fetch uongvancong
+Fetching JoseRoberts87
+Fetching nioman
+Fetching peterjah
+Fetching Luca-Blight
+Fetching JasonMartoux
+Fetching ohadbachner
+Fetching brrrrgrrrr
+Fetching vitco
+Fetching NethermindEth
+Fetching yorkerhodes3
+Fetching JoKenPo
+Fetching Protojae
+Fetching stanleykosi
+Fetching husseinrasti
+Fetching jamdickin11
+Fetching andrewdkennedy1
+remote: Repository not found.
+fatal: repository 'https://github.com/andrewdkennedy1/eliza.git/' not found
+error: could not fetch andrewdkennedy1
+Fetching olenovyk
+Fetching Alexander-Merlos
+remote: Repository not found.
+fatal: repository 'https://github.com/Alexander-Merlos/Project-CX.git/' not found
+error: could not fetch Alexander-Merlos
+Fetching bertux
+Fetching andyvalerio
+Fetching treppers
+Fetching babaswananda
+Fetching tap3-cloud
+remote: Repository not found.
+fatal: repository 'https://github.com/tap3-cloud/eliza.git/' not found
+error: could not fetch tap3-cloud
+Fetching guimsh
+Fetching trustless-engineering
+Fetching Goodness5
+Fetching lidashu
+Fetching TremboliniMA
+Fetching zhourunlai
+Fetching htiennv
+remote: Repository not found.
+fatal: repository 'https://github.com/htiennv/eliza.git/' not found
+error: could not fetch htiennv
+Fetching Hugo-SEQUIER
+Fetching cheetahfightfx
+Fetching bilalmotiwala
+Fetching mightymity
+Fetching Ojogho
+Fetching devalade
+Fetching dogepump
+Fetching yungalgo
+remote: Repository not found.
+fatal: repository 'https://github.com/yungalgo/eliza.git/' not found
+error: could not fetch yungalgo
+Fetching mruderman
+Fetching LM88LM
+Fetching firstfiend
+Fetching yeshubmen
+Fetching NathaliaBarreiros
+Fetching toannhu96
+Fetching algonacci
+Fetching tgbaoo
+Fetching Usmanyousaf88
+Fetching Buooy
+Fetching elysia2326
+Fetching EvgeniyShlyakhtin
+Fetching user01010011
+Fetching JATIN-3102
+Fetching Jjfern96
+remote: Repository not found.
+fatal: repository 'https://github.com/Jjfern96/eliza.git/' not found
+error: could not fetch Jjfern96
+Fetching gh4187
+Fetching goodlife2022
+Fetching Armanhammeralpha
+Fetching chiwuyin
+Fetching Shelpin
+Fetching larryteal
+Fetching NatGirl
+Fetching degouville
+Fetching tanvirkhon
+Fetching nftfren
+Fetching gilbertsahumada
+Fetching oversight007
+Fetching airBogdan
+remote: Repository not found.
+fatal: repository 'https://github.com/airBogdan/eliza.git/' not found
+error: could not fetch airBogdan
+Fetching adrianvulea
+Fetching HunterTheAgent
+remote: Repository not found.
+fatal: repository 'https://github.com/HunterTheAgent/eliza.git/' not found
+error: could not fetch HunterTheAgent
+Fetching Iamfittz
+Fetching Montech-Studios-INC
+Fetching iafhurtado
+Fetching michaelwinczuk
+Fetching ironcrypto
+Fetching Yukitojp
+Fetching tanwithme
+Fetching ddacatahub
+Fetching lausuarez02
+Fetching followthemoney1
+Fetching songyue8858
+Fetching cyberfact
+Fetching spacexbt
+Fetching AlfaOmegaGrafx
+Fetching ZoeyX-FD
+Fetching sekmet
+Fetching taesuklee
+Fetching storedborderless
+Fetching zone837
+Fetching M1NDB0TZ
+Fetching akavjs
+Fetching nyx0v
+Fetching F4r34st3rn
+Fetching ksmizzle
+Fetching zkfriendly
+Fetching MDgoodlife
+Fetching itututec
+Fetching tiero
+Fetching tsutomu-n
+Fetching spoliset
+Fetching slkzgm
+Fetching lovecatmeow
+Fetching AIAgentMan
+Fetching web3richer
+Fetching Gajesh2007
+Fetching heissorry
+Fetching sangeetparashar
+Fetching gorilli-team
+Fetching morthiam09
+Fetching Ed-Marcavage
+Fetching SavvyEngineer
+Fetching ialberquilla
+Fetching kelreel
+Fetching popsickl
+Fetching darafsheh
+Fetching Bran18
+Fetching bmchunu
+Fetching neallausson
+Fetching ajkraus04
+Fetching ChadJeetington
+Fetching mohitJukariya
+Fetching yanushevitz
+Fetching asicarbon
+remote: Repository not found.
+fatal: repository 'https://github.com/asicarbon/eliza_carbon.git/' not found
+error: could not fetch asicarbon
+Fetching abusemydnac
+Fetching dwarum
+Fetching hexaonelabs
+Fetching ebit116
+Fetching SK1989sL
+Fetching www222fff
+Fetching moinshaikh123
+Fetching AstroRoh2
+Fetching PatMacalister
+Fetching bitcoinbender
+Fetching vanshika-srivastava
+Fetching HowieDuhzit
+Fetching cmadaanaya
+Fetching angganurf
+Fetching hiul-dragonfel
+Fetching Rocoro-AI
+Fetching ussho-dev
+Fetching imtms
+Fetching ShahSujal
+Fetching WWLy
+Fetching 0xwejustwhat
+remote: Repository not found.
+fatal: repository 'https://github.com/0xwejustwhat/eliza.git/' not found
+error: could not fetch 0xwejustwhat
+Fetching jimmyxu410
+Fetching ai16zcn
+Fetching milolang
+Fetching praneybehl
+Fetching flintbison
+Fetching tasinskii
+remote: Repository not found.
+fatal: repository 'https://github.com/tasinskii/flower_eliza.git/' not found
+error: could not fetch tasinskii
+Fetching BZetsu
+Fetching Dhaiwat10
+Fetching x12c4q
+Fetching hamiddcivil
+Fetching LucianoLupo
+Fetching coopertweak
+Fetching uglyswap
+Fetching springshine1
+Fetching dbram97
+Fetching iantimothy
+Fetching shawnthelord
+Fetching Sergey1997
+remote: Repository not found.
+fatal: repository 'https://github.com/Sergey1997/eliza.git/' not found
+error: could not fetch Sergey1997
+Fetching trippyogi
+Fetching aviaisenberg
+Fetching AlbionaHoti
+Fetching Rudrakc
+Fetching mehrabsha
+Fetching Tytandoteth
+Fetching EliizaOS
+Fetching allora-network
+Fetching AMR-1111
+Fetching yunadigi
+Fetching janeyJo
+Fetching MontechStudiosINC
+remote: Repository not found.
+fatal: repository 'https://github.com/MontechStudiosINC/MontechEliza.git/' not found
+error: could not fetch MontechStudiosINC
+Fetching 9lordisgod
+Fetching jaeuk2274
+Fetching venkata996
+Fetching jjhesk
+Fetching klren0312
+remote: Repository not found.
+fatal: repository 'https://github.com/klren0312/eliza.git/' not found
+error: could not fetch klren0312
+Fetching thecoderpanda
+Fetching astrumevorsor
+Fetching RaccoonWang
+Fetching Fransasoft
+Fetching andreaalbg
+Fetching njackman-2344
+Fetching Player1Taco
+Fetching chandiniv1
+Fetching thepinkboxterminal
+Fetching samui68400
+Fetching brand-new-vision
+Fetching homgorn
+Fetching PinkBoxTerminal
+Fetching ewerx
+Fetching genki-labs
+Fetching normancomics
+Fetching Arucard11
+Fetching qwdsds
+Fetching vly-money
+Fetching 657366738
+Fetching carlocayos
+Fetching LaughingJackalope
+Fetching Arthur-Jacobina
+Fetching ottchakarov
+Fetching channainfo
+Fetching hiryuzu
+remote: Repository not found.
+fatal: repository 'https://github.com/hiryuzu/eliza-hiryuzu.git/' not found
+error: could not fetch hiryuzu
+Fetching Lyonsupernova
+Fetching eslitxis
+Fetching rishav-eulb
+Fetching StarskreamEXE
+Fetching Sixela33
+Fetching BetSwirl
+remote: Repository not found.
+fatal: repository 'https://github.com/BetSwirl/eliza.git/' not found
+error: could not fetch BetSwirl
+Fetching Walidos2024
+Fetching ironheart122
+Fetching rahulnkm
+Fetching todorkolev
+Fetching HowieChang7
+Fetching jpfraneto
+Fetching e-fu
+Fetching shivaji43
+Fetching mdqst
+remote: Repository not found.
+fatal: repository 'https://github.com/mdqst/eliza.git/' not found
+error: could not fetch mdqst
+Fetching zkvm
+Fetching knownbymanoj
+Fetching divyangchauhan
+Fetching razvanpiticas
+Fetching 0xSeymour
+Fetching kakarot-arch
+remote: Repository not found.
+fatal: repository 'https://github.com/kakarot-arch/phew.git/' not found
+error: could not fetch kakarot-arch
+Fetching 0xChad-coder
+remote: Repository not found.
+fatal: repository 'https://github.com/0xChad-coder/modeai.git/' not found
+error: could not fetch 0xChad-coder
+Fetching nullxplorer
+Fetching Hebx
+Fetching SamGMK
+Fetching tkc310
+Fetching jotaro-ora
+Fetching Velocimeter
+Fetching shizukesa92
+Fetching doxometrist
+Fetching zleypner
+remote: Repository not found.
+fatal: repository 'https://github.com/zleypner/eliza.git/' not found
+error: could not fetch zleypner
+Fetching sendaifun
+Fetching IloveData97
+Fetching web3relic
+Fetching madziaar
+Fetching KerwinChina
+Fetching sachiew
+Fetching moddio
+Fetching bhupeshcoding
+Fetching RedHorse823
+Fetching Walterliu0118
+Fetching fuseio
+Fetching rrmars
+Fetching amosin
+Fetching Anorth1997
+Fetching h0wl
+Fetching kritinyoupane
+Fetching yanhuibinly
+Fetching grzla
+Fetching konradre
+Fetching mhxw
+Fetching LabsDAO
+Fetching linxule
+Fetching CliqueOfficial
+Fetching opaiDOTwork
+remote: Repository not found.
+fatal: repository 'https://github.com/opaiDOTwork/eliza.git/' not found
+error: could not fetch opaiDOTwork
+Fetching iceman0045
+Fetching RobotSanta16z
+Fetching Chunt0
+Fetching agentexplorerai
+Fetching devtempteam
+Fetching alexpaden
+Fetching Josedapker
+Fetching MilanWR
+Fetching kcthomasleung
+Fetching FWangZil
+Fetching Firbydude
+Fetching jeremybeal11
+Fetching Zaragozac
+Fetching kroist
+Fetching hicommonwealth
+Fetching SebManley
+Fetching divine-comedian
+Fetching kvdenden
+Fetching aadarshagarwal1
+Fetching lpleipeng
+Fetching alessandromazza98
+Fetching JenksyGuo
+Fetching MadeWithCodeXYZ
+Fetching didintern
+Fetching RiceChuan
+Fetching hetu-project
+Fetching omahs
+Fetching yusufyian
+Fetching SaulBuilds
+Fetching CryptoReuMD
+Fetching hqueue
+Fetching satyajeet-rout
+Fetching cheshireterminal
+Fetching iankm
+Fetching paulmikulskis
+Fetching souppapa
+remote: Repository not found.
+fatal: repository 'https://github.com/souppapa/eliza.git/' not found
+error: could not fetch souppapa
+Fetching zdai22
+Fetching ShaneOxM
+Fetching punkcanyang
+Fetching ccross2
+Fetching excelsior-creative
+Fetching longinteger017
+Fetching elyrai
+Fetching cnm13ryan
+Fetching camharris
+Fetching yvesbou
+Fetching MuharremOkutan
+Fetching infinity899
+Fetching crcnum4
+Fetching yoosoftcc
+Fetching jonathanjoseph20
+Fetching Fractal-Emergence
+Fetching cloudie-ai
+Fetching dev573
+Fetching blehxyz
+Fetching Blessedbiello
+Fetching ShawnKBeck
+Fetching vamostibor03
+remote: Repository not found.
+fatal: repository 'https://github.com/vamostibor03/eliza-backend-2.git/' not found
+error: could not fetch vamostibor03
+Fetching jmoraes7
+Fetching digvjs
+Fetching Ricks0ne
+Fetching destinyae
+Fetching harperaa
+Fetching umairyaseen77
+Fetching matthewnolan
+Fetching Manvendra27saini
+Fetching 0xChijioke
+Fetching 0xn1c0
+Fetching lachiejames
+Fetching Archethect
+Fetching luisalrp
+Fetching magestrio
+Fetching starlash7
+Fetching jasonqindev
+Fetching johnforfar
+Fetching sealemlab
+Fetching eric-epsilla
+Fetching ronil-bhattarai
+Fetching hcaumo
+Fetching vikrantzerozero7
+Fetching ModernStoicAI
+Fetching kydlikebtc
+Fetching Zewce
+Fetching FriedrichMuelle
+Fetching gmin
+Fetching john7alpha
+Fetching juansebsol
+Fetching bendapkiewicz
+Fetching iBuyRare
+Fetching bayological
+Fetching thetidelab
+Fetching we-are-like-a-really-small-gang
+Fetching RobertSloan22
+Fetching Dr-meed
+Fetching ptahdunbar
+Fetching nusk0
+Fetching Sissolana
+Fetching onlyzerosonce
+Fetching morning-bird
+Fetching jschp
+Fetching raa-dev
+Fetching danielalbinsson
+Fetching ibuidl
+Fetching EZreal-genie
+Fetching xentoshi
+Fetching bitdrongo
+Fetching Uhama91
+Fetching nelohenriq
+remote: Repository not found.
+fatal: repository 'https://github.com/nelohenriq/myeliza.git/' not found
+error: could not fetch nelohenriq
+Fetching cryptoyota
+Fetching quanticsim
+Fetching komorebi88
+Fetching BeholdMeme
+Fetching shlokkhemani
+Fetching mcxross
+Fetching peter-jim
+Fetching 0xJord4n
+Fetching Itheum
+Fetching Namesarecliche
+Fetching imwylin
+Fetching mortinp
+Fetching dreroc
+Fetching trbutler4
+Fetching calintje
+Fetching robertmccallnz
+Fetching 0x330a
+Fetching dominykasmurauskas
+Fetching TrenchPirates
+Fetching ryanleecode
+Fetching DeveloperX12
+Fetching DavidZapataOh
+Fetching AGIAI
+Fetching frla18cz
+Fetching ZicoZhou10
+Fetching Aryan1009Singh
+Fetching loreum-org
+Fetching 0xPiero
+Fetching LJH4
+Fetching muntasirrahman
+remote: Repository not found.
+fatal: repository 'https://github.com/muntasirrahman/eliza.git/' not found
+error: could not fetch muntasirrahman
+Fetching khanh90
+Fetching amirkhonov
+Fetching TheTOKEN-sol
+Fetching JUSTICEESSIELP
+Fetching 0xpickman
+Fetching youifki
+Fetching the-muel-git
+remote: Repository not found.
+fatal: repository 'https://github.com/the-muel-git/eliza.git/' not found
+error: could not fetch the-muel-git
+Fetching moondevonyt
+Fetching remmarpidong
+Fetching druvkotwani
+Fetching meliodas95
+Fetching arihantbansal
+Fetching mariobern
+Fetching mariusilie70
+Fetching vishal-kanna
+Fetching ZJfans
+Fetching idprivacy
+Fetching l16by
+Fetching y4my4my4m
+Fetching odii-vivek
+Fetching tabdrummer91
+Fetching suicidalgoofy
+Fetching 0xArtclub
+Fetching JussCubs
+Fetching dto-simba
+Fetching freak-x
+remote: Repository not found.
+fatal: repository 'https://github.com/freak-x/greg.git/' not found
+error: could not fetch freak-x
+Fetching 0xPBIT
+Fetching yanas-logs
+Fetching hatgit
+Fetching PSkinnerTech
+Fetching myevm-dev
+Fetching SYMBaiEX
+Fetching 0x2bc
+Fetching tracisuzen
+Fetching humanagent
+remote: Repository not found.
+fatal: repository 'https://github.com/humanagent/eliza.git/' not found
+error: could not fetch humanagent
+Fetching ChristopherTrimboli
+Fetching stefanalfbo
+Fetching Magicuber
+Fetching gabormeresz
+Fetching daydy-dev
+Fetching deb-pradhan
+Fetching volume-generator
+Fetching Pent
+Fetching EdwardCracknell
+Fetching unicornlaunching
+Fetching mhw001
+Fetching devlongs
+Fetching rmzlb
+Fetching lytous
+Fetching blockydevs
+Fetching YoMyEVM
+remote: Repository not found.
+fatal: repository 'https://github.com/YoMyEVM/eliza.git/' not found
+error: could not fetch YoMyEVM
+Fetching AcmeNiles
+Fetching orderofmagnitude1
+Fetching cryptobeijing
+Fetching devsbeta
+Fetching XAI-Agent
+Fetching RedditModAi
+Fetching hb-duy
+Fetching PetPk
+Fetching okubicki
+remote: Repository not found.
+fatal: repository 'https://github.com/okubicki/eliza.git/' not found
+error: could not fetch okubicki
+Fetching Emirhan-Cavusoglu-sftw
+Fetching bucurdavid
+remote: Repository not found.
+fatal: repository 'https://github.com/bucurdavid/eliza.git/' not found
+error: could not fetch bucurdavid
+Fetching yohann-dev
+Fetching jteso
+Fetching gabearro
+Fetching SymbiosisX
+Fetching tercel-ai
+Fetching shaneholloman
+Fetching pythonberg1997
+Fetching linuxmahara
+Fetching zk-Lumi
+Fetching Dablclub
+Fetching pascal-h-kim
+Fetching YeoHoonYun
+Fetching aayushsheth
+Fetching ZiaRahim8
+Fetching julienbrs
+Fetching michaellyons
+Fetching greysonthao
+Fetching Derick13
+remote: Repository not found.
+fatal: repository 'https://github.com/Derick13/eliza.git/' not found
+error: could not fetch Derick13
+Fetching mcchan1
+Fetching mehditohidi
+Fetching karelvuong
+remote: Repository not found.
+fatal: repository 'https://github.com/karelvuong/eliza.git/' not found
+error: could not fetch karelvuong
+Fetching simsaidev
+Fetching s29papi
+remote: Repository not found.
+fatal: repository 'https://github.com/s29papi/eliza-vps.git/' not found
+error: could not fetch s29papi
+Fetching mbcse
+Fetching isfinne
+Fetching realchrislee
+Fetching totalremoto
+remote: Repository not found.
+fatal: repository 'https://github.com/totalremoto/eliza.git/' not found
+error: could not fetch totalremoto
+Fetching andreolf
+Fetching fainashalts
+Fetching bz-hashtag-0780
+Fetching amarinsam
+Fetching GravitonINC
+Fetching zalias9
+Fetching jonathangus
+Fetching thesmartrooofer
+Fetching asdspal
+Fetching azurwastaken
+Fetching goat-sdk
+Fetching lanyinzly
+Fetching PrathyushaLakkireddy
+Fetching yjshi2015
+Fetching madsoly
+Fetching aixonecountry
+Fetching MrBloomguy
+Fetching dongfang223
+Fetching elocremarc
+Fetching simpletrontdip
+Fetching blurerzuo
+Fetching mrsuperwealthy
+Fetching bytesun
+Fetching syndicate604
+Fetching clone27
+remote: Repository not found.
+fatal: repository 'https://github.com/clone27/eliza.git/' not found
+error: could not fetch clone27
+Fetching jaegern2018
+Fetching bl4ckh401
+Fetching svetly
+Fetching RomThpt
+Fetching breath-imager
+Fetching satojandro
+Fetching chasebrownn
+Fetching magosl1
+Fetching delulucult
+remote: Repository not found.
+fatal: repository 'https://github.com/delulucult/lulu_brain.git/' not found
+error: could not fetch delulucult
+Fetching SockDrawerLtd
+Fetching nhtera
+Fetching budgier
+Fetching jobyid
+Fetching JGTechie
+Fetching marcNY
+Fetching onchain-studio
+Fetching superdividenz
+remote: Repository not found.
+fatal: repository 'https://github.com/superdividenz/eliza.git/' not found
+error: could not fetch superdividenz
+Fetching beeehappyandfree
+Fetching JoseMiguez98
+Fetching danbednarski
+Fetching irakibul7
+Fetching digitallysavvy
+Fetching vladz027
+Fetching salparadi
+Fetching Amart85
+Fetching baicaiyihao
+Fetching zoe27
+Fetching lggg123
+Fetching Codzart
+Fetching Zac-Jerome
+Fetching peacefulprogress25
+Fetching ByteMeSer
+Fetching tobbelobb
+Fetching Miando
+Fetching Ankur0018
+Fetching vitwit
+Fetching anilcse
+Fetching 0xinit
+Fetching faiz-source
+Fetching Koda-Pig
+Fetching cbxss
+Fetching sayeed99
+Fetching EmpoweringPEACE
+Fetching whitespur
+Fetching 9547
+Fetching tungpun
+Fetching vpavlin
+Fetching Cubs-Capital
+Fetching tweedyant
+remote: Repository not found.
+fatal: repository 'https://github.com/tweedyant/gAI.git/' not found
+error: could not fetch tweedyant
+Fetching DC2Software
+Fetching xz-cn
+Fetching sebsadface
+Fetching lzbgt
+Fetching blockchaingale
+remote: Repository not found.
+fatal: repository 'https://github.com/blockchaingale/eliza.git/' not found
+error: could not fetch blockchaingale
+Fetching stafiprotocol
+Fetching Hdpbilly
+Fetching astoraka0x
+Fetching rickwilliams
+Fetching jiasheng98
+Fetching glamsystems
+Fetching GoalSAH
+Fetching christroutner
+Fetching star23
+Fetching thatalexay
+Fetching NYUUMI-App
+Fetching thesagardevkate
+remote: Repository not found.
+fatal: repository 'https://github.com/thesagardevkate/eliza.git/' not found
+error: could not fetch thesagardevkate
+Fetching neubig
+Fetching Caneryy
+Fetching silasneo
+Fetching neil-lunsford
+Fetching nottrunner
+Fetching metakai1
+Fetching shaheerkhan8476
+Fetching HeySquib
+Fetching 2-A-M
+Fetching tokwalabs
+Fetching 0xOptimism
+Fetching rexterity
+Fetching illuminaryETH
+Fetching Gaurav1327
+Fetching hyperyonAI
+Fetching davidlinjiahao
+remote: Repository not found.
+fatal: repository 'https://github.com/davidlinjiahao/eliza.git/' not found
+error: could not fetch davidlinjiahao
+Fetching weird34
+Fetching Shibbu264
+Fetching igor-peregudov
+Fetching LiquidError
+Fetching Matthis-Herbrecht
+Fetching qqq-tech
+Fetching SumeetChougule
+Fetching aeither
+Fetching robin-rrt
+Fetching harjotjuneja6
+Fetching UD1sto
+Fetching fadai88
+remote: Repository not found.
+fatal: repository 'https://github.com/fadai88/eliza.git/' not found
+error: could not fetch fadai88
+Fetching kubaplata
+Fetching tripluca
+Fetching aiopinions
+Fetching jolestar
+Fetching vmmunoza
+Fetching Alpaca-Labs-ICP
+Fetching thomasWos
+Fetching cony-horizon
+Fetching yang-han
+Fetching JarvisAgentLab
+Fetching SkyYap
+remote: Repository not found.
+fatal: repository 'https://github.com/SkyYap/eliza.git/' not found
+error: could not fetch SkyYap
+Fetching mayuras7685
+Fetching nulLeeKH
+Fetching lilesper
+Fetching AllanJunLi
+Fetching rajgottipati
+Fetching positioner
+Fetching basin-global
+Fetching cwrage77
+Fetching nickpann
+Fetching chulgil
+Fetching heydevs-io
+Fetching sinvali
+Fetching tullahnazari
+Fetching sebastianlujan
+Fetching 0xmusashi
+Fetching monkey-phd
+Fetching BAIOGIT
+Fetching rybciowski
+Fetching roninjin10
+Fetching mx-crash-team
+Fetching LinuxIsCool
+Fetching Wavenodevalidat
+Fetching dolphinman7777
+Fetching leekmeme
+Fetching owlcode
+Fetching ferolol
+Fetching 00one00
+Fetching cchris86
+Fetching rekpero
+Fetching kevinthosatria
+Fetching bealers
+Fetching sdoan99
+Fetching erise133
+Fetching jackleeio
+Fetching swaggymarie
+Fetching AlekseyChusov
+Fetching Ashe-Oro
+remote: Repository not found.
+fatal: repository 'https://github.com/Ashe-Oro/eliza.git/' not found
+error: could not fetch Ashe-Oro
+Fetching shillguy
+Fetching AbdelStark
+Fetching manishbyatroy
+Fetching boilerrat
+Fetching alpha8eta
+Fetching sqrDAO
+Fetching jaysys
+Fetching Ramghimirecr7
+Fetching ajey-kb
+Fetching m1hawk
+Fetching magiconch
+Fetching ionicprotocol
+Fetching fibonacci998
+Fetching Zik87
+Fetching guanyibing
+Fetching cristianberbecaru
+Fetching ElizaOS-Art
+Fetching HZZ504
+Fetching roastbot
+Fetching daweth
+Fetching thomas-nguy
+Fetching Steerpik3
+Fetching Danijel-Enoch
+Fetching aduca98
+Fetching frontboat
+Fetching vampAIre-squid
+remote: Repository not found.
+fatal: repository 'https://github.com/vampAIre-squid/eliza.git/' not found
+error: could not fetch vampAIre-squid
+Fetching dleerdefi
+Fetching rial1
+Fetching CodeInEcho
+remote: Repository not found.
+fatal: repository 'https://github.com/CodeInEcho/eliza.git/' not found
+error: could not fetch CodeInEcho
+Fetching frostida04
+Fetching IvkaPa
+Fetching 0xCardinalError
+Fetching wberry7
+Fetching concernor
+remote: Repository not found.
+fatal: repository 'https://github.com/concernor/eliza.git/' not found
+error: could not fetch concernor
+Fetching pythinking
+Fetching mansaj
+Fetching ai-project-starter
+Fetching MobKite
+Fetching whgreate
+Fetching kenobijon
+Fetching chainchopper
+Fetching DDDEthtest
+Fetching google000000
+Fetching qqlvl
+remote: Repository not found.
+fatal: repository 'https://github.com/qqlvl/CopikaAI.git/' not found
+error: could not fetch qqlvl
+Fetching nickhal
+Fetching Gods-fun
+Fetching andy3400
+Fetching zk1tty
+Fetching dclancy13
+Fetching scriptscrypt
+Fetching McKenzie235
+Fetching futuresurf
+Fetching stevegyutyan
+Fetching AllenWalker16
+Fetching tmoindustries
+Fetching Peeyushmeher
+Fetching Emmyn5600
+Fetching gokulcoder7
+Fetching lowlowcoder
+Fetching artela-network
+Fetching yungyoda
+Fetching briancg42
+Fetching lightforgemedia
+Fetching jackoelv
+Fetching SilentWolfff
+remote: Repository not found.
+fatal: repository 'https://github.com/SilentWolfff/eliza.git/' not found
+error: could not fetch SilentWolfff
+Fetching brunocalmels
+Fetching ket-c
+Fetching Kryptilian
+Fetching ataridev
+remote: Repository not found.
+fatal: repository 'https://github.com/ataridev/zelexia.git/' not found
+error: could not fetch ataridev
+Fetching RytekDigital
+Fetching davedotsol
+remote: Repository not found.
+fatal: repository 'https://github.com/davedotsol/eliza.git/' not found
+error: could not fetch davedotsol
+Fetching wholesalesync
+Fetching DreamVoyagers
+remote: Repository not found.
+fatal: repository 'https://github.com/DreamVoyagers/eliza.git/' not found
+error: could not fetch DreamVoyagers
+Fetching 0xTiino
+Fetching bumpcrypto
+Fetching coolhimanshug
+remote: Repository not found.
+fatal: repository 'https://github.com/coolhimanshug/eliza.git/' not found
+error: could not fetch coolhimanshug
+Fetching gabepp
+Fetching chefron
+Fetching RyanKung
+Fetching BlockJuic3
+Fetching eitjuh
+Fetching enginkaraman
+Fetching WalterHackwell
+Fetching softrug
+Fetching 0x1rubck
+Fetching victorchukwuemeka
+Fetching psychemist
+remote: Repository not found.
+fatal: repository 'https://github.com/psychemist/eliza.git/' not found
+error: could not fetch psychemist
+Fetching cony556
+Fetching danielrobotz
+Fetching kemarheath
+Fetching Kinghood15
+Fetching Move-7-8
+Fetching 0xNordian
+Fetching chainsona
+Fetching Daedreamer7
+Fetching 0xNyk
+Fetching Qhristen
+Fetching cagdotin
+remote: Repository not found.
+fatal: repository 'https://github.com/cagdotin/eliza.git/' not found
+error: could not fetch cagdotin
+Fetching JoshuaRaccoons
+Fetching solarisassistants
+Fetching adirola
+Fetching mgtowcoin
+Fetching vin1penny
+Fetching depicts
+Fetching ai16zevelyn
+Fetching gromdimon
+Fetching rockyisthecool
+Fetching jshiv
+Fetching realesrgan
+Fetching SOLARISAI-io
+remote: Repository not found.
+fatal: repository 'https://github.com/SOLARISAI-io/eliza-solaris.git/' not found
+error: could not fetch SOLARISAI-io
+Fetching codeblack21
+Fetching shengxj1
+Fetching ququzone
+Fetching Jibbscript
+Fetching cipherkilledit
+Fetching ColeMiller21
+Fetching Agent-AI-SOL
+Fetching nurturelabs-co
+Fetching lucaguglielmi
+Fetching kyrers
+Fetching a1z26dao
+remote: Repository not found.
+fatal: repository 'https://github.com/a1z26dao/eliza.git/' not found
+error: could not fetch a1z26dao
+Fetching aramxc
+Fetching NdrPxl
+Fetching Zulqarnain-cc34
+Fetching Minco-Yuga
+Fetching tradejar
+Fetching tqdpham96
+Fetching Seumas-tobraichean
+Fetching Henrydykee
+Fetching remapper-dev
+Fetching divydovy
+Fetching 0xjitsu
+Fetching metaseeker1
+Fetching jameslimjy
+Fetching Etherdrake
+Fetching tomasCalletce
+Fetching africoolinc
+Fetching token-metrics
+remote: Repository not found.
+fatal: repository 'https://github.com/token-metrics/eliza-tmai-agent.git/' not found
+error: could not fetch token-metrics
+Fetching orleckcodes
+Fetching Ungate-Ai
+Fetching babywen-ai
+Fetching base60s
+Fetching chatakon
+Fetching DB-Shadow
+Fetching ennea8
+Fetching system717
+Fetching trungdo278
+Fetching digidigit
+Fetching zzzrs123
+Fetching movr-ai
+Fetching 0xSmartCrypto
+Fetching rmoreira97
+Fetching Oxwagmi
+Fetching cageyoko
+Fetching LevenSton
+Fetching misselvexu
+Fetching AntonioTF5
+Fetching VegaCollective
+Fetching BalanaguYashwanth
+Fetching efforthye
+remote: Repository not found.
+fatal: repository 'https://github.com/efforthye/ai16z_eliza_node.git/' not found
+error: could not fetch efforthye
+Fetching Erfan1995
+Fetching ChristopherDavitt
+Fetching r4topunk
+Fetching PumpChat-AI
+Fetching VisionaireLabs
+Fetching bozp-pzob
+remote: Repository not found.
+fatal: repository 'https://github.com/bozp-pzob/ai-juniorjr.git/' not found
+error: could not fetch bozp-pzob
+Fetching Morphic-Network
+remote: Repository not found.
+fatal: repository 'https://github.com/Morphic-Network/sciEliza.git/' not found
+error: could not fetch Morphic-Network
+Fetching syntax-syndicate
+Fetching maikaisogawa
+Fetching ebrakke
+Fetching momingyixiao
+Fetching stefi-says
+Fetching issa-me-sush
+Fetching AgereJoseph1
+Fetching neilrjones
+Fetching sergical
+Fetching NachoEstevo
+Fetching lessuselesss
+Fetching mollybeach
+Fetching alexcopeland13
+Fetching pranay5255
+Fetching amiller
+Fetching djdabs
+Fetching dagron78
+Fetching siathalysedI
+Fetching Liam-Dow
+Fetching bussyjd
+Fetching SleepyGab
+Fetching avidreder
+Fetching AppleSeed0318
+Fetching FireNirva
+Fetching jrgriffiniii
+Fetching tmelhao
+Fetching ShuochengWang
+Fetching Cimai-Decentralized-Games
+Fetching jwest951227
+remote: Repository not found.
+fatal: repository 'https://github.com/jwest951227/eliza.git/' not found
+error: could not fetch jwest951227
+Fetching zhongyitrip
+Fetching Terre8055
+Fetching suvrat-joshi
+Fetching martaGonz
+Fetching Lukapetro
+Fetching whodaniel
+Fetching Endytech
+Fetching Quest-To-Earn
+Fetching wkjw
+Fetching wangwei1222
+Fetching nonameb3
+Fetching 123contact456
+Fetching 0xNeiro
+Fetching proteanx
+Fetching spideynolove
+remote: Repository not found.
+fatal: repository 'https://github.com/spideynolove/eliza.git/' not found
+error: could not fetch spideynolove
+Fetching skirmantasjanuskas
+Fetching SpMcgarry
+remote: Repository not found.
+fatal: repository 'https://github.com/SpMcgarry/ai16-agent.git/' not found
+error: could not fetch SpMcgarry
+Fetching malteish
+Fetching syscry
+Fetching wasif28
+Fetching snubeaver
+Fetching rknhub
+Fetching solana-index
+Fetching shadmoney
+Fetching HiramZednem
+Fetching 8ightyeight
+Fetching JustinAmstadt
+Fetching MotoAcidic
+Fetching Dangoz
+Fetching BrawnyLad
+Fetching oldvisions
+remote: Repository not found.
+fatal: repository 'https://github.com/oldvisions/eliza.git/' not found
+error: could not fetch oldvisions
+Fetching wswarren12
+Fetching j-ard
+Fetching YuryZhurekk
+Fetching Rajwanshi1
+Fetching DJZSX
+Fetching tokensource
+Fetching savageops
+Fetching birinets
+Fetching Jshanks21
+Fetching llmspace
+Fetching navingate
+Fetching medendale
+Fetching ankerx
+Fetching AamirAlam
+Fetching Titan-Node
+Fetching davidsidol
+Fetching mitch-hello-world
+Fetching BrettAi16z
+Fetching fesp21
+Fetching Mr-MeerMoazzam
+Fetching GottliebFreudenreich
+Fetching eprdude
+Fetching 1bwood1
+Fetching 0xIntuition
+Fetching roadsidedev
+Fetching hroyo
+Fetching lagosito
+Fetching zorvan
+Fetching Adityaakr
+Fetching ianmrc
+Fetching rrowcliffe
+Fetching jamtoasty
+Fetching evmlionel
+remote: Repository not found.
+fatal: repository 'https://github.com/evmlionel/eliza.git/' not found
+error: could not fetch evmlionel
+Fetching stvnprr
+remote: Repository not found.
+fatal: repository 'https://github.com/stvnprr/eliza.git/' not found
+error: could not fetch stvnprr
+Fetching duckling69
+Fetching densmirnov
+Fetching jdubpark
+Fetching Ilyaifudev
+Fetching sagarjethi
+Fetching satyasai69
+Fetching ryan-eth
+Fetching ClaudeIvers
+Fetching NirajBhattarai
+remote: Repository not found.
+fatal: repository 'https://github.com/NirajBhattarai/eliza.git/' not found
+error: could not fetch NirajBhattarai
+Fetching Kevin-Mok
+Fetching oribr
+Fetching ztlr
+Fetching pudgyteddy
+Fetching lucky7323
+Fetching AmyliaY
+Fetching fuj0115
+Fetching amponce
+Fetching daves77
+Fetching ShreyGanatra
+Fetching 0xKoda
+Fetching philgoon
+remote: Repository not found.
+fatal: repository 'https://github.com/philgoon/eliza.git/' not found
+error: could not fetch philgoon
+Fetching Craigin
+Fetching mojalil
+Fetching AIGC-research
+Fetching jennifertrin
+Fetching DarkFateLife
+Fetching chain-ml
+Fetching jamorphy
+Fetching jjz
+remote: Repository not found.
+fatal: repository 'https://github.com/jjz/eliza.git/' not found
+error: could not fetch jjz
+Fetching barigyasi
+remote: Repository not found.
+fatal: repository 'https://github.com/barigyasi/eliza.git/' not found
+error: could not fetch barigyasi
+Fetching ViniciusSerafim
+Fetching AustinRamos
+Fetching lalkobi
+Fetching kush-alloralabs
+Fetching stopmalone
+Fetching PeggyJV
+Fetching ohoerr
+Fetching darkblinds
+Fetching elreygazpacho
+Fetching bkellgren
+Fetching makki-51x3
+Fetching meta-slayer
+Fetching siwanetzu
+Fetching BlockchainCake
+remote: Repository not found.
+fatal: repository 'https://github.com/BlockchainCake/eliza.git/' not found
+error: could not fetch BlockchainCake
+Fetching ChappieOnChain
+Fetching FredLK
+Fetching fegg
+Fetching superfluid-finance
+Fetching daniellinuk
+Fetching JasonTheHumanPerson
+Fetching gadsdencode
+Fetching QuietLiu01
+Fetching metadappdev
+Fetching netdragonx
+Fetching JeromeAmejana
+Fetching RickySupriyadi
+Fetching AIDominar
+Fetching guorong123456789
+Fetching NumaPumpilius
+Fetching anzhaff
+Fetching cryptokoh
+Fetching KellyXBT
+remote: Repository not found.
+fatal: repository 'https://github.com/KellyXBT/joojoobs.git/' not found
+error: could not fetch KellyXBT
+Fetching Armruo
+Fetching ceifeDeFi
+Fetching j2gro
+Fetching mehranhydary
+Fetching dmrutgos
+Fetching kylehagler
+Fetching tarunpahade
+remote: Repository not found.
+fatal: repository 'https://github.com/tarunpahade/eliza.git/' not found
+error: could not fetch tarunpahade
+Fetching 0xSardius
+Fetching subslink326
+Fetching cloeper
+Fetching owenwahlgren
+Fetching ileana-pr
+Fetching HobanSearch
+Fetching storyprotocol
+remote: Repository not found.
+fatal: repository 'https://github.com/storyprotocol/eliza.git/' not found
+error: could not fetch storyprotocol
+Fetching LeoHChen
+Fetching sweetmantech
+Fetching kinsonhou
+Fetching snappinlabs
+Fetching alexastro01
+Fetching Bakobiibizo
+Fetching atiwarigit
+Fetching KrisTemmerman
+Fetching Ad-h0c
+Fetching james-global-liquidity
+Fetching 5thdimension1
+Fetching ste-hue
+Fetching den0xR
+Fetching kkast
+Fetching krittawitk053
+Fetching ricore77
+Fetching verycuriousdev
+remote: Repository not found.
+fatal: repository 'https://github.com/verycuriousdev/sentient.git/' not found
+error: could not fetch verycuriousdev
+Fetching micheal1020
+Fetching archway-network
+Fetching Faseh-alam
+Fetching 2naCan
+Fetching EVM-BUILDER
+Fetching peara
+Fetching Dynasty-Mobile
+Fetching agilee
+Fetching nabaruns
+Fetching fyInALT
+Fetching DiXiDeR
+Fetching Bradymck
+Fetching piesrtasty
+Fetching jnaulty
+Fetching speedyray
+Fetching aa-eyup
+Fetching TheCreativeAI
+Fetching zomglings
+Fetching dylan1951
+Fetching boxhock
+Fetching justinlydialabs
+Fetching addicted2crypto
+Fetching n0-space
+Fetching Bubbl-Media
+Fetching roo-shy
+Fetching mdfkbtc
+Fetching hieunmben100
+Fetching gonnavis
+Fetching urmom0x
+Fetching Fumxana
+Fetching 1knydn
+Fetching Hamzah-syed
+Fetching gene-zhan
+remote: Repository not found.
+fatal: repository 'https://github.com/gene-zhan/eliza-x.git/' not found
+error: could not fetch gene-zhan
+Fetching ougrid
+Fetching av8r919
+Fetching jason-haechi
+Fetching Simisoluwa
+Fetching degen8ball
+Fetching Suede0619
+Fetching onur-saf
+Fetching chriszmx
+Fetching PhaniChandraSekhar
+Fetching bbroeking
+Fetching MikuAiPro
+Fetching jaimindp
+Fetching pablodcruz
+Fetching okcashpro
+Fetching mikepsinn
+Fetching 0xHoneyJar
+Fetching jonathanjm
+Fetching AIEChainSuite
+Fetching pixel-tom
+Fetching golryang
+Fetching guzus
+Fetching NonceGeek
+Fetching samarth30
+remote: Repository not found.
+fatal: repository 'https://github.com/samarth30/eliza.git/' not found
+error: could not fetch samarth30
+Fetching NeelClaudel
+Fetching tharak123455
+Fetching DirtyDreams
+Fetching v1xingyue
+Fetching BrunoSNT
+Fetching krish240574
+Fetching HullyAI
+Fetching NymiraAwakens
+Fetching nbietz
+Fetching dsldsl
+Fetching Eli-Sparks
+Fetching buerbaumer
+Fetching docherty
+Fetching 0xLukin
+Fetching ag-wnl
+Fetching markoggwp
+Fetching SteveYuOWO
+Fetching peersky
+Fetching suhailgme
+Fetching antriksh-malik
+Fetching yeagerai
+Fetching liberatheon
+Fetching asianviking
+Fetching astralarkitekt
+Fetching Lama1403
+Fetching BoomMccloud
+Fetching Xperumt
+Fetching sepehrmn
+Fetching degencast
+Fetching Siddesh7
+Fetching 72fi-labs
+Fetching owenAlterolab
+Fetching hamedf62
+Fetching earlit
+Fetching ewhal
+Fetching anthonybautista
+Fetching kasper-keunen
+Fetching maxcryptodev
+Fetching ssun3
+Fetching jejolare-dev
+Fetching juntao
+Fetching dyablohunter
+Fetching fmonper1
+Fetching Yogathos
+Fetching camdengrieh
+Fetching matteoettam09
+Fetching developerfred
+Fetching fede2442
+Fetching Telegamez
+remote: Repository not found.
+fatal: repository 'https://github.com/Telegamez/eliza.git/' not found
+error: could not fetch Telegamez
+Fetching altyni86
+Fetching haz667
+Fetching chandn0
+Fetching BitPodAI
+Fetching iotexproject
+Fetching arslanaybars
+Fetching dianalokada
+Fetching marlinprotocol
+Fetching otsalex
+Fetching AI-Cartman
+remote: Repository not found.
+fatal: repository 'https://github.com/AI-Cartman/eliza-full-wrapper.git/' not found
+error: could not fetch AI-Cartman
+Fetching koh-samui
+Fetching nhandl3
+Fetching mgavrila
+Fetching pscott
+Fetching lamlv2305
+Fetching sangtrx
+Fetching gmrrww
+Fetching 0xBuooy
+Fetching nn6n
+From https://github.com/nn6n/eliza
+ * [new branch]              snyk-fix-8c27cd935e16c18043664dce56e8478e -> nn6n/snyk-fix-8c27cd935e16c18043664dce56e8478e
+Fetching kamalbuilds
+From https://github.com/kamalbuilds/twon
+ * [new branch]              gh-pages   -> kamalbuilds/gh-pages
+   ea9d1c02291..3e09d9ded2b  main       -> kamalbuilds/main
+Fetching oxSaturn
+Fetching kontext-app
+Fetching 0x311decker
+Fetching sarisssa
+Fetching jcdesmond23
+remote: Repository not found.
+fatal: repository 'https://github.com/jcdesmond23/eliza.git/' not found
+error: could not fetch jcdesmond23
+Fetching aj47
+Fetching kevinknielsen
+Fetching raincamp
+remote: Repository not found.
+fatal: repository 'https://github.com/raincamp/angelica.git/' not found
+error: could not fetch raincamp
+Fetching NPC-Devs
+Fetching Laoode
+Fetching seanbhart
+Fetching tierra-project
+Fetching txthanh1178793
+Fetching bitcoiner-dev
+Fetching mehzee92
+Fetching skeleton1231
+Fetching trislit
+Fetching chromindscan
+Fetching CongLeSolutionX
+remote: Repository not found.
+fatal: repository 'https://github.com/CongLeSolutionX/ai16z_eliza.git/' not found
+error: could not fetch CongLeSolutionX
+Fetching tsocial24
+Fetching DegenHouseDeFi
+remote: Repository not found.
+fatal: repository 'https://github.com/DegenHouseDeFi/eliza.git/' not found
+error: could not fetch DegenHouseDeFi
+Fetching shikher07
+Fetching ahmadmardeni1
+Fetching miron204
+Fetching AdamHanafi
+Fetching kevinweaver
+remote: Repository not found.
+fatal: repository 'https://github.com/kevinweaver/eliza.git/' not found
+error: could not fetch kevinweaver
+Fetching miguelmonares
+remote: Repository not found.
+fatal: repository 'https://github.com/miguelmonares/eliza.git/' not found
+error: could not fetch miguelmonares
+Fetching johnnyp77
+Fetching SmartTokenLabs
+Fetching samueldanso
+Fetching evolabuk
+Fetching blinklabs-ai
+Fetching sonnguyen1004
+Fetching codeboy202410
+Fetching Teo-Dor-Oracle
+Fetching VotorDev
+Fetching johngoad
+Fetching raiseerco
+Fetching armitage-labs
+Fetching ArtistsIllustrated
+Fetching 0xfave
+Fetching meppsilon
+Fetching palsp
+Fetching mufasasa
+Fetching xolosArmy
+remote: Repository not found.
+fatal: repository 'https://github.com/xolosArmy/eliza.git/' not found
+error: could not fetch xolosArmy
+Fetching MatriX-
+Fetching rivendale
+Fetching oleksii-cyber
+Fetching cmdt212
+Fetching jiro-ono
+Fetching dbm87tech
+Fetching w3-bounty
+Fetching hocptit
+Fetching umarshehu
+Fetching ethlas-yenn
+Fetching 0xaptosj
+Fetching SeiranAI
+Fetching Emma-truth
+Fetching sanjaygbhat
+Fetching zyndabski
+Fetching MyronKoch-dev
+remote: Repository not found.
+fatal: repository 'https://github.com/MyronKoch-dev/eliza.git/' not found
+error: could not fetch MyronKoch-dev
+Fetching webduno
+Fetching daojonesceo
+Fetching etraporscheorstreet
+Fetching kimerran
+Fetching azep-ninja
+Fetching andersonamaral2
+Fetching gunkson
+Fetching HashWarlock
+remote: Repository not found.
+fatal: repository 'https://github.com/HashWarlock/eliza-tee-demo.git/' not found
+error: could not fetch HashWarlock
+Fetching jinsp
+Fetching jfrank-summit
+Fetching dievardump
+Fetching rarepepi
+Fetching therealtimex
+Fetching QU3STio
+Fetching cryptofish7
+remote: Repository not found.
+fatal: repository 'https://github.com/cryptofish7/eliza.git/' not found
+error: could not fetch cryptofish7
+Fetching shivmadan
+Fetching ooeygg
+Fetching cgodoy720
+Fetching johnnyclem
+Fetching lovetillion
+Fetching jarvisdegen
+Fetching mike0295
+Fetching girleconomyai
+Fetching hoerl
+Fetching timothyshen
+Fetching akkikumar72
+Fetching pincente
+Fetching OngeTerminalAi
+Fetching Jashiel-Star
+Fetching TheNewAutonomy
+Fetching muhtalipdede
+Fetching samuveth
+Fetching YuSuiXinDong
+Fetching kpopdotfun
+Fetching MeltedMindz
+Fetching swells
+Fetching jpeggirl
+Fetching Ashley0324
+Fetching zhangzhongnan928
+Fetching xwxtwd
+Fetching caevilization
+remote: Repository not found.
+fatal: repository 'https://github.com/caevilization/cvl-cuckoo-eliza.git/' not found
+error: could not fetch caevilization
+Fetching quartzwine
+Fetching jyzwow
+Fetching baos-fun
+remote: Repository not found.
+fatal: repository 'https://github.com/baos-fun/quant-agent.git/' not found
+error: could not fetch baos-fun
+Fetching Grivier797
+Fetching kenjicncr
+Fetching CarlosMeGu
+Fetching dabit3
+Fetching arose00
+Fetching yourbuddyconner
+Fetching samusagbt
+Fetching mmrashid
+Fetching skotlander
+Fetching shawalali07
+Fetching bdanylo
+Fetching pepsibasic
+Fetching second-state
+Fetching AkstonCap
+remote: Repository not found.
+fatal: repository 'https://github.com/AkstonCap/eliza_nxs.git/' not found
+error: could not fetch AkstonCap
+Fetching runawayo1
+Fetching naji1368
+Fetching TheGreatOneInTheMetaVerse
+Fetching shelvenzhou
+Fetching frachter
+Fetching primathontech
+Fetching veithly
+remote: Repository not found.
+fatal: repository 'https://github.com/veithly/eliza.git/' not found
+error: could not fetch veithly
+Fetching grx7
+Fetching KREaTOR-Finance
+Fetching MartianAbhishek
+Fetching rossgoodwin
+Fetching saucyboner
+Fetching 2pmflow
+Fetching JohnnyAndroid
+Fetching atilazz
+Fetching richbetoo
+Fetching zlehman1
+Fetching ronamosa
+Fetching foam60
+Fetching Freytes
+Fetching alecfilios
+Fetching Mbigeard06
+remote: Repository not found.
+fatal: repository 'https://github.com/Mbigeard06/eliza.git/' not found
+error: could not fetch Mbigeard06
+Fetching mickael-btc
+Fetching serrrfirat
+Fetching weseeclearly
+Fetching Fyuturevizion
+Fetching absoluteeo
+Fetching 6ogo
+Fetching bob-robert-ai
+Fetching testingoliverr
+Fetching PanPanda
+Fetching Tealhaze
+Fetching aboutmydreams
+Fetching amit0365
+Fetching itsmetamike
+Fetching RabbiSchlomo
+Fetching itsnoproblem
+Fetching stromamelie
+Fetching LumenLabsDao
+Fetching pedro123456789-wq
+Fetching RolfMetzger
+Fetching 0xikarus
+Fetching commune-ai
+Fetching CalvinLeGassick
+Fetching f58637547
+remote: Repository not found.
+fatal: repository 'https://github.com/f58637547/agentf.git/' not found
+error: could not fetch f58637547
+Fetching meliksahgurtemel
+Fetching CodexTown
+Fetching jpje
+Fetching projecthubcloud
+Fetching cryptoradagast
+Fetching DVA-eacc
+Fetching ontonomous
+Fetching EchoSagee
+Fetching adamzasada
+remote: Repository not found.
+fatal: repository 'https://github.com/adamzasada/eliza.git/' not found
+error: could not fetch adamzasada
+Fetching nghiangovan
+Fetching thundering-silence
+Fetching 0xaguspunk
+Fetching aigustin
+Fetching minkhant1996
+Fetching tomjrch
+Fetching sin-bufan
+Fetching chinsuko-chan
+remote: Repository not found.
+fatal: repository 'https://github.com/chinsuko-chan/eliza.git/' not found
+error: could not fetch chinsuko-chan
+Fetching EVMlord
+Fetching ancosero
+Fetching mon-key-mike
+Fetching hardiktheprogrammer
+Fetching kgratio
+Fetching thomascodes1-dot
+Fetching dr-fusion
+Fetching dontAskVI
+Fetching Betago-GitHub
+Fetching tinypell3ts
+Fetching KelvinThai
+Fetching MinglesAI
+Fetching zjasper666
+Fetching gaupoit
+Fetching briamcode
+Fetching jzl158
+Fetching psyoperation
+Fetching Nextgeniusentrepreneurs
+Fetching Zaunzi
+Fetching m-mohamed
+remote: Repository not found.
+fatal: repository 'https://github.com/m-mohamed/project-2501.git/' not found
+error: could not fetch m-mohamed
+Fetching pureslurp
+Fetching vizion711
+remote: Repository not found.
+fatal: repository 'https://github.com/vizion711/eliza.git/' not found
+error: could not fetch vizion711
+Fetching Upendra-Jaiswal
+Fetching boyaloxer
+remote: Repository not found.
+fatal: repository 'https://github.com/boyaloxer/eliza.git/' not found
+error: could not fetch boyaloxer
+Fetching rsmets
+Fetching 0xRecruiter
+Fetching heartlocket
+Fetching pookiedev30
+Fetching thedexplorer
+Fetching daniel-oh
+Fetching captnseagraves
+Fetching chadxeth
+Fetching consistncy
+remote: Repository not found.
+fatal: repository 'https://github.com/consistncy/boo.git/' not found
+error: could not fetch consistncy
+Fetching aoxingya
+Fetching GemachDAO
+Fetching miamiXx
+Fetching u1242a
+Fetching pandaminter
+Fetching Mickey123123
+Fetching TsimakuridzeNikolozi
+remote: Repository not found.
+fatal: repository 'https://github.com/TsimakuridzeNikolozi/eliza.git/' not found
+error: could not fetch TsimakuridzeNikolozi
+Fetching dexhunter
+Fetching SolDoubt42
+Fetching subii-os
+remote: Repository not found.
+fatal: repository 'https://github.com/subii-os/revvy.git/' not found
+error: could not fetch subii-os
+Fetching 0xYuan90
+Fetching 4LPH4-0x3
+remote: Repository not found.
+fatal: repository 'https://github.com/4LPH4-0x3/eliza.git/' not found
+error: could not fetch 4LPH4-0x3
+Fetching berrberr
+Fetching cygaar
+Fetching rockorama
+Fetching lalalune
+Fetching yieldhunting-ai
+Fetching 50zero
+Fetching DataRelic
+remote: Repository not found.
+fatal: repository 'https://github.com/DataRelic/eliza.git/' not found
+error: could not fetch DataRelic
+Fetching Ziyakaev
+Fetching olympiayo51
+Fetching virtualstarsteam
+Fetching robertkodra
+Fetching elGuille
+Fetching rishavvajpayee
+Fetching targetkom-bid
+Fetching beautifulife
+Fetching Owami
+Fetching AIJust4fun
+remote: Repository not found.
+fatal: repository 'https://github.com/AIJust4fun/eliza.git/' not found
+error: could not fetch AIJust4fun
+Fetching wolfcito
+Fetching Agustine-dev
+Fetching yanjigb
+Fetching ckerr6
+Fetching SatoshisWilly
+Fetching Forum3
+Fetching jamesyoung
+Fetching me-imfhd
+Fetching z-korp
+Fetching konstantine25b
+Fetching apollodao
+Fetching saksijas
+Fetching irisdv
+Fetching krishaamer
+Fetching yoniebans
+Fetching Ardandxb
+Fetching iimokay
+remote: Repository not found.
+fatal: repository 'https://github.com/iimokay/eliza.git/' not found
+error: could not fetch iimokay
+Fetching qudgus3822
+Fetching metatxn
+Fetching YoungPhlo
+Fetching m4rcrich
+Fetching nam3t
+Fetching convergence-rfq
+Fetching blackmambaai16z
+Fetching tradersguild
+Fetching sayangel
+Fetching zeandrecarrieres
+Fetching demolemo
+Fetching cflattum
+Fetching swizzmagik
+Fetching gdotcat
+Fetching benaimin
+Fetching ptonewreckin
+Fetching justabot
+Fetching Blaiseeeeee
+Fetching wojski
+Fetching universal-acc
+Fetching mona-001
+Fetching kyurii
+Fetching lukeyang
+remote: Repository not found.
+fatal: repository 'https://github.com/lukeyang/elizaHerJune.git/' not found
+error: could not fetch lukeyang
+Fetching r-nikhil
+Fetching shrnkld
+Fetching worm-bridge
+Fetching grallc
+Fetching nrhitik
+Fetching Leggielou
+Fetching fame-lady-society
+Fetching 0xbot-studio
+remote: Repository not found.
+fatal: repository 'https://github.com/0xbot-studio/eliza.git/' not found
+error: could not fetch 0xbot-studio
+Fetching jmilldotdev
+Fetching terrapin88
+Fetching botnetai
+Fetching BlueBoxGaming
+Fetching mark-to-marketers
+Fetching mrpspring
+Fetching pmckelvy1
+Fetching JosueMpia
+Fetching Darxgbn
+Fetching leonprou
+Fetching AndyBoWu
+Fetching winrhcp
+Fetching wraitii
+Fetching AP3X-Dev
+Fetching cipherwebllc
+Fetching sumanth-krishna
+Fetching orbitalfun
+Fetching BriefCandle
+Fetching qgpcybs
+Fetching nyxterminal
+Fetching 3456rh
+Fetching umjinsun12
+Fetching aronSOL
+Fetching inhabitants
+Fetching blackmirrordesigner
+Fetching sosloan
+Fetching simon313
+Fetching motokoai
+Fetching aiko-tv
+Fetching mvrocafort
+Fetching btspoony
+Fetching awidearray
+Fetching WLazar
+Fetching HighRoller-AI
+Fetching Cooops
+Fetching UborAI
+Fetching gigabit-eth
+remote: Repository not found.
+fatal: repository 'https://github.com/gigabit-eth/eliza.git/' not found
+error: could not fetch gigabit-eth
+Fetching bweick
+Fetching opensamai
+Fetching aymericdelab
+Fetching psukhopompos
+remote: Repository not found.
+fatal: repository 'https://github.com/psukhopompos/eliza-mimir.git/' not found
+error: could not fetch psukhopompos
+Fetching adarshmishra07
+Fetching 8times4
+Fetching sxlveign
+Fetching Manifest-Holdings
+Fetching antpb
+Fetching AAStarCommunity
+remote: Repository not found.
+fatal: repository 'https://github.com/AAStarCommunity/eliza.git/' not found
+error: could not fetch AAStarCommunity
+Fetching Walter73BC
+Fetching Album-Lepus
+remote: Repository not found.
+fatal: repository 'https://github.com/Album-Lepus/Meiryu-AI.git/' not found
+error: could not fetch Album-Lepus
+Fetching iguigui
+Fetching ChengFai
+Fetching snow-farmer
+Fetching cloudieai
+Fetching oakwoodgates
+Fetching lakshya404stc
+Fetching CoreAIVentures
+Fetching ELIZAFAIL
+Fetching notorious-d-e-v
+remote: Repository not found.
+fatal: repository 'https://github.com/notorious-d-e-v/sitespawn.git/' not found
+error: could not fetch notorious-d-e-v
+Fetching massivefermion
+Fetching NaveenCBurg
+Fetching xin-xinusu
+Fetching scrtlabs
+Fetching 6576616465
+Fetching vivoidos
+remote: Repository not found.
+fatal: repository 'https://github.com/vivoidos/eliza.git/' not found
+error: could not fetch vivoidos
+Fetching reffan
+Fetching aj-maz
+Fetching enstest1
+Fetching drew-royster
+Fetching snobbee
+Fetching Vs-Qwertydesign
+Fetching azogz
+Fetching THtianhao
+Fetching laser-riot
+Fetching bagel-org
+remote: Repository not found.
+fatal: repository 'https://github.com/bagel-org/eliza.git/' not found
+error: could not fetch bagel-org
+Fetching harispraba
+Fetching soaryong
+Fetching hoainam-nguyen
+Fetching RockySteveJobs
+Fetching ROoLZOrg
+remote: Repository not found.
+fatal: repository 'https://github.com/ROoLZOrg/ai-agent.git/' not found
+error: could not fetch ROoLZOrg
+Fetching remiroyc
+Fetching liamzebedee
+Fetching darwintree
+Fetching SolutionPr
+Fetching 0xVitae
+Fetching AZURE-ARC-0
+Fetching ElysiumDevv
+Fetching Loop-Intern
+Fetching bhkgithub54
+Fetching vbrltech
+Fetching lvxuan149
+Fetching chrlschwb
+Fetching augchan42
+Fetching searchonedev
+Fetching yungwkndllc
+Fetching haeunchin
+Fetching monilpat
+Fetching newtworld
+Fetching BidhanRoy
+Fetching BunsDev
+Fetching 0xFlicker
+Fetching TaroHarado
+remote: Repository not found.
+fatal: repository 'https://github.com/TaroHarado/remus.git/' not found
+error: could not fetch TaroHarado
+Fetching okhaimie-dev
+Fetching realmverse
+Fetching jasonkneen
+Fetching 3oracle
+Fetching positonic
+Fetching realityspiral
+Fetching DrakeDamon
+remote: Repository not found.
+fatal: repository 'https://github.com/DrakeDamon/eliza.git/' not found
+error: could not fetch DrakeDamon
+Fetching Rastrow
+Fetching fentrena
+Fetching 0xfrue
+Fetching MaskUp
+Fetching kpgeek
+Fetching NINJA-NUNCHUCKS
+Fetching Yetkinbeyy
+Fetching wolfy-nft
+Fetching AIsupercycle
+Fetching tarrencev
+Fetching fabiankliem
+Fetching RyanParkr1
+Fetching xerx0x
+remote: Repository not found.
+fatal: repository 'https://github.com/xerx0x/eliza.git/' not found
+error: could not fetch xerx0x
+Fetching igorntwari
+Fetching soi-20
+Fetching Akshay-Anand-Code
+Fetching Sequoai
+Fetching RedBeardEth
+Fetching andykeh710
+Fetching 0xCipherCoder
+Fetching 0xwarptic
+Fetching Messona
+Fetching maldiohead
+Fetching Commencement-Technology
+Fetching jinhyang-ai
+Fetching DrippyDrippyDrip
+remote: Repository not found.
+fatal: repository 'https://github.com/DrippyDrippyDrip/eliza.git/' not found
+error: could not fetch DrippyDrippyDrip
+Fetching conflux-fans
+Fetching carlaiau
+Fetching yamz8
+Fetching mishanefedov
+fatal: unable to access 'https://github.com/mishanefedov/eliza.git/': OpenSSL SSL_read: OpenSSL/3.6.0: error:0A000126:SSL routines::unexpected eof while reading, errno 0
+error: could not fetch mishanefedov
+Fetching harveyjavier
+Fetching Semugeshi
+Fetching nshkrdotcom
+Fetching edisontim
+Fetching Ramtinhoss
+Fetching null-hax
+Fetching 0xyard
+Fetching CREWorx
+Fetching tjferrara
+Fetching flashrekt
+Fetching LIUmin1100
+remote: Repository not found.
+fatal: repository 'https://github.com/LIUmin1100/Ignisra.git/' not found
+error: could not fetch LIUmin1100
+Fetching CohumanSpace
+Fetching fabrizioff
+Fetching austin109567
+Fetching ferric-sol
+Fetching fwdap
+Fetching atrisdotai
+Fetching coffeeorgreentea
+Fetching SNABUR
+Fetching Brokeshire-Hathaway
+Fetching 0xalank
+remote: Repository not found.
+fatal: repository 'https://github.com/0xalank/eliza.git/' not found
+error: could not fetch 0xalank
+Fetching dapp-craft
+Fetching echallenge
+Fetching akaday
+Fetching whalelephant
+Fetching 0xlny
+Fetching morrstudio
+Fetching acidicanft
+Fetching phong397
+Fetching Playeroneai
+Fetching ItsFlash10
+Fetching ailabteam
+Fetching vjgaur
+Fetching martincik
+Fetching TrustlessComputer
+Fetching jamesIDT
+Fetching goswamig
+Fetching majiajue
+Fetching KM69GG
+Fetching lihuibng
+Fetching AnthonE
+Fetching choguun
+remote: Repository not found.
+fatal: repository 'https://github.com/choguun/eliza.git/' not found
+error: could not fetch choguun
+Fetching ibrahimeatspie
+Fetching milancermak
+Fetching DrivenIdeaLab
+Fetching Cfomodz
+Fetching DanielHighETH
+Fetching mochzilla
+Fetching radioclone
+Fetching thenetguy
+Fetching almakedon
+Fetching Bolajiking
+Fetching Myestery
+Fetching TheMonkeyBarber
+Fetching andy8052
+Fetching NotFuckingAround
+Fetching whonion
+Fetching xclicx
+Fetching yoshicrypto
+Fetching lidlcolaborator
+Fetching hussainasghar
+Fetching wlplease
+Fetching elijahbrown9
+Fetching IsakGreatrex
+Fetching D3monX
+Fetching uyetkin87
+Fetching aigc3yehe
+remote: Repository not found.
+fatal: repository 'https://github.com/aigc3yehe/niyoko.git/' not found
+error: could not fetch aigc3yehe
+Fetching cuindream
+remote: Repository not found.
+fatal: repository 'https://github.com/cuindream/eliza.git/' not found
+error: could not fetch cuindream
+Fetching CryptoKage
+Fetching aigentone
+Fetching enitrat
+Fetching andrew-iotx
+Fetching thepeoplesengineer
+Fetching cvcuiwei
+Fetching 0xArchiviste
+Fetching keithofaptos
+Fetching 0xMalachai
+Fetching 8bitsats
+remote: Repository not found.
+fatal: repository 'https://github.com/8bitsats/eliza.git/' not found
+error: could not fetch 8bitsats
+Fetching z3c4g0n
+Fetching YouAreLate
+Fetching bmgalego
+Fetching Madrycrypto
+Fetching zaholdyeck
+Fetching MSghais
+Fetching deepfates
+Fetching oguzserdar
+remote: Repository not found.
+fatal: repository 'https://github.com/oguzserdar/eliza.git/' not found
+error: could not fetch oguzserdar
+Fetching 0xbrw
+remote: Repository not found.
+fatal: repository 'https://github.com/0xbrw/eliza.git/' not found
+error: could not fetch 0xbrw
+Fetching yerinle
+Fetching asDNSk
+Fetching snailmax
+Fetching komanu888
+Fetching tcotten-scrypted
+Fetching 0glabs
+Fetching hijk3745
+Fetching thuong9494
+Fetching pengjinning
+Fetching mmnavarr
+Fetching wjw12
+Fetching 5ky9uy
+Fetching kira495
+remote: Repository not found.
+fatal: repository 'https://github.com/kira495/eliza.git/' not found
+error: could not fetch kira495
+Fetching lamardealmaker
+Fetching normand1
+Fetching moonboylabsxyz
+remote: Repository not found.
+fatal: repository 'https://github.com/moonboylabsxyz/eliza.git/' not found
+error: could not fetch moonboylabsxyz
+Fetching fomoTon
+Fetching Blockasset
+Fetching markjkaem
+Fetching ai16z-demirix
+Fetching bitpif
+Fetching M4cs
+Fetching EdsonAlcala
+remote: Repository not found.
+fatal: repository 'https://github.com/EdsonAlcala/eliza.git/' not found
+error: could not fetch EdsonAlcala
+Fetching nishimweprince
+Fetching ghostofpokemon
+Fetching Jasmine564354
+Fetching haailabs
+Fetching w1kke
+Fetching gerryqi
+remote: Repository not found.
+fatal: repository 'https://github.com/gerryqi/eliza.git/' not found
+error: could not fetch gerryqi
+Fetching lfzkoala
+Fetching zo-eth
+remote: Repository not found.
+fatal: repository 'https://github.com/zo-eth/eliza.git/' not found
+error: could not fetch zo-eth
+Fetching lineCode
+Fetching HELLWRAy
+Fetching WLIG
+Fetching gataungapainn
+remote: Repository not found.
+fatal: repository 'https://github.com/gataungapainn/patoniAI.git/' not found
+error: could not fetch gataungapainn
+Fetching IhsotasTon
+Fetching erndck
+remote: Repository not found.
+fatal: repository 'https://github.com/erndck/eliza.git/' not found
+error: could not fetch erndck
+Fetching tshwangq
+Fetching owenb132
+Fetching mosheyang
+remote: Repository not found.
+fatal: repository 'https://github.com/mosheyang/leo.git/' not found
+error: could not fetch mosheyang
+Fetching leeren
+Fetching salviapraha
+Fetching 0xprames
+Fetching odilitime
+Fetching OWO9000
+Fetching tsubasakong
+Fetching rezapex
+remote: Repository not found.
+fatal: repository 'https://github.com/rezapex/ertiza.git/' not found
+error: could not fetch rezapex
+Fetching teamspice
+Fetching thoa746
+Fetching thedentist89
+Fetching tobi110289
+Fetching gabrielsants
+Fetching tcm390
+Fetching BeraBravo
+Fetching thomascherickal
+Fetching bford21
+Fetching shyla-marie
+remote: Repository not found.
+fatal: repository 'https://github.com/shyla-marie/eliza.git/' not found
+error: could not fetch shyla-marie
+Fetching KoharuAI
+Fetching BugByClaude
+Fetching jacobhan
+Fetching thebubbacat
+Fetching mrsnobody84
+Fetching shakkernerd
+Fetching alanneary17
+Fetching jffchd
+remote: Repository not found.
+fatal: repository 'https://github.com/jffchd/eliza.git/' not found
+error: could not fetch jffchd
+Fetching how31131113
+Fetching dai-vinci
+Fetching VarickS
+Fetching ai-god-gen-x
+Fetching 0xBiggy
+Fetching Joshalphonse
+Fetching StoleUn
+Fetching hype-eth
+Fetching harrytou
+Fetching samuelgovernale
+Fetching CosmosAI1
+Fetching koshimazaki
+Fetching archytus10
+Fetching LudwigTang
+Fetching iyetkin65
+Fetching yyetkin68
+Fetching SuperAgenty
+Fetching pindaroso
+Fetching thejoven
+Fetching Phala-Network
+Fetching saxenauts
+Fetching orion-ai-dev
+remote: Repository not found.
+fatal: repository 'https://github.com/orion-ai-dev/ai16z.git/' not found
+error: could not fetch orion-ai-dev
+Fetching dreamineering
+Fetching jcoleharrison
+Fetching MoongateGames
+Fetching SeanyDS
+Fetching zoomerianAI
+Fetching KuiHua-JAC
+Fetching digitalarchivo
+remote: Repository not found.
+fatal: repository 'https://github.com/digitalarchivo/eliza.git/' not found
+error: could not fetch digitalarchivo
+Fetching blakesaari
+Fetching Alex-Wong-HK
+remote: Repository not found.
+fatal: repository 'https://github.com/Alex-Wong-HK/eliza.git/' not found
+error: could not fetch Alex-Wong-HK
+Fetching ai69z
+remote: Repository not found.
+fatal: repository 'https://github.com/ai69z/ai69z.git/' not found
+error: could not fetch ai69z
+Fetching Sifchain
+Fetching biggulpshuh
+Fetching thev0idwalk3r
+Fetching ropresearch
+Fetching cgallic
+Fetching aimfer
+Fetching CodingTux
+Fetching grub-grub-grub
+remote: Repository not found.
+fatal: repository 'https://github.com/grub-grub-grub/grub.git/' not found
+error: could not fetch grub-grub-grub
+Fetching ViWiAI
+Fetching vaukt
+Fetching actanonverbos
+remote: Repository not found.
+fatal: repository 'https://github.com/actanonverbos/eliza.git/' not found
+error: could not fetch actanonverbos
+Fetching mmchougule
+Fetching ai06z
+Fetching bijilabs
+Fetching littlejohntj
+remote: Repository not found.
+fatal: repository 'https://github.com/littlejohntj/eliza.git/' not found
+error: could not fetch littlejohntj
+Fetching xsubtropic
+Fetching ail16z
+remote: Repository not found.
+fatal: repository 'https://github.com/ail16z/Lester-AI.git/' not found
+error: could not fetch ail16z
+Fetching stormpepe
+remote: Repository not found.
+fatal: repository 'https://github.com/stormpepe/eliza-clone.git/' not found
+error: could not fetch stormpepe
+Fetching yTheclivem
+Fetching slee1996
+Fetching VikingDataDev
+Fetching pukadev
+Fetching fabianhug
+Fetching ai16z-infra
+Fetching giaset
+Fetching roboyrulez
+remote: Repository not found.
+fatal: repository 'https://github.com/roboyrulez/Hannah.git/' not found
+error: could not fetch roboyrulez
+Fetching malinhl
+Fetching thearyanag
+Fetching NeokBazel
+Fetching denizekiz
+Fetching rohanphw
+Fetching CEOofthishouse
+Fetching tebayoso
+remote: Repository not found.
+fatal: repository 'https://github.com/tebayoso/eliza.git/' not found
+error: could not fetch tebayoso
+Fetching dadsec-dev
+Fetching jckdotim
+Fetching Oneirocom
+Fetching CryptoLisboa
+Fetching masone
+Fetching hopsai
+Fetching BranchManager69
+remote: Repository not found.
+fatal: repository 'https://github.com/BranchManager69/betty.git/' not found
+error: could not fetch BranchManager69
+Fetching lattaai5
+remote: Repository not found.
+fatal: repository 'https://github.com/lattaai5/ai16z-eliza-238.git/' not found
+error: could not fetch lattaai5
+Fetching atoma-network
+Fetching bathrobe
+Fetching illyangz
+Fetching 0xtechnoir
+Fetching ccerrato147
+Fetching dylankilkenny
+Fetching NewDevGang
+Fetching 0xAsten
+remote: Repository not found.
+fatal: repository 'https://github.com/0xAsten/eliza.git/' not found
+error: could not fetch 0xAsten
+Fetching kevweng
+Fetching ilyamk
+Fetching Keia-R
+remote: Repository not found.
+fatal: repository 'https://github.com/Keia-R/eliza.git/' not found
+error: could not fetch Keia-R
+Fetching kustomzone
+Fetching dorianjanezic
+Fetching mufasa08
+Fetching Boyquotes
+Fetching stoplion
+Fetching jarbacoa
+Fetching PinataBot
+Fetching coutoluizf
+Fetching FuzzyBullishBear
+Fetching nvldlia
+Fetching Sid31
+Fetching juke
+Fetching sonpt-afk
+Fetching atvonsc
+Fetching yodamaster726
+Fetching 0x3N3jVhPUV
+Fetching mars-arch
+Fetching BASEBallDAO
+Fetching almondous
+Fetching jtig37
+Fetching ProphetX10
+Fetching minghinmatthewlam
+Fetching Shauray018
+Fetching reinamora137
+Fetching papiguy
+Fetching jshobz12
+Fetching mad-finance
+Fetching MeDott29
+Fetching o-on-x
+Fetching ponderingdemocritus
+Fetching eraye1
+Fetching madjin
+Fetching selfishfishi
+Fetching Propialis
+Fetching anantatai
+Fetching ukaserge
+Fetching tomchapin
+Fetching St4rgarden
+Fetching Williero
+Fetching 5c0
+Fetching XC0R
+Fetching levelsdennis
+Fetching pokhrelsushil
+Fetching metadiver
+Fetching leomercier
+Fetching DarkMagaVC
+Fetching dannweeeee
+Fetching BemusedPanda
+remote: Repository not found.
+fatal: repository 'https://github.com/BemusedPanda/eliza.git/' not found
+error: could not fetch BemusedPanda
+Fetching moronjie
+Fetching evmts
+Fetching shangobashi
+Fetching sendn0des
+Fetching lSoonami
+Fetching georgerobescu
+Fetching SteinsZero
+Fetching sunlightxz
+Fetching gino2013
+Fetching wramzo
+remote: Repository not found.
+fatal: repository 'https://github.com/wramzo/eliza.git/' not found
+error: could not fetch wramzo
+Fetching LCecho
+Fetching 0xFanz
+Fetching finnbags
+Fetching danilowhk
+Fetching metabull
+Fetching eltociear
+remote: Repository not found.
+fatal: repository 'https://github.com/eltociear/eliza.git/' not found
+error: could not fetch eltociear
+Fetching dpmillett
+Fetching 0xPotatoofdoom
+Fetching mashimi
+Fetching Mediaeater
+Fetching mulfdev
+remote: Repository not found.
+fatal: repository 'https://github.com/mulfdev/eliza.git/' not found
+error: could not fetch mulfdev
+Fetching hmtxn
+Fetching HubertHu137
+Fetching nerdy-tech-com-gitub
+Fetching mz-Datura
+Fetching ai16zpartners
+Fetching mrdavidburns
+Fetching tanbinh123
+Fetching nickbtts
+Fetching beachm4
+Fetching louissypher800k
+Fetching Agent-DAO
+Fetching SuperDappAI
+Fetching Honkware
+Fetching chunli0x
+Fetching badcookie78
+Fetching dilongfa
+Fetching sirkitree
+Fetching thinkKundera
+Fetching wcordelo
+Fetching Vakurin
+Fetching afgcsborges
+Fetching 0xjims
+Fetching 0x0000369
+Fetching IkigaiLabsETH
+Fetching ceeriil
+Fetching mytestlab123
+Fetching senasgr-eth
+Fetching wahndo
+Fetching thisiscarlosgomes
+Fetching catemperorbtc
+Fetching CryptoHayesAi
+Fetching zkfarmoor
+remote: Repository not found.
+fatal: repository 'https://github.com/zkfarmoor/eliza.git/' not found
+error: could not fetch zkfarmoor
+Fetching pillheadddd
+Fetching id-daniel-mccoy
+Fetching cypher-eth
+Fetching degenRobot
+Fetching twilwa
+Fetching bembengcs
+Fetching dreaminglucid
+Fetching MarcoMandar
+Fetching ygeezus
+Fetching thegeneth
+Fetching cognitivetech
+Fetching bitbucket
+Fetching bb
+git@bitbucket.org: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+error: could not fetch bb
+Fetching agentgit
+ssh: connect to host localhost port 2222: Connection refused
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+error: could not fetch agentgit
+Fetching Deadsg
+Fetching np-introspector
+Fetching rahulbarmann
+Fetching paunko
+remote: Repository not found.
+fatal: repository 'https://github.com/paunko/eliza.git/' not found
+error: could not fetch paunko
+Fetching CryptoguyDaAlien
+Fetching tolltalcrypto
+Fetching alienHunterOnMars
+Fetching QBEIN-net
+Fetching fspseva
+Fetching XrpDaAlien
+Fetching jeffmartson
+Fetching Kubemake
+Fetching QBe1n
+Fetching vinston12
+Fetching forward-x
+Fetching operagxsasha
+Fetching loviswaternakamoto
+Fetching TommNum
+Fetching noraldase
+Fetching allen-hsu
+Fetching 0xb11a
+Fetching praveen-kaia
+Fetching HealthyBuilder
+remote: Repository not found.
+fatal: repository 'https://github.com/HealthyBuilder/mammoth-agent.git/' not found
+error: could not fetch HealthyBuilder
+Fetching Aishete
+Fetching Gonzo3030
+Fetching ae2079
+Fetching jetlej
+Fetching Coiin-Blockchain
+remote: Repository not found.
+fatal: repository 'https://github.com/Coiin-Blockchain/eliza.git/' not found
+error: could not fetch Coiin-Blockchain
+Fetching ss251
+Fetching Inspectablock
+Fetching alghozali02
+Fetching cypherpepe
+remote: Repository not found.
+fatal: repository 'https://github.com/cypherpepe/eliza.git/' not found
+error: could not fetch cypherpepe
+Fetching Fallengirl
+remote: Repository not found.
+fatal: repository 'https://github.com/Fallengirl/eliza.git/' not found
+error: could not fetch Fallengirl
+Fetching youyyytrok
+Fetching elpulpo0
+remote: Repository not found.
+fatal: repository 'https://github.com/elpulpo0/eliza.git/' not found
+error: could not fetch elpulpo0
+Fetching metaverseOS
+Fetching rolodexter
+Fetching SmartDevsSys
+Fetching Danyylka
+Fetching mhkasuri01
+Fetching gap-editor
+remote: Repository not found.
+fatal: repository 'https://github.com/gap-editor/updates-eliza.git/' not found
+error: could not fetch gap-editor
+Fetching exil0867
+Fetching dondon1234561
+Fetching binya666
+Fetching omidsakhi
+Fetching LucasR71
+Fetching Okulon
+Fetching ogmoonboi
+remote: Repository not found.
+fatal: repository 'https://github.com/ogmoonboi/eliza-1.git/' not found
+error: could not fetch ogmoonboi
+Fetching kilavvy
+Fetching nilaysarma
+Fetching Duonget123
+Fetching ShaunGRAHAM
+Fetching fleek-platform
+Fetching ben-dh3
+Fetching ernest-zulpukarov
+Fetching elfa-ai
+Fetching Eanam
+Fetching Cookfi
+Fetching adysingh5711
+Fetching dasarathg68
+Fetching Nexus-2023
+Fetching jordanurbs
+Fetching anaweeese
+Fetching GooseMatrix
+remote: Repository not found.
+fatal: repository 'https://github.com/GooseMatrix/eliza.git/' not found
+error: could not fetch GooseMatrix
+Fetching UltravioletaDAO
+remote: Repository not found.
+fatal: repository 'https://github.com/UltravioletaDAO/ultrakoketa.git/' not found
+error: could not fetch UltravioletaDAO
+Fetching roturalabs
+Fetching Muhangi2
+remote: Repository not found.
+fatal: repository 'https://github.com/Muhangi2/eliza.git/' not found
+error: could not fetch Muhangi2
+Fetching subhayand10
+From https://github.com/subhayand10/eliza
+ * branch                    HEAD       -> FETCH_HEAD
+Fetching xiaoshuiz
+Fetching Nolas-Shadow
+Fetching royalnine
+Fetching ton3s
+Fetching PepeTheD3v
+remote: Repository not found.
+fatal: repository 'https://github.com/PepeTheD3v/eliza.git/' not found
+error: could not fetch PepeTheD3v
+Fetching gkfyr
+Fetching jiminfinite
+Fetching AFYAPP
+Fetching youngsecurity
+Fetching MC2-Universe
+Fetching kaxm23
+Fetching fluentlabs-xyz
+Fetching Radicalize-AI
+Fetching devrose04
+Fetching bettercallzaal
+Fetching cagefun
+Fetching cagefunadmin
+Fetching Fu19man
+Fetching YouJun-IWON
+Fetching 0xTaneja
+Fetching miladyboy
+Fetching Vitaliyr888
+Fetching jeasonzhang-eth
+Fetching RamRamez
+Fetching AutoEliza
+Fetching longgammalabs
+Fetching vickhung
+Fetching croal99
+Fetching SergioFinix
+Fetching CetusProtocol
+Fetching AI-Reserve
+Fetching avdheshcharjan
+Fetching polats
+Fetching hobbes1651
+Fetching IndianaJonesCrypto
+Fetching tomtomdu73
+Fetching aliveevie
+Fetching gauravmandall
+Fetching yconnect44
+Fetching cryptologic-ai
+remote: Repository not found.
+fatal: repository 'https://github.com/cryptologic-ai/agent.git/' not found
+error: could not fetch cryptologic-ai
+Fetching asalef10
+Fetching LoreTechX
+Fetching joaovmp
+Fetching FulcrumN13
+Fetching bitbucket2
+git@bitbucket.org: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+error: could not fetch bitbucket2
+Fetching bark-ruffalo
+Fetching PiggyGPT
+Fetching melbourne-quantum-dev
+remote: Repository not found.
+fatal: repository 'https://github.com/melbourne-quantum-dev/eliza.git/' not found
+error: could not fetch melbourne-quantum-dev
+Fetching jacksond882
+Fetching patrik-fredon
+Fetching primemeridiem
+Fetching thanhtx1178793
+Fetching NeonOrbitX
+Fetching sunjuniorX
+Fetching atrislabs
+Fetching rookx88
+Fetching 0xRhota
+Fetching upstream
