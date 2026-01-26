@@ -1,0 +1,161 @@
+# 5e8c73c1:packages_plugin-sql_src_pg_adapter.ts:1-150
+
+**Commit:** 5e8c73c182183f29f3a258addda3fe909cf82a6d
+**Author:** Christopher Trimboli
+**Date:** Fri Dec 19 13:53:16 2025 -0800
+**File:** packages/plugin-sql/src/pg/adapter.ts:1-150
+**Novelty Score:** 217.94
+**Concepts:** agent-system, embedded-db, event-driven, orchestration, plugin-system, postgres, security, testing
+
+```
+import { type UUID, logger, Agent, Entity, Memory, Component } from '@elizaos/core';
+import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { BaseDrizzleAdapter } from '../base';
+import { DIMENSION_MAP, type EmbeddingDimensionColumn } from '../schema/embedding';
+import type { PostgresConnectionManager } from './manager';
+
+/**
+ * Adapter class for interacting with a PostgreSQL database.
+ * Extends BaseDrizzleAdapter.
+ */
+export class PgDatabaseAdapter extends BaseDrizzleAdapter {
+  protected embeddingDimension: EmbeddingDimensionColumn = DIMENSION_MAP[384];
+  private manager: PostgresConnectionManager;
+
+  constructor(
+    agentId: UUID,
+    manager: PostgresConnectionManager,
+    _schema?: Record<string, unknown>
+  ) {
+    super(agentId);
+    this.manager = manager;
+    this.db = manager.getDatabase();
+  }
+
+  getManager(): PostgresConnectionManager {
+    return this.manager;
+  }
+
+  /**
+   * Execute a callback with entity context for Entity RLS
+   * Delegates to the manager's withEntityContext method
+   *
+   * This is a public method because it's part of the adapter's public API
+   * for operations that need entity-scoped database access.
+   */
+  public async withEntityContext<T>(
+    entityId: UUID | null,
+    callback: (tx: NodePgDatabase) => Promise<T>
+  ): Promise<T> {
+    return await this.manager.withEntityContext(entityId, callback);
+  }
+
+  // Methods required by TypeScript but not in base class
+  async getEntityByIds(entityIds: UUID[]): Promise<Entity[] | null> {
+    // Delegate to the correct method name
+    return this.getEntitiesByIds(entityIds);
+  }
+
+  async getMemoriesByServerId(_params: { serverId: UUID; count?: number }): Promise<Memory[]> {
+    // This method doesn't seem to exist in the base implementation
+    // Provide a basic implementation that returns empty array
+    logger.warn({ src: 'plugin:sql' }, 'getMemoriesByServerId called but not implemented');
+    return [];
+  }
+
+  async ensureAgentExists(agent: Partial<Agent>): Promise<Agent> {
+    // Check if agent exists, create if not
+    const existingAgent = await this.getAgent(this.agentId);
+    if (existingAgent) {
+      return existingAgent;
+    }
+
+    // Create the agent with required fields
+    const newAgent: Agent = {
+      id: this.agentId,
+      name: agent.name || 'Unknown Agent',
+      username: agent.username,
+      bio: agent.bio || 'An AI agent',
+      createdAt: agent.createdAt || Date.now(),
+      updatedAt: agent.updatedAt || Date.now(),
+    };
+
+    await this.createAgent(newAgent);
+    const createdAgent = await this.getAgent(this.agentId);
+    if (!createdAgent) {
+      throw new Error('Failed to create agent');
+    }
+    return createdAgent;
+  }
+
+  /**
+   * Executes the provided operation with a database connection.
+   *
+   * @template T
+   * @param {() => Promise<T>} operation - The operation to be executed with the database connection.
+   * @returns {Promise<T>} A promise that resolves with the result of the operation.
+   */
+  protected async withDatabase<T>(operation: () => Promise<T>): Promise<T> {
+    return await this.withRetry(async () => {
+      const client = await this.manager.getClient();
+      try {
+        // drizzle-orm/node-postgres accepts PoolClient from pg package
+        // PoolClient is compatible with drizzle's expected client type
+        const db = drizzle(client);
+        this.db = db;
+
+        return await operation();
+      } finally {
+        client.release();
+      }
+    });
+  }
+
+  /**
+   * Asynchronously initializes the PgDatabaseAdapter by running migrations using the manager.
+   * Logs a success message if initialization is successful, otherwise logs an error message.
+   *
+   * @returns {Promise<void>} A promise that resolves when initialization is complete.
+   */
+  async init(): Promise<void> {
+    logger.debug({ src: 'plugin:sql' }, 'PgDatabaseAdapter initialized');
+  }
+
+  /**
+   * Checks if the database connection is ready and active.
+   * @returns {Promise<boolean>} A Promise that resolves to true if the connection is healthy.
+   */
+  async isReady(): Promise<boolean> {
+    return this.manager.testConnection();
+  }
+
+  /**
+   * Asynchronously closes the manager associated with this instance.
+   *
+   * @returns A Promise that resolves once the manager is closed.
+   */
+  async close(): Promise<void> {
+    await this.manager.close();
+  }
+
+  /**
+   * Asynchronously retrieves the connection from the manager.
+   *
+   * @returns {Promise<Pool>} A Promise that resolves with the connection.
+   */
+  async getConnection() {
+    return this.manager.getConnection();
+  }
+
+  async createAgent(agent: Agent): Promise<boolean> {
+    return super.createAgent(agent);
+  }
+
+  getAgent(agentId: UUID): Promise<Agent | null> {
+    return super.getAgent(agentId);
+  }
+
+  updateAgent(agentId: UUID, agent: Partial<Agent>): Promise<boolean> {
+    return super.updateAgent(agentId, agent);
+  }
+```

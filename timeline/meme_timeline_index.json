@@ -1,0 +1,12 @@
+{
+  "total_snippets": 13471,
+  "total_concepts": 18,
+  "timeline_entries": 45,
+  "note": "Full snippet content is in the snippets/ directory. This is just an index.",
+  "concepts": [
+    "testing", "plugin-system", "event-driven", "orchestration", "postgres",
+    "llm-integration", "agent-system", "security", "embedded-db", "rag-system",
+    "containerization", "blockchain", "prompt-engineering", "rust-async",
+    "documentation", "cache", "performance", "authentication"
+  ]
+}

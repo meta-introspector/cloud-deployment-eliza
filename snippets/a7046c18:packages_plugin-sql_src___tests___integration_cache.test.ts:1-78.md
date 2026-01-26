@@ -1,0 +1,89 @@
+# a7046c18:packages_plugin-sql_src___tests___integration_cache.test.ts:1-78
+
+**Commit:** a7046c1843f76b29f0432654f631f950f18a4390
+**Author:** lalalune
+**Date:** Thu Jan 8 23:05:40 2026 -0800
+**File:** packages/plugin-sql/src/__tests__/integration/cache.test.ts:1-78
+**Novelty Score:** 23659.22
+**Concepts:** agent-system, authentication, blockchain, cache, containerization, documentation, embedded-db, event-driven, llm-integration, orchestration, performance, plugin-system, postgres, prompt-engineering, rag-system, rust-async, security, testing
+
+```
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "bun:test";
+import type { AgentRuntime, UUID } from "@elizaos/core";
+import type { PgDatabaseAdapter } from "../../pg/adapter";
+import type { PgliteDatabaseAdapter } from "../../pglite/adapter";
+import { cacheTable } from "../../schema";
+import { createIsolatedTestDatabase } from "../test-helpers";
+
+describe("Cache Integration Tests", () => {
+  let adapter: PgliteDatabaseAdapter | PgDatabaseAdapter;
+  let _runtime: AgentRuntime;
+  let cleanup: () => Promise<void>;
+  let _testAgentId: UUID;
+
+  beforeAll(async () => {
+    const setup = await createIsolatedTestDatabase("cache-tests");
+    adapter = setup.adapter;
+    _runtime = setup.runtime;
+    cleanup = setup.cleanup;
+    _testAgentId = setup.testAgentId;
+  });
+
+  afterAll(async () => {
+    if (cleanup) {
+      await cleanup();
+    }
+  });
+
+  describe("Cache Tests", () => {
+    beforeEach(async () => {
+      // Clean up cache table before each test
+      await adapter.getDatabase().delete(cacheTable);
+    });
+
+    it("should set and get a simple string value", async () => {
+      const key = "simple_key";
+      const value = "hello world";
+      await adapter.setCache(key, value);
+      const retrievedValue = await adapter.getCache(key);
+      expect(retrievedValue).toBe(value);
+    });
+
+    it("should set and get a complex object value", async () => {
+      const key = "complex_key";
+      const value = { a: 1, b: { c: "nested" }, d: [1, 2, 3] };
+      await adapter.setCache(key, value);
+      const retrievedValue = await adapter.getCache(key);
+      expect(retrievedValue).toEqual(value);
+    });
+
+    it("should update an existing cache value", async () => {
+      const key = "update_key";
+      await adapter.setCache(key, "initial_value");
+      await adapter.setCache(key, "updated_value");
+      const retrievedValue = await adapter.getCache(key);
+      expect(retrievedValue).toBe("updated_value");
+    });
+
+    it("should delete a cache value", async () => {
+      const key = "delete_key";
+      await adapter.setCache(key, "some value");
+      await adapter.deleteCache(key);
+      const retrievedValue = await adapter.getCache(key);
+      expect(retrievedValue).toBeUndefined();
+    });
+
+    it("should return undefined for a non-existent key", async () => {
+      const retrievedValue = await adapter.getCache("non_existent_key");
+      expect(retrievedValue).toBeUndefined();
+    });
+  });
+});
+```

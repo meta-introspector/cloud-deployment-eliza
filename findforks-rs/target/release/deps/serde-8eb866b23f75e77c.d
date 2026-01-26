@@ -1,0 +1,14 @@
+/mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/deps/serde-8eb866b23f75e77c.d: /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/build/serde-5305a079c5d0efe8/out/private.rs
+
+/mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/deps/libserde-8eb866b23f75e77c.rlib: /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/build/serde-5305a079c5d0efe8/out/private.rs
+
+/mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/deps/libserde-8eb866b23f75e77c.rmeta: /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/build/serde-5305a079c5d0efe8/out/private.rs
+
+/home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/build/serde-5305a079c5d0efe8/out/private.rs:
+
+# env-dep:OUT_DIR=/mnt/data1/nix/time/2024/12/31/cloud-deployment-eliza/findforks-rs/target/release/build/serde-5305a079c5d0efe8/out

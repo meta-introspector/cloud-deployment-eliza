@@ -1,0 +1,129 @@
+# a7046c18:packages_plugin-sql_src___tests___integration_postgres_postgres-init.test.ts:1-118
+
+**Commit:** a7046c1843f76b29f0432654f631f950f18a4390
+**Author:** lalalune
+**Date:** Thu Jan 8 23:05:40 2026 -0800
+**File:** packages/plugin-sql/src/__tests__/integration/postgres/postgres-init.test.ts:1-118
+**Novelty Score:** 23659.22
+**Concepts:** agent-system, authentication, blockchain, cache, containerization, documentation, embedded-db, event-driven, llm-integration, orchestration, performance, plugin-system, postgres, prompt-engineering, rag-system, rust-async, security, testing
+
+```
+import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import type { IAgentRuntime } from "@elizaos/core";
+import { plugin } from "../../../index";
+
+describe("PostgreSQL Initialization Tests", () => {
+  let mockRuntime: IAgentRuntime;
+  let originalEnv: NodeJS.ProcessEnv;
+
+  beforeEach(() => {
+    originalEnv = { ...process.env };
+    delete process.env.POSTGRES_URL;
+    delete process.env.PGLITE_DATA_DIR;
+
+    mockRuntime = {
+      agentId: "00000000-0000-0000-0000-000000000000",
+      getSetting: mock(),
+      registerDatabaseAdapter: mock(),
+      registerService: mock(),
+      getService: mock(),
+      hasElizaOS: mock(() => false),
+      logger: {
+        info: mock(() => {}),
+        debug: mock(() => {}),
+        warn: mock(() => {}),
+        error: mock(() => {}),
+      },
+    } as any;
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
+    // Mocks auto-clear in bun:test;
+  });
+
+  it("should initialize with PostgreSQL when POSTGRES_URL is provided", async () => {
+    const postgresUrl = "postgresql://test:test@localhost:5432/testdb";
+    (mockRuntime.getSetting as any).mockImplementation((key: string) => {
+      if (key === "POSTGRES_URL") return postgresUrl;
+      return undefined;
+    });
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).toHaveBeenCalled();
+    const adapter = (mockRuntime.registerDatabaseAdapter as any).mock
+      .calls[0][0];
+    expect(adapter).toBeDefined();
+    expect(adapter.constructor.name).toBe("PgDatabaseAdapter");
+  });
+
+  it("should skip initialization if database adapter already exists", async () => {
+    // Simulate existing adapter
+    (mockRuntime as any).databaseAdapter = { test: true };
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).not.toHaveBeenCalled();
+  });
+
+  it("should use PGLITE_DATA_DIR when provided", async () => {
+    // Use a proper temporary directory that actually exists
+    const pglitePath = join(tmpdir(), `eliza-test-pglite-${Date.now()}`);
+    (mockRuntime.getSetting as any).mockImplementation((key: string) => {
+      if (key === "PGLITE_DATA_DIR") return pglitePath;
+      return undefined;
+    });
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).toHaveBeenCalled();
+    const adapter = (mockRuntime.registerDatabaseAdapter as any).mock
+      .calls[0][0];
+    expect(adapter).toBeDefined();
+    expect(adapter.constructor.name).toBe("PgliteDatabaseAdapter");
+  });
+
+  it("should use default path when PGLITE_DATA_DIR is not provided", async () => {
+    (mockRuntime.getSetting as any).mockReturnValue(undefined);
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).toHaveBeenCalled();
+    const adapter = (mockRuntime.registerDatabaseAdapter as any).mock
+      .calls[0][0];
+    expect(adapter).toBeDefined();
+    expect(adapter.constructor.name).toBe("PgliteDatabaseAdapter");
+  });
+
+  it("should use default path when no configuration is provided", async () => {
+    (mockRuntime.getSetting as any).mockReturnValue(undefined);
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).toHaveBeenCalled();
+    const adapter = (mockRuntime.registerDatabaseAdapter as any).mock
+      .calls[0][0];
+    expect(adapter).toBeDefined();
+    expect(adapter.constructor.name).toBe("PgliteDatabaseAdapter");
+  });
+
+  it("should handle errors gracefully during adapter check", async () => {
+    // Make databaseAdapter throw an error when accessed
+    Object.defineProperty(mockRuntime, "databaseAdapter", {
+      get() {
+        throw new Error("No adapter");
+      },
+      configurable: true,
+    });
+
+    (mockRuntime.getSetting as any).mockReturnValue(undefined);
+
+    await plugin.init?.({}, mockRuntime);
+
+    expect(mockRuntime.registerDatabaseAdapter).toHaveBeenCalled();
+  });
+});
+```

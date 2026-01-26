@@ -1,0 +1,128 @@
+# 1aa252f2:packages_plugin-sql_src_pg_manager.ts:1-117
+
+**Commit:** 1aa252f2d1973cee9ff0b8150c8e7c3d4da4cf6b
+**Author:** 0xbbjoker
+**Date:** Sat Jan 3 16:40:19 2026 +0100
+**File:** packages/plugin-sql/src/pg/manager.ts:1-117
+**Novelty Score:** 10.78
+**Concepts:** plugin-system, postgres, testing
+
+```
+import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { Pool, type PoolClient, type PoolConfig } from 'pg';
+import { sql } from 'drizzle-orm';
+import { logger, type UUID } from '@elizaos/core';
+
+export class PostgresConnectionManager {
+  private pool: Pool;
+  private db: NodePgDatabase;
+
+  constructor(connectionString: string, rlsServerId?: string) {
+    // If RLS is enabled, set application_name to the server_id
+    // This allows the RLS function current_server_id() to read it
+    const poolConfig: PoolConfig = { connectionString };
+
+    if (rlsServerId) {
+      poolConfig.application_name = rlsServerId;
+      logger.debug(
+        { src: 'plugin:sql', rlsServerId: rlsServerId.substring(0, 8) },
+        'Pool configured with RLS server'
+      );
+    }
+
+    this.pool = new Pool(poolConfig);
+    this.db = drizzle(this.pool, { casing: 'snake_case' });
+  }
+
+  public getDatabase(): NodePgDatabase {
+    return this.db;
+  }
+
+  public getConnection(): Pool {
+    return this.pool;
+  }
+
+  public async getClient(): Promise<PoolClient> {
+    return this.pool.connect();
+  }
+
+  public async testConnection(): Promise<boolean> {
+    let client: PoolClient | null = null;
+    try {
+      client = await this.pool.connect();
+      await client.query('SELECT 1');
+      return true;
+    } catch (error) {
+      logger.error(
+        { src: 'plugin:sql', error: error instanceof Error ? error.message : String(error) },
+        'Failed to connect to the database'
+      );
+      return false;
+    } finally {
+      if (client) {
+        client.release();
+      }
+    }
+  }
+
+  /**
+   * Execute a query with entity context for Entity RLS.
+   * Sets app.entity_id before executing the callback.
+   *
+   * Server RLS context (if enabled) is already set via Pool's application_name.
+   *
+   * If ENABLE_DATA_ISOLATION is not true, this method skips setting entity context
+   * entirely to avoid PostgreSQL errors that would abort the transaction.
+   *
+   * @param entityId - The entity UUID to set as context (or null for server operations)
+   * @param callback - The database operations to execute with the entity context
+   * @returns The result of the callback
+   * @throws {Error} If the callback fails or if there's a critical Entity RLS configuration issue
+   */
+  public async withEntityContext<T>(
+    entityId: UUID | null,
+    callback: (tx: NodePgDatabase) => Promise<T>
+  ): Promise<T> {
+    // Check if data isolation is enabled - if not, skip SET LOCAL entirely
+    // This avoids PostgreSQL transaction abort errors when app.entity_id is not configured
+    const dataIsolationEnabled = process.env.ENABLE_DATA_ISOLATION === 'true';
+
+    return await this.db.transaction(async (tx) => {
+      // Only set entity context if ENABLE_DATA_ISOLATION is true AND entityId is provided
+      if (dataIsolationEnabled && entityId) {
+        try {
+          // SET LOCAL does not support parameterized queries, so we must use sql.raw()
+          await tx.execute(sql.raw(`SET LOCAL app.entity_id = '${entityId}'`));
+          logger.debug(`[Entity Context] Set app.entity_id = ${entityId}`);
+        } catch (error) {
+          // This is an unexpected error since we already checked ENABLE_DATA_ISOLATION
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          logger.error(
+            { error, entityId },
+            `[Entity Context] Failed to set entity context: ${errorMessage}`
+          );
+          // Re-throw because if ENABLE_DATA_ISOLATION is true, this should work
+          throw error;
+        }
+      } else if (!dataIsolationEnabled) {
+        // Data isolation not enabled - just execute without entity context
+        // This is the expected path for most deployments
+      } else {
+        logger.debug('[Entity Context] No entity context set (server operation)');
+      }
+
+      // Execute the callback with the transaction
+      return await callback(tx);
+    });
+  }
+
+  /**
+   * Closes the connection pool.
+   * @returns {Promise<void>}
+   * @memberof PostgresConnectionManager
+   */
+  public async close(): Promise<void> {
+    await this.pool.end();
+  }
+}
+```

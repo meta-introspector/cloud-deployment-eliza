@@ -1,0 +1,161 @@
+# 5e8c73c1:packages_core_src_types_runtime.ts:1-150
+
+**Commit:** 5e8c73c182183f29f3a258addda3fe909cf82a6d
+**Author:** Christopher Trimboli
+**Date:** Fri Dec 19 13:53:16 2025 -0800
+**File:** packages/core/src/types/runtime.ts:1-150
+**Novelty Score:** 217.94
+**Concepts:** agent-system, embedded-db, event-driven, orchestration, plugin-system, postgres, security, testing
+
+```
+import type { Character } from './agent';
+import type { Action, Evaluator, Provider, ActionResult } from './components';
+import { HandlerCallback } from './components';
+import type { IDatabaseAdapter } from './database';
+import type { IElizaOS } from './elizaos';
+import type { Entity, Room, World, ChannelType } from './environment';
+import type { Logger } from '../logger';
+import { Memory, MemoryMetadata } from './memory';
+import type { SendHandlerFunction, TargetInfo } from './messaging';
+import type { IMessageService } from '../services/message-service';
+import type {
+  ModelParamsMap,
+  ModelResultMap,
+  ModelTypeName,
+  GenerateTextOptions,
+  GenerateTextResult,
+  GenerateTextParams,
+  TextGenerationModelType,
+} from './model';
+import type { Plugin, RuntimeEventStorage, Route } from './plugin';
+import type { Content, UUID } from './primitives';
+import type { Service, ServiceTypeName } from './service';
+import type { State } from './state';
+import type { TaskWorker } from './task';
+import type { EventPayloadMap, EventHandler, EventPayload } from './events';
+
+/**
+ * Represents the core runtime environment for an agent.
+ * Defines methods for database interaction, plugin management, event handling,
+ * state composition, model usage, and task management.
+ */
+
+export interface IAgentRuntime extends IDatabaseAdapter {
+  // Properties
+  agentId: UUID;
+  character: Character;
+  initPromise: Promise<void>;
+  messageService: IMessageService | null;
+  providers: Provider[];
+  actions: Action[];
+  evaluators: Evaluator[];
+  plugins: Plugin[];
+  services: Map<ServiceTypeName, Service[]>;
+  events: RuntimeEventStorage;
+  fetch?: typeof fetch | null;
+  routes: Route[];
+  logger: Logger;
+  stateCache: Map<string, State>;
+  elizaOS?: IElizaOS;
+
+  // Methods
+  registerPlugin(plugin: Plugin): Promise<void>;
+
+  initialize(options?: { skipMigrations?: boolean }): Promise<void>;
+
+  getConnection(): Promise<unknown>;
+
+  getService<T extends Service>(service: ServiceTypeName | string): T | null;
+
+  getServicesByType<T extends Service>(service: ServiceTypeName | string): T[];
+
+  getAllServices(): Map<ServiceTypeName, Service[]>;
+
+  registerService(service: typeof Service): Promise<void>;
+
+  getServiceLoadPromise(serviceType: ServiceTypeName): Promise<Service>;
+
+  getRegisteredServiceTypes(): ServiceTypeName[];
+
+  hasService(serviceType: ServiceTypeName | string): boolean;
+
+  hasElizaOS(): this is IAgentRuntime & { elizaOS: IElizaOS };
+
+  // Keep these methods for backward compatibility
+  registerDatabaseAdapter(adapter: IDatabaseAdapter): void;
+
+  setSetting(key: string, value: string | boolean | null, secret?: boolean): void;
+
+  getSetting(key: string): string | boolean | number | null;
+
+  getConversationLength(): number;
+
+  processActions(
+    message: Memory,
+    responses: Memory[],
+    state?: State,
+    callback?: HandlerCallback,
+    options?: { onStreamChunk?: (chunk: string, messageId?: UUID) => Promise<void> }
+  ): Promise<void>;
+
+  getActionResults(messageId: UUID): ActionResult[];
+
+  evaluate(
+    message: Memory,
+    state?: State,
+    didRespond?: boolean,
+    callback?: HandlerCallback,
+    responses?: Memory[]
+  ): Promise<Evaluator[] | null>;
+
+  registerProvider(provider: Provider): void;
+
+  registerAction(action: Action): void;
+
+  registerEvaluator(evaluator: Evaluator): void;
+
+  ensureConnections(entities: Entity[], rooms: Room[], source: string, world: World): Promise<void>;
+  ensureConnection({
+    entityId,
+    roomId,
+    metadata,
+    userName,
+    worldName,
+    name,
+    source,
+    channelId,
+    messageServerId,
+    type,
+    worldId,
+    userId,
+  }: {
+    entityId: UUID;
+    roomId: UUID;
+    userName?: string;
+    name?: string;
+    worldName?: string;
+    source?: string;
+    channelId?: string;
+    messageServerId?: UUID;
+    type?: ChannelType | string;
+    worldId: UUID;
+    userId?: UUID;
+    metadata?: Record<string, unknown>;
+  }): Promise<void>;
+
+  ensureParticipantInRoom(entityId: UUID, roomId: UUID): Promise<void>;
+
+  ensureWorldExists(world: World): Promise<void>;
+
+  ensureRoomExists(room: Room): Promise<void>;
+
+  composeState(
+    message: Memory,
+    includeList?: string[],
+    onlyInclude?: boolean,
+    skipCache?: boolean
+  ): Promise<State>;
+
+  /**
+   * Use a model for inference with proper type inference based on parameters.
+```

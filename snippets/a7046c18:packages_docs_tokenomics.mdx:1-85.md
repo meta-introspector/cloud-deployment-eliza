@@ -1,0 +1,96 @@
+# a7046c18:packages_docs_tokenomics.mdx:1-85
+
+**Commit:** a7046c1843f76b29f0432654f631f950f18a4390
+**Author:** lalalune
+**Date:** Thu Jan 8 23:05:40 2026 -0800
+**File:** packages/docs/tokenomics.mdx:1-85
+**Novelty Score:** 23659.22
+**Concepts:** agent-system, authentication, blockchain, cache, containerization, documentation, embedded-db, event-driven, llm-integration, orchestration, performance, plugin-system, postgres, prompt-engineering, rag-system, rust-async, security, testing
+
+```
+---
+title: Tokenomics
+description: Key information about the $elizaOS token economics, contract addresses, vesting schedules, and token release details
+---
+
+See below key information about the $elizaOS tokenomics.
+
+## Contract Addresses
+
+<Info>
+$elizaOS is available on multiple chains with cross-chain functionality enabled from day one.
+</Info>
+
+**$elizaOS SVM:** `DuMbhu7mvQvqQHGcnikDgb4XegXJRyhUBfdU22uELiZA`
+
+**$elizaOS EVM (ETH & Base & BSC):** `0xea17Df5Cf6D172224892B5477A16ACb111182478`
+
+**Token Standards:** BEP-20 (BSC), ERC-20 (Ethereum, Base) and SPL (Solana). CCIP enabled day one.
+
+**Total Supply:** 11,000,000,000
+
+**Circulating Supply:** 7,482,200,000 (as of November 11, 2025)
+
+## Official Token Pages
+
+Track `$elizaOS` token metrics and market data on these platforms:
+
+- [CoinMarketCap](https://coinmarketcap.com/currencies/elizaos/)
+- [CoinGecko](https://www.coingecko.com/en/coins/elizaos)
+
+## Vesting and Transparency
+
+All token allocations follow structured vesting schedules with built-in transparency mechanisms:
+
+<Steps>
+  <Step title="Ecosystem/Community">
+    3-month cliff + 9-month linear vest
+  </Step>
+  
+  <Step title="Foundation">
+    24-month linear vest
+  </Step>
+  
+  <Step title="Team & Contributors">
+    12-month cliff from October 21, then 24-month linear vest (total 36 months)
+  </Step>
+  
+  <Step title="SAFT">
+    Locked multisig, minimum 12-month cliff
+  </Step>
+  
+  <Step title="Liquidity & POL">
+    Programmatic for market making
+  </Step>
+</Steps>
+
+<Note>
+**Monitoring:** All vesting wallets will be publicly listed with explorer links for real-time tracking. Streamflow contracts enforce cliffs and prevent discretionary early unlocks.
+</Note>
+
+## Token Release Schedule
+
+After the migration from `$ai16z` to `$elizaOS`, the `$elizaOS` total supply will gradually expand from 6.6B to 11B (+40%), with circulating supply increasing by 882M, from 6.6B to 7.4B (approximately +13%) immediately.
+
+This unlocks capital for increased liquidity demands of the token becoming multichain and funding ecosystem growth – including:
+
+- **607M tokens** for liquidity & listings
+- **275M tokens** of Protocol Owned Liquidity
+
+<Warning>
+Over time, total supply could expand to up to 11B tokens, though actual circulating supply may be less as a large portion is held by the Foundation and Treasury for ecosystem development and liquidity management.
+</Warning>
+
+## Change Log
+
+### v1.0 - November 6, 2025
+
+**Description:** Migration from `$ai16z` to `$elizaOS` started
+
+---
+
+### v1.1 - November 11, 2025
+
+**Description:** Introduction of `$ai16z` snapshot at 11:40am UTC
+
+```

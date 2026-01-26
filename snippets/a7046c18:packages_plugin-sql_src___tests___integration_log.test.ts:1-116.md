@@ -1,0 +1,127 @@
+# a7046c18:packages_plugin-sql_src___tests___integration_log.test.ts:1-116
+
+**Commit:** a7046c1843f76b29f0432654f631f950f18a4390
+**Author:** lalalune
+**Date:** Thu Jan 8 23:05:40 2026 -0800
+**File:** packages/plugin-sql/src/__tests__/integration/log.test.ts:1-116
+**Novelty Score:** 23659.22
+**Concepts:** agent-system, authentication, blockchain, cache, containerization, documentation, embedded-db, event-driven, llm-integration, orchestration, performance, plugin-system, postgres, prompt-engineering, rag-system, rust-async, security, testing
+
+```
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "bun:test";
+import {
+  type AgentRuntime,
+  ChannelType,
+  type Entity,
+  type Room,
+  type UUID,
+} from "@elizaos/core";
+import { v4 as uuidv4 } from "uuid";
+import type { PgDatabaseAdapter } from "../../pg/adapter";
+import type { PgliteDatabaseAdapter } from "../../pglite/adapter";
+import { logTable } from "../../schema";
+import { createIsolatedTestDatabase } from "../test-helpers";
+
+describe("Log Integration Tests", () => {
+  let adapter: PgliteDatabaseAdapter | PgDatabaseAdapter;
+  let _runtime: AgentRuntime;
+  let cleanup: () => Promise<void>;
+  let testAgentId: UUID;
+  let testEntityId: UUID;
+  let testRoomId: UUID;
+
+  beforeAll(async () => {
+    const setup = await createIsolatedTestDatabase("log-tests");
+    adapter = setup.adapter;
+    _runtime = setup.runtime;
+    cleanup = setup.cleanup;
+    testAgentId = setup.testAgentId;
+
+    // Generate random UUIDs for test data
+    testEntityId = uuidv4() as UUID;
+    testRoomId = uuidv4() as UUID;
+
+    // Create necessary entities for foreign key constraints
+    await adapter.createEntities([
+      {
+        id: testEntityId,
+        agentId: testAgentId,
+        names: ["Test Entity"],
+      } as Entity,
+    ]);
+    await adapter.createRooms([
+      {
+        id: testRoomId,
+        agentId: testAgentId,
+        name: "Test Room",
+        source: "test",
+        type: ChannelType.GROUP,
+      } as Room,
+    ]);
+  });
+
+  afterAll(async () => {
+    if (cleanup) {
+      await cleanup();
+    }
+  });
+
+  describe("Log Tests", () => {
+    beforeEach(async () => {
+      await adapter.getDatabase().delete(logTable);
+    });
+
+    it("should create and retrieve a log entry", async () => {
+      const logData = {
+        body: { message: "hello world" },
+        entityId: testEntityId,
+        roomId: testRoomId,
+        type: "test_log",
+      };
+      await adapter.log(logData);
+      const logs = await adapter.getLogs({
+        ownerEntityId: testEntityId,
+        roomId: testRoomId,
+      });
+      expect(logs).toHaveLength(1);
+      expect(logs[0].body).toEqual({ message: "hello world" });
+    });
+
+    it("should not throw when deleting a non-existent log", async () => {
+      const nonExistentId = uuidv4() as UUID;
+      await adapter.deleteLog(nonExistentId);
+      expect(true).toBe(true);
+    });
+
+    it("should filter logs by type", async () => {
+      await adapter.log({
+        body: { message: "message 1" },
+        entityId: testEntityId,
+        roomId: testRoomId,
+        type: "typeA",
+      });
+      await adapter.log({
+        body: { message: "message 2" },
+        entityId: testEntityId,
+        roomId: testRoomId,
+        type: "typeB",
+      });
+
+      const logs = await adapter.getLogs({
+        ownerEntityId: testEntityId,
+        roomId: testRoomId,
+        type: "typeA",
+      });
+      expect(logs).toHaveLength(1);
+      expect(logs[0].type).toBe("typeA");
+    });
+  });
+});
+```

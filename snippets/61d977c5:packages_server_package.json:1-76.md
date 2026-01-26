@@ -1,0 +1,87 @@
+# 61d977c5:packages_server_package.json:1-76
+
+**Commit:** 61d977c5b5e49fbb6784afe3b937fe03f14ec53f
+**Author:** github-actions[bot]
+**Date:** Sat Dec 20 05:10:13 2025 +0000
+**File:** packages/server/package.json:1-76
+**Novelty Score:** 21.35
+**Concepts:** plugin-system, testing
+
+```
+{
+  "name": "@elizaos/server",
+  "version": "1.7.0-beta.0",
+  "description": "ElizaOS Server - Core server infrastructure for ElizaOS agents",
+  "publishConfig": {
+    "access": "public",
+    "workspaces": {
+      "preserveIfPresent": true
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "elizaOS",
+    "url": "https://twitter.com/eliza_OS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elizaOS/eliza.git",
+    "directory": "packages/server"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "keywords": [],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "bun run build.ts",
+    "type-check": "tsc --project tsconfig.build.json --noEmit",
+    "lint": "eslint src/ && prettier --write ./src",
+    "lint:check": "eslint src/",
+    "format": "prettier --write ./src",
+    "format:check": "prettier --check ./src",
+    "clean": "rm -rf dist .turbo node_modules .turbo-tsconfig.json *.tsbuildinfo",
+    "test": "bun run test:unit && bun run test:integration",
+    "test:unit": "bun test src/__tests__/unit/",
+    "test:integration": "bash scripts/run-integration-tests.sh",
+    "test:coverage": "bun test --coverage",
+    "test:watch": "bun test --watch",
+    "dev": "bun run build.ts --watch"
+  },
+  "devDependencies": {
+    "@elizaos/client": "workspace:*",
+    "@elizaos/config": "workspace:*",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^24.10.1",
+    "bun-fetch-mock": "^1.0.0",
+    "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "which": "^6.0.0",
+    "ws": "^8.18.0"
+  },
+  "gitHead": "255e37c0e4a76da0b776219db5ebb9dadf20e89f",
+  "dependencies": {
+    "@elizaos/core": "workspace:*",
+    "@elizaos/plugin-sql": "workspace:*",
+    "@sentry/node": "^10.16.0",
+    "@types/express": "^5.0.2",
+    "@types/helmet": "^4.0.0",
+    "@types/multer": "^2.0.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "jose": "^6.1.2",
+    "multer": "^2.0.1",
+    "path-to-regexp": "^8.2.0",
+    "socket.io": "^4.8.1"
+  }
+}
+```

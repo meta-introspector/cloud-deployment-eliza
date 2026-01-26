@@ -1,0 +1,161 @@
+# a7046c18:packages_core_python_elizaos_types___init__.py:151-300
+
+**Commit:** a7046c1843f76b29f0432654f631f950f18a4390
+**Author:** lalalune
+**Date:** Thu Jan 8 23:05:40 2026 -0800
+**File:** packages/core/python/elizaos/types/__init__.py:151-300
+**Novelty Score:** 23659.22
+**Concepts:** agent-system, authentication, blockchain, cache, containerization, documentation, embedded-db, event-driven, llm-integration, orchestration, performance, plugin-system, postgres, prompt-engineering, rag-system, rust-async, security, testing
+
+```
+    IBrowserService,
+    IEmailService,
+    ILpService,
+    ImageSearchOptions,
+    IMessagingService,
+    IPdfService,
+    IPostService,
+    ITokenDataService,
+    ITranscriptionService,
+    IVideoService,
+    IWalletService,
+    IWebSearchService,
+    LpPositionDetails,
+    MessageAttachment,
+    MessageChannel,
+    MessageContent,
+    MessageEmbed,
+    MessageInfo,
+    MessageParticipant,
+    MessageReaction,
+    MessageReference,
+    MessageSearchOptions,
+    MessageSendOptions,
+    MessageThread,
+    NewsSearchOptions,
+    PageInfo,
+    PdfConversionOptions,
+    PdfExtractionResult,
+    PdfGenerationOptions,
+    PdfMargins,
+    # PDF
+    PdfMetadata,
+    PerformingHour,
+    PollOption,
+    PoolInfo,
+    # Liquidity Pool
+    PoolTokenInfo,
+    # Post/Social
+    PostAnalytics,
+    PostAuthor,
+    PostContent,
+    PostCreateOptions,
+    PostEngagement,
+    PostInfo,
+    PostLinkPreview,
+    PostLocation,
+    PostMedia,
+    PostPoll,
+    PostSearchOptions,
+    PostThread,
+    ScreenshotClip,
+    ScreenshotOptions,
+    # Web Search
+    SearchDateRange,
+    SearchResponse,
+    SearchResult,
+    SpeechToTextOptions,
+    TextToSpeechOptions,
+    # Token & Wallet
+    TokenBalance,
+    TokenData,
+    TransactionResult,
+    # Transcription
+    TranscriptionOptions,
+    TranscriptionResult,
+    TranscriptionSegment,
+    TranscriptionWord,
+    TypeOptions,
+    VideoDownloadOptions,
+    # Video
+    VideoFormat,
+    VideoInfo,
+    VideoProcessingOptions,
+    VideoSearchOptions,
+    VoiceInfo,
+    WalletAsset,
+    WalletPortfolio,
+    WebSearchBaseOptions,
+)
+from elizaos.types.state import (
+    ActionPlan,
+    ActionPlanStep,
+    State,
+    StateData,
+)
+from elizaos.types.task import (
+    Task,
+    TaskMetadata,
+    TaskStatus,
+    TaskWorker,
+)
+
+__all__ = [
+    # Primitives
+    "UUID",
+    "as_uuid",
+    "Content",
+    "ContentType",
+    "Media",
+    "MentionContext",
+    "Metadata",
+    # Memory
+    "Memory",
+    "MessageMemory",
+    "MemoryType",
+    "MemoryScope",
+    "MemoryMetadata",
+    "BaseMetadata",
+    "DocumentMetadata",
+    "FragmentMetadata",
+    "MessageMetadata",
+    "DescriptionMetadata",
+    "CustomMetadata",
+    # Agent
+    "Character",
+    "Agent",
+    "AgentStatus",
+    "MessageExample",
+    "TemplateType",
+    # Environment
+    "Entity",
+    "Component",
+    "World",
+    "WorldMetadata",
+    "Room",
+    "RoomMetadata",
+    "ChannelType",
+    "Role",
+    "Participant",
+    "Relationship",
+    # Components
+    "Action",
+    "ActionExample",
+    "ActionResult",
+    "ActionContext",
+    "Handler",
+    "Validator",
+    "HandlerCallback",
+    "HandlerOptions",
+    "Evaluator",
+    "EvaluationExample",
+    "Provider",
+    "ProviderResult",
+    # Plugin
+    "Plugin",
+    "PluginEvents",
+    "ProjectAgent",
+    "Project",
+    "Route",
+    "RouteRequest",
+```
